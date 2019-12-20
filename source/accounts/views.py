@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.models import User
+from .forms import UserCreationForm
 
 
 def login_view(request, *args, **kwargs):
@@ -31,4 +32,15 @@ def logout_view(request, *args, **kwargs):
     logout(request)
     return redirect('webapp:index')
 
+
+def register_view(request, *args, **kwargs):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('webapp:index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'user_create.html', context={'form': form})
 
