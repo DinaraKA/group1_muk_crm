@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}MySite{% endblock %}</title>
+    <title>{% block title %}Мук{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     {% block styles %}{% endblock %}
@@ -15,7 +15,7 @@
 <nav class="navbar-my">
     <div class="container">
         <ul class="menu">
-            <li><a href="#">Home</a></li>
+            <li><a href="#">Главная</a></li>
             <li><a href="#"></a></li>
             <li><a href="#"></a></li>
             <li><a href="#"></a></li>
@@ -23,12 +23,11 @@
             <li class="menu-right">
                 <ul>
                     {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'accounts:user_index' %}">Users</a></li>
-                        <li style="color: darkblue;">Hello, <a href="{%  url 'accounts:user_detail' request.user.pk %}">{{request.user}}!</a></li>
-                        <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
+                        <li style="color: darkblue;">Привет, <a href="#">{{request.user}}!</a></li>
+                        <li><a href="#">Выход</a></li>
                     {% else %}
-                        <li><a href="{% url 'accounts:login' %}">Log in</a></li>
-                        <li><a href="{% url 'accounts:register' %}">Sign up</a></li>
+                        <li><a href="#">Вход</a></li>
+                        <li><a href="#">Регистрация</a></li>
                     {% endif %}
                 </ul>
             </li>
