@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-12 col-md-10 col-lg-8 col-xl-6 m-auto">
+            <h1 class="text-center">Вход</h1>
+            <form action="{% url 'accounts:login' %}?next={{ next }}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {% if form.non_field_errors %}
+                    <p class="text-danger">Неверное имя пользователя или пароль.</p>
+                {% endif %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Имя пользователя:</label>
+                    {{ form.username|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">Пароль:</label>
+                    {{ form.password|add_class:"form-control" }}
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
