@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Вход</h1>
+    <form action="{% url 'accounts:login' %}?next={{ next }}" method="post" class="text-center">
+    {% include 'partial/form.html' with button_text='Войти' %}
+    </form>
+{% endblock %}
