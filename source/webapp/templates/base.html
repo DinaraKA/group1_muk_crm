@@ -22,13 +22,13 @@
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>
-                    {% if request.user.is_authenticated %}
-                        <li style="color: darkblue;">Привет, <a href="#">{{request.user}}!</a></li>
+{#                    {% if request.user.is_authenticated %}#}
+{#                        <li style="color: darkblue;">Привет, <a href="#">{{request.user}}!</a></li>#}
                         <li><a href="#">Выход</a></li>
-                    {% else %}
-                        <li><a href="#">Вход</a></li>
+{#                    {% else %}#}
+                        <li><a href="">Вход</a></li>
                         <li><a href="#">Регистрация</a></li>
-                    {% endif %}
+{#                    {% endif %}#}
                 </ul>
             </li>
         </ul>
