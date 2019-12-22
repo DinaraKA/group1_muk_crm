@@ -1,7 +1,6 @@
 body {
     color: #222222;
     font-family: Arial, sans-serif;
-    margin-top: 60px;
 }
 
 h1 {
@@ -14,20 +13,20 @@ h3 {
 
 .container {
     max-width: 1300px;
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
 }
 
 .navbar-my {
     display: block;
-    background: #6a7dff;
-    position: fixed;
+    background: rgb(66 66 66);
+    position: relative;
     top: 0;
     right: 0;
     left: 0;
     font-size: 0;
     box-sizing: border-box;
-    padding: 7px 30px;
+    padding: 20px 0px;
 }
 
 .menu {
@@ -57,4 +56,55 @@ h3 {
 
 .menu-right{
     float: right;
+}
+.d-block{
+    height: 700px;
+}
+.main-text{
+    padding: 100px 50px;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+    color: rgb(33 33 33);
+}
+.card{
+    border: solid 0.5px; rgb(66 66 66);
+    border-radius: 0;
+}
+.label-img{
+    width: 55px;
+    height: 60px;
+    padding-top: 7px;
+}
+.card-text{
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 30px;
+}
+.card-footer{
+    background: none;
+    border: none;
+    text-align: center;
+}
+.carousel-caption{
+    text-transform: uppercase;
+    font: 300 3rem/6.25rem "Roboto", sans-serif, arial, helvetica;
+    padding-bottom: 50px;
+}
+.main-logo{
+    display: flex;
+    vertical-align: top;
+    align-items: start;
+
+}
+.news{
+    margin-top: 50px;
+}
+.address_wrap{
+    text-align: center;
+    background-color: rgb(66 66 66);
+    color: white;
+    padding: 50px;
 }
