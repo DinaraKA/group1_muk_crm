@@ -1,3 +1,4 @@
 from django.contrib import admin
+from webapp.models import Parent
 
-# Register your models here.
+admin.site.register(Parent)
