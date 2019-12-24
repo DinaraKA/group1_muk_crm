@@ -1,3 +1,7 @@
 from django.contrib import admin
+from accounts.models import Parent
+from webapp.models import News
 
-# Register your models here.
+admin.site.register(Parent)
+admin.site.register(News)
+
