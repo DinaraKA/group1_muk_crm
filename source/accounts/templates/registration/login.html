@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-{% block title %}Вход{% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col col-sm-12 col-md-10 col-lg-8 col-xl-6 m-auto">
-            <h1 class="text-center">Вход</h1>
+        <div class="col col-sm-10 col-md-8 col-lg-6 col-xl-4 m-auto">
+            <h1 class="text-center mt-5 pt-5">Вход</h1>
             <form action="{% url 'accounts:login' %}?next={{ next }}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
@@ -23,4 +22,6 @@
             </form>
         </div>
     </div>
+
 {% endblock %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
