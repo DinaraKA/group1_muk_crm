@@ -63,3 +63,11 @@ class Role(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class UserRole(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
+    role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
+
+    def __str__(self):
+        return self.user.get_full_name() + self.role
