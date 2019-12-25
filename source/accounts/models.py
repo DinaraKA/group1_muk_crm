@@ -40,3 +40,6 @@ class Passport(models.Model):
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
+
+class AdminPosition(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Админпоз')
