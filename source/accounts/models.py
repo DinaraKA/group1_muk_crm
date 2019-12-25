@@ -25,3 +25,6 @@ class Profile(models.Model):
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     parent_one = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Один')
     parent_two = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Два')
+
+    def __str__(self):
+        return self.user.get_full_name() + "'s Profile"
