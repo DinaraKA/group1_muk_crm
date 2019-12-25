@@ -43,3 +43,8 @@ class Passport(models.Model):
 
 class AdminPosition(models.Model):
     name = models.CharField(max_length=500, verbose_name='Админпоз')
+
+class UserAdminPosition(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')
+    admin_position = models.ForeignKey('AdminPosition', on_delete=models.CASCADE, related_name='position',
+                                       verbose_name='Админпоз')
