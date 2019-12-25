@@ -44,7 +44,13 @@ class Passport(models.Model):
 class AdminPosition(models.Model):
     name = models.CharField(max_length=500, verbose_name='Админпоз')
 
+    def __str__(self):
+        return self.name
+
 class UserAdminPosition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')
     admin_position = models.ForeignKey('AdminPosition', on_delete=models.CASCADE, related_name='position',
                                        verbose_name='Админпоз')
+
+    def __str__(self):
+        return self.user.get_full_name() + self.admin_position
