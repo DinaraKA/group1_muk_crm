@@ -26,6 +26,7 @@ class Profile(models.Model):
     parent_one = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Один')
     parent_two = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Два')
 
+
 class Passport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Паспорт')
     series = models.IntegerField(max_length=30, verbose_name='Серия')
@@ -36,3 +37,6 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, verbose_name='Национальность')
     sex = models.CharField(max_length=15, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
+
+    def __str__(self):
+        return self.user.get_full_name() + "'s Profile"
