@@ -41,11 +41,13 @@ class Passport(models.Model):
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
 
+
 class AdminPosition(models.Model):
     name = models.CharField(max_length=500, verbose_name='Админпоз')
 
     def __str__(self):
         return self.name
+
 
 class UserAdminPosition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')
@@ -54,3 +56,10 @@ class UserAdminPosition(models.Model):
 
     def __str__(self):
         return self.user.get_full_name() + self.admin_position
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Роль')
+
+    def __str__(self):
+        return self.name
