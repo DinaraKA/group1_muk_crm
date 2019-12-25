@@ -25,3 +25,14 @@ class Profile(models.Model):
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     parent_one = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Один')
     parent_two = models.OneToOneField(User, related_name='profile', verbose_name='Родитель Два')
+
+class Passport(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Паспорт')
+    series = models.IntegerField(max_length=30, verbose_name='Серия')
+    issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')
+    issued_date = models.DateField(verbose_name='Дата выдачи')
+    address = models.CharField(max_length=100, verbose_name='Адрес')
+    inn = models.IntegerField(max_length=50, verbose_name='ИНН')
+    nationality = models.CharField(max_length=30, verbose_name='Национальность')
+    sex = models.CharField(max_length=15, verbose_name='Пол')
+    birth_date = models.DateField(verbose_name='Дата Рождения')
