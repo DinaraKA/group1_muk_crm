@@ -3,13 +3,6 @@ from django.db import models
 from phone_field import PhoneField
 
 
-class Position(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название')
-
-    def __str__(self):
-        return self.name
-
-
 class Parent(models.Model):
     user = models.ForeignKey(User, related_name='parents', on_delete=models.CASCADE, verbose_name='Родитель')
 
@@ -41,11 +34,13 @@ class Passport(models.Model):
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
 
+
 class AdminPosition(models.Model):
     name = models.CharField(max_length=500, verbose_name='Админпоз')
 
     def __str__(self):
         return self.name
+
 
 class UserAdminPosition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')
