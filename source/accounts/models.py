@@ -59,3 +59,18 @@ class UserRole(models.Model):
 
     def __str__(self):
         return self.user.get_full_name()
+
+
+class SocialStatus(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Статус')
+
+    def __str__(self):
+        return self.name
+
+
+class UserSocialStatus(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
+    role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
+
+    def __str__(self):
+        return self.user.get_full_name()
