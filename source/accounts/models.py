@@ -16,12 +16,12 @@ class Profile(models.Model):
 
 
 class Passport(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Паспорт')
-    series = models.IntegerField(max_length=30, verbose_name='Серия')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
+    series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
     address = models.CharField(max_length=100, verbose_name='Адрес')
-    inn = models.IntegerField(max_length=50, verbose_name='ИНН')
+    inn = models.CharField(max_length=50, verbose_name='ИНН')
     nationality = models.CharField(max_length=30, verbose_name='Национальность')
     sex = models.CharField(max_length=15, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
@@ -43,7 +43,7 @@ class UserAdminPosition(models.Model):
                                        verbose_name='Админпоз')
 
     def __str__(self):
-        return self.user.get_full_name() + self.admin_position
+        return self.user.get_full_name()
 
 
 class Role(models.Model):
@@ -58,4 +58,4 @@ class UserRole(models.Model):
     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
 
     def __str__(self):
-        return self.user.get_full_name() + self.role
+        return self.user.get_full_name()
