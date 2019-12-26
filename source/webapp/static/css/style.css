@@ -108,3 +108,13 @@ h3 {
     color: white;
     padding: 50px;
 }
+.news-title{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+}
+.news-list{
+    margin-bottom: 40px;
+    height: 250px;
+    overflow: hidden;
+}

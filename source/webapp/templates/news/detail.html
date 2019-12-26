@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <div class="row">
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+            <h1 class="title pt-5">{{ news.title }}</h1>
+            <p><b>Дата создания: </b>{{ news.created_at| date:'d.m.Y H:i:s'}}</p>
+            <img src="{{ news.photo.url }}" class="card-img-top mb-5" alt="{{ news.title }}">
+            <p align="justify">{{news.text}}</p>
+{#                {% if perms.webapp.change_news %}#}
+{#                        <a href="{% url 'webapp:news_edit' news.pk %}" class="btn btn-primary">Редактировать</a>#}
+{#                    {% endif %}#}
+{#                {% if perms.webapp.delete_news %}#}
+{#                        <a href="{% url 'webapp:news_delete' news.pk %}" class="btn btn-primary">Удалить</a>#}
+{#                    {% endif %}#}
+                <hr>
+            </div>
+        </div>
+    </div>
+{% endblock %}
