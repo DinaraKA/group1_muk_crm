@@ -55,9 +55,7 @@
             <div class="card-header" style="background: none; border: none">
                 <div class=" row header-inner">
                     <div class="col-3" style="text-align: end">
-
                         <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
-
                     </div>
                     <div class="col-9" style="text-align: center; padding-top: 7px">
                         <b>Политехнический колледж Международного университета Кыргызской Республики</b>
@@ -66,7 +64,7 @@
             </div>
             <div style="text-align: center">
                 <b>Отделение связи</b>
-                <a href="#">
+                <a href="{% url 'webapp:department1' %}">
                     <img class="card-img" src="https://www.pc.edu.kg/images/1.jpg" alt="image">
                 </a>
             </div>
@@ -74,7 +72,7 @@
                 <p class="card-text">Телефонный разговор находится на полпути между исскуством и жизнью</p>
             </div>
             <div class="card-footer">
-                <button class="btn">Смотреть</button>
+                <a href="{% url 'webapp:department1' %}" class="btn">Смотреть</a>
             </div>
         </div>
         <div class="card">
@@ -90,13 +88,15 @@
             </div>
             <div style="text-align: center">
                 <b>Энергоотделение</b>
-                <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image">
+                <a href="{% url 'webapp:department2' %}">
+                    <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image">
+                </a>
             </div>
             <div class="card-body">
                 <p class="card-text">Мы сделаем электричество таким дешевым, что жечь свечи будут только богачи</p>
             </div>
             <div class="card-footer">
-                <button class="btn"> Смотреть</button>
+                <a href="{% url 'webapp:department2' %}" class="btn">Смотреть</a>
             </div>
         </div>
         <div class="card">
@@ -112,14 +112,16 @@
             </div>
             <div style="text-align: center">
                 <b>Компьютерные сети и программирование</b>
-                <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image">
+                <a href="{% url 'webapp:department3' %}">
+                    <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image">
+                </a>
             </div>
             <div class="card-body">
                 <p class="card-text">Большинство хороших программистов делают свою работу потому что получают
                     удовольствие от программирования</p>
             </div>
             <div class="card-footer">
-                <button class="btn"> Смотреть</button>
+                <a href="{% url 'webapp:department3' %}" class="btn">Смотреть</a>
             </div>
         </div>
     </div>
@@ -187,6 +189,22 @@
                 </div>
                 <div class="right"><a href="#"> Смотреть все объвления... </a></div>
             </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="address_wrap row">
+        <div class="col-sm-4">
+            <p>Кыргызская Республика, 720007,<br>г. Бишкек, ул. Л. Толстого, 17А/1</p>
+            <p>ОКПО 29763954<br>ИНН 02612201610272</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Кыргыз Республикасы, 720007,<br>Бишкек шаары, Л.Толстой көчөсү, 17А/1</p>
+            <p>Тел.: +996 (312) 64-23-37, 64-11-56<br>Факс: +996 (312) 64-23-28</p>
+        </div>
+        <div class="col-sm-4">
+            <p>The Kyrgyz Republic, 720007,<br>Bishkek, 17A/1, St. Tolstoy</p>
+            <p>E-mail: consortium.iuk@gmail.com<br>Web-сайт: www.iuk.kg</p>
         </div>
     </div>
 {% endblock %}
