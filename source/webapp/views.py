@@ -8,4 +8,7 @@ class IndexView(TemplateView):
 class Department1View(TemplateView):
     template_name = 'departments/department1.html'
 
+class Department2View(TemplateView):
+    template_name = 'departments/department2.html'
+
 

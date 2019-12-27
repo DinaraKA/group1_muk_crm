@@ -88,13 +88,15 @@
             </div>
             <div style="text-align: center">
                 <b>Энергоотделение</b>
-                <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image">
+                <a href="{% url 'webapp:department2' %}">
+                    <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image">
+                </a>
             </div>
             <div class="card-body">
                 <p class="card-text">Мы сделаем электричество таким дешевым, что жечь свечи будут только богачи</p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn">Смотреть</a>
+                <a href="{% url 'webapp:department2' %}" class="btn">Смотреть</a>
             </div>
         </div>
         <div class="card">
