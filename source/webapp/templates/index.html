@@ -55,9 +55,7 @@
             <div class="card-header" style="background: none; border: none">
                 <div class=" row header-inner">
                     <div class="col-3" style="text-align: end">
-
                         <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
-
                     </div>
                     <div class="col-9" style="text-align: center; padding-top: 7px">
                         <b>Политехнический колледж Международного университета Кыргызской Республики</b>
@@ -66,7 +64,7 @@
             </div>
             <div style="text-align: center">
                 <b>Отделение связи</b>
-                <a href="#">
+                <a href="{% url 'webapp:department1' %}">
                     <img class="card-img" src="https://www.pc.edu.kg/images/1.jpg" alt="image">
                 </a>
             </div>
@@ -74,7 +72,7 @@
                 <p class="card-text">Телефонный разговор находится на полпути между исскуством и жизнью</p>
             </div>
             <div class="card-footer">
-                <button class="btn">Смотреть</button>
+                <a href="{% url 'webapp:department1' %}" class="btn">Смотреть</a>
             </div>
         </div>
         <div class="card">
@@ -96,7 +94,7 @@
                 <p class="card-text">Мы сделаем электричество таким дешевым, что жечь свечи будут только богачи</p>
             </div>
             <div class="card-footer">
-                <button class="btn"> Смотреть</button>
+                <a href="#" class="btn">Смотреть</a>
             </div>
         </div>
         <div class="card">
@@ -119,7 +117,7 @@
                     удовольствие от программирования</p>
             </div>
             <div class="card-footer">
-                <button class="btn"> Смотреть</button>
+                <a href="#" class="btn">Смотреть</a>
             </div>
         </div>
     </div>
