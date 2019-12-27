@@ -112,14 +112,16 @@
             </div>
             <div style="text-align: center">
                 <b>Компьютерные сети и программирование</b>
-                <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image">
+                <a href="{% url 'webapp:department3' %}">
+                    <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image">
+                </a>
             </div>
             <div class="card-body">
                 <p class="card-text">Большинство хороших программистов делают свою работу потому что получают
                     удовольствие от программирования</p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn">Смотреть</a>
+                <a href="{% url 'webapp:department3' %}" class="btn">Смотреть</a>
             </div>
         </div>
     </div>
@@ -187,6 +189,22 @@
                 </div>
                 <div class="right"><a href="#"> Смотреть все объвления... </a></div>
             </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="address_wrap row">
+        <div class="col-sm-4">
+            <p>Кыргызская Республика, 720007,<br>г. Бишкек, ул. Л. Толстого, 17А/1</p>
+            <p>ОКПО 29763954<br>ИНН 02612201610272</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Кыргыз Республикасы, 720007,<br>Бишкек шаары, Л.Толстой көчөсү, 17А/1</p>
+            <p>Тел.: +996 (312) 64-23-37, 64-11-56<br>Факс: +996 (312) 64-23-28</p>
+        </div>
+        <div class="col-sm-4">
+            <p>The Kyrgyz Republic, 720007,<br>Bishkek, 17A/1, St. Tolstoy</p>
+            <p>E-mail: consortium.iuk@gmail.com<br>Web-сайт: www.iuk.kg</p>
         </div>
     </div>
 {% endblock %}

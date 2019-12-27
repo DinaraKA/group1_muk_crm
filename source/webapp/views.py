@@ -11,4 +11,7 @@ class Department1View(TemplateView):
 class Department2View(TemplateView):
     template_name = 'departments/department2.html'
 
+class Department3View(TemplateView):
+    template_name = 'departments/department3.html'
+
 
