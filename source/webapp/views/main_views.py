@@ -13,5 +13,3 @@ class Department2View(TemplateView):
 
 class Department3View(TemplateView):
     template_name = 'departments/department3.html'
-
-
