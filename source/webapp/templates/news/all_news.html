@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Новости</h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     <hr/>
     {%  for news in news_list %}
       <div class="row">
@@ -17,4 +20,8 @@
         </div>
       </div>
     {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+
 {% endblock %}
