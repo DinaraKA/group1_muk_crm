@@ -1,0 +1,9 @@
+
+{% extends 'base.html' %}
+{% block title %}Обновить{% endblock %}
+{% block content %}
+    <h1>Обновление {{ title }}</h1>
+     <form method="POST">
+    {% include 'partial/form.html' with button_text='Обновить'%}
+    </form>
+{% endblock %}
