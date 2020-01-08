@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from accounts.models import AdminPosition
 
 
 class LoginLogoutViewTest(TestCase):
@@ -35,3 +36,16 @@ class LoginLogoutViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, 'index.html')
+
+
+class AdminPositionModelTest(TestCase):
+
+    def test_string_representation(self):
+        entry = AdminPosition(name="Test Name")
+        self.assertEqual(str(entry), entry.name)
+
+    def test_verbose_name(self):
+        self.assertEqual(str(AdminPosition._meta.verbose_name), "Позиция")
+
+    def test_verbose_name_plural(self):
+        self.assertEqual(str(AdminPosition._meta.verbose_name_plural), "Позиции")
