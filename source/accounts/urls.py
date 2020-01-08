@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from accounts.views.views import register_view
+from accounts.views.reg_log_in_out import register_view
 from accounts.views.admin_position import AdminPositionCreateView, AdminPositionUpdateView, AdminPositionDeleteView
 
 app_name = 'accounts'
