@@ -36,6 +36,10 @@ class AdminPosition(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Позиция'
+        verbose_name_plural = 'Позиции'
+
 
 class UserAdminPosition(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')

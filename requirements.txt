@@ -3,4 +3,6 @@ django-phone-field==1.8.0
 django-widget-tweaks==1.4.5
 Pillow==6.2.1
 pytz==2019.3
+selenium==3.141.0
 sqlparse==0.3.0
+urllib3==1.25.7

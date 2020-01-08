@@ -22,6 +22,7 @@ class AdminPositionUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('webapp:index')
 
+
 class AdminPositionDeleteView(DeleteView):
     model = AdminPosition
     template_name = 'delete.html'
