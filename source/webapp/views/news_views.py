@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from webapp.models import News
 
 
@@ -28,6 +28,17 @@ class NewsAddView(LoginRequiredMixin, CreateView):
     permission_required = 'webapp.add_news'
     permission_denied_message = "Доступ запрещен"
 
+    def get_success_url(self):
+        return reverse('webapp:new_detail', kwargs={'pk': self.object.pk})
+
+
+class NewsEditView(LoginRequiredMixin, UpdateView):
+    template_name = 'news/edit.html'
+    model = News
+    fields = ('title', 'text', 'photo')
+    context_object_name = 'news'
+    permission_required = 'webapp.change_news'
+    permission_denied_message = 'Доступ запрещен!'
 
     def get_success_url(self):
         return reverse('webapp:new_detail', kwargs={'pk': self.object.pk})

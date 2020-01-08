@@ -12,7 +12,7 @@
             <img src="{{ news.photo.url }}" class="card-img-top mb-5" alt="{{ news.title }}">
             <p align="justify">{{news.text}}</p>
 {#                {% if perms.webapp.change_news %}#}
-{#                        <a href="{% url 'webapp:news_edit' news.pk %}" class="btn btn-primary">Редактировать</a>#}
+                        <a href="{% url 'webapp:news_edit' news.pk %}" class="btn btn-primary">Редактировать</a>
 {#                    {% endif %}#}
 {#                {% if perms.webapp.delete_news %}#}
 {#                        <a href="{% url 'webapp:news_delete' news.pk %}" class="btn btn-primary">Удалить</a>#}
