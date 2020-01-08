@@ -1,41 +1,39 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+
 from accounts.models import AdminPosition
+from selenium.webdriver import Chrome
 
 
-class LoginLogoutViewTest(TestCase):
+class LoginTest(TestCase):
     def setUp(self):
-        test_user1 = User.objects.create_user(username='user', password='user')
+        self.driver = Chrome()
 
-        test_user1.save()
+    def tearDown(self):
+        self.driver.close()
 
-    def test_logged_in_uses_correct_template(self):
-        login = self.client.login(username='user', password='user')
-        response = self.client.get(reverse('webapp:index'))
+    def test_log_in_as_admin(self):
+        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button').click()
+        assert self.driver.current_url == 'http://localhost:8000/'
 
-        self.assertEqual(str(response.context['user']), 'user')
 
-        self.assertEqual(response.status_code, 200)
+class LogoutTest(TestCase):
+    def setUp(self):
+        self.driver = Chrome()
 
-        self.assertTemplateUsed(response, 'index.html')
+    def tearDown(self):
+        self.driver.close()
 
-    def test_logged_out_uses_correct_template(self):
-        login = self.client.login(username='user', password='user')
-        response = self.client.get(reverse('webapp:index'))
-
-        self.assertEqual(str(response.context['user']), 'user')
-
-        self.assertEqual(response.status_code, 200)
-
-        self.assertTemplateUsed(response, 'index.html')
-
-        logout = self.client.logout()
-        response = self.client.get(reverse('webapp:index'))
-
-        self.assertEqual(response.status_code, 200)
-
-        self.assertTemplateUsed(response, 'index.html')
+    def test_logout_as_admin(self):
+        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button').click()
+        self.driver.get('http://localhost:8000/accounts/logout/')
+        assert self.driver.current_url == 'http://localhost:8000/'
 
 
 class AdminPositionModelTest(TestCase):
@@ -49,3 +47,40 @@ class AdminPositionModelTest(TestCase):
 
     def test_verbose_name_plural(self):
         self.assertEqual(str(AdminPosition._meta.verbose_name_plural), "Позиции")
+
+
+class AdminPositionViewTest(TestCase):
+
+    def test_created_position(self):
+        response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'test'})
+        self.assertEqual(AdminPosition.objects.get().name, 'test')
+        self.assertEqual(response.status_code, 302)
+
+    def test_updated_post(self):
+        position = AdminPosition.objects.create(name='Test')
+
+        response = self.client.post(
+            reverse('accounts:change_admin_position', kwargs={'pk': position.id}),
+            {'name': 'New Test'})
+
+        self.assertEqual(response.status_code, 302)
+
+        self.assertEqual(AdminPosition.objects.get().name, 'New Test')
+
+    def test_deleted_post(self):
+        position = AdminPosition.objects.create(name='Test')
+
+        self.assertEqual(AdminPosition.objects.get().name, 'Test')
+
+        response = self.client.delete(
+            reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
+            {'name': 'Test'})
+
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
+                                   {'name': 'Test'})
+
+        self.assertEqual(response.status_code, 404)
+
+        self.assertFalse(AdminPosition.objects.filter(pk=position.id).exists())
