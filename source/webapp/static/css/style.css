@@ -100,11 +100,69 @@ h3 {
 
 }
 .news{
-    margin-top: 50px;
+    margin: 50px auto;
 }
 .address_wrap{
     text-align: center;
     background-color: rgb(66 66 66);
     color: white;
     padding: 50px;
+}
+.news_body {
+    overflow: hidden;
+    height: 200px;
+    padding-bottom: 10px;
+   }
+.content_item{
+    width: 48%;
+    margin-top: 70px;
+    padding: 30px;
+}
+.fa-calendar-alt{
+    color: rgb(158 158 158);
+}
+.news-title{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+}
+.news-list{
+    margin-bottom: 40px;
+    height: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+}
+.pagination {
+    text-align: center;
+    margin-left: 28%;
+    padding-bottom: 18px;
+}
+.pagination a, .page-disabled, .page-active {
+    display: inline-block;
+    border: solid 1px #6a7ddd;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px;
+}
+.pagination a {
+    background: #6a7ddd;
+    color: white;
+    text-decoration: none;
+}
+.pagination a:hover {
+   background: #6a7dff;
+   text-decoration: underline;
+}
+.page-disabled {
+    background: #6a7dcc;
+    color: #dddddd
+}
+.page-input {
+    font-size: 14px;
+    width: 40px;
+    text-align: center;
+}
+.page-active {
+    background: #ff7e5f;
 }
