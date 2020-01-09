@@ -24,6 +24,7 @@ SEX_CHOICES = (
 )
 
 
+
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
     series = models.CharField(max_length=15, verbose_name='Серия')
@@ -44,6 +45,10 @@ class AdminPosition(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Позиция'
+        verbose_name_plural = 'Позиции'
 
 
 class UserAdminPosition(models.Model):
@@ -77,9 +82,9 @@ class SocialStatus(models.Model):
         return self.name
 
 
-class UserSocialStatus(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
-    status = models.ForeignKey('SocialStatus', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
-
-    def __str__(self):
-        return self.user.get_full_name()
+# class UserSocialStatus(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
+#     status = models.ForeignKey('SocialStatus', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
+#
+#     def __str__(self):
+#         return self.user.get_full_name()
