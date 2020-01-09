@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <h1 style="padding-top: 20px">Позиции</h1>
+    {% for object in object_list %}
+        {% include 'admin_position/list.html' %}
+    {% endfor %}
+{% endblock %}
