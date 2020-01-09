@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{#    <form method="POST" action="#">#}
+        {% csrf_token %}
+        <table class="table">
+            <h2>Roles</h2>
+            <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Name</th>
+                   <th class="symbol" scope="col">Update</th>
+                   <th class="symbol" scope="col">Delete</th>
+                </tr>
+            </thead>
+            {% for role in roles %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ role.name }}</td>
+{#                        <td class="symbol"><a href="#">&#x270E;</a></td>#}
+{#                        <td class="symbol"><a href="#">X</a></td>#}
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+{#    </form>#}
+{% endblock %}
