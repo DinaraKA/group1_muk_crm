@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from accounts.forms import AdminPositionForm
 from accounts.models import AdminPosition
 from selenium.webdriver import Chrome
 
@@ -65,6 +66,19 @@ class AdminPositionModelTest(TestCase):
 
     def test_verbose_name_plural(self):
         self.assertEqual(str(AdminPosition._meta.verbose_name_plural), "Позиции")
+
+
+class AdminPositionFormTest(TestCase):
+
+    def test_renew_form_name_field_label(self):
+        form = AdminPositionForm()
+        self.assertTrue(form.fields['name'].label == None or form.fields['name'].label == 'name')
+
+    def test_form_valid(self):
+        position = AdminPosition.objects.create(name='Test')
+        form_data = {'name': 'Test'}
+        form = AdminPositionForm(data=form_data)
+        self.assertFalse(form.is_valid())
 
 
 class AdminPositionViewTest(TestCase):
