@@ -9,13 +9,14 @@ class Profile(models.Model):
     phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
     photo = models.ImageField(null=True, blank=True, upload_to='', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
-    parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
-                                      verbose_name='Родитель Один')
-    parent_two = models.ForeignKey(User, null=True, blank=True,  on_delete=models.PROTECT, related_name='parent_two',
-                                      verbose_name='Родитель Два')
+    # parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
+    #                                   verbose_name='Родитель Один')
+    # parent_two = models.ForeignKey(User, null=True, blank=True,  on_delete=models.PROTECT, related_name='parent_two',
+    #                                   verbose_name='Родитель Два')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
+
 
 SEX_CHOICES = (
     ('man', 'мужской'),
