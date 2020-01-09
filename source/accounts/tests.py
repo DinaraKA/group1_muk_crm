@@ -36,7 +36,6 @@ class LogoutTest(TestCase):
         assert self.driver.current_url == 'http://localhost:8000/'
 
 
-
 class AdminPositionModelTest(TestCase):
 
     def test_string_representation(self):

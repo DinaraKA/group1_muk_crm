@@ -2,7 +2,20 @@ from accounts.models import AdminPosition
 
 from django.urls import reverse, reverse_lazy
 
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
+
+class AdminPositionIndexView(ListView):
+    template_name = 'admin_position/index.html'
+    model = AdminPosition
+    context_object_name = 'positions'
+    paginate_by = 4
+    paginate_orphans = 0
+    page_kwarg = 'page'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        return context
 
 
 class AdminPositionCreateView(CreateView):
