@@ -29,6 +29,10 @@ h3 {
     padding: 20px 0px;
 }
 
+.lk-content {
+    margin-top: 80px;
+}
+
 .menu {
     font-size: 14px;
     line-height: 1;
@@ -165,4 +169,12 @@ h3 {
 }
 .page-active {
     background: #ff7e5f;
+}
+
+.user_photo {
+    display: inline-block;
+    float: left;
+    width: 250px;
+    height: auto;
+    margin-right: 20px;
 }
