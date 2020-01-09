@@ -14,6 +14,9 @@ class Profile(models.Model):
     parent_two = models.OneToOneField(User, on_delete=models.PROTECT, related_name='parent_two',
                                       verbose_name='Родитель Два')
 
+    def __str__(self):
+        return self.user.get_full_name()
+
 
 class Passport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
@@ -35,6 +38,10 @@ class AdminPosition(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Позиция'
+        verbose_name_plural = 'Позиции'
 
 
 class UserAdminPosition(models.Model):
