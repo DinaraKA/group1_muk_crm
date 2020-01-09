@@ -3,20 +3,8 @@ from django.db import models
 from phone_field import PhoneField
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
-    patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
-    phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
-    photo = models.ImageField(null=True, blank=True, upload_to='', verbose_name='Фото')
-    address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
-    parent_one = models.OneToOneField(User, on_delete=models.PROTECT, related_name='parent_one',
-                                      verbose_name='Родитель Один')
-    parent_two = models.OneToOneField(User, on_delete=models.PROTECT, related_name='parent_two',
-                                      verbose_name='Родитель Два')
-
-
 class Passport(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь', default=None)
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
@@ -28,6 +16,38 @@ class Passport(models.Model):
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
+
+
+class ParentOne(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='parent_one', verbose_name='Родитель 1')
+
+    def __str__(self):
+        return self.user.get_full_name() + "'s Profile"
+
+
+class ParentTwo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='parent_two', verbose_name='Родитель 2')
+
+    def __str__(self):
+        return self.user.get_full_name() + "'s Profile"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
+    patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
+    phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
+    photo = models.ImageField(null=True, blank=True, upload_to='', verbose_name='Фото')
+    address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
+    parent_one = models.ForeignKey(ParentOne, on_delete=models.PROTECT, related_name='parent_one',
+                                      verbose_name='Родитель Один', null=True, blank=True)
+    parent_two = models.ForeignKey(ParentTwo, on_delete=models.PROTECT, related_name='parent_two',
+                                      verbose_name='Родитель Два', null=True, blank=True)
+    # passport = models.OneToOneField(Passport, related_name='passport', verbose_name='Паспорт', on_delete=models.CASCADE,
+    #                                 default=None, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.get_full_name() + "'s Profile"
+
 
 
 class AdminPosition(models.Model):
