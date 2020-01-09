@@ -16,20 +16,36 @@
             <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
                 <div class="mt-3">
                     {% if user_obj.profile.photo %}
-                        <img src="{{user_obj.profile.photo.url}}" class="user_photo">
+                        <img src="{{ user_obj.profile.photo.url }}" class="user_photo">
                     {% endif %}
                     <p><b>Логин:</b> {{ user_obj.username }}</p>
                     <p><b>Имя:</b> {{ user_obj.first_name }}</p>
                     <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
                     <p><b>Почта:</b> {{ user_obj.email }}</p>
                     {% if user_obj.profile %}
-                    <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
-                    <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
-                    <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
-                    <p><b>Родители:</b></p> <p>{{ user_obj.profile.parent_one }}, {{ user_obj.profile.parent_two }}</p>
+                        <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
+                        <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
+                        <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
+                        <p><b>Родители:</b></p>
+                        <p>{{ user_obj.profile.parent_one }}, {{ user_obj.profile.parent_two }}</p>
                     {% endif %}
-                </div>
+                    {% if user_obj.passport %}
+                        <div class="passport"
+                        <h5>Паспортные данные</h5>
+{#                        series = models.CharField(max_length=15, verbose_name='Серия')#}
+{#                        issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')#}
+{#                        issued_date = models.DateField(verbose_name='Дата выдачи')#}
+{#                        address = models.CharField(max_length=100, verbose_name='Адрес')#}
+{#                        inn = models.CharField(max_length=50, verbose_name='ИНН')#}
+{#                        nationality = models.CharField(max_length=30, verbose_name='Национальность')#}
+{#                        sex = models.CharField(max_length=15, verbose_name='Пол')#}
+{#                        birth_date = models.DateField(verbose_name='Дата Рождения')#}
+                        <p><b>Серия:</b> {{ user_obj.passport }}</p>
+                        <p><b>Кем выдан:</b> {{ user_obj.passport.issued_by }}</p>
+                        </div>
+                    {% endif %}
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

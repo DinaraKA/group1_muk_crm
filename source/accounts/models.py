@@ -19,7 +19,7 @@ class Profile(models.Model):
 
 
 class Passport(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
