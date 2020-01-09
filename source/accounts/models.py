@@ -17,6 +17,11 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
 
+SEX_CHOICES = (
+    ('man', 'мужской'),
+    ("women", "женский"),
+)
+
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
@@ -26,7 +31,7 @@ class Passport(models.Model):
     address = models.CharField(max_length=100, verbose_name='Адрес')
     inn = models.CharField(max_length=50, verbose_name='ИНН')
     nationality = models.CharField(max_length=30, verbose_name='Национальность')
-    sex = models.CharField(max_length=15, verbose_name='Пол')
+    sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
 
     def __str__(self):
