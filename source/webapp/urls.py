@@ -1,4 +1,6 @@
 from django.urls import path
+
+from .views import AnnouncementsView, AnnounceDetailView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView
 
@@ -11,4 +13,8 @@ urlpatterns = [
     path('departments/department3/', Department3View.as_view(),  name='department3'),
     path('news/', NewsView.as_view(), name='news'),
     path('news/<int:pk>', NewsDetailView.as_view(), name='new_detail'),
+
+
+    path('announcements/', AnnouncementsView.as_view(), name='announcements'),
+    path('announcements/<int:pk>', AnnounceDetailView.as_view(), name='announce_detail'),
 ]
