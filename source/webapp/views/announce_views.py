@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from webapp.models import Announcements
 
 
@@ -27,14 +27,14 @@ class AnnouncementCreateView(CreateView):
         return reverse('webapp:announcements')
 
 
-# class AnnouncementUpdateView(UpdateView):
-#     model = Announcements
-#     template_name = 'change.html'
-#     fields = ['title', 'text', 'photo']
-#     context_object_name = 'announcement'
-#
-#     def get_success_url(self):
-#         return reverse('webapp:announce_detail')
+class AnnouncementUpdateView(UpdateView):
+    model = Announcements
+    template_name = 'change.html'
+    fields = ['title', 'text', 'photo']
+    context_object_name = 'announcement'
+
+    def get_success_url(self):
+        return reverse('webapp:announce_detail')
 
 
 # class AnnouncementDeleteView(DeleteView):
