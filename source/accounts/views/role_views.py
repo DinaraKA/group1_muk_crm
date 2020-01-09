@@ -16,12 +16,12 @@ class RoleIndexView(ListView):
         return context
 
 
-# class RoleCreateView(CreateView):
-#     model = Role
-#     template_name = 'add.html'
-#     fields = ['name']
-#
-#     def get_success_url(self):
-#         return reverse('accounts:roles_list')
+class RoleCreateView(CreateView):
+    model = Role
+    template_name = 'add.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('accounts:roles_list')
 
 
