@@ -20,7 +20,7 @@ class NewsDetailView(DetailView):
 
 class NewsAddView(CreateView):
     model = News
-    template_name = 'news/add.html'
+    template_name = 'add.html'
     fields = ('title', 'text', 'photo')
     success_url = reverse_lazy('webapp:news')
 
@@ -29,7 +29,7 @@ class NewsAddView(CreateView):
 
 
 class NewsEditView(UpdateView):
-    template_name = 'news/edit.html'
+    template_name = 'change.html'
     model = News
     fields = ('title', 'text', 'photo')
     context_object_name = 'news'
@@ -40,7 +40,7 @@ class NewsEditView(UpdateView):
 
 class NewsDeleteView(DeleteView):
     model = News
-    template_name = 'news/delete.html'
+    template_name = 'delete.html'
     context_object_name = 'news'
     success_url = reverse_lazy('webapp:news')
 
