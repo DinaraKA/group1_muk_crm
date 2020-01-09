@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Announcements
 
 
@@ -37,9 +37,9 @@ class AnnouncementUpdateView(UpdateView):
         return reverse('webapp:announce_detail')
 
 
-# class AnnouncementDeleteView(DeleteView):
-#     model = Announcements
-#     template_name = 'delete.html'
-#
-#     def get_success_url(self):
-#         return reverse('webapp:announcements')
+class AnnouncementDeleteView(DeleteView):
+    model = Announcements
+    template_name = 'delete.html'
+
+    def get_success_url(self):
+        return reverse('webapp:announcements')
