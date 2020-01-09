@@ -1,4 +1,7 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
+from accounts.models import AdminPosition
 from django import forms
 
 
@@ -24,3 +27,16 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
 
+
+class AdminPositionForm(forms.ModelForm):
+    name = forms.CharField()
+
+    def clean_name(self):
+        data = self.cleaned_data['name']
+
+        if not data:
+            raise ValidationError('This field is required')
+
+    class Meta:
+        model = AdminPosition
+        fields = ['name']
