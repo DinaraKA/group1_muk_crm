@@ -136,12 +136,14 @@
                       <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
                     </a>
                     <div class="news_body col-8">
-                        <a class="title" href="{% url 'webapp:new_detail' news.pk %}" style="display: block">{{ news.title }}</a>
+                        <a class="title" href="{% url 'webapp:news_detail' news.pk %}" style="display: block">{{ news.title }}</a>
                         <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
-                        <p> {{ news.text }}
-                            <br>
-                            <a href="{%  url 'webapp:new_detail' news.pk %}">читать полностью</a>
+                        <p class="news_index"> {{ news.text }}
+{#                            <br>#}
+{#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
                         </p>
+                        <a href="{%  url 'webapp:news_detail' news.pk %}" style="color: red">читать полностью</a>
+{#                        <br>#}
                     </div>
                 </div>
                 {% endfor %}

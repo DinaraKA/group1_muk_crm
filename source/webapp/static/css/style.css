@@ -127,38 +127,68 @@ h3 {
     font-size: 20px;
     /*margin-top: 20px;*/
 }
-.text_news{
+/*.text_news {*/
+  /*overflow: hidden;*/
+  /*text-overflow: ellipsis;*/
+  /*display: -webkit-box;*/
+  /*-webkit-line-clamp: 6;*/
+  /*-webkit-box-orient: vertical;*/
+  /*line-height: 20px;*/
+  /*max-height: 200px;*/
+/*}*/
+.news-list{
     overflow: hidden;
-    height: 180px;
-    width: 600px;
-    line-height: 25px;
+    position: absolute;
+    line-height: 1.2em;
+    max-height: 4.6em;
+    text-align: justify !important;
+    /*padding-right: 39px;*/
+    /*padding-left: 1em;*/
+    /*height: 150px;*/
+    width: 800px;
+    /*line-height: 25px;*/
 }
-.text_news:before {
-    content: "";
-    float: left;
-    width: 5px;
-    height: 200px;
-}
-
-.text_news > *:first-child {
-    float: right;
-    width: 100%;
-    margin-left: -5px;
-}
-
-.text_news:after {
-    content: "\02026";
-    box-sizing: content-box;
-    float: right;
+.news-list:before {
+    content: '';
     position: relative;
-    top: -43px;
-    left: 93%;
-    width: 3em;
-    margin-left: -3em;
-    padding-right: 5px;
-    text-align: right;
+    /*float: left;*/
+    /*width: 5px;*/
+    /*height: 150px;*/
+    bottom: 0;
+}
+.news_index{
+    overflow: hidden;
+    /*position: relative;*/
+    line-height: 1.2em;
+    max-height: 4.6em;
+    text-align: justify !important;
+
+}
+/*.text_news > *:first-child {*/
+    /*float: right;*/
+    /*width: 100%;*/
+    /*margin-left: -5px;*/
+/*}*/
+
+.news-list:after {
+    content: "...";
+    /*box-sizing: content-box;*/
+    /*float: right;*/
+    /*position: relative;*/
+    /*top: -43px;*/
+    /*left: 80%;*/
+    /*width: 3em;*/
+    /*margin-left: -3em;*/
+    /*padding-right: 5px;*/
+    /*text-align: right;*/
     /*background-size: 100% 100%;*/
     /*background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);*/
+    position: relative;
+    right: 260px;
+    width: 3em;
+    height: 2em;
+    margin-top: 0.3em;
+    background: white;
 }
 /*.news-list{*/
     /*margin-bottom: 40px;*/
