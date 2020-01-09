@@ -18,7 +18,7 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ role.name }}</td>
-                        <td class="symbol"><a href="#">&#x270E;</a></td>
+                        <td class="symbol"><a href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
                         <td class="symbol"><a href="#">X</a></td>
                     </tr>
                 </tbody>

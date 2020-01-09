@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.reg_log_in_out import register_view
 from accounts.views.admin_position import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, AdminPositionDeleteView
-from accounts.views.role_views import RoleIndexView, RoleCreateView
+from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateView
 
 app_name = 'accounts'
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path('delete_admin_position/<int:pk>/', AdminPositionDeleteView.as_view(), name='delete_admin_position'),
     path('roles/', RoleIndexView.as_view(), name='roles_list' ),
     path('roles/add/', RoleCreateView.as_view(), name='role_add'),
+    path('roles/change/<int:pk>', RoleUpdateView.as_view(), name='role_change'),
 ]

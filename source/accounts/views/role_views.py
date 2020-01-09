@@ -25,3 +25,16 @@ class RoleCreateView(CreateView):
         return reverse('accounts:roles_list')
 
 
+class RoleUpdateView(UpdateView):
+    model = Role
+    template_name = 'change.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('accounts:roles_list')
+
+
+# class RoleDeleteView(DeleteView):
+#     model = Role
+#     template_name = 'delete.html'
+#     success_url = reverse_lazy('accounts:roles_list')
