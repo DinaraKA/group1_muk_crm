@@ -106,7 +106,7 @@ class AdminPositionViewTest(TestCase):
         self.driver.get('http://127.0.0.1:8000/accounts/positions/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('Test2')
+        self.driver.find_element_by_name('name').send_keys('Islam_Cool')
         self.driver.find_element_by_class_name('btn.btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/'
 
