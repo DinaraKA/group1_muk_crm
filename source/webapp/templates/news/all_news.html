@@ -2,21 +2,27 @@
 
 {% block content %}
     <h1>Новости</h1>
+
+        <a href="{% url 'webapp:news_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить новость</a>
+
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
     <hr/>
     {%  for news in news_list %}
-      <div class="row">
+      <div class="row m-4">
         <div class="col-3 m-2">
             <img src="{{ news.photo.url }}" class="card-img-top" alt="{{ news.title }}">
         </div>
-        <div class="col-8">
-          <div class="news-list">
+        <div class="tnews col-8">
             <h5 class="news-title">{{ news.title }}</h5>
-            <p class="news-text" style=>{{ news.text }}</p>
+          <div class="news-list">
+{#            <h5 class="news-title">{{ news.title }}</h5>#}
+            <p>{{ news.text }}
+                <a href="{% url 'webapp:news_detail' news.pk %}">Читать полностью...</a></p>
+
           </div>
-            <a href="{% url 'webapp:new_detail' news.pk %}" class="link mb-2" style="color:red">Читать полностью</a>
+{#            <a href="{% url 'webapp:news_detail' news.pk %}" class="link mt-1" style="color:red">Читать полностью</a>#}
         </div>
       </div>
     {% endfor %}
@@ -25,3 +31,8 @@
     {% endif %}
 
 {% endblock %}
+
+
+
+
+

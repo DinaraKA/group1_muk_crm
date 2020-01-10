@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+        <hr/>
+        <div class="statuses">
+            <h1>Social Statuses:</h1>
+        </div>
+            {% for status in statuses %}
+                <p>{{ status.name }}</p>
+            {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+    </section>
+{% endblock %}
