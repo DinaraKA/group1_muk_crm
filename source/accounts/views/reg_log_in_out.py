@@ -72,3 +72,16 @@ class UserPersonalInfoChangeView(UpdateView):
     def get_success_url(self):
         print('success')
         return reverse('webapp:index')
+
+
+# class UserPasswordChangeView(UpdateView):
+#     model = User
+#     template_name = 'user_password_change.html'
+#     form_class = PasswordChangeForm
+#     context_object_name = 'user_obj'
+#
+#     def test_func(self):
+#         return self.request.user.pk == self.kwargs['pk']
+#
+#     def get_success_url(self):
+#         return reverse('accounts:login')
