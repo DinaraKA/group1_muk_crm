@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Пользователь{% endblock %}
+
+{#{% block menu %}#}
+{#    {% if user.pk == user_obj.pk %}#}
+{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>#}
+{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+
+{% block content %}
+    <div class="lk-content">
+        <h1 class="text-center">Личный кабинет</h1>
+        <div class="row">
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+                <div class="mt-3">
+                    {% if user_obj.profile.photo %}
+                        <img src="{{ user_obj.profile.photo.url }}" class="user_photo">
+                    {% endif %}
+                    <p><b>Логин:</b> {{ user_obj.username }}</p>
+                    <p><b>Имя:</b> {{ user_obj.first_name }}</p>
+                    <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
+                    <p><b>Почта:</b> {{ user_obj.email }}</p>
+                    {% if user_obj.profile %}
+                        <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
+                        <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
+                        <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
+{#                        <p><b>Родители:</b></p>#}
+{#                        <p>{{ user_obj.profile.parent_one }}, {{ user_obj.profile.parent_two }}</p>#}
+                    {% endif %}
+                    {% if user_obj.passport %}
+                        <div class="passport">
+                            <h5><b>Паспортные данные:</b></h5>
+                            <p><b>Серия:</b> {{ user_obj.passport.series }}</p>
+                            <p><b>Кем выдан:</b> {{ user_obj.passport.issued_by }}</p>
+                            <p><b>Дата выдачи:</b> {{ user_obj.passport.issued_date }}</p>
+                            <p><b>Адрес:</b> {{ user_obj.passport.address}}</p>
+                            <p><b>ИНН:</b> {{ user_obj.passport.inn }}</p>
+                            <p><b>Национальность:</b> {{ user_obj.passport.nationality }}</p>
+                            <p><b>Пол:</b> {{ user_obj.passport.sex }}</p>
+                            <p><b>Дата рождения:</b> {{ user_obj.passport.birth_date }}</p>
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

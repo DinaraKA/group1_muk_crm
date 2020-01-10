@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{#{% block menu %}#}
+{#    <li class="nav-item"><a class="nav-link" href="{% url "accounts:detail" user_obj.pk %}">Назад</a></li>#}
+{#    <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>#}
+{#{% endblock %}#}
+
+{% block content %}
+    <h1 class="text-center">Личный кабинет</h1>
+    <form action="{% url "accounts:update" user_obj.pk %}" method="post" enctype="multipart/form-data">
+        {% include 'partial/form.html' %}
+        <input type="submit" value="Сохранить" class="btn btn-primary">
+    </form>
+{% endblock %}
