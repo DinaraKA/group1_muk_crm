@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'webapp',
     'accounts',
     'phone_field',
-    "extra_views",
 ]
 
 MIDDLEWARE = [
