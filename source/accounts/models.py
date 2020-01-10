@@ -24,9 +24,6 @@ SEX_CHOICES = (
 )
 
 
-    def __str__(self):
-        return self.user.get_full_name()
-
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
