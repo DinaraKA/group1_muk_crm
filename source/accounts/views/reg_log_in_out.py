@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views.generic import UpdateView
 from accounts.forms import UserCreationForm, UserChangeForm
 from accounts.models import Passport
+from accounts.forms import UserCreationForm
 
 
 def login_view(request, *args, **kwargs):
