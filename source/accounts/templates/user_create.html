@@ -2,7 +2,6 @@
 {% block content %}
         <h1 class="text-center">Регистрация</h1>
         <form action="{% url 'accounts:create' %}" method="post">
-            {% include "partial/form.html" %}
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            {% include "partial/form.html" with button_text='Зарегистрироваться'%}
         </form>
 {% endblock %}

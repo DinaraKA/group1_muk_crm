@@ -13,7 +13,8 @@ class LoginTest(TestCase):
         self.driver.close()
 
     def test_log_in_as_admin(self):
-        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.get('http://localhost:8000')
+        self.driver.find_element_by_class_name('login').click()
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button').click()
@@ -28,11 +29,12 @@ class LogoutTest(TestCase):
         self.driver.close()
 
     def test_logout_as_admin(self):
-        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.get('http://localhost:8000')
+        self.driver.find_element_by_class_name('login').click()
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button').click()
-        self.driver.get('http://localhost:8000/accounts/logout/')
+        self.driver.find_element_by_class_name('logout').click()
         assert self.driver.current_url == 'http://localhost:8000/'
 
 
@@ -72,7 +74,7 @@ class AdminPositionFormTest(TestCase):
 
     def test_renew_form_name_field_label(self):
         form = AdminPositionForm()
-        self.assertTrue(form.fields['name'].label == None or form.fields['name'].label == 'name')
+        self.assertTrue(form.fields['name'].label is None or form.fields['name'].label == 'name')
 
     def test_form_valid(self):
         position = AdminPosition.objects.create(name='Test')
@@ -87,6 +89,12 @@ class AdminPositionViewTest(TestCase):
 
     def tearDown(self):
         self.driver.close()
+
+    def test_list_position(self):
+        self.driver.get('http://localhost:8000/accounts/add_admin_position/')
+        self.driver.find_element_by_name('name').send_keys('Mama')
+        response = self.client.get('http://127.0.0.1:8000/accounts/positions/')
+        assert self.driver.find_element_by_name('name')
 
     def test_created_position(self):
         self.driver.get('http://localhost:8000/accounts/add_admin_position/')
@@ -112,7 +120,7 @@ class AdminPositionViewTest(TestCase):
     # response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'test'})
     # self.assertEqual(AdminPosition.objects.get().name, 'test')
     # self.assertEqual(response.status_code, 302)
-
+    #
     # def test_updated_post(self):
     #     position = AdminPosition.objects.create(name='Test')
     #
