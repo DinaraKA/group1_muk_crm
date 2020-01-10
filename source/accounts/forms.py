@@ -1,11 +1,20 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Profile
+from .models import Profile, Passport
+
 
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    series = forms.CharField(label='Пасспорт серия', required=False)
+    issued_by = forms.CharField(label='Кем выдан', required=False)
+    issued_date = forms.DateField(label='Дата выдачи', required=False)
+    address = forms.CharField(label='Адрес',required=False)
+    inn = forms.CharField(label='ИНН')
+    nationality = forms.CharField(label='Национальность')
+    sex = forms.CharField(label='Пол')
+    birth_date= forms.DateField(label='Дата Рождения')
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
@@ -21,19 +30,6 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-    class Meta:
-        model = User
-        fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
-
-
-class UserChangeForm(forms.ModelForm):
-    patronymic = forms.CharField(label='Отчество', max_length=30, required=False)
-    phone_number = forms.CharField(label="Номер телефона", required=False)
-    photo = forms.ImageField(label='Фото', required=False)
-    address_fact = forms.CharField(max_length=100, label='Фактический Адрес')
-    parent_one = forms.ModelMultipleChoiceField(queryset=User.objects.all(), label='Родитель Один', required=False)
-    parent_two = forms.ModelMultipleChoiceField(queryset=User.objects.all(), label='Родитель Два', required=False)
-
     def get_initial_for_field(self, field, field_name):
         if field_name in self.Meta.profile_fields:
             try:
@@ -42,45 +38,44 @@ class UserChangeForm(forms.ModelForm):
                 return None
         return super().get_initial_for_field(field, field_name)
 
-    def save(self, commit=True):
-        user = super().save(commit)
-        self.save_profile(commit)
-        return user
+    def get_initial_for_passport(self, field, field_name):
+        if field_name in self.Meta.profile_fields:
+            try:
+                return getattr(self.instance.profile, field_name)
+            except Passport.DoesNotExist:
+                return None
+        return super().get_initial_for_field(field, field_name)
 
-    def save_profile(self, commit=True):
+    def save_passport(self, commit=True):
         try:
-            profile = self.instance.profile
-        except Profile.DoesNotExist:
-            profile = Profile.objects.create(user=self.instance)
-        # for field in self.Meta.profile_fields:
-        #     setattr(profile, field, self.cleaned_data[field])
-        first_name = self.cleaned_data['first_name']
-        last_name = self.cleaned_data['last_name']
-        email = self.cleaned_data['email']
-        patronymic = self.cleaned_data['patronymic']
-        phone_number = self.cleaned_data.get('phone_number ')
-        photo = self.cleaned_data.get('photo')
-        address_fact = self.cleaned_data.get('address_fact')
-        parent_one = self.cleaned_data.get('parent_one')
-        parent_two = self.cleaned_data.get('parent_two')
-        # parent_one = User.objects.get(active=True)
-        # parent_two = User.objects.get(active=True)
-        if not profile.photo:
-            profile.photo = None
+            passport = self.instance.passport
+        except Passport.DoesNotExist:
+            passport = Passport.objects.create(passport=self.instance)
+        for field in self.Meta.passport_fields:
+            setattr(passport, field, self.cleaned_data[field])
+        # if not profile.avatar:
+        #     profile.avatar = None
         if commit:
-            profile.save()
+            passport.save()
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'patronymic', 'phone_number', 'photo', 'address_fact', "parent_one", "parent_two"]
-        profile_fields = ['patronymic', 'phone_number', 'photo', 'address_fact', "parent_one", "parent_two"]
-        labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
+        fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
+        profile_fields = ['address_fact', 'passport']
+        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
 
 
-class PasswordChangeForm(forms.ModelForm):
-    password = forms.CharField(label="Новый пароль", strip=False, widget=forms.PasswordInput)
+class UserChangeForm(forms.ModelForm):
+    password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
-    old_password = forms.CharField(label="Старый пароль", strip=False, widget=forms.PasswordInput)
+    series = forms.CharField(label='Пасспорт серия', required=False)
+    issued_by = forms.CharField(label='Кем выдан', required=False)
+    issued_date = forms.DateField(label='Дата выдачи', required=False)
+    address = forms.CharField(label='Адрес',required=False)
+    inn = forms.CharField(label='ИНН')
+    nationality = forms.CharField(label='Национальность')
+    sex = forms.CharField(label='Пол')
+    birth_date = forms.DateField(label='Дата Рождения')
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
@@ -89,19 +84,31 @@ class PasswordChangeForm(forms.ModelForm):
             raise forms.ValidationError('Пароли не совпадают!')
         return password_confirm
 
-    def clean_old_password(self):
-        old_password = self.cleaned_data.get('old_password')
-        if not self.instance.check_password(old_password):
-            raise forms.ValidationError('Старый пароль неправильный!')
-        return old_password
+    def get_initial_for_field(self, field, field_name):
+        if field_name in self.Meta.passport_fields:
+            try:
+                return getattr(self.instance.passport, field_name)
+            except Passport.DoesNotExist:
+                return None
+        return super().get_initial_for_field(field, field_name)
 
     def save(self, commit=True):
-        user = self.instance
-        user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
+        user = super().save(commit=False)
+        self.save_passport(commit)
         return user
+
+    def save_passport(self, commit=True):
+        try:
+            passport = self.instance.passport
+        except Passport.DoesNotExist:
+            passport = Passport.objects.create(passport=self.instance)
+        for field in self.Meta.passport_fields:
+            setattr(passport, field, self.cleaned_data[field])
+        if commit:
+            passport.save()
 
     class Meta:
         model = User
-        fields = ['password', 'password_confirm', 'old_password']
+        fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
+        # profile_fields = ['address_fact', 'passport']
+        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
