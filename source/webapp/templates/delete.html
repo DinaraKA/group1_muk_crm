@@ -1,14 +1,11 @@
-
 {% extends "base.html" %}
 {% block title %}Удалить {{ title }}{% endblock %}
 {% block content %}
-    <h3>Вы уверены что хотите  {{ title }} :<br>"{{ object }}"?</h3>
     <h3>Вы уверены что хотите удалить {{ title }} :<br>"{{ object }}"?</h3>
     <form method="POST"  class="text-center">
         {% csrf_token %}
         <div class="confirm d-flex justify-content-center">
             <p><input type="submit" value="Да" class="mt-5 btn btn-danger"></p>
-            <p><a href="{% url 'webapp:index' %}" class="mt-5 btn  btn-primary">Нет</a></p>
         </div>
     </form>
 {% endblock %}
