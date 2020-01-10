@@ -128,65 +128,47 @@
     <div class="content_inner row">
         <div class="content_item">
             <h4>Новости</h4>
+
             <div class="news">
+                {%  for news in news_list %}
                 <div class="row">
                     <a class="col-4" href="#">
-                        <img src="https://www.pc.edu.kg/images/1.jpg" class="img-thumbnail" alt="...">
+                      <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
                     </a>
                     <div class="news_body col-8">
-                        <a class="title" href="#" style="display: block">Заголовок</a>
-                        <time><i class="fa fa-calendar-alt" aria-hidden="true"> Дата</i></time>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor eaque fugit iure non
-                            veritatis voluptates. Animi asperiores dignissimos doloremque doloribus dolorum, eaque esse
-                            in ipsam itaque minima obcaecati provident quibusdam recusandae reiciendis rem repellendus
-                            saepe sed temporibus? Aliquid deserunt esse incidunt necessitatibus quidem, quod sunt.
-                            Aliquam dolores earum, est illo incidunt labore laudantium mollitia omnis vel voluptatibus.
-                            Adipisci animi architecto aut beatae consectetur consequuntur doloremque dolores eum fuga
-                            maiores minima nihil placeat, quaerat quas sapiente suscipit tempora vel vero vitae
-                            voluptatibus. A asperiores aut consequuntur deleniti dignissimos fugiat itaque iure maxime
-                            nemo nihil nulla pariatur perferendis quidem reprehenderit, similique soluta ut veritatis
-                            vitae voluptates voluptatum? Accusamus aliquid amet aut, cum dignissimos, distinctio dolorum
-                            enim et ex explicabo illo, laudantium nam nemo non nulla omnis possimus praesentium ratione
-                            rem tempore temporibus veniam voluptatem. Aliquam autem blanditiis cumque et impedit iure,
-                            magnam saepe tenetur. Aliquid commodi est expedita ipsa nobis rerum!
-                            <br>
-                            <a href="#">читать полностью</a>
+                        <a class="title" href="{% url 'webapp:news_detail' news.pk %}" style="display: block">{{ news.title }}</a>
+                        <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
+                        <p class="news_index"> {{ news.text }}
+{#                            <br>#}
+{#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
                         </p>
+                        <a href="{%  url 'webapp:news_detail' news.pk %}" style="color: red">читать полностью</a>
+{#                        <br>#}
                     </div>
                 </div>
-                <div class="right"><a href="#"> Смотреть все новости... </a></div>
+                {% endfor %}
+
+                <div class="right"><a href="{% url 'webapp:news' %}"> Смотреть все новости... </a></div>
             </div>
+
+
         </div>
         <div class="content_item">
             <h4>Объявления</h4>
             <div class="news">
-                <div class="row">
-                    <a class="col-4" href="#">
-                        <img src="https://www.pc.edu.kg/images/1.jpg" class="img-thumbnail" alt="...">
-                    </a>
-                    <div class="news_body col-8">
-                        <a class="title" href="#" style="display: block">Заголовок</a>
-                        <time><i class="fa fa-calendar-alt" aria-hidden="true"> Дата</i></time>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolor eaque fugit iure non
-                            veritatis voluptates. Animi asperiores dignissimos doloremque doloribus dolorum, eaque esse
-                            in ipsam itaque minima obcaecati provident quibusdam recusandae reiciendis rem repellendus
-                            saepe sed temporibus? Aliquid deserunt esse incidunt necessitatibus quidem, quod sunt.
-                            Aliquam dolores earum, est illo incidunt labore laudantium mollitia omnis vel voluptatibus.
-                            Adipisci animi architecto aut beatae consectetur consequuntur doloremque dolores eum fuga
-                            maiores minima nihil placeat, quaerat quas sapiente suscipit tempora vel vero vitae
-                            voluptatibus. A asperiores aut consequuntur deleniti dignissimos fugiat itaque iure maxime
-                            nemo nihil nulla pariatur perferendis quidem reprehenderit, similique soluta ut veritatis
-                            vitae voluptates voluptatum? Accusamus aliquid amet aut, cum dignissimos, distinctio dolorum
-                            enim et ex explicabo illo, laudantium nam nemo non nulla omnis possimus praesentium ratione
-                            rem tempore temporibus veniam voluptatem. Aliquam autem blanditiis cumque et impedit iure,
-                            magnam saepe tenetur. Aliquid commodi est expedita ipsa nobis rerum!
-                            <br>
-                            <a href="#">читать полностью</a>
-                        </p>
+                {%  for announcement in announcements %}
+                    <div class="row">
+                        <a class="col-4" href="#">
+                            <img src="{{ announcement.photo.url }}" class="img-thumbnail" alt="{{ announcement.title }}">
+                        </a>
+                        <div class="news_body col-8">
+                            <a class="title" href="{% url 'webapp:announce_detail' announcement.pk %}" style="display: block">{{ announcement.title }}</a>
+                            <time><i class="fa fa-calendar-alt" aria-hidden="true">{{ announcement.created_at }}</i></time>
+                            <p class="news_index"> {{ news.text }}</p>
+                            <a href="{%  url 'webapp:announce_detail' announcement.pk %}" style="color: red">читать полностью</a>
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
                 <div class="right"><a href="#"> Смотреть все объвления... </a></div>
             </div>
         </div>
