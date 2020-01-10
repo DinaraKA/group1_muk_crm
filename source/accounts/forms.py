@@ -69,14 +69,13 @@ class UserCreationForm(forms.ModelForm):
         passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
 
 
-
 class UserChangeForm(forms.ModelForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
-    series = forms.CharField(label='Пасспорт серия', required=False)
-    issued_by = forms.CharField(label='Кем выдан', required=False)
-    issued_date = forms.DateField(label='Дата выдачи', required=False)
-    address = forms.CharField(label='Адрес', required=False)
+    series = forms.CharField(label='Пасспорт серия')
+    issued_by = forms.CharField(label='Кем выдан')
+    issued_date = forms.DateField(label='Дата выдачи')
+    address = forms.CharField(label='Адрес')
     inn = forms.CharField(label='ИНН')
     nationality = forms.CharField(label='Национальность')
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
