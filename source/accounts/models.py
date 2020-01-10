@@ -9,28 +9,35 @@ class Profile(models.Model):
     phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
     photo = models.ImageField(null=True, blank=True, upload_to='', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
-    parent_one = models.OneToOneField(User, on_delete=models.PROTECT, related_name='parent_one',
-                                      verbose_name='Родитель Один')
-    parent_two = models.OneToOneField(User, on_delete=models.PROTECT, related_name='parent_two',
-                                      verbose_name='Родитель Два')
+    # parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
+    #                                   verbose_name='Родитель Один')
+    # parent_two = models.ForeignKey(User, null=True, blank=True,  on_delete=models.PROTECT, related_name='parent_two',
+    #                                   verbose_name='Родитель Два')
 
     def __str__(self):
-        return self.user.get_full_name()
+        return self.user.get_full_name() + "'s Profile"
+
+
+SEX_CHOICES = (
+    ('man', 'мужской'),
+    ("women", "женский"),
+)
+
 
 
 class Passport(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
     address = models.CharField(max_length=100, verbose_name='Адрес')
     inn = models.CharField(max_length=50, verbose_name='ИНН')
     nationality = models.CharField(max_length=30, verbose_name='Национальность')
-    sex = models.CharField(max_length=15, verbose_name='Пол')
+    sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
 
     def __str__(self):
-        return self.user.get_full_name() + "'s Profile"
+        return self.user.get_full_name() + "'s Passport"
 
 
 class AdminPosition(models.Model):
@@ -75,9 +82,9 @@ class SocialStatus(models.Model):
         return self.name
 
 
-class UserSocialStatus(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
-    status = models.ForeignKey('SocialStatus', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
-
-    def __str__(self):
-        return self.user.get_full_name()
+# class UserSocialStatus(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
+#     status = models.ForeignKey('SocialStatus', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
+#
+#     def __str__(self):
+#         return self.user.get_full_name()
