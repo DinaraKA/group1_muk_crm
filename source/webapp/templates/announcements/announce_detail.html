@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Объявления{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <div class="row">
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+            <h1 class="title pt-5">{{ announcement.title }}</h1>
+            <p><b>Дата создания: </b>{{ announcement.created_at| date:'d.m.Y H:i:s'}}</p>
+            <img src="{{ announcement.photo.url }}" class="card-img-top mb-5" alt="{{ announcement.title }}">
+            <p align="justify">{{announcement.text}}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+{% endblock %}
