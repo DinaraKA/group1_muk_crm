@@ -8,7 +8,7 @@ class AdminPositionIndexView(ListView):
     template_name = 'admin_position/index.html'
     model = AdminPosition
     context_object_name = 'positions'
-    paginate_by = 4
+    paginate_by = 6
     paginate_orphans = 0
     page_kwarg = 'page'
 
