@@ -76,7 +76,7 @@ class UserRole(models.Model):
 
 
 class SocialStatus(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Статус')
+    name = models.CharField(max_length=500, verbose_name='Социальный статус')
 
     def __str__(self):
         return self.name
@@ -88,3 +88,10 @@ class SocialStatus(models.Model):
 #
 #     def __str__(self):
 #         return self.user.get_full_name()
+
+
+class Status(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Статус')
+
+    def __str__(self):
+        return self.name
