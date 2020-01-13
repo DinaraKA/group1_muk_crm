@@ -19,35 +19,26 @@
     <div class="container">
         <ul class="menu">
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
-            <li><a href="#">Миссия и стратегия</a></li>
-            <li><a href="#">Специальности</a></li>
+{#            <li><a href="#">Миссия и стратегия</a></li>#}
+{#            <li><a href="#">Специальности</a></li>#}
             <li><a href="{% url 'webapp:news' %}">Новости</a></li>
-            <li><a href="#">Абитуриент</a></li>
-            <li><a href="#">Правовая информация</a></li>
-            <li><a href="#">Выпускники</a></li>
+            <li><a href="{% url 'webapp:announcements' %}">Объявление</a></li>
+{#            <li><a href="#">Абитуриент</a></li>#}
+{#            <li><a href="#">Правовая информация</a></li>#}
+{#            <li><a href="#">Выпускники</a></li>#}
             <li><a href="#">Контакты</a></li>
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>
-<<<<<<< HEAD
                     {% if request.user.is_authenticated %}
-{#                        <li class="nav-item"><a href="{% url 'accounts:detail' request.user.pk %}" class="nav-link">#}
+                        <li class="nav-item"><a href="{% url 'accounts:detail' request.user.pk %}" class="nav-link">
                             Привет, {{ request.user.username }}!
-{#                        </a></li>#}
+                        </a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a></li>
                     {% else %}
                         <li class="nav-item"><a href="{% url 'accounts:create' %}" class="nav-link">Регистрация</a></li>
                         <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                     {% endif %}
-=======
-{#                    {% if request.user.is_authenticated %}#}
-{#                        <li style="color: darkblue;">Привет, <a href="#">{{request.user}}!</a></li>#}
-                        <li><a  class="logout" href="{% url 'accounts:logout' %}">Выход</a></li>
-{#                    {% else %}#}
-                        <li><a class="login" href="{% url 'accounts:login' %}">Вход</a></li>
-                        <li><a href="{%  url 'accounts:create' %}">Регистрация</a></li>
-{#                    {% endif %}#}
->>>>>>> origin/Profile
                 </ul>
             </li>
         </ul>
@@ -62,7 +53,6 @@
 <footer>
     {% block footer %}{% endblock %}
 </footer>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
