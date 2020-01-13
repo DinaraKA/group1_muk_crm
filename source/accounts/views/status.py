@@ -1,4 +1,4 @@
-from accounts.models import SocialStatus, Status
+from accounts.models import Status
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -32,3 +32,9 @@ class StatusUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:statuses')
+
+
+class StatusDeleteView(DeleteView):
+    model = Status
+    template_name = 'delete.html'
+    success_url = reverse_lazy('accounts:statuses')

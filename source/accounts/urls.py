@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from accounts.views.status import StatusListView, StatusCreateView, StatusUpdateView
+from accounts.views.status import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView
 from accounts.views.social_status import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
@@ -33,4 +33,5 @@ urlpatterns = [
     path('statuses/', StatusListView.as_view(), name='statuses'),
     path('add_statuses/', StatusCreateView.as_view(), name='add_status'),
     path('change_status/<int:pk>/', StatusUpdateView.as_view(), name='change_status'),
+    path('delete_status/<int:pk>/', StatusDeleteView.as_view(), name='delete_status'),
 ]
