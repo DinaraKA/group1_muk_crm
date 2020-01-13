@@ -1,6 +1,6 @@
 from django.urls import path
 
-from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView
+from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
 from .views import AnnouncementsView, AnnounceDetailView, AnnouncementCreateView, AnnouncementUpdateView, AnnouncementDeleteView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView
@@ -26,4 +26,5 @@ urlpatterns = [
     path('auditories/', AuditoryListView.as_view(), name='auditories'),
     path('auditories/add/', AuditoryCreateView.as_view(), name='add_auditory'),
     path('auditories/change/<int:pk>/', AuditoryUpdateView.as_view(), name='change_auditory'),
+    path('auditories/delete/<int:pk>/', AuditoryDeleteView.as_view(), name='delete_auditory'),
 ]

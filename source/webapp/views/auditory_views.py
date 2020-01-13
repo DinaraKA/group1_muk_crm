@@ -33,3 +33,9 @@ class AuditoryUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('webapp:auditories')
 
+
+class AuditoryDeleteView(DeleteView):
+    model = Auditory
+    template_name = 'delete.html'
+    success_url = reverse_lazy('webapp:auditories')
+
