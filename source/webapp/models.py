@@ -22,8 +22,8 @@ class Announcements(models.Model):
 
 class Auditory(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, verbose_name='Название')
-    places = models.IntegerField(null=False, blank=False, verbose_name='Вместимость')
-    description = models.TextField(max_length=2000, null=False, blank=False, verbose_name='Описание')
+    places = models.IntegerField(null=True, blank=True, verbose_name='Вместимость')
+    description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
 
     def __str__(self):
         return self.name
