@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <table class="table">
+            <h2>Статусы преподавателей, студентов и персонала</h2>
+            <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Название</th>
+                   <th class="symbol" scope="col">Редактировать</th>
+                   <th class="symbol" scope="col">Удалить</th>
+                </tr>
+            </thead>
+            {% for status in statuses %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ status.name }}</td>
+{#                        <td class="symbol"><a href="{% url 'accounts:status_change' status.pk %}">&#x270E;</a></td>#}
+{#                        <td class="symbol"><a href="{%  url 'accounts:status_delete' status.pk %}">X</a></td>#}
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </form>
+{% endblock %}

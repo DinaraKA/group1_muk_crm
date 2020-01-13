@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class RoleIndexView(ListView):
-    template_name = 'role/list.html'
+    template_name = 'role/roles.html'
     model = Role
     context_object_name = 'roles'
     paginate_by = 4
