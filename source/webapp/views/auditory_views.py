@@ -15,6 +15,7 @@ class AuditoryListView(ListView):
         context = super().get_context_data()
         return context
 
+
 class AuditoryCreateView(CreateView):
     model = Auditory
     template_name = 'add.html'
@@ -22,3 +23,13 @@ class AuditoryCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('webapp:auditories')
+
+
+class AuditoryUpdateView(UpdateView):
+    model = Auditory
+    template_name = 'change.html'
+    fields = ['name', 'places', 'description']
+
+    def get_success_url(self):
+        return reverse('webapp:auditories')
+
