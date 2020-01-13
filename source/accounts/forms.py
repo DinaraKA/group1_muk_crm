@@ -1,4 +1,7 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
+from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport
 
@@ -146,3 +149,16 @@ class PasswordChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['password', 'password_confirm', 'old_password']
+
+class AdminPositionForm(forms.ModelForm):
+    name = forms.CharField()
+
+    def clean_name(self):
+        data = self.cleaned_data['name']
+
+        if not data:
+            raise ValidationError('This field is required')
+
+    class Meta:
+        model = AdminPosition
+        fields = ['name']
