@@ -1,6 +1,6 @@
 from django.test import TestCase
-from django.urls import reverse, reverse_lazy
 
+from accounts.forms import AdminPositionForm
 from accounts.models import AdminPosition
 from selenium.webdriver import Chrome
 
@@ -13,7 +13,8 @@ class LoginTest(TestCase):
         self.driver.close()
 
     def test_log_in_as_admin(self):
-        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.get('http://localhost:8000')
+        self.driver.find_element_by_class_name('login').click()
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button').click()
@@ -28,19 +29,39 @@ class LogoutTest(TestCase):
         self.driver.close()
 
     def test_logout_as_admin(self):
-        self.driver.get('http://localhost:8000/accounts/login/')
+        self.driver.get('http://localhost:8000')
+        self.driver.find_element_by_class_name('login').click()
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button').click()
-        self.driver.get('http://localhost:8000/accounts/logout/')
+        self.driver.find_element_by_class_name('logout').click()
         assert self.driver.current_url == 'http://localhost:8000/'
 
 
 class AdminPositionModelTest(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        AdminPosition.objects.create(name='TestModel')
+
+    def test_name_label(self):
+        position = AdminPosition.objects.get(id=1)
+        field_label = position._meta.get_field('name').verbose_name
+        self.assertEquals(field_label, 'Админпоз')
+
+    def test_name_max_length(self):
+        position = AdminPosition.objects.get(id=1)
+        max_length = position._meta.get_field('name').max_length
+        self.assertEquals(max_length, 500)
+
     def test_string_representation(self):
-        entry = AdminPosition(name="Test Name")
-        self.assertEqual(str(entry), entry.name)
+        position = AdminPosition(name="Test Name")
+        self.assertEqual(str(position), position.name)
+
+    def test_object_name_is_name(self):
+        position = AdminPosition.objects.get(id=1)
+        expected_object_name = '%s' % position.name
+        self.assertEquals(expected_object_name, str(position))
 
     def test_verbose_name(self):
         self.assertEqual(str(AdminPosition._meta.verbose_name), "Позиция")
@@ -49,38 +70,82 @@ class AdminPositionModelTest(TestCase):
         self.assertEqual(str(AdminPosition._meta.verbose_name_plural), "Позиции")
 
 
+class AdminPositionFormTest(TestCase):
+
+    def test_renew_form_name_field_label(self):
+        form = AdminPositionForm()
+        self.assertTrue(form.fields['name'].label is None or form.fields['name'].label == 'name')
+
+    def test_form_valid(self):
+        position = AdminPosition.objects.create(name='Test')
+        form_data = {'name': 'Test'}
+        form = AdminPositionForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+
 class AdminPositionViewTest(TestCase):
+    def setUp(self):
+        self.driver = Chrome()
+
+    def tearDown(self):
+        self.driver.close()
+
+    def test_list_position(self):
+        self.driver.get('http://localhost:8000/accounts/add_admin_position/')
+        self.driver.find_element_by_name('name').send_keys('Mama')
+        response = self.client.get('http://127.0.0.1:8000/accounts/positions/')
+        assert self.driver.find_element_by_name('name')
 
     def test_created_position(self):
-        response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'test'})
-        self.assertEqual(AdminPosition.objects.get().name, 'test')
-        self.assertEqual(response.status_code, 302)
+        self.driver.get('http://localhost:8000/accounts/add_admin_position/')
+        self.driver.find_element_by_name('name').send_keys('Mama')
+        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        assert self.driver.current_url == 'http://localhost:8000/'
 
-    def test_updated_post(self):
-        position = AdminPosition.objects.create(name='Test')
+    def test_updated_position(self):
+        self.driver.get('http://127.0.0.1:8000/accounts/positions/')
+        self.driver.find_element_by_class_name('update').click()
+        self.driver.find_element_by_name('name').clear()
+        self.driver.find_element_by_name('name').send_keys('Islam_Cool')
+        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/'
 
-        response = self.client.post(
-            reverse('accounts:change_admin_position', kwargs={'pk': position.id}),
-            {'name': 'New Test'})
+    def test_deleted_position(self):
+        self.driver.get('http://127.0.0.1:8000/accounts/positions/')
+        self.driver.find_element_by_class_name('delete').click()
+        self.driver.find_element_by_class_name('btn.btn-danger').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/'
 
-        self.assertEqual(response.status_code, 302)
-
-        self.assertEqual(AdminPosition.objects.get().name, 'New Test')
-
-    def test_deleted_post(self):
-        position = AdminPosition.objects.create(name='Test')
-
-        self.assertEqual(AdminPosition.objects.get().name, 'Test')
-
-        response = self.client.delete(
-            reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
-            {'name': 'Test'})
-
-        self.assertEqual(response.status_code, 302)
-
-        response = self.client.get(reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
-                                   {'name': 'Test'})
-
-        self.assertEqual(response.status_code, 404)
-
-        self.assertFalse(AdminPosition.objects.filter(pk=position.id).exists())
+    # def test_created_position(self):
+    # response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'test'})
+    # self.assertEqual(AdminPosition.objects.get().name, 'test')
+    # self.assertEqual(response.status_code, 302)
+    #
+    # def test_updated_post(self):
+    #     position = AdminPosition.objects.create(name='Test')
+    #
+    #     response = self.client.post(
+    #         reverse('accounts:change_admin_position', kwargs={'pk': position.id}),
+    #         {'name': 'New Test'})
+    #
+    #     self.assertEqual(response.status_code, 302)
+    #
+    #     self.assertEqual(AdminPosition.objects.get().name, 'New Test')
+    #
+    # def test_deleted_post(self):
+    #     position = AdminPosition.objects.create(name='Test')
+    #
+    #     self.assertEqual(AdminPosition.objects.get().name, 'Test')
+    #
+    #     response = self.client.delete(
+    #         reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
+    #         {'name': 'Test'})
+    #
+    #     self.assertEqual(response.status_code, 302)
+    #
+    #     response = self.client.get(reverse_lazy('accounts:delete_admin_position', kwargs={'pk': position.id}),
+    #                                {'name': 'Test'})
+    #
+    #     self.assertEqual(response.status_code, 404)
+    #
+    #     self.assertFalse(AdminPosition.objects.filter(pk=position.id).exists())
