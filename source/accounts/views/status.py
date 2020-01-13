@@ -23,3 +23,12 @@ class StatusCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('accounts:statuses')
+
+
+class StatusUpdateView(UpdateView):
+    model = Status
+    template_name = 'change.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('accounts:statuses')
