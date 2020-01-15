@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView
 from accounts.forms import UserCreationForm, UserChangeForm
-from accounts.models import Passport
+from accounts.models import Passport, Profile
 from accounts.forms import UserCreationForm, PasswordChangeForm
 
 
@@ -51,8 +51,24 @@ def register_view(request, *args, **kwargs):
                 sex=form.cleaned_data['sex'],
                 birth_date=form.cleaned_data['birth_date']
             )
+
+            # print(f"form.cleaned_data['photo'], {form.cleaned_data['photo']}")
+            # print(f"request.files['photo'], {request.files}")
+            try:
+                photo = request.FILES['photo']
+            except:
+                photo = None
+
+            profile = Profile(
+                user=user,
+                patronymic=form.cleaned_data['patronymic'],
+                phone_number=form.cleaned_data['phone_number'],
+                address_fact=form.cleaned_data['address_fact'],
+                photo=photo
+            )
             user.set_password(form.cleaned_data['password'])
             passport.save()
+            profile.save()
             login(request, user)
             return redirect('webapp:index')
     else:
