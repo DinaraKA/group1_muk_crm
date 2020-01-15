@@ -5,6 +5,7 @@
         {% csrf_token %}
         <table class="table">
             <h2>Роли</h2>
+            <a href="{% url 'accounts:role_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить роль</a>
             <thead>
                 <tr>
                    <th scope="col">#</th>
