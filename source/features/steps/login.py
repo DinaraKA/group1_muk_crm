@@ -1,4 +1,4 @@
-from behave import given, when, then
+from behave import given, when, then, step
 from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
@@ -9,7 +9,7 @@ def open_login_page(context):
     context.browser.get('http://127.0.0.1:8000/accounts/login/')
 
 
-@when('Я ввожу текст "{text}" в поле "{name}"')
+@step('Я ввожу текст "{text}" в поле "{name}"')
 def enter_text(context, text, name):
     context.browser.find_element_by_name(name).send_keys(text)
 
