@@ -1,5 +1,6 @@
 from django.contrib import admin
-from accounts.models import User, Profile, Passport, AdminPosition, UserAdminPosition, Role, UserRole, SocialStatus, Status
+from accounts.models import User, Profile, Passport, AdminPosition, UserAdminPosition, Role, UserRole, SocialStatus, \
+    Status, Group
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -23,3 +24,4 @@ admin.site.register(Role)
 admin.site.register(UserRole)
 admin.site.register(SocialStatus)
 admin.site.register(Status)
+admin.site.register(Group)
