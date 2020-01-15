@@ -32,8 +32,6 @@ class LoginTest(TestCase):
         assert error.text == "Неверное имя пользователя или пароль."
 
 
-
-
 class LogoutTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
