@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
-class GroupsListView(ListView):
+class GroupListView(ListView):
     template_name = 'group/list.html'
     model = Group
     ordering = ["-name"]
