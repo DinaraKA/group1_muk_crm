@@ -22,6 +22,17 @@ class LoginTest(TestCase):
             link = None
         assert link is not None
 
+    def test_login_error(self):
+        self.driver.get('http://127.0.0.1:8000/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('adminanet')
+        self.driver.find_element_by_name('password').send_keys('adminanet')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        assert self.driver.current_url.split('?')[0] == 'http://127.0.0.1:8000/accounts/login/'
+        error = self.driver.find_element_by_css_selector('.text-danger')
+        assert error.text == "Неверное имя пользователя или пароль."
+
+
+
 
 class LogoutTest(TestCase):
     def setUp(self):
