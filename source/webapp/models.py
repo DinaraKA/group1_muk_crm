@@ -27,3 +27,11 @@ class Auditory(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Grade(models.Model):
+    value = models.CharField(max_length=50, null=True, blank=True, verbose_name='Оценка')
+
+    def __str__(self):
+        return self.value
+
