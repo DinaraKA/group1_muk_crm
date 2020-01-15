@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Изменить новость{% endblock %}
+{% block content %}
+    <h1 class="text-center">Изменить новость</h1>
+    <form action="{% url "webapp:news_edit" news.pk %}" method="POST" enctype="multipart/form-data">
+        {% include 'partial/form.html' %}
+        <input type="submit" value="Изменить" class="btn btn-primary">
+    </form>
+{% endblock %}
