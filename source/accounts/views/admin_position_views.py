@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class AdminPositionIndexView(ListView):
-    template_name = 'admin_position/index.html'
+    template_name = 'admin_position/list.html'
     model = AdminPosition
     context_object_name = 'positions'
     paginate_by = 6

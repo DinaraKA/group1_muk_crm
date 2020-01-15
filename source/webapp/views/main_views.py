@@ -23,7 +23,7 @@ class IndexView(ListView):
 
 
 # class IndexView(TemplateView):
-#     template_name = 'index.html'
+#     template_name = 'list.html'
 
 class Department1View(TemplateView):
     template_name = 'departments/department1.html'

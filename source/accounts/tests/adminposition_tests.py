@@ -98,7 +98,7 @@ class AdminPositionViewTest(TestCase):
     #
     #         self.assertEqual(response.status_code, 200)
     #
-    #         self.assertTemplateUsed(response, 'index.html')
+    #         self.assertTemplateUsed(response, 'list.html')
     #
     #     def test_logged_out_uses_correct_template(self):
     #         login = self.client.login(username='user', password='user')
@@ -108,14 +108,14 @@ class AdminPositionViewTest(TestCase):
     #
     #         self.assertEqual(response.status_code, 200)
     #
-    #         self.assertTemplateUsed(response, 'index.html')
+    #         self.assertTemplateUsed(response, 'list.html')
     #
     #         logout = self.client.logout()
     #         response = self.client.get(reverse('webapp:index'))
     #
     #         self.assertEqual(response.status_code, 200)
     #
-    #         self.assertTemplateUsed(response, 'index.html')
+    #         self.assertTemplateUsed(response, 'list.html')
 
 
     # class AdminPositionViewTest(TestCase):

@@ -22,7 +22,7 @@ class GroupCreateView(CreateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('')
+        return reverse('accounts:groups')
 
 
 class GroupUpdateView(UpdateView):
@@ -31,10 +31,10 @@ class GroupUpdateView(UpdateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('')
+        return reverse('accounts:groups')
 
 
 class GroupDeleteView(DeleteView):
     model = Group
     template_name = 'delete.html'
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('accounts:groups')
