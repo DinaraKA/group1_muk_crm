@@ -1,6 +1,6 @@
 from accounts.models import Group
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class GroupListView(ListView):
@@ -16,10 +16,17 @@ class GroupListView(ListView):
         return context
 
 
+class GroupDetailView(DetailView):
+
+    template_name = 'group/detail.html'
+
+    model = Group
+
+
 class GroupCreateView(CreateView):
     model = Group
     template_name = 'add.html'
-    fields = ['name']
+    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
 
     def get_success_url(self):
         return reverse('accounts:groups')
@@ -28,7 +35,7 @@ class GroupCreateView(CreateView):
 class GroupUpdateView(UpdateView):
     model = Group
     template_name = 'change.html'
-    fields = ['name']
+    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']  
 
     def get_success_url(self):
         return reverse('accounts:groups')

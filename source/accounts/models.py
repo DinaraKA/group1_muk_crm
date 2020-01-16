@@ -105,4 +105,4 @@ class Group(models.Model):
     started_at = models.DateField(verbose_name='Дата создания')
 
     def __str__(self):
-        return self.name
+        return self.name + self.students

@@ -8,7 +8,8 @@ from accounts.views.social_status_views import SocialStatusListView, SocialStatu
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
     AdminPositionDeleteView
 from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateView, RoleDeleteView
-from accounts.views.group_views import GroupListView, GroupCreateView, GroupUpdateView, GroupDeleteView
+from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
+    GroupDeleteView
 
 app_name = 'accounts'
 
@@ -37,6 +38,7 @@ urlpatterns = [
     path('change_status/<int:pk>/', StatusUpdateView.as_view(), name='change_status'),
     path('delete_status/<int:pk>/', StatusDeleteView.as_view(), name='delete_status'),
     path('groups/', GroupListView.as_view(), name='groups'),
+    path('detail_group/<int:pk>/', GroupDetailView.as_view(), name='detail_group'),
     path('add_group/', GroupCreateView.as_view(), name='add_group'),
     path('change_group/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
     path('delete_group/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
