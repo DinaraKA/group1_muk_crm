@@ -8,7 +8,7 @@ class AnnouncementsView(ListView):
     template_name = 'announcements/announcements.html'
     context_object_name = 'announcements'
     ordering = ['-created_at']
-    paginate_by = 2
+    paginate_by = 10
     paginate_orphans = 0
 
 

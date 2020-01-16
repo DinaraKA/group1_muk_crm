@@ -18,3 +18,21 @@ class Announcements(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Auditory(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False, verbose_name='Название')
+    places = models.IntegerField(null=True, blank=True, verbose_name='Вместимость')
+    description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
+
+    def __str__(self):
+        return self.name
+
+
+class Grade(models.Model):
+    value = models.CharField(max_length=50, null=True, blank=True, verbose_name='Оценка')
+    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name='Описание')
+
+    def __str__(self):
+        return self.value
+
