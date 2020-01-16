@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
         <h1 class="text-center">Регистрация</h1>
-        <form action="{% url 'accounts:create' %}" method="post">
+        <form action="{% url 'accounts:create' %}" method="post" enctype="multipart/form-data">
             {% include "partial/form.html" with button_text='Зарегистрироваться'%}
-<<<<<<< HEAD
 {#            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>#}
-=======
->>>>>>> origin/Profile
         </form>
 {% endblock %}
