@@ -97,7 +97,7 @@ class UserPersonalInfoChangeView(UpdateView):
         #     phone_number=form.cleaned_data['phone_number'],
         #     address_fact=form.cleaned_data['address_fact'],
         # )
-        profile = get_object_or_404(Profile, id=1)
+        profile = get_object_or_404(Profile, user=pk)
         # form.save()
         print('yes')
         profile.save()
