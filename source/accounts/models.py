@@ -3,12 +3,19 @@ from django.db import models
 from phone_field import PhoneField
 
 
+class Role(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Роль')
+
+    def __str__(self):
+        return self.name
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
     patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
     phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
+    role = models.ManyToManyField(Role, related_name='role', verbose_name='Роль')
     # parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
     #                                   verbose_name='Родитель Один')
     # parent_two = models.ForeignKey(User, null=True, blank=True,  on_delete=models.PROTECT, related_name='parent_two',
@@ -60,19 +67,19 @@ class UserAdminPosition(models.Model):
         return self.user.get_full_name()
 
 
-class Role(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Роль')
+# class Role(models.Model):
+#     name = models.CharField(max_length=500, verbose_name='Роль')
+#
+#     def __str__(self):
+#         return self.name
 
-    def __str__(self):
-        return self.name
 
-
-class UserRole(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
-    role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
-
-    def __str__(self):
-        return self.user.get_full_name()
+# class UserRole(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
+#     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
+#
+#     def __str__(self):
+#         return self.user.get_full_name()
 
 
 class SocialStatus(models.Model):

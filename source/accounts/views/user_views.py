@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView
 from accounts.forms import UserCreationForm, UserChangeForm
-from accounts.models import Passport, Profile
+from accounts.models import Passport, Profile, Role
 from accounts.forms import UserCreationForm, PasswordChangeForm
+from django.shortcuts import redirect, get_object_or_404
 
 
 def login_view(request, *args, **kwargs):
@@ -58,14 +59,19 @@ def register_view(request, *args, **kwargs):
 
             profile = Profile(
                 user=user,
+                # role=form.cleaned_data['role'],
                 patronymic=form.cleaned_data['patronymic'],
                 phone_number=form.cleaned_data['phone_number'],
                 address_fact=form.cleaned_data['address_fact'],
-                photo=photo
+                photo=photo,
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
             profile.save()
+            role = form.cleaned_data['role']
+            roles = Role.objects.filter(pk=role.pk)
+            profile.save()
+            profile.role.set(roles)
             login(request, user)
             return redirect('webapp:index')
     else:
@@ -79,11 +85,30 @@ class UserPersonalInfoChangeView(UpdateView):
     form_class = UserChangeForm
     context_object_name = 'user_obj'
 
+    def form_valid(self, form):
+        pk = self.kwargs.get('pk')
+        user=get_object_or_404(User, id=pk)
+        print(user)
+        profile = Profile(
+            user=user,
+            # role=form.cleaned_data['role'],
+            patronymic=form.cleaned_data['patronymic'],
+            phone_number=form.cleaned_data['phone_number'],
+            address_fact=form.cleaned_data['address_fact'],
+        )
+        profile.save()
+        role = form.cleaned_data['role']
+        roles = Role.objects.filter(pk=role.pk)
+        profile.save()
+        profile.role.set(roles)
+
+        return reverse('webapp:index')
+
+
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        print('success')
         return reverse('webapp:index')
 
 
