@@ -98,14 +98,32 @@ class UserPersonalInfoChangeView(UpdateView):
         #     address_fact=form.cleaned_data['address_fact'],
         # )
         profile = get_object_or_404(Profile, user=pk)
+        user = get_object_or_404(User, pk=pk)
         # form.save()
         print('yes')
         profile.save()
         role = form.cleaned_data['role']
+        username = form.cleaned_data['username']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        series = form.cleaned_data['series']
+        issued_by = form.cleaned_data['issued_by']
+        issued_date = form.cleaned_data['issued_date']
+        address = form.cleaned_data['address']
+        inn = form.cleaned_data['inn']
+        nationality = form.cleaned_data['nationality']
+        patronymic = form.cleaned_data['patronymic']
+        phone_number = form.cleaned_data['phone_number']
+        address_fact = form.cleaned_data['address_fact']
+        photo = form.cleaned_data['photo']
         roles = Role.objects.filter(pk=role.pk)
         profile.save()
         profile.role.set(roles)
-
+        User.objects.update(first_name=first_name, last_name=last_name)
+        Passport.objects.update(series=series, issued_by=issued_by, issued_date=issued_date, address=address, inn=inn,
+                                nationality=nationality)
+        Profile.objects.update(patronymic=patronymic, phone_number=phone_number, address_fact=address_fact,
+                               photo=photo)
         return redirect('webapp:index')
 
 
