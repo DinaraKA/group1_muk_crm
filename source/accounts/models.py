@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
     patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
     phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
-    photo = models.ImageField(null=True, blank=True, upload_to='', verbose_name='Фото')
+    photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
 
     # parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
@@ -80,14 +80,6 @@ class SocialStatus(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class UserSocialStatus(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='socstatus', verbose_name='Пользователь')
-#     status = models.ForeignKey('SocialStatus', on_delete=models.CASCADE, related_name='socstatus', verbose_name='Cтатус')
-#
-#     def __str__(self):
-#         return self.user.get_full_name()
 
 
 class Status(models.Model):
