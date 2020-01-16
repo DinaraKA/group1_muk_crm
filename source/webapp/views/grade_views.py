@@ -17,7 +17,7 @@ class GradeListView(ListView):
 class GradeCreateView(CreateView):
     model = Grade
     template_name = 'add.html'
-    fields = ['value']
+    fields = ['value', 'description']
 
     def get_success_url(self):
         return reverse('webapp:grades')
@@ -26,7 +26,7 @@ class GradeCreateView(CreateView):
 class GradeUpdateView(UpdateView):
     model = Grade
     template_name = 'change.html'
-    fields = ['value']
+    fields = ['value', 'description']
 
     def get_success_url(self):
         return reverse('webapp:grades')

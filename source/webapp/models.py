@@ -31,6 +31,7 @@ class Auditory(models.Model):
 
 class Grade(models.Model):
     value = models.CharField(max_length=50, null=True, blank=True, verbose_name='Оценка')
+    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name='Описание')
 
     def __str__(self):
         return self.value
