@@ -4,7 +4,8 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Роли</h2>
+            <h2>Статусы преподавателей, студентов и персонала</h2>
+            <a href="{% url 'accounts:add_status' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить статус</a>
             <thead>
                 <tr>
                    <th scope="col">#</th>
@@ -13,13 +14,13 @@
                    <th class="symbol" scope="col">Удалить</th>
                 </tr>
             </thead>
-            {% for role in roles %}
+            {% for status in statuses %}
                 <tbody>
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ role.name }}</td>
-                        <td class="symbol"><a href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'accounts:role_delete' role.pk %}">X</a></td>
+                        <td>{{ status.name }}</td>
+                        <td class="symbol"><a href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
