@@ -9,6 +9,7 @@ class Profile(models.Model):
     phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
+
     # parent_one = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='parent_one',
     #                                   verbose_name='Родитель Один')
     # parent_two = models.ForeignKey(User, null=True, blank=True,  on_delete=models.PROTECT, related_name='parent_two',
@@ -22,7 +23,6 @@ SEX_CHOICES = (
     ('man', 'мужской'),
     ("women", "женский"),
 )
-
 
 
 class Passport(models.Model):
@@ -87,3 +87,14 @@ class Status(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Группа')
+    students = models.ManyToManyField(User)
+    starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
+    kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
+    started_at = models.DateField(verbose_name='Дата создания')
+
+    def __str__(self):
+        return self.name + self.students
