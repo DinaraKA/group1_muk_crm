@@ -10,7 +10,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Значение</th>
-{#                    <th scope="col">Описание</th>#}
+                    <th scope="col">Описание</th>
                     <th class="symbol" scope="col">Редактировать</th>
                     <th class="symbol" scope="col">Удалить</th>
                 </tr>
@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ grade.value }}</td>
-{#                        <td>{{ grade.description }}</td>#}
+                        <td>{{ grade.description }}</td>
                         <td class="symbol"><a href="{% url 'webapp:change_grade' grade.pk %}">&#x270E;</a></td>
                         <td class="symbol"><a href="{%  url 'webapp:delete_grade' grade.pk %}">X</a></td>
                     </tr>
