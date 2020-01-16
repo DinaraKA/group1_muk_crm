@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <table class="table">
+            <h2>Дисциплины</h2>
+            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить дисциплину</a>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th class="symbol" scope="col">Редактировать</th>
+                    <th class="symbol" scope="col">Удалить</th>
+                </tr>
+            </thead>
+            {% for discipline in disciplines %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ discipline.name }}</td>
+                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}">X</a></td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </form>
+{% endblock %}
