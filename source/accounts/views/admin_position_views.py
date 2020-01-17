@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class AdminPositionIndexView(ListView):
-    template_name = 'admin_position/index.html'
+    template_name = 'admin_position/list.html'
     model = AdminPosition
     context_object_name = 'positions'
     paginate_by = 6
@@ -23,7 +23,7 @@ class AdminPositionCreateView(CreateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('webapp:index')
+        return reverse('accounts:positions')
 
 
 class AdminPositionUpdateView(UpdateView):
@@ -32,10 +32,10 @@ class AdminPositionUpdateView(UpdateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('webapp:index')
+        return reverse('accounts:positions')
 
 
 class AdminPositionDeleteView(DeleteView):
     model = AdminPosition
     template_name = 'delete.html'
-    success_url = reverse_lazy('webapp:index')
+    success_url = reverse_lazy('accounts:positions')

@@ -8,7 +8,7 @@ class NewsView(ListView):
     template_name = 'news/all_news.html'
     context_object_name = 'news_list'
     ordering = ['-created_at']
-    paginate_by = 1
+    paginate_by = 3
     paginate_orphans = 0
 
 
