@@ -88,22 +88,12 @@ class UserPersonalInfoChangeView(UpdateView):
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
         user = get_object_or_404(User, id=pk)
-        # form = UserChangeForm(self.request.POST, instance=user)
         print(user)
-        # profile = Profile(
-        #     user=user,
-        #     # role=form.cleaned_data['role'],
-        #     patronymic=form.cleaned_data['patronymic'],
-        #     phone_number=form.cleaned_data['phone_number'],
-        #     address_fact=form.cleaned_data['address_fact'],
-        # )
         profile = get_object_or_404(Profile, user=pk)
         user = get_object_or_404(User, pk=pk)
-        # form.save()
         print('yes')
         profile.save()
         role = form.cleaned_data['role']
-        username = form.cleaned_data['username']
         first_name = form.cleaned_data['first_name']
         last_name = form.cleaned_data['last_name']
         series = form.cleaned_data['series']
