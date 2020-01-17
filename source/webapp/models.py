@@ -36,3 +36,11 @@ class Grade(models.Model):
     def __str__(self):
         return self.value
 
+
+class Discipline(models.Model):
+    name = models.CharField(max_length=500, null=False, blank=False, verbose_name='Дисциплина')
+
+    def __str__(self):
+        return self.name
+
+
