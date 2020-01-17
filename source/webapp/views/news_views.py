@@ -22,7 +22,7 @@ class NewsAddView(CreateView):
     model = News
     template_name = 'add.html'
     fields = ('title', 'text', 'photo')
-    success_url = reverse_lazy('webapp:news')
+    # success_url = reverse_lazy('webapp:news')
 
     def get_success_url(self):
         return reverse('webapp:news_detail', kwargs={'pk': self.object.pk})
