@@ -67,7 +67,7 @@ class AdminPositionViewTest(TestCase):
         self.driver.get('http://localhost:8000/accounts/add_admin_position/')
         self.driver.find_element_by_name('name').send_keys('Mama')
         self.driver.find_element_by_class_name('btn.btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/'
+        assert self.driver.current_url == 'http://localhost:8000/accounts/positions/'
 
     def test_updated_position(self):
         self.driver.get('http://127.0.0.1:8000/accounts/positions/')
@@ -75,13 +75,13 @@ class AdminPositionViewTest(TestCase):
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('Islam_Cool')
         self.driver.find_element_by_class_name('btn.btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/'
+        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/positions/'
 
     def test_deleted_position(self):
         self.driver.get('http://127.0.0.1:8000/accounts/positions/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn.btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/'
+        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/positions/'
 
 
     # class LoginLogoutViewTest(TestCase):
