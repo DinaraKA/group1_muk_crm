@@ -38,28 +38,28 @@ class RoleViewTest(TestCase):
     def tearDown(self):
         self.driver.close()
 
-    def test_list_position(self):
-        self.driver.get('http://localhost:8000/accounts/roles/add/')
-        self.driver.find_element_by_name('name').send_keys('Преподаватель')
-        response = self.client.get('http://127.0.0.1:8000/accounts/roles/')
-        assert self.driver.find_element_by_name('name')
+    def test_list_roles(self):
+        self.driver.get('http://127.0.0.1:8000/')
+        self.driver.find_element_by_class_name('roles').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
 
-    def test_created_position(self):
-        self.driver.get('http://localhost:8000/accounts/roles/add/')
+    def test_created_role(self):
+        self.driver.get('http://localhost:8000/accounts/roles/')
+        self.driver.find_element_by_class_name('btn-outline-primary').click()
         self.driver.find_element_by_name('name').send_keys('Преподаватель')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
 
-    def test_updated_position(self):
+    def test_updated_role(self):
         self.driver.get('http://127.0.0.1:8000/accounts/roles/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('Сторож')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
 
-    def test_deleted_position(self):
+    def test_deleted_role(self):
         self.driver.get('http://127.0.0.1:8000/accounts/roles/')
         self.driver.find_element_by_class_name('delete').click()
-        self.driver.find_element_by_class_name('btn.btn-danger').click()
+        self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'

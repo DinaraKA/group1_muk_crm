@@ -19,10 +19,10 @@
     <div class="container">
         <ul class="menu">
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
-            <li><a href="{% url 'accounts:roles_list' %}">Роли</a></li>
+            <li><a class="roles" href="{% url 'accounts:roles_list' %}">Роли</a></li>
             <li><a href="{% url 'accounts:positions' %}">Админ позиция</a></li>
             <li><a href="{% url 'accounts:all_social_statuses' %}">Соц статус</a></li>
-            <li><a href="{% url 'accounts:statuses' %}">Статус</a></li>
+            <li><a class='statuses' href="{% url 'accounts:statuses' %}">Статус</a></li>
             <li><a href="{% url 'webapp:grades' %}">Оценка</a></li>
             <li><a href="{% url 'webapp:auditories' %}">Аудитория</a></li>
             <li><a href="#">Группа</a></li>

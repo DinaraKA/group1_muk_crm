@@ -38,28 +38,28 @@ class StatusViewTest(TestCase):
     def tearDown(self):
         self.driver.close()
 
-    def test_list_position(self):
-        self.driver.get('http://localhost:8000/accounts/add_statuses/')
-        self.driver.find_element_by_name('name').send_keys('Отчислен')
-        response = self.client.get('http://127.0.0.1:8000/accounts/statuses/')
-        assert self.driver.find_element_by_name('name')
+    def test_list_statuses(self):
+        self.driver.get('http://127.0.0.1:8000/')
+        self.driver.find_element_by_class_name('statuses').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
 
-    def test_created_position(self):
-        self.driver.get('http://localhost:8000/accounts/add_statuses/')
-        self.driver.find_element_by_name('name').send_keys('Отчислен')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
+    def test_created_status(self):
+        self.driver.get('http://localhost:8000/accounts/statuses/')
+        self.driver.find_element_by_class_name('btn-outline-primary').click()
+        self.driver.find_element_by_name('name').send_keys('Test')
+        self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/accounts/statuses/'
 
-    def test_updated_position(self):
+    def test_updated_status(self):
         self.driver.get('http://127.0.0.1:8000/accounts/statuses/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('Восстановлен')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        self.driver.find_element_by_name('name').send_keys('Test')
+        self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
 
-    def test_deleted_position(self):
+    def test_deleted_status(self):
         self.driver.get('http://127.0.0.1:8000/accounts/statuses/')
         self.driver.find_element_by_class_name('delete').click()
-        self.driver.find_element_by_class_name('btn.btn-danger').click()
+        self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
