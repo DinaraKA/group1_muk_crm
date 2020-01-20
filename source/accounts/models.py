@@ -9,6 +9,14 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
+
+class Status(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Статус')
+
+    def __str__(self):
+        return self.name
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
     patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
@@ -16,6 +24,7 @@ class Profile(models.Model):
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     role = models.ManyToManyField(Role, related_name='role', verbose_name='Роль')
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус', default=None)
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
@@ -62,13 +71,6 @@ class UserAdminPosition(models.Model):
         return self.user.get_full_name()
 
 
-# class Role(models.Model):
-#     name = models.CharField(max_length=500, verbose_name='Роль')
-#
-#     def __str__(self):
-#         return self.name
-
-
 # class UserRole(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
 #     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
@@ -79,13 +81,6 @@ class UserAdminPosition(models.Model):
 
 class SocialStatus(models.Model):
     name = models.CharField(max_length=500, verbose_name='Социальный статус')
-
-    def __str__(self):
-        return self.name
-
-
-class Status(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Статус')
 
     def __str__(self):
         return self.name
