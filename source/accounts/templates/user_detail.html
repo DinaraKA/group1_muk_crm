@@ -26,6 +26,8 @@
                         <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
                         <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
                         <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
+                        <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}</p>
+                        <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
 {#                        <p><b>Родители:</b></p>#}
 {#                        <p>{{ user_obj.profile.parent_one }}, {{ user_obj.profile.parent_two }}</p>#}
                     {% endif %}
