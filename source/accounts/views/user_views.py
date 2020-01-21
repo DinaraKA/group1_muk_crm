@@ -50,7 +50,8 @@ def register_view(request, *args, **kwargs):
                 inn=form.cleaned_data['inn'],
                 nationality=form.cleaned_data['nationality'],
                 sex=form.cleaned_data['sex'],
-                birth_date=form.cleaned_data['birth_date']
+                birth_date=form.cleaned_data['birth_date'],
+                citizenship=form.cleaned_data['citizenship'],
             )
             try:
                 photo = request.FILES['photo']
@@ -64,15 +65,17 @@ def register_view(request, *args, **kwargs):
                 phone_number=form.cleaned_data['phone_number'],
                 address_fact=form.cleaned_data['address_fact'],
                 photo=photo,
-                status=form.cleaned_data['status']
+                status=form.cleaned_data['status'],
+                admin_position=form.cleaned_data['admin_position'],
+                social_status=form.cleaned_data['social_status']
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
             profile.save()
             role = form.cleaned_data['role']
-            roles = Role.objects.filter(pk=role.pk)
+            # roles = Role.objects.filter(pk=role.pk)
             profile.save()
-            profile.role.set(roles)
+            profile.role.set(role)
             login(request, user)
             return redirect('webapp:index')
     else:
@@ -105,11 +108,14 @@ class UserPersonalInfoChangeView(UpdateView):
         passport.inn = form.cleaned_data['inn']
         passport.nationality = form.cleaned_data['nationality']
         passport.patronymic = form.cleaned_data['patronymic']
+        passport.citizenship=form.cleaned_data['citizenship']
         profile.phone_number = form.cleaned_data['phone_number']
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
         roles = Role.objects.filter(pk=role.pk)
         profile.status = form.cleaned_data['status']
+        profile.admin_position = form.cleaned_data['admin_position']
+        profile.social_status=form.cleaned_data['social_status']
         profile.save()
         passport.save()
         profile.role.set(roles)

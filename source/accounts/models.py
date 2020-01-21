@@ -17,6 +17,24 @@ class Status(models.Model):
         return self.name
 
 
+class AdminPosition(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Должность')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Должность'
+        verbose_name_plural = 'Должности'
+
+
+class SocialStatus(models.Model):
+    name = models.CharField(max_length=500, verbose_name='Социальный статус')
+
+    def __str__(self):
+        return self.name
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
     patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
@@ -24,7 +42,12 @@ class Profile(models.Model):
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     role = models.ManyToManyField(Role, related_name='role', verbose_name='Роль')
-    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус', default=None)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
+                               default=None)
+    admin_position = models.ForeignKey(AdminPosition, on_delete=models.CASCADE, related_name='admin_position',
+                                 verbose_name='Должность', null=True, blank=True)
+    social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
+                                      verbose_name='Соц. Статус', null=True, blank=True)
 
     def __str__(self):
         return self.user.get_full_name() + "'s Profile"
@@ -46,20 +69,10 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, verbose_name='Национальность')
     sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
+    citizenship = models.CharField(max_length=20, default='Кыргызстан')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Passport"
-
-
-class AdminPosition(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Админпоз')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Позиция'
-        verbose_name_plural = 'Позиции'
 
 
 class UserAdminPosition(models.Model):
@@ -78,12 +91,6 @@ class UserAdminPosition(models.Model):
 #     def __str__(self):
 #         return self.user.get_full_name()
 
-
-class SocialStatus(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Социальный статус')
-
-    def __str__(self):
-        return self.name
 
 
 class Group(models.Model):

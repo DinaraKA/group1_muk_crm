@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from accounts.models import AdminPosition
 from django import forms
 # from .models import Profile, Passport, Role
-from .models import Profile, Passport, Group, Role, Status
+from .models import Profile, Passport, Group, Role, Status, AdminPosition, SocialStatus
 
 SEX_CHOICES = (
     ('man', 'мужской'),
@@ -21,14 +21,17 @@ class UserCreationForm(forms.ModelForm):
     address = forms.CharField(label='Адрес')
     inn = forms.CharField(label='ИНН')
     nationality = forms.CharField(label='Национальность')
+    citizenship=forms.CharField(label='Гражданство', initial='Кыргызстан')
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
     patronymic = forms.CharField(label='Отчество')
     phone_number = forms.IntegerField(label='Номер телефона')
     photo = forms.ImageField(label='Фото', required=False)
     address_fact = forms.CharField(label='Фактический адрес')
-    role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
+    role = forms.ModelMultipleChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
+    social_status=forms.ModelChoiceField(label='Социальный статус', queryset=SocialStatus.objects.all())
+    admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
@@ -87,8 +90,10 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
-        profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status']
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
+        profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
+                          'social_status']
+        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'citizenship',
+                           'sex', 'birth_date']
 
 
 class UserChangeForm(forms.ModelForm):
@@ -100,6 +105,7 @@ class UserChangeForm(forms.ModelForm):
     address = forms.CharField(label='Адрес')
     inn = forms.CharField(label='ИНН')
     nationality = forms.CharField(label='Национальность')
+    citizenship = forms.CharField(label='Гражданство')
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
     patronymic = forms.CharField(label='Отчество')
@@ -108,6 +114,8 @@ class UserChangeForm(forms.ModelForm):
     address_fact = forms.CharField(label='Фактический адрес')
     role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
+    admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
+    social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(), required=False)
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
@@ -158,8 +166,11 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
-        profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status']
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
+        profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
+                          'social_status'
+                          ]
+        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'citizenship', 'sex',
+                           'birth_date']
 
 
 class PasswordChangeForm(forms.ModelForm):
