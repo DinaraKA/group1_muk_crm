@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'accounts:change_group' object.pk %}">Обновить</a></li>
+    <li><a href="{% url 'accounts:delete_group' object.pk %}">Удалить</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ group.name }}</h1>
+    <p>{{ group.started_at }} создана {{ issue.created_at|date:'d.m.Y H:i:s' }}</p>
+    <hr>
+    <div class="pre" style="margin-top: 20px">Староста: {{ group.starosta }}</div>
+    <div class="pre" style="margin-top: 5px">Куратор: {{ group.kurator }}</div>
+    <hr>
+    <div class="pre" style="margin-top: 5px"> Студенты:</div>
+    {% for student in group.students.all %}
+        <p style="margin-top: 10px">{{ student }}</p>
+    {% endfor %}
+{% endblock %}

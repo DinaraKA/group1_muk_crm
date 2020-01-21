@@ -3,8 +3,7 @@ from django.core.exceptions import ValidationError
 
 from accounts.models import AdminPosition
 from django import forms
-from .models import Profile, Passport
-
+from .models import Profile, Passport, Group
 
 SEX_CHOICES = (
     ('man', 'мужской'),
@@ -168,6 +167,7 @@ class PasswordChangeForm(forms.ModelForm):
         model = User
         fields = ['password', 'password_confirm', 'old_password']
 
+
 class AdminPositionForm(forms.ModelForm):
     name = forms.CharField()
 
@@ -180,3 +180,9 @@ class AdminPositionForm(forms.ModelForm):
     class Meta:
         model = AdminPosition
         fields = ['name']
+
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
