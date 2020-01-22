@@ -58,10 +58,8 @@ class AdminPositionViewTest(TestCase):
         self.driver.close()
 
     def test_list_position(self):
-        self.driver.get('http://localhost:8000/accounts/add_admin_position/')
-        self.driver.find_element_by_name('name').send_keys('Mama')
-        response = self.client.get('http://127.0.0.1:8000/accounts/positions/')
-        assert self.driver.find_element_by_name('name')
+        self.driver.get('http://localhost:8000/accounts/positions/')
+        assert self.driver.current_url == 'http://localhost:8000/accounts/positions/'
 
     def test_created_position(self):
         self.driver.get('http://localhost:8000/accounts/add_admin_position/')
