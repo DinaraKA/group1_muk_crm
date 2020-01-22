@@ -103,3 +103,9 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name + self.students
+
+class Theme(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Тема')
+
+    def __str__(self):
+        return self.name
