@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -68,7 +69,7 @@ def register_view(request, *args, **kwargs):
             passport.save()
             profile.save()
             login(request, user)
-            return redirect('webapp:index')
+            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -84,8 +85,7 @@ class UserPersonalInfoChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        print('success')
-        return reverse('webapp:index')
+        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
@@ -98,7 +98,7 @@ class UserPasswordChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:login')
+        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
 
 
 class UserDetailView(DetailView):

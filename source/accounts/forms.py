@@ -91,8 +91,7 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
-    password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    citizenship = forms.CharField(label="Гражданство", initial="Кыргызская Республика")
     series = forms.CharField(label='Пасспорт серия')
     issued_by = forms.CharField(label='Кем выдан')
     issued_date = forms.DateField(label='Дата выдачи')
@@ -101,13 +100,6 @@ class UserChangeForm(forms.ModelForm):
     nationality = forms.CharField(label='Национальность')
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
-
-    def clean_password_confirm(self):
-        password = self.cleaned_data.get("password")
-        password_confirm = self.cleaned_data.get("password_confirm")
-        if password and password_confirm and password != password_confirm:
-            raise forms.ValidationError('Пароли не совпадают!')
-        return password_confirm
 
     def get_initial_for_field(self, field, field_name):
         if field_name in self.Meta.passport_fields:
@@ -134,9 +126,9 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
         # profile_fields = ['address_fact', 'passport']
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
+        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
 
 
 class PasswordChangeForm(forms.ModelForm):
