@@ -16,7 +16,7 @@ class LessonCreateView(CreateView):
     fields = ['name', "start_time", "end_time"]
 
     def get_success_url(self):
-        return reverse('webapp:all_lessons')
+        return reverse('lessons')
 
 
 class LessonUpdateView(UpdateView):
@@ -25,11 +25,11 @@ class LessonUpdateView(UpdateView):
     fields = ['name', "start_time", "end_time"]
 
     def get_success_url(self):
-        return reverse('webapp:all_lessons')
+        return reverse('lessons')
 
 
 class LessonDeleteView(DeleteView):
     model = Lesson
     template_name = 'delete.html'
-    success_url = reverse_lazy('webapp:all_lessons')
+    success_url = reverse_lazy('lessons')
 

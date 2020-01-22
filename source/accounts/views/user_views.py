@@ -42,6 +42,7 @@ def register_view(request, *args, **kwargs):
             user.save()
             passport = Passport(
                 user=user,
+                citizenship=form.cleaned_data['citizenship'],
                 series=form.cleaned_data['series'],
                 issued_by=form.cleaned_data['issued_by'],
                 issued_date=form.cleaned_data['issued_date'],

@@ -14,16 +14,17 @@ SEX_CHOICES = (
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    citizenship = forms.CharField(label="Гражданство", initial="Кыргызская Республика")
     series = forms.CharField(label='Пасспорт серия')
-    issued_by = forms.CharField(label='Кем выдан')
+    issued_by = forms.CharField(label='Кем выдан', required=False)
     issued_date = forms.DateField(label='Дата выдачи')
     address = forms.CharField(label='Адрес')
-    inn = forms.CharField(label='ИНН')
-    nationality = forms.CharField(label='Национальность')
+    inn = forms.CharField(label='ИНН', required=False)
+    nationality = forms.CharField(label='Национальность', required=False)
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
-    patronymic = forms.CharField(label='Отчество')
-    phone_number = forms.IntegerField(label='Номер телефона')
+    patronymic = forms.CharField(label='Отчество', required=False)
+    phone_number = forms.IntegerField(label='Номер телефона', required=False)
     photo = forms.ImageField(label='Фото', required=False)
     address_fact = forms.CharField(label='Фактический адрес')
 
@@ -86,7 +87,7 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo']
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
+        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex', 'birth_date']
 
 
 class UserChangeForm(forms.ModelForm):
