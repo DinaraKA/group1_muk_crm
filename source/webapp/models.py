@@ -44,3 +44,12 @@ class Discipline(models.Model):
         return self.name
 
 
+class Lesson(models.Model):
+    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
+    start_time = models.TimeField(verbose_name="Время начала")
+    end_time = models.TimeField(verbose_name="Время окончания")
+
+    def __str__(self):
+        return self.name
+
+
