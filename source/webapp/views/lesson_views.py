@@ -27,3 +27,9 @@ class LessonUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('webapp:all_lessons')
 
+
+class LessonDeleteView(DeleteView):
+    model = Lesson
+    template_name = 'delete.html'
+    success_url = reverse_lazy('webapp:all_lessons')
+
