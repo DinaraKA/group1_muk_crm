@@ -9,6 +9,21 @@ class LessonListView(ListView):
     ordering = ["start_time"]
     context_object_name = 'lessons'
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data()
-    #     return context
+
+class LessonCreateView(CreateView):
+    model = Lesson
+    template_name = 'add.html'
+    fields = ['name', "start_time", "end_time"]
+
+    def get_success_url(self):
+        return reverse('webapp:all_lessons')
+
+
+class LessonUpdateView(UpdateView):
+    model = Lesson
+    template_name = 'change.html'
+    fields = ['name', "start_time", "end_time"]
+
+    def get_success_url(self):
+        return reverse('webapp:all_lessons')
+
