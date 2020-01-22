@@ -11,6 +11,7 @@ from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateV
 from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
     GroupDeleteView
 
+
 app_name = 'accounts'
 
 urlpatterns = [

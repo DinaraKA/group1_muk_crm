@@ -6,6 +6,7 @@ from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView
 from .views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteView
 from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
+from .views import LessonListView
 
 app_name = 'webapp'
 
@@ -36,5 +37,7 @@ urlpatterns = [
     path('disciplines/', DisciplineListView.as_view(), name='disciplines'),
     path('disciplines/add/', DisciplineCreateView.as_view(), name='add_discipline'),
     path('disciplines/change/<int:pk>/', DisciplineUpdateView.as_view(), name='change_discipline'),
-    path('disciplines/delete/<int:pk>/', DisciplineDeleteView.as_view(), name='delete_discipline')
+    path('disciplines/delete/<int:pk>/', DisciplineDeleteView.as_view(), name='delete_discipline'),
+    path('all_lessons/', LessonListView.as_view(), name='all_lessons'),
+
 ]
