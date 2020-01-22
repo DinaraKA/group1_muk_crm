@@ -15,7 +15,7 @@
         <div class="col-8">
             <h5 class="news-title">{{ news.title }}</h5>
             <p class="news-text" style=>{{ news.text }}</p>
-            <a href="{% url 'webapp:new_detail' news.pk %}" class="link mb-2" style="color:red">Читать полностью</a>
+            <a href="{% url 'webapp:news_detail' news.pk %}" class="link mb-2" style="color:red">Читать полностью</a>
         </div>
       </div>
     {% endfor %}
