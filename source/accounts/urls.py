@@ -10,6 +10,7 @@ from accounts.views.admin_position_views import AdminPositionIndexView, AdminPos
 from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateView, RoleDeleteView
 from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
     GroupDeleteView
+from accounts.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 
 app_name = 'accounts'
 
@@ -42,4 +43,8 @@ urlpatterns = [
     path('add_group/', GroupCreateView.as_view(), name='add_group'),
     path('change_group/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
     path('delete_group/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
+    path('themes/', ThemeListView.as_view(), name='themes'),
+    path('add_theme/', ThemeCreateView.as_view(), name='add_theme'),
+    path('change_theme/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
+    path('delete_theme/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
 ]
