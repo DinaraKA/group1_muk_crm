@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-01-19T20:29:34.538Z",
+    "last_login": "2020-01-22T08:58:23.935Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -51,6 +51,125 @@
   }
 },
 {
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$TBEnKY0fpb26$QMVm4waO7Li94r54TNvttuu6us8iL1WZR14CJgj6yRE=",
+    "last_login": "2020-01-22T08:23:44.690Z",
+    "is_superuser": false,
+    "username": "student-1",
+    "first_name": "\u0412\u0430\u0441\u0438\u043b\u0438\u0439",
+    "last_name": "\u041f\u0443\u043f\u043a\u0438\u043d",
+    "email": "vasya@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T08:23:44.294Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$SFN0syyg1H2N$9nRqU7RyCt2YBo8s5pJMNi3teuD8qNm62GFvoNknltc=",
+    "last_login": "2020-01-22T08:42:13.731Z",
+    "is_superuser": false,
+    "username": "student-2",
+    "first_name": "\u0423\u043b\u0443\u043a\u0431\u0435\u043a",
+    "last_name": "\u0421\u0435\u0438\u0442\u043e\u0432",
+    "email": "uluk@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T08:42:13.410Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$yZQaiEAMCF5o$VtjBiNxcZWFm1zYUo6sAdBlyKpDVREogUlAqkX7vacc=",
+    "last_login": "2020-01-22T08:46:48.640Z",
+    "is_superuser": false,
+    "username": "student-3",
+    "first_name": "\u041d\u0443\u0440\u0438\u044f",
+    "last_name": "\u0410\u0434\u044b\u043b\u043e\u0432\u0430",
+    "email": "nur@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T08:46:48.274Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$JbydYM6gTTfj$wA1eUimZceYzE3vuddA0P1PSDYDo0OPwJY7hlKJzfW4=",
+    "last_login": "2020-01-22T09:20:19.053Z",
+    "is_superuser": false,
+    "username": "adminovich",
+    "first_name": "Admin",
+    "last_name": "admin",
+    "email": "admin@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T09:20:18.729Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Moa8lbMqlJtk$2L131Aj39ocQieZc9SSCJHLZo6+odssuc/ce/dQDT/s=",
+    "last_login": "2020-01-22T09:22:58.497Z",
+    "is_superuser": false,
+    "username": "adminovich2",
+    "first_name": "Generalova",
+    "last_name": "",
+    "email": "tyza@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T09:22:58.176Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$BtB9KHV5jqEl$dUfdxJysRiPjSTPC4koDsVyzgLeJjRIDcLW8BiRfDcM=",
+    "last_login": "2020-01-22T09:27:20.945Z",
+    "is_superuser": false,
+    "username": "adminovich3",
+    "first_name": "Generalova",
+    "last_name": "",
+    "email": "tyza@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T09:27:20.622Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$150000$bnkyhaFexakY$0u9c4XLc6kqQEnguUTSMl6LU0cQ4UAhaiFXvPmx0TY4=",
+    "last_login": "2020-01-22T09:34:11.430Z",
+    "is_superuser": false,
+    "username": "Ann",
+    "first_name": "Generalova",
+    "last_name": "Generalova",
+    "email": "tyza@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-22T09:34:11.105Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "sessions.session",
   "pk": "e3f7o0ty92rrxgg9bmi8qyhelfnpojcg",
   "fields": {
@@ -60,10 +179,18 @@
 },
 {
   "model": "sessions.session",
-  "pk": "vmu2c1vzkca0ebe1k2xushsnkkzdwm5q",
+  "pk": "kdwcql66g2w6khhl2w3z00t4luxa4x42",
   "fields": {
-    "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
-    "expire_date": "2020-02-02T20:29:27.744Z"
+    "session_data": "NjI0YjkyYzZiN2RmZDUyY2Y4YWNmMGJjMDE1MjU4MzY2YTljYzQwYzp7fQ==",
+    "expire_date": "2020-02-05T09:27:20.944Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "oq0lzene5ilcr0slmn8dcsr0dty43twb",
+  "fields": {
+    "session_data": "NjI0YjkyYzZiN2RmZDUyY2Y4YWNmMGJjMDE1MjU4MzY2YTljYzQwYzp7fQ==",
+    "expire_date": "2020-02-05T09:22:58.496Z"
   }
 },
 {
@@ -231,65 +358,341 @@
   }
 },
 {
-  "model": "accounts.passport",
+  "model": "webapp.discipline",
+  "pk": 1,
+  "fields": {
+    "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u041a\u044b\u0440\u0433\u044b\u0437\u0441\u0442\u0430\u043d\u0430"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 3,
+  "fields": {
+    "name": "\u041c\u0438\u0440\u043e\u0432\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 4,
+  "fields": {
+    "name": "\u041f\u0440\u0430\u0432\u043e"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 5,
+  "fields": {
+    "name": "\u0410\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 6,
+  "fields": {
+    "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u0440\u0435\u0432\u043d\u0435\u0433\u043e \u043c\u0438\u0440\u0430"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 7,
+  "fields": {
+    "name": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a"
+  }
+},
+{
+  "model": "webapp.discipline",
+  "pk": 8,
+  "fields": {
+    "name": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 1,
+  "fields": {
+    "name": "1 \u043f\u0430\u0440\u0430",
+    "start_time": "07:30:00",
+    "end_time": "08:50:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 2,
+  "fields": {
+    "name": "2 \u043f\u0430\u0440\u0430",
+    "start_time": "09:00:00",
+    "end_time": "10:20:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 3,
+  "fields": {
+    "name": "3 \u043f\u0430\u0440\u0430",
+    "start_time": "10:50:00",
+    "end_time": "12:10:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 4,
+  "fields": {
+    "name": "4 \u043f\u0430\u0440\u0430",
+    "start_time": "12:20:00",
+    "end_time": "13:40:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 5,
+  "fields": {
+    "name": "5 \u043f\u0430\u0440\u0430",
+    "start_time": "13:50:00",
+    "end_time": "15:10:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 6,
+  "fields": {
+    "name": "6 \u043f\u0430\u0440\u0430",
+    "start_time": "15:20:00",
+    "end_time": "16:40:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 7,
+  "fields": {
+    "name": "7 \u043f\u0430\u0440\u0430",
+    "start_time": "16:50:00",
+    "end_time": "18:10:00"
+  }
+},
+{
+  "model": "webapp.lesson",
+  "pk": 8,
+  "fields": {
+    "name": "8 \u043f\u0430\u0440\u0430",
+    "start_time": "18:20:00",
+    "end_time": "19:40:00"
+  }
+},
+{
+  "model": "accounts.profile",
   "pk": 1,
   "fields": {
     "user": [
-      "docha"
+      "student-1"
     ],
-    "series": "A555555",
-    "issued_by": "MVD 50-66",
-    "issued_date": "2009-10-05",
-    "address": "Sumcskoi 69",
-    "inn": "156999888888999999999999",
-    "nationality": "kyrgyz",
-    "sex": "women",
-    "birth_date": "2004-04-21"
+    "patronymic": "\u0410\u043b\u0438\u0431\u0430\u0435\u0432\u0438\u0447",
+    "phone_number": "500767676",
+    "photo": "user_pics/4WSiL321oBNR_I5w1XqEBA.jpg",
+    "address_fact": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041c\u0430\u043d\u0430\u0441\u0430 92, \u043a\u0432 4."
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "student-2"
+    ],
+    "patronymic": "\u0411\u0430\u043a\u044b\u0442\u043e\u0432\u0438\u0447",
+    "phone_number": "500333178",
+    "photo": "user_pics/2579629816.jpg",
+    "address_fact": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041f\u0430\u043d\u0444\u0438\u043b\u043e\u0432\u0430 33, \u043a\u0432 4."
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "student-3"
+    ],
+    "patronymic": "\u0421\u0435\u0440\u0438\u043a\u043e\u0432\u043d\u0430",
+    "phone_number": "500233245",
+    "photo": "user_pics/\u0422\u044e\u043b\u0435\u043c\u0431\u0430\u0435\u0432\u0430-\u0410\u0438\u0436\u0430\u043d-\u0421\u0435\u0440\u0438\u043a\u043e\u0432\u043d\u0430.jpg",
+    "address_fact": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041c\u0435\u0434\u0435\u0440\u043e\u0432\u0430 33, \u043a\u0432 4."
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "adminovich"
+    ],
+    "patronymic": "",
+    "phone_number": "555444855",
+    "photo": "user_pics/400559KJE_OM_B.jpg",
+    "address_fact": "g Sovmina 2, kv 4"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "adminovich2"
+    ],
+    "patronymic": "",
+    "phone_number": "555444855",
+    "photo": "user_pics/400559KJE_OM_B_fB9ACMT.jpg",
+    "address_fact": "g Sovmina 2, kv 4"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "adminovich3"
+    ],
+    "patronymic": "",
+    "phone_number": "555444855",
+    "photo": "user_pics/400559KK4_OM_B.jpg",
+    "address_fact": "g Sovmina 2, kv 4"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "Ann"
+    ],
+    "patronymic": "\u0410\u043b\u0438\u0431\u0435\u043a\u043e\u0432\u043d\u0430",
+    "phone_number": "555444855",
+    "photo": "user_pics/400559KJE_OM_F.jpg",
+    "address_fact": "g Sovmina 2, kv 4"
   }
 },
 {
   "model": "accounts.passport",
-  "pk": 2,
-  "fields": {
-    "user": [
-      "syn"
-    ],
-    "series": "A556699999",
-    "issued_by": "MVD 50-99",
-    "issued_date": "2015-05-13",
-    "address": "Sumcskoi 69",
-    "inn": "8888888888888888888",
-    "nationality": "kyrgyz",
-    "sex": "man",
-    "birth_date": "2009-05-15"
-  }
-},
-{
-  "model": "accounts.adminposition",
-  "pk": 2,
-  "fields": {
-    "name": "\u041a\u0443\u0440\u0430\u0442\u043e\u0440"
-  }
-},
-{
-  "model": "accounts.adminposition",
   "pk": 3,
   "fields": {
-    "name": "\u0414\u0435\u043a\u0430\u043d"
+    "user": [
+      "student-1"
+    ],
+    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+    "series": "AN000777",
+    "issued_by": "MKK 50-00",
+    "issued_date": "2020-01-09",
+    "address": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041c\u0430\u043d\u0430\u0441\u0430 92, \u043a\u0432 4.",
+    "inn": "434344343044",
+    "nationality": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+    "sex": "man",
+    "birth_date": "2000-02-26"
   }
 },
 {
-  "model": "accounts.adminposition",
+  "model": "accounts.passport",
   "pk": 4,
   "fields": {
-    "name": "\u0414\u0435\u043a\u0430\u043d"
+    "user": [
+      "student-2"
+    ],
+    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+    "series": "AN01224789",
+    "issued_by": "MKK 50-00",
+    "issued_date": "2020-02-06",
+    "address": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041f\u0430\u043d\u0444\u0438\u043b\u043e\u0432\u0430 33, \u043a\u0432 4.",
+    "inn": "1228899088",
+    "nationality": "\u041a\u044b\u0440\u0433\u044b\u0437",
+    "sex": "man",
+    "birth_date": "2001-07-13"
   }
 },
 {
-  "model": "accounts.adminposition",
+  "model": "accounts.passport",
   "pk": 5,
   "fields": {
-    "name": "\u0423\u0431\u043e\u0440\u0449\u0438\u0446\u0430"
+    "user": [
+      "student-3"
+    ],
+    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+    "series": "AN0134897",
+    "issued_by": "MKK 50-01",
+    "issued_date": "2019-12-07",
+    "address": "\u0433. \u0411\u0438\u0448\u043a\u0435\u043a, \u0443\u043b. \u041c\u0435\u0434\u0435\u0440\u043e\u0432\u0430 33, \u043a\u0432 4.",
+    "inn": "12238726267",
+    "nationality": "\u041a\u044b\u0440\u0433\u044b\u0437\u043a\u0430",
+    "sex": "women",
+    "birth_date": "2001-05-23"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "adminovich"
+    ],
+    "citizenship": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c",
+    "series": "AN0007572",
+    "issued_by": "MKK 50-00",
+    "issued_date": "2020-01-09",
+    "address": "g Sovmina 2, kv 4, K-Akieva 9, 55",
+    "inn": "434344343044",
+    "nationality": "\u041b\u0435\u0437\u0433\u0438\u043d",
+    "sex": "man",
+    "birth_date": "2010-02-26"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "adminovich2"
+    ],
+    "citizenship": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c",
+    "series": "AN0007572",
+    "issued_by": "",
+    "issued_date": "2020-01-09",
+    "address": "g Sovmina 2, kv 4, K-Akieva 9, 55",
+    "inn": "434344343044",
+    "nationality": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430",
+    "sex": "women",
+    "birth_date": "2010-02-26"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "adminovich3"
+    ],
+    "citizenship": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c",
+    "series": "AN0007572",
+    "issued_by": "",
+    "issued_date": "2020-01-09",
+    "address": "g Sovmina 2, kv 4, K-Akieva 9, 55",
+    "inn": "434344343044",
+    "nationality": "\u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430",
+    "sex": "women",
+    "birth_date": "2010-02-26"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "Ann"
+    ],
+    "citizenship": "Kyrgyzstan",
+    "series": "AN0007572",
+    "issued_by": "",
+    "issued_date": "2020-01-09",
+    "address": "g Sovmina 2, kv 4, K-Akieva 9, 55",
+    "inn": "434344343044",
+    "nationality": "Chui",
+    "sex": "women",
+    "birth_date": "2010-02-26"
   }
 },
 {
@@ -325,6 +728,41 @@
   "pk": 6,
   "fields": {
     "name": "\u0410\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0439 \u0440\u0430\u0431\u043e\u0442\u043d\u0438\u043a"
+  }
+},
+{
+  "model": "accounts.socialstatus",
+  "pk": 1,
+  "fields": {
+    "name": "\u041b\u041e\u0412\u0417"
+  }
+},
+{
+  "model": "accounts.socialstatus",
+  "pk": 2,
+  "fields": {
+    "name": "\u041c\u043d\u043e\u0433\u043e\u0434\u0435\u0442\u043d\u0430\u044f \u0441\u0435\u043c\u044c\u044f"
+  }
+},
+{
+  "model": "accounts.socialstatus",
+  "pk": 3,
+  "fields": {
+    "name": "\u0420\u043e\u0434\u0438\u0442\u0435\u043b\u044c \u0432\u043e\u0441\u043f\u0438\u0442\u044b\u0432\u0430\u0435\u0442 \u043e\u0434\u0438\u043d"
+  }
+},
+{
+  "model": "accounts.socialstatus",
+  "pk": 4,
+  "fields": {
+    "name": "\u041c\u0430\u0442\u044c-\u043e\u0434\u0438\u043d\u043e\u0447\u043a\u0430"
+  }
+},
+{
+  "model": "accounts.socialstatus",
+  "pk": 5,
+  "fields": {
+    "name": "\u0421\u0438\u0440\u043e\u0442\u0430"
   }
 },
 {
@@ -446,6 +884,546 @@
     "object_repr": "\u2014 \u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u043e-\u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u0447\u043d\u0430\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u0430 (\u042d\u0411\u0421) \u00abZnanium\u00bb",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2020-01-22T05:36:45.695Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "1",
+    "object_repr": "1 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2020-01-22T05:38:09.803Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "2",
+    "object_repr": "2 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2020-01-22T05:38:40.057Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "3",
+    "object_repr": "3 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2020-01-22T05:42:09.126Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "4",
+    "object_repr": "4 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2020-01-22T05:42:43.603Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "5",
+    "object_repr": "5 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2020-01-22T05:43:10.297Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "6",
+    "object_repr": "6 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2020-01-22T05:43:32.001Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "7",
+    "object_repr": "7 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2020-01-22T05:44:04.049Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "8",
+    "object_repr": "8 \u043f\u0430\u0440\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2020-01-22T05:44:16.050Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "8",
+    "object_repr": "8 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2020-01-22T05:44:40.373Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "2",
+    "object_repr": "2 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2020-01-22T05:44:55.218Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "3",
+    "object_repr": "3 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2020-01-22T05:45:09.443Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "4",
+    "object_repr": "4 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2020-01-22T05:45:21.832Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "5",
+    "object_repr": "5 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2020-01-22T05:45:30.600Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "6",
+    "object_repr": "6 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2020-01-22T05:45:42.383Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "7",
+    "object_repr": "7 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2020-01-22T05:45:53.652Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "8",
+    "object_repr": "8 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2020-01-22T08:24:48.099Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "3",
+    "object_repr": "3 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2020-01-22T08:25:01.793Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "4",
+    "object_repr": "4 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2020-01-22T08:26:05.472Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "5",
+    "object_repr": "5 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2020-01-22T08:26:17.152Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "6",
+    "object_repr": "6 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2020-01-22T08:26:31.806Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "7",
+    "object_repr": "7 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2020-01-22T08:26:45.746Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "8",
+    "object_repr": "8 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"start_time\", \"end_time\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2020-01-22T08:27:24.245Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "passport"
+    ],
+    "object_id": "2",
+    "object_repr": "Aidin Sanjarbekov's Passport",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2020-01-22T08:27:24.246Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "passport"
+    ],
+    "object_id": "1",
+    "object_repr": "Nadina Sanjarbekova's Passport",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2020-01-22T08:32:46.450Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "socialstatus"
+    ],
+    "object_id": "1",
+    "object_repr": "\u041b\u041e\u0412\u0417",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2020-01-22T08:32:53.733Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "socialstatus"
+    ],
+    "object_id": "2",
+    "object_repr": "\u041c\u043d\u043e\u0433\u043e\u0434\u0435\u0442\u043d\u0430\u044f \u0441\u0435\u043c\u044c\u044f",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2020-01-22T08:34:12.946Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "socialstatus"
+    ],
+    "object_id": "3",
+    "object_repr": "\u0420\u043e\u0434\u0438\u0442\u0435\u043b\u044c \u0432\u043e\u0441\u043f\u0438\u0442\u044b\u0432\u0430\u0435\u0442 \u043e\u0434\u0438\u043d",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2020-01-22T08:34:28.464Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "socialstatus"
+    ],
+    "object_id": "4",
+    "object_repr": "\u041c\u0430\u0442\u044c-\u043e\u0434\u0438\u043d\u043e\u0447\u043a\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2020-01-22T08:34:37.586Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "socialstatus"
+    ],
+    "object_id": "5",
+    "object_repr": "\u0421\u0438\u0440\u043e\u0442\u0430",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2020-01-22T09:07:29.813Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "object_id": "3",
+    "object_repr": "\u041d\u0443\u0440\u0438\u044f \u0410\u0434\u044b\u043b\u043e\u0432\u0430's Profile",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"photo\"]}}]"
   }
 }
 ]

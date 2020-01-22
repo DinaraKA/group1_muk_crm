@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -43,6 +44,7 @@ def register_view(request, *args, **kwargs):
             user.save()
             passport = Passport(
                 user=user,
+                citizenship=form.cleaned_data['citizenship'],
                 series=form.cleaned_data['series'],
                 issued_by=form.cleaned_data['issued_by'],
                 issued_date=form.cleaned_data['issued_date'],
@@ -50,8 +52,7 @@ def register_view(request, *args, **kwargs):
                 inn=form.cleaned_data['inn'],
                 nationality=form.cleaned_data['nationality'],
                 sex=form.cleaned_data['sex'],
-                birth_date=form.cleaned_data['birth_date'],
-                citizenship=form.cleaned_data['citizenship'],
+                birth_date=form.cleaned_data['birth_date']
             )
             try:
                 photo = request.FILES['photo']
@@ -77,7 +78,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return redirect('webapp:index')
+            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -127,7 +128,7 @@ class UserPersonalInfoChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('webapp:index')
+        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
@@ -140,7 +141,7 @@ class UserPasswordChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:login')
+        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
 
 
 class UserDetailView(DetailView):

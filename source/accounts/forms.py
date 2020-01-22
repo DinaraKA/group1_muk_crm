@@ -3,8 +3,7 @@ from django.core.exceptions import ValidationError
 
 from accounts.models import AdminPosition
 from django import forms
-# from .models import Profile, Passport, Role
-from .models import Profile, Passport, Group, Role, Status, AdminPosition, SocialStatus
+from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
 SEX_CHOICES = (
     ('man', 'мужской'),
@@ -15,17 +14,17 @@ SEX_CHOICES = (
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    citizenship = forms.CharField(label="Гражданство", initial="Кыргызская Республика")
     series = forms.CharField(label='Пасспорт серия')
-    issued_by = forms.CharField(label='Кем выдан')
+    issued_by = forms.CharField(label='Кем выдан', required=False)
     issued_date = forms.DateField(label='Дата выдачи')
     address = forms.CharField(label='Адрес')
-    inn = forms.CharField(label='ИНН')
-    nationality = forms.CharField(label='Национальность')
-    citizenship=forms.CharField(label='Гражданство', initial='Кыргызстан')
+    inn = forms.CharField(label='ИНН', required=False)
+    nationality = forms.CharField(label='Национальность', required=False)
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
-    patronymic = forms.CharField(label='Отчество')
-    phone_number = forms.IntegerField(label='Номер телефона')
+    patronymic = forms.CharField(label='Отчество', required=False)
+    phone_number = forms.IntegerField(label='Номер телефона', required=False)
     photo = forms.ImageField(label='Фото', required=False)
     address_fact = forms.CharField(label='Фактический адрес')
     role = forms.ModelMultipleChoiceField(label='Роль', queryset=Role.objects.all())
@@ -60,6 +59,7 @@ class UserCreationForm(forms.ModelForm):
             try:
                 return getattr(self.instance.profile, field_name)
             except Passport.DoesNotExist:
+            # except Profile.DoesNotExist:
                 return None
         return super().get_initial_for_field(field, field_name)
 
@@ -92,20 +92,18 @@ class UserCreationForm(forms.ModelForm):
         fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
                           'social_status']
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'citizenship',
+        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality',
                            'sex', 'birth_date']
 
 
 class UserChangeForm(forms.ModelForm):
-    # password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
-    # password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    citizenship = forms.CharField(label="Гражданство", initial="Кыргызская Республика")
     series = forms.CharField(label='Пасспорт серия')
     issued_by = forms.CharField(label='Кем выдан')
     issued_date = forms.DateField(label='Дата выдачи')
     address = forms.CharField(label='Адрес')
     inn = forms.CharField(label='ИНН')
     nationality = forms.CharField(label='Национальность')
-    citizenship = forms.CharField(label='Гражданство')
     sex = forms.ChoiceField(choices=SEX_CHOICES, label='Пол')
     birth_date = forms.DateField(label='Дата Рождения')
     patronymic = forms.CharField(label='Отчество')
@@ -117,12 +115,6 @@ class UserChangeForm(forms.ModelForm):
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
     social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(), required=False)
 
-    def clean_password_confirm(self):
-        password = self.cleaned_data.get("password")
-        password_confirm = self.cleaned_data.get("password_confirm")
-        if password and password_confirm and password != password_confirm:
-            raise forms.ValidationError('Пароли не совпадают!')
-        return password_confirm
 
     def get_initial_for_field(self, field, field_name):
         if field_name in self.Meta.passport_fields:
@@ -130,6 +122,7 @@ class UserChangeForm(forms.ModelForm):
                 return getattr(self.instance.passport, field_name)
             except Passport.DoesNotExist:
                 return None
+
         if field_name in self.Meta.profile_fields:
             try:
                 return getattr(self.instance.profile, field_name)
@@ -169,7 +162,7 @@ class UserChangeForm(forms.ModelForm):
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
                           'social_status'
                           ]
-        passport_fields = ['series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'citizenship', 'sex',
+        passport_fields = [ 'citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
                            'birth_date']
 
 
