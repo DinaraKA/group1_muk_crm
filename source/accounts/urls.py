@@ -47,4 +47,8 @@ urlpatterns = [
     path('add_theme/', ThemeCreateView.as_view(), name='add_theme'),
     path('change_theme/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
     path('delete_theme/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
+    path('progress/', ThemeListView.as_view(), name='progress'),
+    path('add_progress/', ThemeCreateView.as_view(), name='add_progress'),
+    path('change_progress/<int:pk>/', ThemeUpdateView.as_view(), name='change_progress'),
+    path('delete_progress/<int:pk>/', ThemeDeleteView.as_view(), name='delete_progresse'),
 ]
