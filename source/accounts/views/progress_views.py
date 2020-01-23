@@ -25,3 +25,12 @@ class ProgressCreateView(CreateView):
     def get_success_url(self):
         return reverse('accounts:progress]')
 
+class ProgressUpdateView(UpdateView):
+    model = Progress
+    template_name = 'change.html'
+    fields = ['grade']
+
+    def get_success_url(self):
+        return reverse('accounts:progress')
+
+
