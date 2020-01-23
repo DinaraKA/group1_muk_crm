@@ -33,4 +33,9 @@ class ProgressUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('accounts:progress')
 
+class ProgressDeleteView(DeleteView):
+    model = Progress
+    template_name = 'delete.html'
+    success_url = reverse_lazy('accounts:progress')
+
 
