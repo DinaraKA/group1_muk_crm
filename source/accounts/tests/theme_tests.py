@@ -22,7 +22,7 @@ class ThemeModelTest(TestCase):
         self.assertEquals(max_length, 100)
 
     def test_string_representation(self):
-        theme = AdminPosition(name="Test Name")
+        theme = Theme(name="Test Name")
         self.assertEqual(str(theme), theme.name)
 
     def test_object_name_is_name(self):
