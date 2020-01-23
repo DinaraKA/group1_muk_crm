@@ -120,4 +120,4 @@ class Progress(models.Model):
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
 
     def __str__(self):
-        return self.student
+        return self.student.last_name + self.student.first_name

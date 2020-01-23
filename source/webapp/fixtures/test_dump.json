@@ -392,65 +392,24 @@
   }
 },
 {
-  "model": "accounts.passport",
+  "model": "webapp.discipline",
   "pk": 1,
   "fields": {
-    "user": [
-      "docha"
-    ],
-    "series": "A555555",
-    "issued_by": "MVD 50-66",
-    "issued_date": "2009-10-05",
-    "address": "Sumcskoi 69",
-    "inn": "156999888888999999999999",
-    "nationality": "kyrgyz",
-    "sex": "women",
-    "birth_date": "2004-04-21"
+    "name": "\u041c\u0430\u0442\u0435\u0438\u0430\u0442\u0438\u043a\u0430"
   }
 },
 {
-  "model": "accounts.passport",
+  "model": "webapp.discipline",
   "pk": 2,
   "fields": {
-    "user": [
-      "syn"
-    ],
-    "series": "A556699999",
-    "issued_by": "MVD 50-99",
-    "issued_date": "2015-05-13",
-    "address": "Sumcskoi 69",
-    "inn": "8888888888888888888",
-    "nationality": "kyrgyz",
-    "sex": "man",
-    "birth_date": "2009-05-15"
+    "name": "\u0424\u0438\u0437\u0440\u0430"
   }
 },
 {
-  "model": "accounts.adminposition",
-  "pk": 2,
-  "fields": {
-    "name": "\u041a\u0443\u0440\u0430\u0442\u043e\u0440"
-  }
-},
-{
-  "model": "accounts.adminposition",
+  "model": "webapp.discipline",
   "pk": 3,
   "fields": {
-    "name": "\u0414\u0435\u043a\u0430\u043d"
-  }
-},
-{
-  "model": "accounts.adminposition",
-  "pk": 4,
-  "fields": {
-    "name": "\u0414\u0435\u043a\u0430\u043d"
-  }
-},
-{
-  "model": "accounts.adminposition",
-  "pk": 5,
-  "fields": {
-    "name": "\u0423\u0431\u043e\u0440\u0449\u0438\u0446\u0430"
+    "name": "\u0418\u043d\u0444\u043e\u0440\u0438\u0430\u0442\u0438\u043a\u0430"
   }
 },
 {
@@ -535,6 +494,70 @@
   "pk": 7,
   "fields": {
     "name": "\u0423\u0432\u043e\u043b\u0435\u043d"
+  }
+},
+{
+  "model": "accounts.adminposition",
+  "pk": 2,
+  "fields": {
+    "name": "\u041a\u0443\u0440\u0430\u0442\u043e\u0440"
+  }
+},
+{
+  "model": "accounts.adminposition",
+  "pk": 3,
+  "fields": {
+    "name": "\u0414\u0435\u043a\u0430\u043d"
+  }
+},
+{
+  "model": "accounts.adminposition",
+  "pk": 4,
+  "fields": {
+    "name": "\u0414\u0435\u043a\u0430\u043d"
+  }
+},
+{
+  "model": "accounts.adminposition",
+  "pk": 5,
+  "fields": {
+    "name": "\u0423\u0431\u043e\u0440\u0449\u0438\u0446\u0430"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "docha"
+    ],
+    "series": "A555555",
+    "issued_by": "MVD 50-66",
+    "issued_date": "2009-10-05",
+    "address": "Sumcskoi 69",
+    "inn": "156999888888999999999999",
+    "nationality": "kyrgyz",
+    "sex": "women",
+    "birth_date": "2004-04-21",
+    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u0442\u0430\u043d"
+  }
+},
+{
+  "model": "accounts.passport",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "syn"
+    ],
+    "series": "A556699999",
+    "issued_by": "MVD 50-99",
+    "issued_date": "2015-05-13",
+    "address": "Sumcskoi 69",
+    "inn": "8888888888888888888",
+    "nationality": "kyrgyz",
+    "sex": "man",
+    "birth_date": "2009-05-15",
+    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u0442\u0430\u043d"
   }
 },
 {
@@ -645,6 +668,71 @@
   "pk": 5,
   "fields": {
     "name": "\u041f\u044f\u0442\u043f\u044f \u0422\u0435\u043c\u0430"
+  }
+},
+{
+  "model": "accounts.progress",
+  "pk": 3,
+  "fields": {
+    "date": "2020-01-20",
+    "student": [
+      "FirstStudent"
+    ],
+    "discipline": 1,
+    "theme": 1,
+    "grade": 5
+  }
+},
+{
+  "model": "accounts.progress",
+  "pk": 4,
+  "fields": {
+    "date": "2020-01-20",
+    "student": [
+      "SecondStudent"
+    ],
+    "discipline": 2,
+    "theme": 2,
+    "grade": 7
+  }
+},
+{
+  "model": "accounts.progress",
+  "pk": 5,
+  "fields": {
+    "date": "2020-01-20",
+    "student": [
+      "ThirdStudent"
+    ],
+    "discipline": 1,
+    "theme": 3,
+    "grade": 4
+  }
+},
+{
+  "model": "accounts.progress",
+  "pk": 6,
+  "fields": {
+    "date": "2020-01-20",
+    "student": [
+      "SeventhStudent"
+    ],
+    "discipline": 2,
+    "theme": 3,
+    "grade": 3
+  }
+},
+{
+  "model": "accounts.progress",
+  "pk": 7,
+  "fields": {
+    "date": "2020-01-20",
+    "student": [
+      "NinethStudent"
+    ],
+    "discipline": 3,
+    "theme": 5,
+    "grade": 5
   }
 },
 {

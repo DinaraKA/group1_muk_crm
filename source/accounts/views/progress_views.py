@@ -23,7 +23,7 @@ class ProgressCreateView(CreateView):
     fields = ['student', 'date', 'discipline', 'theme', 'grade']
 
     def get_success_url(self):
-        return reverse('accounts:progress]')
+        return reverse('accounts:progress')
 
 class ProgressUpdateView(UpdateView):
     model = Progress
