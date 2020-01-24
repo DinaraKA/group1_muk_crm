@@ -109,20 +109,19 @@ class UserPersonalInfoChangeView(UpdateView):
         passport.inn = form.cleaned_data['inn']
         passport.nationality = form.cleaned_data['nationality']
         passport.patronymic = form.cleaned_data['patronymic']
-        passport.citizenship=form.cleaned_data['citizenship']
+        passport.citizenship = form.cleaned_data['citizenship']
         profile.phone_number = form.cleaned_data['phone_number']
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
         roles = Role.objects.filter(pk=role.pk)
         profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
-        profile.social_status=form.cleaned_data['social_status']
+        profile.social_status = form.cleaned_data['social_status']
         profile.save()
         passport.save()
         profile.role.set(roles)
         user.save()
         return redirect('webapp:index')
-
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']

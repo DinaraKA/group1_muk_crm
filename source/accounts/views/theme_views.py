@@ -15,6 +15,7 @@ class ThemeListView(ListView):
         context = super().get_context_data()
         return context
 
+
 class ThemeCreateView(CreateView):
     model = Theme
     template_name = 'add.html'
@@ -22,6 +23,7 @@ class ThemeCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('accounts:themes')
+
 
 class ThemeUpdateView(UpdateView):
     model = Theme

@@ -1,6 +1,5 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
