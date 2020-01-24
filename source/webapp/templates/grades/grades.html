@@ -4,25 +4,23 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Оценки</h2>
-            <a href="{% url 'webapp:add_grade' %}" class="btn btn-outline-primary  m-4">Добавить оценку</a>
+            <h2>Дисциплины</h2>
+            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-outline-primary  m-4">Добавить дисциплину</a>
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Значение</th>
-                    <th scope="col">Описание</th>
+                    <th scope="col">Название</th>
                     <th class="symbol" scope="col">Редактировать</th>
                     <th class="symbol" scope="col">Удалить</th>
                 </tr>
             </thead>
-            {% for grade in grades %}
+            {% for discipline in disciplines %}
                 <tbody>
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ grade.value }}</td>
-                        <td>{{ grade.description }}</td>
-                        <td class="symbol"><a href="{% url 'webapp:change_grade' grade.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_grade' grade.pk %}">X</a></td>
+                        <td>{{ discipline.name }}</td>
+                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete">X</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
