@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from accounts.models import AdminPosition, Theme
+from accounts.models import AdminPosition, Theme, Progress
 from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
@@ -219,3 +219,8 @@ class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
         fields = ['name']
+
+class ProgressForm(forms.ModelForm):
+    class Meta:
+        model = Progress
+        fields = ['student', 'date', 'discipline', 'theme', 'grade']
