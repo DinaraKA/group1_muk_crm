@@ -121,7 +121,7 @@ class UserPersonalInfoChangeView(UpdateView):
         passport.save()
         profile.role.set(roles)
         user.save()
-        return redirect('webapp:index')
+        return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
