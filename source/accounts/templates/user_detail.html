@@ -2,12 +2,10 @@
 
 {% block title %}Пользователь{% endblock %}
 
-{#{% block menu %}#}
-{#    {% if user.pk == user_obj.pk %}#}
-{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>#}
-{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>#}
-{#    {% endif %}#}
-{#{% endblock %}#}
+{% block menu %}
+        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>
+{% endblock %}
 
 {% block content %}
     <div class="lk-content">
@@ -21,17 +19,23 @@
                     <p><b>Логин:</b> {{ user_obj.username }}</p>
                     <p><b>Имя:</b> {{ user_obj.first_name }}</p>
                     <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
-                    <p><b>Почта:</b> {{ user_obj.email }}</p>
                     {% if user_obj.profile %}
                         <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
+                    {% endif %}
+                    <p><b>Почта:</b> {{ user_obj.email }}</p>
+                    {% if user_obj.profile.phone_number %}
                         <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
+                    {% endif %}
                         <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
+                    {% if user_obj.profile.role %}
                         <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}</p>
+                    {% endif %}
                         <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
+                    {% if user_obj.profile.social_status %}
                         <p><b>Социальный статус:</b> {{ user_obj.profile.social_status }}</p>
+                    {% endif %}
+                    {% if user_obj.profile.admin_position %}
                         <p><b>Должность:</b> {{ user_obj.profile.admin_position }}</p>
-{#                        <p><b>Родители:</b></p>#}
-{#                        <p>{{ user_obj.profile.parent_one }}, {{ user_obj.profile.parent_two }}</p>#}
                     {% endif %}
                     {% if user_obj.passport %}
                         <div class="passport">

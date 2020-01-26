@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from phone_field import PhoneField
 
+from webapp.models import Discipline, Grade
+
 
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
@@ -102,4 +104,21 @@ class Group(models.Model):
     started_at = models.DateField(verbose_name='Дата создания')
 
     def __str__(self):
-        return self.name + self.students
+        return self.name
+
+
+class Theme(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Тема')
+
+    def __str__(self):
+        return self.name
+
+class Progress(models.Model):
+    date = models.DateField(verbose_name='Дата')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='dicipline', verbose_name='Дисциплина')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
+
+    def __str__(self):
+        return self.student.last_name + self.student.first_name
