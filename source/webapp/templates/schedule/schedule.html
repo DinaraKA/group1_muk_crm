@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table table-bordered schedule">
+        <h1>Расписание</h1>
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          {% for lesson in lessons %}
+            <th scope="col">{{ lesson.name }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+          <th scope="row">Понедельник</th>
+{#          {% for schedule in schedules %}#}
+{#              {% if schedule.day == 'Monday' %}#}
+{#                  <td>#}
+{#                      <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">#}
+{#                          <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>#}
+{#                          <p class="my-0">{{ schedule.teacher }}</p>#}
+{#                          <p class="my-0">{{ schedule.discipline }}</p>#}
+{#                          <p class="my-0">{{ schedule.auditoriya }}</p>#}
+{#                      </a>#}
+{#                      <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>#}
+{#                  </td>#}
+{#              {% endif %}#}
+{#          {% endfor %}#}
+            {% for schedule in monday %}
+                  <td>
+                    {% if schedule != "" %}
+                      <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                          <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                          <p class="my-0">{{ schedule.teacher }}</p>
+                          <p class="my-0">{{ schedule.discipline }}</p>
+                          <p class="my-0">{{ schedule.auditoriya }}</p>
+                      </a>
+                      <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                  {% endif %}
+                  </td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">Вторник</th>
+          {% for schedule in schedules %}
+              {% if schedule.day == 'Tuesday' %}
+                 <td>
+                    <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <p class="my-0">{{ schedule.teacher }}</p>
+                      <p class="my-0">{{ schedule.discipline }}</p>
+                      <p class="my-0">{{ schedule.auditoriya }}</p>
+                    </a>
+                    <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                  </td>
+              {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">Среда</th>
+          {% for schedule in schedules %}
+              {% if schedule.day == 'Wednesday' %}
+                 <td>
+                    <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <p class="my-0">{{ schedule.teacher }}</p>
+                      <p class="my-0">{{ schedule.discipline }}</p>
+                      <p class="my-0">{{ schedule.auditoriya }}</p>
+                    </a>
+                    <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                  </td>
+              {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">Четверг</th>
+          {% for schedule in schedules %}
+              {% if schedule.day == 'Thursday' %}
+                 <td>
+                    <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <p class="my-0">{{ schedule.teacher }}</p>
+                      <p class="my-0">{{ schedule.discipline }}</p>
+                      <p class="my-0">{{ schedule.auditoriya }}</p>
+                    </a>
+                    <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                 </td>
+              {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">Пятница</th>
+          {% for schedule in schedules %}
+              {% if schedule.day == 'Friday' %}
+                 <td>
+                    <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <p class="my-0">{{ schedule.teacher }}</p>
+                      <p class="my-0">{{ schedule.discipline }}</p>
+                      <p class="my-0">{{ schedule.auditoriya }}</p>
+                    </a>
+                    <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                 </td>
+              {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="row">Суббота</th>
+          {% for schedule in schedules %}
+              {% if schedule.day == 'Saturday' %}
+                 <td>
+                    <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
+                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <p class="my-0">{{ schedule.teacher }}</p>
+                      <p class="my-0">{{ schedule.discipline }}</p>
+                      <p class="my-0">{{ schedule.auditoriya }}</p>
+                    </a>
+                    <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>
+                 </td>
+              {% endif %}
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+    <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
+{% endblock %}
