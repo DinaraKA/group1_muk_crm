@@ -56,7 +56,6 @@ class SaturdayLessonUpdateView(UpdateView):
 class SaturdayLessonDeleteView(DeleteView):
     model = SaturdayLesson
     template_name = 'delete.html'
+    success_url = reverse_lazy('webapp:lessons')
 
-    def get_success_url(self):
-        return reverse_lazy('webapp:lessons')
 
