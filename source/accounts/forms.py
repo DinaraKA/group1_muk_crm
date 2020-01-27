@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from accounts.models import AdminPosition, Theme
+
+from accounts.models import AdminPosition, Theme, Progress
 from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
@@ -28,7 +29,7 @@ class UserCreationForm(forms.ModelForm):
     address_fact = forms.CharField(label='Фактический адрес')
     role = forms.ModelMultipleChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
-    social_status = forms.ModelChoiceField(label='Социальный статус', queryset=SocialStatus.objects.all(), required=False)
+    social_status=forms.ModelChoiceField(label='Социальный статус', queryset=SocialStatus.objects.all())
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
 
     def clean_password_confirm(self):
@@ -58,7 +59,7 @@ class UserCreationForm(forms.ModelForm):
             try:
                 return getattr(self.instance.profile, field_name)
             except Passport.DoesNotExist:
-                # except Profile.DoesNotExist:
+            # except Profile.DoesNotExist:
                 return None
         return super().get_initial_for_field(field, field_name)
 
@@ -112,8 +113,8 @@ class UserChangeForm(forms.ModelForm):
     role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
-    social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(),
-                                           required=False)
+    social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(), required=False)
+
 
     def get_initial_for_field(self, field, field_name):
         if field_name in self.Meta.passport_fields:
@@ -161,7 +162,7 @@ class UserChangeForm(forms.ModelForm):
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
                           'social_status'
                           ]
-        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
+        passport_fields = [ 'citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
                            'birth_date']
 
 
@@ -213,7 +214,6 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
-
 
 class ThemeForm(forms.ModelForm):
     class Meta:

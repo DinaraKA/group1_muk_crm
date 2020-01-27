@@ -10,6 +10,7 @@ from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateV
 from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
     GroupDeleteView
 from accounts.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
+from accounts.views.progress_views import ProgressIndexView, ProgressCreateView, ProgressUpdateView, ProgressDeleteView
 
 app_name = 'accounts'
 
@@ -23,8 +24,8 @@ urlpatterns = [
     path('delete_admin_position/<int:pk>/', AdminPositionDeleteView.as_view(), name='delete_admin_position'),
     path('roles/', RoleIndexView.as_view(), name='roles_list' ),
     path('roles/add/', RoleCreateView.as_view(), name='role_add'),
-    path('roles/change/<int:pk>', RoleUpdateView.as_view(), name='role_change'),
-    path('roles/delete/<int:pk>', RoleDeleteView.as_view(), name='role_delete'),
+    path('roles/change/<int:pk>/', RoleUpdateView.as_view(), name='role_change'),
+    path('roles/delete/<int:pk>/', RoleDeleteView.as_view(), name='role_delete'),
     path('all_social_statuses/', SocialStatusListView.as_view(), name='all_social_statuses'),
     path('add_social_statuses/', SocialStatusCreateView.as_view(), name='add_social_status'),
     path('change_social_status/<int:pk>/', SocialStatusUpdateView.as_view(), name='change_social_status'),
@@ -46,4 +47,8 @@ urlpatterns = [
     path('add_theme/', ThemeCreateView.as_view(), name='add_theme'),
     path('change_theme/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
     path('delete_theme/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
+    path('progress/', ProgressIndexView.as_view(), name='progress'),
+    path('add_progress/', ProgressCreateView.as_view(), name='add_progress'),
+    path('change_progress/<int:pk>/', ProgressUpdateView.as_view(), name='change_progress'),
+    path('delete_progress/<int:pk>/', ProgressDeleteView.as_view(), name='delete_progresse'),
 ]
