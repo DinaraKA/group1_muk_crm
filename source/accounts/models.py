@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from phone_field import PhoneField
 
+from webapp.models import Discipline, Grade
+
 
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
@@ -54,14 +56,14 @@ class Profile(models.Model):
 
 
 SEX_CHOICES = (
-    ('мужской', 'мужской'),
-    ("женский", "женский"),
+    ('man', 'мужской'),
+    ("women", "женский"),
 )
 
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
-    citizenship = models.CharField(max_length=30, default="Кыргызская Республика", verbose_name="Гражданство")
+    citizenship = models.CharField(max_length=20, default="Кыргызская Республика", verbose_name="Гражданство")
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, blank="True", null="True", verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
@@ -70,6 +72,7 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, blank="True", null="True", verbose_name='Национальность')
     sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
+    citizenship = models.CharField(max_length=20, default='Кыргызстан')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Passport"
@@ -109,3 +112,13 @@ class Theme(models.Model):
 
     def __str__(self):
         return self.name
+
+class Progress(models.Model):
+    date = models.DateField(verbose_name='Дата')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='dicipline', verbose_name='Дисциплина')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
+
+    def __str__(self):
+        return self.student.last_name + self.student.first_name

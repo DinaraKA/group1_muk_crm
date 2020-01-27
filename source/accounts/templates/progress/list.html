@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block menu %}
+     <a href="{% url 'accounts:add_progress'%}" class="create">Создать</a>
+{% endblock %}
+{% block content %}
+    <h1 style="padding-top: 20px">Прогресс</h1>
+    {% for object in object_list %}
+    <div class="object">
+        <div class="row my-5">
+            <div class="left col-8 justify-content-center">
+                <h5>{{ object.pk }}.{{ object.student }}</h5>
+                <p>{{ object.date }}</p>
+                <p>{{ object.discipline }}</p>
+                <p>{{ object.grade }}</p>
+                <p>{{ object.theme }}</p>
+            </div>
+            <div class="right col-4 d-flex justify-content-end">
+                <p class="mr-5"><a href="{% url 'accounts:change_progress' object.pk %}" class="update">Редактироать</a></p>
+                <p class="mr-3"><a href="{% url 'accounts:delete_progresse' object.pk %}" class="delete">Удалить</a></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        {% include 'partial/pagination.html' %}
+{% endblock %}
