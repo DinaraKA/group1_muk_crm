@@ -10,6 +10,7 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+
 class Announcements(models.Model):
     title = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок')
     text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст')

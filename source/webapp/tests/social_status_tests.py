@@ -3,8 +3,7 @@ from accounts.models import SocialStatus
 from selenium.webdriver import Chrome
 
 
-
-class GradeModelTest(TestCase):
+class SocialStatusModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):

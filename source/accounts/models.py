@@ -29,7 +29,7 @@ class AdminPosition(models.Model):
 
 
 class SocialStatus(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Социальный статус')
+    name = models.CharField(max_length=30, verbose_name='Социальный статус')
 
     def __str__(self):
         return self.name
