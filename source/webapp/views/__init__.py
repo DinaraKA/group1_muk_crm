@@ -5,4 +5,4 @@ from webapp.views.auditory_views import AuditoryListView, AuditoryCreateView, Au
 from webapp.views.grade_views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteView
 from webapp.views.discipline_views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from webapp.views.lesson_views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
-from  webapp.views.schedule_views import ScheduleView, ScheduleAddView, ScheduleUpdateView, ScheduleDeleteView
+from webapp.views.lesson_views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView

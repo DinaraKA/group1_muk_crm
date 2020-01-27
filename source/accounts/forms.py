@@ -6,8 +6,8 @@ from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
 SEX_CHOICES = (
-    ('man', 'мужской'),
-    ("women", "женский"),
+    ('мужской', 'мужской'),
+    ("женский", "женский"),
 )
 
 
