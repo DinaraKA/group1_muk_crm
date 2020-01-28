@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -37,12 +38,21 @@ class Grade(models.Model):
     def __str__(self):
         return self.value
 
+    class Meta:
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
+
 
 class Discipline(models.Model):
     name = models.CharField(max_length=500, null=False, blank=False, verbose_name='Дисциплина')
+    teacher = models.ManyToManyField(User, related_name='disciplines', verbose_name='Преподаватель')
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Дисциплина'
+        verbose_name_plural = 'Дисциплины'
 
 
 class Lesson(models.Model):
