@@ -60,7 +60,6 @@ class UserCreationForm(forms.ModelForm):
             try:
                 return getattr(self.instance.profile, field_name)
             except Passport.DoesNotExist:
-            # except Profile.DoesNotExist:
                 return None
         return super().get_initial_for_field(field, field_name)
 
@@ -71,8 +70,6 @@ class UserCreationForm(forms.ModelForm):
             passport = Passport.objects.create(passport=self.instance)
         for field in self.Meta.passport_fields:
             setattr(passport, field, self.cleaned_data[field])
-        # if not profile.avatar:
-        #     profile.avatar = None
         if commit:
             passport.save()
 
