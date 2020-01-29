@@ -9,7 +9,7 @@ from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDel
 from .views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
 from .views import PersonalGradesListView
 from webapp.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
-from webapp.views.progress_views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
+from webapp.views.journal_views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
 
 app_name = 'webapp'
 
@@ -47,11 +47,11 @@ urlpatterns = [
     path('saturday_lessons/add/', SaturdayLessonCreateView.as_view(), name='saturday_lesson_create'),
     path('saturday_lessons/update/<int:pk>/', SaturdayLessonUpdateView.as_view(), name='saturday_lesson_update'),
     path('saturday_lessons/delete/<int:pk>/', SaturdayLessonDeleteView.as_view(), name='saturday_lesson_delete'),
-    path('personalgrades/all/', PersonalGradesListView.as_view(), name='personal_grades'),
+    path('personal_grades/all/', PersonalGradesListView.as_view(), name='personal_grades'),
     path('themes/', ThemeListView.as_view(), name='themes'),
-    path('add_theme/', ThemeCreateView.as_view(), name='add_theme'),
-    path('change_theme/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
-    path('delete_theme/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
+    path('theme/add/', ThemeCreateView.as_view(), name='add_theme'),
+    path('theme/change/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
+    path('theme/delete/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
     path('journal/', JournalIndexView.as_view(), name='journal'),
     path('journal/add/', JournalCreateView.as_view(), name='add_journal'),
     path('journal/update/<int:pk>/', JournalUpdateView.as_view(), name='change_journal'),
