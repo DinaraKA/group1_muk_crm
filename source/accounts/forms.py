@@ -216,6 +216,7 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
 
+
 class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
