@@ -17,9 +17,7 @@ class GroupListView(ListView):
 
 
 class GroupDetailView(DetailView):
-
     template_name = 'group/detail.html'
-
     model = Group
 
 

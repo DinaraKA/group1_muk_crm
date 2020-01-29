@@ -25,6 +25,7 @@ class ProgressCreateView(CreateView):
     def get_success_url(self):
         return reverse('accounts:progress')
 
+
 class ProgressUpdateView(UpdateView):
     model = Progress
     template_name = 'change.html'
@@ -32,6 +33,7 @@ class ProgressUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:progress')
+
 
 class ProgressDeleteView(DeleteView):
     model = Progress
