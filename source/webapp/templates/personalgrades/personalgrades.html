@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}
+    <p>Дневник</p>
+{% endblock %}
+{% block content %}
+        <div class="lessons">
+        <br>
+            <h3 class="text-center">Успеваемость: </h3>
+        <br>
+    <table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Название предмета</th>
+      <th class="text-center">
+        Дата
+      </th>
+{#      <th class="text-center">#}
+{#        Время окончания#}
+{#      </th>#}
+    </tr>
+  </thead>
+        {% for discipline in disciplines %}
+  <tbody>
+    <tr>
+      <th class="text-nowrap text-center" scope="row">{{ discipline.name }}</th>
+        {% for grade in progress.grades %}
+      <td class="text-center">{{grade}}</td>
+            {% endfor %}
+{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+        </div>
+{#     <div class="lessons">#}
+{#        <br>#}
+{#            <h3 class="text-center">Суббота:</h3>#}
+{#        <br>#}
+{#    <table class="table table-bordered table-striped">#}
+{#  <thead>#}
+{#    <tr>#}
+{#      <th></th>#}
+{#      <th class="text-center">#}
+{#        Время начала#}
+{#      </th>#}
+{#      <th class="text-center">#}
+{#        Время окончания#}
+{#      </th>#}
+{#    </tr>#}
+{#  </thead>#}
+{#        {% for lesson in saturdaylessons %}#}
+{#  <tbody>#}
+{#    <tr>#}
+{#      <th class="text-nowrap text-center" scope="row">{{ lesson.name }}</th>#}
+{#      <td class="text-center">{{lesson.start_time|time:"H:i"}}</td>#}
+{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
+{#    </tr>#}
+{#  {% endfor %}#}
+{#  </tbody>#}
+{#</table>#}
+{#        </div>#}
+{% endblock %}

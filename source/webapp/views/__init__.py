@@ -6,3 +6,4 @@ from webapp.views.grade_views import GradeListView, GradeCreateView, GradeUpdate
 from webapp.views.discipline_views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from webapp.views.lesson_views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from webapp.views.lesson_views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
+from webapp.views.personalgrades_views import PersonalGradesListView
