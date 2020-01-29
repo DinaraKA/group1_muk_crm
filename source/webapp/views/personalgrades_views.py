@@ -12,7 +12,7 @@ class PersonalGradesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PersonalGradesListView, self).get_context_data(**kwargs)
         context.update({
-            'grades': Journal.objects.order_by('grade')
+           'grades': Journal.objects.order_by('grade')
         })
         return context
 
