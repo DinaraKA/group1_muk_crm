@@ -1,5 +1,5 @@
 from django.urls import path
-from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
+from .views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
 from .views import AnnouncementsView, AnnounceDetailView, AnnouncementCreateView, AnnouncementUpdateView, AnnouncementDeleteView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView

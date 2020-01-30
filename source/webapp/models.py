@@ -56,12 +56,13 @@ class Discipline(models.Model):
 
 
 class Lesson(models.Model):
+    index = models.IntegerField(verbose_name="Порядковый номер", default=1)
     name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
     start_time = models.TimeField(verbose_name="Время начала")
     end_time = models.TimeField(verbose_name="Время окончания")
 
     def __str__(self):
-        return self.name
+        return str(self.index) + " пара"
 
 
 class SaturdayLesson(models.Model):
