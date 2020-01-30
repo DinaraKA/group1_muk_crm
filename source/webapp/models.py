@@ -65,16 +65,6 @@ class Lesson(models.Model):
         return str(self.index) + " пара"
 
 
-class SaturdayLesson(models.Model):
-    index = models.IntegerField(verbose_name="Порядковый номер")
-    is_saturday = models.BooleanField(default=False, verbose_name="Суббота")
-    start_time = models.TimeField(verbose_name="Время начала")
-    end_time = models.TimeField(verbose_name="Время окончания")
-
-    def __str__(self):
-        return str(self.index) + " пара"
-
-
 class Theme(models.Model):
     name = models.CharField(max_length=100, verbose_name='Тема')
 
