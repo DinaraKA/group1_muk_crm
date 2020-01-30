@@ -9,12 +9,14 @@ class LessonListView(ListView):
     template_name = 'lesson/all_lessons.html'
     model = Lesson
     ordering = ["start_time"]
-    context_object_name = 'lessons'
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)
         context.update({
-            'saturdaylessons': SaturdayLesson.objects.order_by('start_time')
+            'lessons': Lesson.objects.filter(is_saturday=False)
+        })
+        context.update({
+            'saturdaylessons': Lesson.objects.filter(is_saturday=True)
         })
         return context
 
