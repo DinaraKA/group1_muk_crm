@@ -39,25 +39,3 @@ class LessonDeleteView(DeleteView):
     model = Lesson
     template_name = 'delete.html'
     success_url = reverse_lazy('webapp:lessons')
-
-
-class SaturdayLessonCreateView(CreateView):
-    model = SaturdayLesson
-    template_name = 'add.html'
-    fields = ['name', "start_time", "end_time"]
-    success_url = reverse_lazy('webapp:lessons')
-
-
-class SaturdayLessonUpdateView(UpdateView):
-    model = SaturdayLesson
-    template_name = 'change.html'
-    fields = ['name', "start_time", "end_time"]
-    success_url = reverse_lazy('webapp:lessons')
-
-
-class SaturdayLessonDeleteView(DeleteView):
-    model = SaturdayLesson
-    template_name = 'delete.html'
-    success_url = reverse_lazy('webapp:lessons')
-
-
