@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
+from accounts.views.other_progress_views import ProgressOthersListView, ProgressOthersCreateView, \
+    ProgressOthersUpdateView, ProgressOthersDeleteView, ProgressOthersForProgressCreateView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
@@ -52,4 +54,10 @@ urlpatterns = [
     path('add_progress/', ProgressCreateView.as_view(), name='add_progress'),
     path('change_progress/<int:pk>/', ProgressUpdateView.as_view(), name='change_progress'),
     path('delete_progress/<int:pk>/', ProgressDeleteView.as_view(), name='delete_progresse'),
+    path('progress_others/', ProgressOthersListView.as_view(), name='progress_others_list'),
+    path('progress_others/add/', ProgressOthersCreateView.as_view(), name='progress_others_add'),
+    path('progress_others/<int:pk>/change/', ProgressOthersUpdateView.as_view(), name='progress_others_change'),
+    path('progress_others/<int:pk>/delete/', ProgressOthersDeleteView.as_view(), name='progress_others_delete'),
+    path('progress/<int:pk>/add-progress/', ProgressOthersForProgressCreateView.as_view(), name='progress_progress_add'),
+
 ]

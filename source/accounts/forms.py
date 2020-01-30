@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from accounts.models import AdminPosition, Theme, Progress
+from accounts.models import AdminPosition, Theme, Progress, ProgressOthers
 from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
@@ -223,4 +223,7 @@ class ThemeForm(forms.ModelForm):
 class ProgressForm(forms.ModelForm):
     class Meta:
         model = Progress
-        fields = ['student', 'date', 'discipline', 'theme', 'grade']
+        fields = ['student', 'discipline']
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Найти')
