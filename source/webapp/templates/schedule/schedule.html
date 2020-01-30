@@ -3,13 +3,16 @@
     <table class="table table-bordered schedule">
         <h1>Расписание</h1>
         <thead>
-        <tr>
-          <th scope="col"></th>
-          {% for lesson in lessons %}
-            <th scope="col" class="schedule-block">{{ lesson.name }} пара</th>
-          {% endfor %}
-        </tr>
-      </thead>
+            <tr>
+                <th scope="col" class="schedule-days"></th>
+                {% for lesson in lessons %}
+                    <th scope="col" class="schedule-block">
+                        <p>{{ lesson.name }} пара</p>
+                        <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
         <tbody>
         <tr>
           <th scope="row">Понедельник</th>
@@ -92,6 +95,15 @@
           {% endfor %}
         </tr>
         <tr>
+            <th scope="col" class="schedule-days"></th>
+            {% for lesson in lessons %}
+                <th scope="col" class="schedule-block">
+                    <p>{{ lesson.name }} пара</p>
+                    <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
+                </th>
+            {% endfor %}
+        </tr>
+        <tr>
           <th scope="row">Суббота</th>
           {% for schedule in saturday %}
                  <td>
@@ -107,7 +119,7 @@
               {% endif %}
           {% endfor %}
         </tr>
-      </tbody>
+        </tbody>
     </table>
     <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
 {% endblock %}

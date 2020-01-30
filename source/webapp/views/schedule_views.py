@@ -11,22 +11,43 @@ class ScheduleView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ScheduleView, self).get_context_data(**kwargs)
-        monday_array = ["","","","","","","",""]
-        shedule_monday = Schedule.objects.filter(day="Monday")
+        context["monday"] = self.day_array('Monday')
+        context['tuesday'] = self.day_array('Tuesday')
+        context['wednesday'] = self.day_array('Wednesday')
+        context['thursday'] = self.day_array('Thursday')
+        context['friday'] = self.day_array('Friday')
+        context['saturday'] = self.day_array('Saturday')
+        context.update({
+            'lessons': Lesson.objects.all(),
+            'saturday_lesson': SaturdayLesson.objects.all(),
+        })
+        return context
+
+    # def day_array(self, day):
+    #     day_array = ["","","","","","","",""]
+    #     schedule_day = Schedule.objects.filter(day=day)
+    #     i = 0
+    #     while i < 9:
+    #         try:
+    #             index = int(schedule_day[i].lesson.name) - 1
+    #             day_array[index] = (schedule_day[i])
+    #         except:
+    #             pass
+    #         i += 1
+    #     return day_array
+
+    def day_array(self, day):
+        day_array = [[],[],[],[],[],[],[],[]]
+        schedule_day = Schedule.objects.filter(day=day)
         i = 0
         while i < 9:
             try:
-                index = int(shedule_monday[i].lesson.name) - 1
-                monday_array[index] = (shedule_monday[i])
+                index = int(schedule_day[i].lesson.name) - 1
+                day_array[index].append(schedule_day[i])
             except:
                 pass
             i += 1
-        context["monday"] = monday_array
-
-        context.update({
-            'lessons': Lesson.objects.all()
-        })
-        return context
+        return day_array
 
     def get_queryset(self):
         return Schedule.objects.all()
