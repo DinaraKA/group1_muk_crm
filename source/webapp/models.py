@@ -57,7 +57,6 @@ class Discipline(models.Model):
 
 class Lesson(models.Model):
     index = models.IntegerField(verbose_name="Порядковый номер")
-    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
     start_time = models.TimeField(verbose_name="Время начала")
     end_time = models.TimeField(verbose_name="Время окончания")
 
@@ -66,7 +65,7 @@ class Lesson(models.Model):
 
 
 class SaturdayLesson(models.Model):
-    index = models.IntegerField(verbose_name="Порядковый номер", default=1)
+    index = models.IntegerField(verbose_name="Порядковый номер")
     start_time = models.TimeField(verbose_name="Время начала")
     end_time = models.TimeField(verbose_name="Время окончания")
 
