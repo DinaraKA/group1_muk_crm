@@ -19,7 +19,7 @@ class JournalIndexView(ListView):
 class JournalCreateView(CreateView):
     model = Journal
     template_name = 'add.html'
-    fields = ['student', 'date', 'discipline', 'theme', 'grade']
+    fields = ['student', 'discipline']
 
     def get_success_url(self):
         return reverse('webapp:journal')

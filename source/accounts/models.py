@@ -94,4 +94,8 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
-
+class ProgressOthers(models.Model):
+    progress = models.ForeignKey(Progress, on_delete=models.CASCADE, related_name='progressot', verbose_name='Прогресс')
+    date = models.DateField(verbose_name='Дата')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
