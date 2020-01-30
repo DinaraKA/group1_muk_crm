@@ -52,7 +52,7 @@ class Profile(models.Model):
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name() + "'s Profile"
+        return self.user.get_full_name()
 
 
 SEX_CHOICES = (

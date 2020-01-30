@@ -2,7 +2,8 @@ from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from webapp.models import Schedule, Lesson, SaturdayLesson
-from accounts.models import Group
+from accounts.models import Group, User, Profile
+
 
 class ScheduleView(ListView):
     model = Schedule
@@ -18,6 +19,8 @@ class ScheduleView(ListView):
         context['friday'] = self.day_array('Friday')
         context['saturday'] = self.day_array('Saturday')
         context['groups'] = Group.objects.filter(students=self.request.user)
+        context['teacher'] = Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user)
+        print(context['teacher'])
         context.update({
             'lessons': Lesson.objects.all(),
             'saturday_lesson': SaturdayLesson.objects.all(),

@@ -5,6 +5,9 @@
         {% for group in groups %}
             <h4>Группа - {{ group.name }}</h4>
         {% endfor %}
+        {% if teacher %}
+            <h4>Учитель: {{ teacher.get }}</h4>
+        {% endif %}
         <thead>
             <tr>
                 <th scope="col" class="schedule-days"></th>
@@ -23,16 +26,22 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
-                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
+                                {% if request.user == item.teacher %}
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    <p class="my-0">{{ item.auditoriya }}</p>
+                                {% elif item.group in groups %}
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
-                                </a>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
-                                <hr style="border-color: rgb(66 66 66)">
-                            {% endif %}
+                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                    <hr style="border-color: rgb(66 66 66)">
+                                {% endif %}
+                            </a>
+
                         {% endfor %}
                     {% endif %}
                 </td>
@@ -44,10 +53,12 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
+                            {% if item.group in groups or item.teacher in teachers %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
                                 </a>
@@ -64,10 +75,12 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
+                            {% if item.group in groups or item.teacher in teachers %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
                                 </a>
@@ -84,10 +97,12 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
+                            {% if item.group in groups or item.teacher in teachers %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
                                 </a>
@@ -104,10 +119,12 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
+                            {% if item.group in groups or item.teacher in teachers %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
                                 </a>
@@ -133,10 +150,12 @@
                 <td>
                     {% if schedule %}
                         {% for item in schedule %}
-                            {% if item.group in groups %}
+                            {% if item.group in groups or item.teacher in teachers %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher }}</p>
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    {% if self.request.user in groups %}
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    {% endif %}
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">{{ item.auditoriya }}</p>
                                 </a>
