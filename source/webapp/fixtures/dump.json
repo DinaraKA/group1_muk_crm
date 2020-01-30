@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-01-27T04:20:16.029Z",
+    "last_login": "2020-01-30T03:11:34.862Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -235,6 +235,14 @@
     "date_joined": "2020-01-27T05:50:01.492Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "5z2aq1cmeo1snk1n1le3oea29uje8brz",
+  "fields": {
+    "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
+    "expire_date": "2020-02-13T03:11:34.865Z"
   }
 },
 {
@@ -509,7 +517,7 @@
   "model": "webapp.lesson",
   "pk": 1,
   "fields": {
-    "name": "1 \u043f\u0430\u0440\u0430",
+    "index": 1,
     "start_time": "07:30:00",
     "end_time": "08:50:00"
   }
@@ -518,7 +526,7 @@
   "model": "webapp.lesson",
   "pk": 2,
   "fields": {
-    "name": "2 \u043f\u0430\u0440\u0430",
+    "index": 2,
     "start_time": "09:00:00",
     "end_time": "10:20:00"
   }
@@ -527,7 +535,7 @@
   "model": "webapp.lesson",
   "pk": 3,
   "fields": {
-    "name": "3 \u043f\u0430\u0440\u0430",
+    "index": 3,
     "start_time": "10:50:00",
     "end_time": "12:10:00"
   }
@@ -536,7 +544,7 @@
   "model": "webapp.lesson",
   "pk": 4,
   "fields": {
-    "name": "4 \u043f\u0430\u0440\u0430",
+    "index": 4,
     "start_time": "12:20:00",
     "end_time": "13:40:00"
   }
@@ -545,7 +553,7 @@
   "model": "webapp.lesson",
   "pk": 5,
   "fields": {
-    "name": "5 \u043f\u0430\u0440\u0430",
+    "index": 5,
     "start_time": "13:50:00",
     "end_time": "15:10:00"
   }
@@ -554,7 +562,7 @@
   "model": "webapp.lesson",
   "pk": 6,
   "fields": {
-    "name": "6 \u043f\u0430\u0440\u0430",
+    "index": 6,
     "start_time": "15:20:00",
     "end_time": "16:40:00"
   }
@@ -563,7 +571,7 @@
   "model": "webapp.lesson",
   "pk": 7,
   "fields": {
-    "name": "7 \u043f\u0430\u0440\u0430",
+    "index": 7,
     "start_time": "16:50:00",
     "end_time": "18:10:00"
   }
@@ -572,7 +580,7 @@
   "model": "webapp.lesson",
   "pk": 8,
   "fields": {
-    "name": "8 \u043f\u0430\u0440\u0430",
+    "index": 8,
     "start_time": "18:20:00",
     "end_time": "19:40:00"
   }
@@ -581,7 +589,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 1,
   "fields": {
-    "name": "1 \u043f\u0430\u0440\u0430",
+    "index": 1,
     "start_time": "07:30:00",
     "end_time": "08:50:00"
   }
@@ -590,7 +598,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 2,
   "fields": {
-    "name": "2 \u043f\u0430\u0440\u0430",
+    "index": 2,
     "start_time": "09:00:00",
     "end_time": "10:20:00"
   }
@@ -599,7 +607,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 3,
   "fields": {
-    "name": "3 \u043f\u0430\u0440\u0430",
+    "index": 3,
     "start_time": "10:30:00",
     "end_time": "11:50:00"
   }
@@ -608,7 +616,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 4,
   "fields": {
-    "name": "4 \u043f\u0430\u0440\u0430",
+    "index": 4,
     "start_time": "12:00:00",
     "end_time": "13:20:00"
   }
@@ -617,7 +625,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 5,
   "fields": {
-    "name": "5 \u043f\u0430\u0440\u0430",
+    "index": 5,
     "start_time": "13:30:00",
     "end_time": "14:50:00"
   }
@@ -626,7 +634,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 6,
   "fields": {
-    "name": "6 \u043f\u0430\u0440\u0430",
+    "index": 6,
     "start_time": "15:00:00",
     "end_time": "16:20:00"
   }
@@ -635,7 +643,7 @@
   "model": "webapp.saturdaylesson",
   "pk": 7,
   "fields": {
-    "name": "7 \u043f\u0430\u0440\u0430",
+    "index": 7,
     "start_time": "16:30:00",
     "end_time": "17:50:00"
   }
@@ -2472,6 +2480,240 @@
     "object_repr": "\u0412\u0438\u043a\u0442\u043e\u0440 \u041d\u0435\u043a\u0438\u0444\u043e\u0440\u043e\u0432's Passport",
     "action_flag": 2,
     "change_message": "[{\"changed\": {\"fields\": [\"sex\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2020-01-30T03:12:36.756Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "2",
+    "object_repr": "2\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2020-01-30T03:12:42.421Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "3",
+    "object_repr": "3\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2020-01-30T03:12:47.847Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "4",
+    "object_repr": "4\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2020-01-30T03:12:53.016Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "5",
+    "object_repr": "5\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2020-01-30T03:12:58.630Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "6",
+    "object_repr": "6\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2020-01-30T03:13:04.740Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "7",
+    "object_repr": "7\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2020-01-30T03:13:09.922Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "lesson"
+    ],
+    "object_id": "8",
+    "object_repr": "8\u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2020-01-30T03:16:02.048Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "2",
+    "object_repr": "2 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2020-01-30T03:16:07.267Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "3",
+    "object_repr": "3 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2020-01-30T03:16:11.906Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "4",
+    "object_repr": "4 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2020-01-30T03:16:17.317Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "5",
+    "object_repr": "5 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2020-01-30T03:16:22.008Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "6",
+    "object_repr": "6 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2020-01-30T03:16:27.968Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "saturdaylesson"
+    ],
+    "object_id": "7",
+    "object_repr": "7 \u043f\u0430\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"index\"]}}]"
   }
 }
 ]
