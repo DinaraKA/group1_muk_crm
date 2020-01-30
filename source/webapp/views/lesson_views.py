@@ -1,7 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
-from webapp.models import Lesson, SaturdayLesson
-from django.urls import reverse, reverse_lazy
+from webapp.models import Lesson
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
