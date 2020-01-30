@@ -8,8 +8,8 @@ from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateVie
 from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from .views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
 from .views import PersonalGradesListView
-from webapp.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
-from webapp.views.journal_views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
+from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
+from .views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
 
 app_name = 'webapp'
 

@@ -7,3 +7,6 @@ from webapp.views.discipline_views import DisciplineListView, DisciplineCreateVi
 from webapp.views.lesson_views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from webapp.views.lesson_views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
 from webapp.views.personalgrades_views import PersonalGradesListView
+from webapp.views.journal_views import JournalCreateView, JournalIndexView, JournalUpdateView, JournalDeleteView
+from webapp.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
+
