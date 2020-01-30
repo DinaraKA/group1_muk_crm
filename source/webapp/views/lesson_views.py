@@ -24,14 +24,14 @@ class LessonListView(ListView):
 class LessonCreateView(CreateView):
     model = Lesson
     template_name = 'add.html'
-    fields = ['name', "start_time", "end_time"]
+    fields = ['index', "is_saturday", "start_time", "end_time"]
     success_url = reverse_lazy('webapp:lessons')
 
 
 class LessonUpdateView(UpdateView):
     model = Lesson
     template_name = 'change.html'
-    fields = ['name', "start_time", "end_time"]
+    fields = ['index', "is_saturday", "start_time", "end_time"]
     success_url = reverse_lazy('webapp:lessons')
 
 
