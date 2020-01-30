@@ -220,7 +220,7 @@ class GroupForm(forms.ModelForm):
 class FullSearchForm(forms.Form):
     text = forms.CharField(max_length=100, required=False, label='Текст')
     in_username = forms.BooleanField(initial=True, required=False, label='Username')
-    in_text = forms.BooleanField(initial=True, required=False, label='В тексте')
+    in_first_name = forms.BooleanField(initial=True, required=False, label='По имени')
     in_tags = forms.BooleanField(initial=True, required=False, label='В тегах')
     in_comment_text = forms.BooleanField(initial=False, required=False, label='В тексте комментариев')
 
@@ -232,17 +232,17 @@ class FullSearchForm(forms.Form):
         super().clean()
         data = self.cleaned_data
         text = data.get('text')
-        user = data.get('user')
-        if not (text or user):
+        # user = data.get('user')
+        if not (text):
             raise ValidationError('No search text or author provided',
                                   code='text_and_author_empty')
         errors = []
         if text:
             in_username = data.get('in_username')
-            in_text = data.get('in_text')
+            in_first_name = data.get('in_first_name')
             in_tags = data.get('in_tags')
             in_comment_text = data.get('in_comment_text')
-            if not (in_username or in_text or in_tags or in_comment_text):
+            if not (in_username or in_first_name or in_tags or in_comment_text):
                 errors.append(ValidationError(
                     'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
                     code='text_search_criteria_empty'

@@ -196,7 +196,7 @@ class UserSearchView(FormView):
 class SearchResultsView(ListView):
     model = User
     template_name = 'search.html'
-    context_object_name = 'user'
+    context_object_name = 'object_list'
     paginate_by = 5
     paginate_orphans = 2
 
@@ -204,7 +204,7 @@ class SearchResultsView(ListView):
         queryset = super().get_queryset()
         form = FullSearchForm(data=self.request.GET)
         if form.is_valid():
-            query = self.get_user_query(form)
+            query = self.get_search_query(form)
             queryset = queryset.filter(query).distinct()
         return queryset
 
@@ -234,21 +234,21 @@ class SearchResultsView(ListView):
     #             query = query | Q(comments__user__username__iexact=user)
     #     return query
 
-    def get_user_query(self, form):
+    def get_search_query(self, form):
         query = Q()
-        user = form.cleaned_data.get('user')
-        if user:
+        text = form.cleaned_data.get('text')
+        if text:
             in_username = form.cleaned_data.get('in_username')
             if in_username:
-                query = query | Q(user__last_name__icontains=user)
-            in_text = form.cleaned_data.get('in_text')
-            if in_text:
-                query = query | Q(user__icontains=user)
-            in_tags = form.cleaned_data.get('in_tags')
-            if in_tags:
-                query = query | Q(tags__name__iexact=user)
-            in_comment_text = form.cleaned_data.get('in_comment_text')
-            if in_comment_text:
-                query = query | Q(comments__text__icontains=user)
+                query = query | Q(username__icontains=text)
+            in_first_name = form.cleaned_data.get('in_first_name')
+            if in_first_name:
+                query = query | Q(first_name__icontains=text)
+            # in_tags = form.cleaned_data.get('in_tags')
+            # if in_first_name:
+            #     query = query | Q(first_name__iexact=user)
+            # in_comment_text = form.cleaned_data.get('in_comment_text')
+            # if in_comment_text:
+            #     query = query | Q(comments__text__icontains=user)
         return query
 

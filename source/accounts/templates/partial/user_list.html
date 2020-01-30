@@ -1,13 +1,15 @@
 <hr/>
-{% for use in user %}
-    <h2>{{ user.username }}</h2>
-    <p>USER{{ user.first_name }} ({{ article.category|default_if_none:'Без категории' }})
-        Registered {{ user.data_joined|date:'d.m.Y H:i:s' }}</p>
+{% for list in object_list %}
+    <h2>{{ list.first_name }}</h2>
+    <p>{{ list.last_name }}
+{#        ({{ article.category|default_if_none:'Без категории' }})#}
+{#        {{  }}#}
+        Registered {{ list.date_joined|date:'d.m.Y H:i:s' }}</p>
 {#    {% include 'partial/tag_bar.html' with object=article %}#}
     <p>
-        <a href="{% url 'accounts:user_detail' user.pk %}">Detail...</a>
-        <a href="{% url 'accounts:update' user.pk %}">Edit</a>
-        <a href="{% url "accounts:user_delete" user.pk %}">Delete</a>
+        <a href="{% url 'accounts:detail' list.pk %}">Detail...</a>
+        <a href="{% url 'accounts:update' list.pk %}">Edit</a>
+        <a href="{% url "accounts:user_delete" list.pk %}">Delete</a>
     </p>
     <hr/>
 {% endfor %}

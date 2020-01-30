@@ -16,9 +16,7 @@
     </form>
     <h1>Results</h1>
     {% if user %}
-        <p>user {{ user }}</p>
         {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
         {% endif %}
         {% include 'partial/user_list.html' %}
     {% else %}
