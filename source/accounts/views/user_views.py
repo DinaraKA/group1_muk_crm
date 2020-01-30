@@ -1,13 +1,17 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.views.generic import UpdateView, DetailView
-from accounts.forms import UserCreationForm, UserChangeForm
-from accounts.models import Passport, Profile, Role
+from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm
+from accounts.models import Passport, Profile, Role, Status
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.http import urlencode
+from django.db.models import Q
+
 
 
 def login_view(request, *args, **kwargs):
@@ -92,12 +96,10 @@ class UserPersonalInfoChangeView(UpdateView):
 
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
-        user = get_object_or_404(User, id=pk)
-        print(user)
+        # user = get_object_or_404(User, id=pk)
         passport = get_object_or_404(Passport, user=pk)
         profile = get_object_or_404(Profile, user=pk)
         user = get_object_or_404(User, pk=pk)
-        print('yes')
         profile.save()
         role = form.cleaned_data['role']
         user.first_name = form.cleaned_data['first_name']
@@ -113,13 +115,15 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.phone_number = form.cleaned_data['phone_number']
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
-        roles = Role.objects.filter(pk=role.pk)
+        # roles = Role.objects.filter(pk=role.pk)
+        role = form.cleaned_data['role']
         profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
         profile.social_status=form.cleaned_data['social_status']
         profile.save()
         passport.save()
-        profile.role.set(roles)
+        # profile.role.set(roles)
+        profile.role.set(role)
         user.save()
         return redirect('webapp:index')
 
@@ -148,3 +152,103 @@ class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+
+
+class UserListView(ListView):
+    model = User
+    template_name = 'user_list.html'
+    context_object_name = 'user'
+    # permission_required = 'webapp.user_list'
+    # permission_denied_message = '403 Доступ запрещён!'
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'user_delete.html'
+    success_url = reverse_lazy('webapp:index')
+    context_object_name = 'user'
+    # permission_required = 'accounts.user_delete'
+    # permission_denied_message = '403 Доступ запрещён!'
+
+    def delete(self, request, *args, **kwargs):
+        user = self.object = self.get_object()
+        rol = get_object_or_404(Role, name='Студент')
+        my = list(user.profile.role.all())
+        print(my)
+        if rol not in my:
+            user.profile.status=get_object_or_404(Status, name='Уволен')
+        else:
+            user.profile.status = get_object_or_404(Status, name='Отчислен')
+        user.profile.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class UserSearchView(FormView):
+    template_name = 'search.html'
+    form_class = FullSearchForm
+
+    def form_valid(self, form):
+        query = urlencode(form.cleaned_data)
+        url = reverse('accounts:search_results') + '?' + query
+        return redirect(url)
+
+
+class SearchResultsView(ListView):
+    model = User
+    template_name = 'search.html'
+    context_object_name = 'user'
+    paginate_by = 5
+    paginate_orphans = 2
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = FullSearchForm(data=self.request.GET)
+        if form.is_valid():
+            query = self.get_user_query(form)
+            queryset = queryset.filter(query).distinct()
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        form = FullSearchForm(data=self.request.GET)
+        query = self.get_query_string()
+        return super().get_context_data(
+            form=form, query=query, object_list=object_list, **kwargs
+        )
+
+    def get_query_string(self):
+        data = {}
+        for key in self.request.GET:
+            if key != 'page':
+                data[key] = self.request.GET.get(key)
+        return urlencode(data)
+
+    # def get_user_query(self, form):
+    #     query = Q()
+    #     user = form.cleaned_data.get('user')
+    #     if user:
+    #         user = form.cleaned_data.get('user')
+    #         if user:
+    #             query = query | Q(user__username__iexact=user)
+    #         comment_author = form.cleaned_data.get('comment_author')
+    #         if comment_author:
+    #             query = query | Q(comments__user__username__iexact=user)
+    #     return query
+
+    def get_user_query(self, form):
+        query = Q()
+        user = form.cleaned_data.get('user')
+        if user:
+            in_username = form.cleaned_data.get('in_username')
+            if in_username:
+                query = query | Q(user__last_name__icontains=user)
+            in_text = form.cleaned_data.get('in_text')
+            if in_text:
+                query = query | Q(user__icontains=user)
+            in_tags = form.cleaned_data.get('in_tags')
+            if in_tags:
+                query = query | Q(tags__name__iexact=user)
+            in_comment_text = form.cleaned_data.get('in_comment_text')
+            if in_comment_text:
+                query = query | Q(comments__text__icontains=user)
+        return query
+

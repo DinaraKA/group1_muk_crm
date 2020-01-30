@@ -2,7 +2,8 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
-from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView
+from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
+    UserListView, UserDeleteView, UserSearchView, SearchResultsView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
@@ -19,8 +20,12 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('create/', register_view, name='create'),
     path('<int:pk>/', UserDetailView.as_view(), name='detail'),
+    path('users/', UserListView.as_view(), name='user_list'),
+    path('<int:pk>/delete', UserDeleteView.as_view(), name='user_delete'),
+    path('user/search/', UserSearchView.as_view(), name='user_search'),
+    path('user/search/results/', SearchResultsView.as_view(), name='search_results'),
     path('password_change/<int:pk>', UserPasswordChangeView.as_view(), name='password_change'),
-    path('update/<int:pk>', UserPersonalInfoChangeView.as_view(), name='update'),
+    path('<int:pk>/update', UserPersonalInfoChangeView.as_view(), name='update'),
     path('admin_position/all/', AdminPositionIndexView.as_view(), name='positions'),
     path('admin_position/add/', AdminPositionCreateView.as_view(), name='add_admin_position'),
     path('admin_position/change/<int:pk>/', AdminPositionUpdateView.as_view(), name='change_admin_position'),

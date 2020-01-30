@@ -110,7 +110,8 @@ class UserChangeForm(forms.ModelForm):
     phone_number = forms.IntegerField(label='Номер телефона')
     photo = forms.ImageField(label='Фото', required=False)
     address_fact = forms.CharField(label='Фактический адрес')
-    role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
+    role = forms.ModelMultipleChoiceField(label='Роль', queryset=Role.objects.all())
+    # role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
     social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(), required=False)
@@ -214,3 +215,46 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+
+
+class FullSearchForm(forms.Form):
+    text = forms.CharField(max_length=100, required=False, label='Текст')
+    in_username = forms.BooleanField(initial=True, required=False, label='Username')
+    in_text = forms.BooleanField(initial=True, required=False, label='В тексте')
+    in_tags = forms.BooleanField(initial=True, required=False, label='В тегах')
+    in_comment_text = forms.BooleanField(initial=False, required=False, label='В тексте комментариев')
+
+    # user = forms.CharField(max_length=100, required=False, label='User')
+    # in_articles = forms.BooleanField(initial=True, required=False, label='Статей')
+    # in_comments = forms.BooleanField(initial=False, required=False, label='Комментариев')
+
+    def clean(self):
+        super().clean()
+        data = self.cleaned_data
+        text = data.get('text')
+        user = data.get('user')
+        if not (text or user):
+            raise ValidationError('No search text or author provided',
+                                  code='text_and_author_empty')
+        errors = []
+        if text:
+            in_username = data.get('in_username')
+            in_text = data.get('in_text')
+            in_tags = data.get('in_tags')
+            in_comment_text = data.get('in_comment_text')
+            if not (in_username or in_text or in_tags or in_comment_text):
+                errors.append(ValidationError(
+                    'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
+                    code='text_search_criteria_empty'
+                ))
+        # if user:
+        #     in_articles = data.get('in_articles')
+        #     in_comments = data.get('in_comments')
+        #     if not (in_articles or in_comments):
+        #         errors.append(ValidationError(
+        #             'One of the checkboxes should be checked: In articles, In comments',
+        #             code='author_search_criteria_empty'
+        #         ))
+        if errors:
+            raise ValidationError(errors)
+        return data

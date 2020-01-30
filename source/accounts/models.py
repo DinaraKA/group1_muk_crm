@@ -70,7 +70,6 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, blank="True", null="True", verbose_name='Национальность')
     sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
-    citizenship = models.CharField(max_length=20, default='Кыргызстан')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Passport"
@@ -91,7 +90,6 @@ class UserAdminPosition(models.Model):
 #
 #     def __str__(self):
 #         return self.user.get_full_name()
-
 
 
 class Group(models.Model):
