@@ -194,7 +194,8 @@ class UserSearchView(FormView):
 
 
 class SearchResultsView(ListView):
-    model = User
+    # model = User
+    model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'
     paginate_by = 5
@@ -236,19 +237,36 @@ class SearchResultsView(ListView):
 
     def get_search_query(self, form):
         query = Q()
-        text = form.cleaned_data.get('text')
+        text = form.cleaned_data.get('text').capitalize()
+        print(text, 'Text')
         if text:
             in_username = form.cleaned_data.get('in_username')
             if in_username:
-                query = query | Q(username__icontains=text)
+                query = query | Q(user__username__icontains=text)
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
-                query = query | Q(first_name__icontains=text)
+                query = query | Q(user__first_name__icontains=text)
+                print('FirstName', text)
+            in_status = form.cleaned_data.get('in_status')
+            if in_status:
+                query = query | Q(status__name__icontains=text)
+                print('Status')
+                print(text, "status")
+            # if in_first_name:
+                # query = query | Q(first_name__icontains=text)
             # in_tags = form.cleaned_data.get('in_tags')
             # if in_first_name:
             #     query = query | Q(first_name__iexact=user)
             # in_comment_text = form.cleaned_data.get('in_comment_text')
             # if in_comment_text:
             #     query = query | Q(comments__text__icontains=user)
+        # if text==None:
+        #     in_username = form.cleaned_data.get('in_username')
+        #     if in_username:
+        #         # query = query | Q(user__username__icontains=text)
+        #         query = query
+        #         print(query)
+
+
         return query
 

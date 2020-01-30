@@ -222,7 +222,7 @@ class FullSearchForm(forms.Form):
     in_username = forms.BooleanField(initial=True, required=False, label='Username')
     in_first_name = forms.BooleanField(initial=True, required=False, label='По имени')
     in_tags = forms.BooleanField(initial=True, required=False, label='В тегах')
-    in_comment_text = forms.BooleanField(initial=False, required=False, label='В тексте комментариев')
+    in_status = forms.BooleanField(initial=False, required=False, label='По статусу')
 
     # user = forms.CharField(max_length=100, required=False, label='User')
     # in_articles = forms.BooleanField(initial=True, required=False, label='Статей')
@@ -241,8 +241,8 @@ class FullSearchForm(forms.Form):
             in_username = data.get('in_username')
             in_first_name = data.get('in_first_name')
             in_tags = data.get('in_tags')
-            in_comment_text = data.get('in_comment_text')
-            if not (in_username or in_first_name or in_tags or in_comment_text):
+            in_status = data.get('in_status')
+            if not (in_username or in_first_name or in_tags or in_status):
                 errors.append(ValidationError(
                     'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
                     code='text_search_criteria_empty'
