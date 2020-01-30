@@ -1,5 +1,6 @@
 from django.db import models
-from accounts.models import User, Group
+from django.contrib.auth.models import User
+from accounts.models import Group
 
 
 class News(models.Model):

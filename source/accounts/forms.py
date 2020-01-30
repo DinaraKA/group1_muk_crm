@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from accounts.models import AdminPosition, Theme, Progress
+from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
@@ -215,7 +215,7 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
 
-class ThemeForm(forms.ModelForm):
-    class Meta:
-        model = Theme
-        fields = ['name']
+# class ThemeForm(forms.ModelForm):
+#     class Meta:
+#         model = Theme
+#         fields = ['name']

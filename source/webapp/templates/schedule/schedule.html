@@ -6,31 +6,18 @@
         <tr>
           <th scope="col"></th>
           {% for lesson in lessons %}
-            <th scope="col">{{ lesson.name }}</th>
+            <th scope="col" class="schedule-block">{{ lesson.name }} пара</th>
           {% endfor %}
         </tr>
       </thead>
         <tbody>
         <tr>
           <th scope="row">Понедельник</th>
-{#          {% for schedule in schedules %}#}
-{#              {% if schedule.day == 'Monday' %}#}
-{#                  <td>#}
-{#                      <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">#}
-{#                          <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>#}
-{#                          <p class="my-0">{{ schedule.teacher }}</p>#}
-{#                          <p class="my-0">{{ schedule.discipline }}</p>#}
-{#                          <p class="my-0">{{ schedule.auditoriya }}</p>#}
-{#                      </a>#}
-{#                      <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>#}
-{#                  </td>#}
-{#              {% endif %}#}
-{#          {% endfor %}#}
             {% for schedule in monday %}
                   <td>
                     {% if schedule != "" %}
                       <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                          <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                          <h5>{{ schedule.group }}</h5>
                           <p class="my-0">{{ schedule.teacher }}</p>
                           <p class="my-0">{{ schedule.discipline }}</p>
                           <p class="my-0">{{ schedule.auditoriya }}</p>
@@ -42,11 +29,11 @@
         </tr>
         <tr>
           <th scope="row">Вторник</th>
-          {% for schedule in schedules %}
-              {% if schedule.day == 'Tuesday' %}
+          {% for schedule in tuesday %}
                  <td>
+                    {% if schedule != "" %}
                     <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <h5>{{ schedule.group }}</h5>
                       <p class="my-0">{{ schedule.teacher }}</p>
                       <p class="my-0">{{ schedule.discipline }}</p>
                       <p class="my-0">{{ schedule.auditoriya }}</p>
@@ -58,11 +45,11 @@
         </tr>
         <tr>
           <th scope="row">Среда</th>
-          {% for schedule in schedules %}
-              {% if schedule.day == 'Wednesday' %}
+          {% for schedule in wednesday %}
                  <td>
+                    {% if schedule != "" %}
                     <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <h5>{{ schedule.group }}</h5>
                       <p class="my-0">{{ schedule.teacher }}</p>
                       <p class="my-0">{{ schedule.discipline }}</p>
                       <p class="my-0">{{ schedule.auditoriya }}</p>
@@ -74,11 +61,11 @@
         </tr>
         <tr>
           <th scope="row">Четверг</th>
-          {% for schedule in schedules %}
-              {% if schedule.day == 'Thursday' %}
+          {% for schedule in thursday %}
                  <td>
+                     {% if schedule != "" %}
                     <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <h5>{{ schedule.group }}</h5>
                       <p class="my-0">{{ schedule.teacher }}</p>
                       <p class="my-0">{{ schedule.discipline }}</p>
                       <p class="my-0">{{ schedule.auditoriya }}</p>
@@ -90,11 +77,11 @@
         </tr>
         <tr>
           <th scope="row">Пятница</th>
-          {% for schedule in schedules %}
-              {% if schedule.day == 'Friday' %}
+          {% for schedule in friday %}
                  <td>
+                     {% if schedule != "" %}
                     <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <h5>{{ schedule.group }}</h5>
                       <p class="my-0">{{ schedule.teacher }}</p>
                       <p class="my-0">{{ schedule.discipline }}</p>
                       <p class="my-0">{{ schedule.auditoriya }}</p>
@@ -106,11 +93,11 @@
         </tr>
         <tr>
           <th scope="row">Суббота</th>
-          {% for schedule in schedules %}
-              {% if schedule.day == 'Saturday' %}
+          {% for schedule in saturday %}
                  <td>
+                     {% if schedule != "" %}
                     <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">
-                      <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
+                      <h5>{{ schedule.group }}</h5>
                       <p class="my-0">{{ schedule.teacher }}</p>
                       <p class="my-0">{{ schedule.discipline }}</p>
                       <p class="my-0">{{ schedule.auditoriya }}</p>

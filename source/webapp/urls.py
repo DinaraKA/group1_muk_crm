@@ -8,6 +8,7 @@ from .views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteV
 from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from .views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
+from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
 
 app_name = 'webapp'
 
@@ -45,4 +46,8 @@ urlpatterns = [
     path('saturday_lessons/add/', SaturdayLessonCreateView.as_view(), name='saturday_lesson_create'),
     path('saturday_lessons/update/<int:pk>/', SaturdayLessonUpdateView.as_view(), name='saturday_lesson_update'),
     path('saturday_lessons/delete/<int:pk>/', SaturdayLessonDeleteView.as_view(), name='saturday_lesson_delete'),
+    path('schedule/',  ScheduleView.as_view(), name='schedule'),
+    path('schedule/add/', ScheduleAddView.as_view(), name='schedule_add'),
+    path('schedule/update/<int:pk>/', ScheduleUpdateView.as_view(), name='schedule_update'),
+    path('schedule/delete/<int:pk>/', ScheduleDeleteView.as_view(), name='schedule_delete'),
 ]
