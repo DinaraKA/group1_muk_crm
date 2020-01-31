@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import User
+from accounts.models import Group
 
 
 class News(models.Model):
@@ -56,21 +58,32 @@ class Discipline(models.Model):
 
 
 class Lesson(models.Model):
-    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
+    index = models.IntegerField(verbose_name="Порядковый номер")
+    is_saturday = models.BooleanField(verbose_name="Суббота")
     start_time = models.TimeField(verbose_name="Время начала")
     end_time = models.TimeField(verbose_name="Время окончания")
 
     def __str__(self):
-        return self.name
+        return str(self.index) + " пара"
 
-
-class SaturdayLesson(models.Model):
-    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
-    start_time = models.TimeField(verbose_name="Время начала")
-    end_time = models.TimeField(verbose_name="Время окончания")
+DAY_CHOICES = (
+    ('Monday', 'Понедельник'),
+    ('Tuesday', "Вторник"),
+    ('Wednesday', 'Среда'),
+    ('Thursday', "Четверг"),
+    ('Friday', "Пятница"),
+    ('Saturday', "Суббота")
+)
+class Schedule(models.Model):
+    lesson = models.ForeignKey(Lesson, related_name='schedule_lesson', on_delete=models.CASCADE, verbose_name='Пара')
+    day = models.CharField(max_length=20, choices=DAY_CHOICES, verbose_name='День недели')
+    teacher = models.ForeignKey(User, related_name='schedule_user', on_delete=models.CASCADE, verbose_name='Учитель')
+    auditoriya = models.ForeignKey(Auditory, related_name='schedule_auditoriya', on_delete=models.CASCADE, verbose_name='Аудитория')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='schedule_discipline', verbose_name='Предмет')
+    group = models.ForeignKey(Group, related_name='schedule_group', on_delete=models.CASCADE, verbose_name='Группа')
 
     def __str__(self):
-        return self.name
+        return '%s, %s, %s, %s, %s, %s' % (self.lesson, self.day, self.teacher, self.auditoriya, self.discipline, self.group)
 
 
 class Theme(models.Model):

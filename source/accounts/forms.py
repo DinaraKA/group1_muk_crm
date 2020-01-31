@@ -60,7 +60,6 @@ class UserCreationForm(forms.ModelForm):
             try:
                 return getattr(self.instance.profile, field_name)
             except Passport.DoesNotExist:
-            # except Profile.DoesNotExist:
                 return None
         return super().get_initial_for_field(field, field_name)
 
@@ -71,8 +70,6 @@ class UserCreationForm(forms.ModelForm):
             passport = Passport.objects.create(passport=self.instance)
         for field in self.Meta.passport_fields:
             setattr(passport, field, self.cleaned_data[field])
-        # if not profile.avatar:
-        #     profile.avatar = None
         if commit:
             passport.save()
 
@@ -221,3 +218,45 @@ class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
         fields = ['name']
+
+class FullSearchForm(forms.Form):
+    text = forms.CharField(max_length=100, required=False, label='Текст')
+    in_username = forms.BooleanField(initial=True, required=False, label='Username')
+    in_first_name = forms.BooleanField(initial=True, required=False, label='По имени')
+    in_tags = forms.BooleanField(initial=True, required=False, label='В тегах')
+    in_status = forms.BooleanField(initial=False, required=False, label='По статусу')
+
+    # user = forms.CharField(max_length=100, required=False, label='User')
+    # in_articles = forms.BooleanField(initial=True, required=False, label='Статей')
+    # in_comments = forms.BooleanField(initial=False, required=False, label='Комментариев')
+
+    def clean(self):
+        super().clean()
+        data = self.cleaned_data
+        text = data.get('text')
+        # user = data.get('user')
+        if not (text):
+            raise ValidationError('No search text or author provided',
+                                  code='text_and_author_empty')
+        errors = []
+        if text:
+            in_username = data.get('in_username')
+            in_first_name = data.get('in_first_name')
+            in_tags = data.get('in_tags')
+            in_status = data.get('in_status')
+            if not (in_username or in_first_name or in_tags or in_status):
+                errors.append(ValidationError(
+                    'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
+                    code='text_search_criteria_empty'
+                ))
+        # if user:
+        #     in_articles = data.get('in_articles')
+        #     in_comments = data.get('in_comments')
+        #     if not (in_articles or in_comments):
+        #         errors.append(ValidationError(
+        #             'One of the checkboxes should be checked: In articles, In comments',
+        #             code='author_search_criteria_empty'
+        #         ))
+        if errors:
+            raise ValidationError(errors)
+        return data

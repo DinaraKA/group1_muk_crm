@@ -34,10 +34,21 @@
                     {% endfor %}
 {#                        {% endfor %}#}
                 </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-{#        <div class="text-center mb-4">#}
+        <div class="lessons">
+        <br>
+            <h3 class="text-center">Успеваемость: </h3>
+        <br>
+    <table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Название предмета</th>
+      <th class="text-center">
+        Дата
+      </th>
+{#      <th class="text-center">#}
+{#        Время окончания#}
+{#      </th>#}
+    </tr>
 {#          <a href="{% url "schoolkid" schoolkid_id=schoolkid.id %}?week={{previous_week.week}}&year={{previous_week.year}}"><== Предыдущая неделя</a>#}
 {#          <a href="{% url "schoolkid" schoolkid_id=schoolkid.id %}?week={{next_week.week}}&year={{next_week.year}}">Следующая неделя ==></a>#}
 {#        </div>#}

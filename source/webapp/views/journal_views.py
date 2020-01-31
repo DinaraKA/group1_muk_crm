@@ -3,10 +3,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
-class ProgressIndexView(ListView):
+class JournalIndexView(ListView):
     template_name = 'progress/list.html'
     model = Journal
-    context_object_name = 'progress'
+    context_object_name = 'journals'
+
     paginate_by = 30
     paginate_orphans = 0
     page_kwarg = 'page'
@@ -16,27 +17,27 @@ class ProgressIndexView(ListView):
         return context
 
 
-class ProgressCreateView(CreateView):
+class JournalCreateView(CreateView):
     model = Journal
     template_name = 'add.html'
     fields = ['student', 'date', 'discipline', 'theme', 'grade']
 
     def get_success_url(self):
-        return reverse('accounts:progress')
+        return reverse('webapp:journal')
 
 
-class ProgressUpdateView(UpdateView):
+class JournalUpdateView(UpdateView):
     model = Journal
     template_name = 'change.html'
     fields = ['grade']
 
     def get_success_url(self):
-        return reverse('accounts:progress')
+        return reverse('webapp:journal')
 
 
-class ProgressDeleteView(DeleteView):
+class JournalDeleteView(DeleteView):
     model = Journal
     template_name = 'delete.html'
-    success_url = reverse_lazy('accounts:progress')
+    success_url = reverse_lazy('webapp:journal')
 
 

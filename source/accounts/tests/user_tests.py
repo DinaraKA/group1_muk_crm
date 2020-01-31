@@ -17,7 +17,7 @@ class LoginTest(TestCase):
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/'
         try:
-            link = self.driver.find_element_by_link_text("Привет, admin!")
+            link = self.driver.find_element_by_link_text("Приветб admin!")
         except NoSuchElementException:
             link = None
         assert link is not None

@@ -2,10 +2,12 @@
 
 {% block title %}Пользователь{% endblock %}
 
-{% block menu %}
-        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>
-{% endblock %}
+{#{% block menu %}#}
+{#    {% if user.pk == user_obj.pk %}#}
+{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>#}
+{#        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
 
 {% block content %}
     <div class="lk-content">

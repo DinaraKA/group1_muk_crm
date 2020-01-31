@@ -1,10 +1,6 @@
-from urllib import request
-
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
-from isoweek import Week
-from accounts.models import Profile
 from webapp.models import Journal, Discipline
 
 
