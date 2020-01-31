@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from phone_field import PhoneField
 
-from webapp.models import Discipline, Grade
-
 
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
@@ -56,8 +54,8 @@ class Profile(models.Model):
 
 
 SEX_CHOICES = (
-    ('man', 'мужской'),
-    ("women", "женский"),
+    ('мужской', 'мужской'),
+    ("женский", "женский"),
 )
 
 
@@ -72,7 +70,6 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, blank="True", null="True", verbose_name='Национальность')
     sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
-    citizenship = models.CharField(max_length=20, default='Кыргызстан')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Passport"
@@ -85,6 +82,7 @@ class UserAdminPosition(models.Model):
 
     def __str__(self):
         return self.user.get_full_name()
+
 
 
 # class UserRole(models.Model):
@@ -106,24 +104,9 @@ class Group(models.Model):
         return self.name
 
 
+
 class Theme(models.Model):
     name = models.CharField(max_length=100, verbose_name='Тема')
 
     def __str__(self):
         return self.name
-
-
-class Progress(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='discipline',
-                                   verbose_name='Дисциплина')
-
-    def __str__(self):
-        return self.student.get_full_name()
-
-
-class ProgressOthers(models.Model):
-    progress = models.ForeignKey(Progress, on_delete=models.CASCADE, related_name='progressot', verbose_name='Прогресс')
-    date = models.DateField(verbose_name='Дата')
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')

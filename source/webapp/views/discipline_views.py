@@ -6,7 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 class DisciplineListView(ListView):
     template_name = 'disciplines/disciplines.html'
     model = Discipline
-    ordering = ["-name"]
+    ordering = ["name"]
     context_object_name = 'disciplines'
     paginate_by = 8
     paginate_orphans = 2
@@ -19,7 +19,7 @@ class DisciplineListView(ListView):
 class DisciplineCreateView(CreateView):
     model = Discipline
     template_name = 'add.html'
-    fields = ['name']
+    fields = ['name', 'teacher']
 
     def get_success_url(self):
         return reverse('webapp:disciplines')
@@ -28,7 +28,7 @@ class DisciplineCreateView(CreateView):
 class DisciplineUpdateView(UpdateView):
     model = Discipline
     template_name = 'change.html'
-    fields = ['name']
+    fields = ['name', 'teacher']
 
     def get_success_url(self):
         return reverse('webapp:disciplines')

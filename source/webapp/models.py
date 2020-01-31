@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -37,27 +38,46 @@ class Grade(models.Model):
     def __str__(self):
         return self.value
 
+    class Meta:
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
+
 
 class Discipline(models.Model):
     name = models.CharField(max_length=500, null=False, blank=False, verbose_name='Дисциплина')
+    teacher = models.ManyToManyField(User, related_name='disciplines', verbose_name='Преподаватель')
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Дисциплина'
+        verbose_name_plural = 'Дисциплины'
 
 
 class Lesson(models.Model):
-    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
+    index = models.IntegerField(verbose_name="Порядковый номер")
+    is_saturday = models.BooleanField(verbose_name="Суббота")
     start_time = models.TimeField(verbose_name="Время начала")
     end_time = models.TimeField(verbose_name="Время окончания")
+
+    def __str__(self):
+        return str(self.index) + " пара"
+
+
+class Theme(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Тема')
 
     def __str__(self):
         return self.name
 
 
-class SaturdayLesson(models.Model):
-    name = models.CharField(max_length=20, null=False, blank=False, verbose_name="Пара")
-    start_time = models.TimeField(verbose_name="Время начала")
-    end_time = models.TimeField(verbose_name="Время окончания")
+class Journal(models.Model):
+    date = models.DateField(verbose_name='Дата')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='dicipline', verbose_name='Дисциплина')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
 
     def __str__(self):
-        return self.name
+        return self.student.last_name + self.student.first_name
