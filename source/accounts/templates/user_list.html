@@ -15,7 +15,7 @@
   <div class="card-header"><h3>{{ use.first_name}}
   {{ use.pk }}</h3><a href="{% url 'accounts:detail' use.pk %}"> Details...</a></p>
       </h3><a href="{% url 'accounts:user_delete' use.pk %}"> Удалить</a></p>
-      </h3><a href="{% url 'accounts:update' use.pk %}"> Редактировать</a></p>
+      </h3><a href="{% url 'accounts:user_update' use.pk %}"> Редактировать</a></p>
 {#    <h5 class="card-title">{{ todo.description }}</h5>#}
 {#      <h5 class="card-title">Status: {{ todo.status }}</h5>#}
 {#      <h5 class="card-title">Type: {{ todo.type }}</h5>#}

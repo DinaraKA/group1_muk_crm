@@ -82,7 +82,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -124,13 +124,13 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.role.set(roles)
         profile.save()
         user.save()
-        return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
