@@ -1995,42 +1995,6 @@
 },
 {
   "model": "admin.logentry",
-  "pk": 46,
-  "fields": {
-    "action_time": "2020-01-24T11:27:42.673Z",
-    "user": [
-      "admin"
-    ],
-    "content_type": [
-      "webapp",
-      "saturdaylesson"
-    ],
-    "object_id": "1",
-    "object_repr": "1 \u043f\u0430\u0440\u0430",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 47,
-  "fields": {
-    "action_time": "2020-01-24T11:54:46.502Z",
-    "user": [
-      "admin"
-    ],
-    "content_type": [
-      "webapp",
-      "saturdaylesson"
-    ],
-    "object_id": "2",
-    "object_repr": "2 \u043f\u0430\u0440\u0430",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
   "pk": 53,
   "fields": {
     "action_time": "2020-01-27T04:20:33.743Z",
