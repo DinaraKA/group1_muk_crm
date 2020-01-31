@@ -6,19 +6,37 @@
 {% endblock %}
 {% block content %}
     <h1 style="padding-top: 20px">Прогресс</h1>
-    {% for object in object_list %}
+      {% include 'partial/search_form.html' %}
+    {% for prog in progress %}
     <div class="object">
         <div class="row my-5">
             <div class="left col-8 justify-content-center">
-                <h5>{{ object.pk }}.{{ object.student }}</h5>
-                <p>{{ object.date }}</p>
-                <p>{{ object.discipline }}</p>
-                <p>{{ object.grade }}</p>
-                <p>{{ object.theme }}</p>
+{#                {% for dis in prog.discipline.all %}#}
+{#                    {{ dis }}#}
+{#                {% endfor %}#}
+                <h5>Имя: {{ prog.student.username}}</h5>
+                <h5>Дисциплина: {{ prog.discipline}}</h5>
+                <h5><a href="{% url 'accounts:delete_progresse' prog.pk%}">Удалить</a></h5>
+            <div class="review-list">
+        {% for progressother in prog.progressot.all %}
+            <div class="progress">
+                <div>{{ progressother.date }} -</div>
+                <div>{{ progressother.theme }} -</div>
+                <div>{{ progressother.grade }} -</div>
+                <p class="progress-links">
+                        <a href="{% url 'accounts:progress_others_change' progressother.pk %}">Обновить</a>
+                        <a href="{% url 'accounts:progress_others_delete' progressother.pk %}">Удалить</a>
+                </p>
+            </div>
+        {% empty %}
+            <p>Нет оценок</p>
+        {% endfor %}
+    </div>
             </div>
             <div class="right col-4 d-flex justify-content-end">
-                <p class="mr-5"><a href="{% url 'accounts:change_progress' object.pk %}" class="update">Редактироать</a></p>
-                <p class="mr-3"><a href="{% url 'accounts:delete_progresse' object.pk %}" class="delete">Удалить</a></p>
+            <form action="{% url 'accounts:progress_progress_add' prog.pk%}" method="POST" id="add_grade">
+                {% include 'partial/form.html' with button_text='Добавить Оценку' %}
+            </form>
             </div>
         </div>
     </div>

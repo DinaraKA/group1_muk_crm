@@ -31,7 +31,7 @@ class AdminPosition(models.Model):
 
 
 class SocialStatus(models.Model):
-    name = models.CharField(max_length=30, verbose_name='Социальный статус')
+    name = models.CharField(max_length=500, verbose_name='Социальный статус')
 
     def __str__(self):
         return self.name
@@ -47,7 +47,7 @@ class Profile(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
                                default=None)
     admin_position = models.ForeignKey(AdminPosition, on_delete=models.CASCADE, related_name='admin_position',
-                                 verbose_name='Должность', null=True, blank=True)
+                                       verbose_name='Должность', null=True, blank=True)
     social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
@@ -95,10 +95,9 @@ class UserAdminPosition(models.Model):
 #         return self.user.get_full_name()
 
 
-
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User)
+    students = models.ManyToManyField(User, related_name='student_group')
     starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
     kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')
@@ -113,12 +112,18 @@ class Theme(models.Model):
     def __str__(self):
         return self.name
 
+
 class Progress(models.Model):
-    date = models.DateField(verbose_name='Дата')
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='dicipline', verbose_name='Дисциплина')
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='discipline',
+                                   verbose_name='Дисциплина')
 
     def __str__(self):
-        return self.student.last_name + self.student.first_name
+        return self.student.get_full_name()
+
+
+class ProgressOthers(models.Model):
+    progress = models.ForeignKey(Progress, on_delete=models.CASCADE, related_name='progressot', verbose_name='Прогресс')
+    date = models.DateField(verbose_name='Дата')
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')

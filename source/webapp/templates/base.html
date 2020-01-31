@@ -19,22 +19,16 @@
     <div class="container">
         <ul class="menu">
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
-            <li><a class="roles" href="{% url 'accounts:roles_list' %}">Роли</a></li>
-            <li><a href="{% url 'accounts:positions' %}">Админ позиция</a></li>
-            <li><a href="{% url 'accounts:all_social_statuses' %}">Соц статус</a></li>
-            <li><a class='statuses' href="{% url 'accounts:statuses' %}">Статус</a></li>
-            <li><a href="{% url 'webapp:grades' %}">Оценка</a></li>
-            <li><a href="{% url 'webapp:auditories' %}">Аудитория</a></li>
-            <li><a href="#">Группа</a></li>
-            <li><a href="#">Дисциплина</a></li>
 {#            <li><a href="#">Миссия и стратегия</a></li>#}
 {#            <li><a href="#">Специальности</a></li>#}
-{#            <li><a href="{% url 'webapp:news' %}">Новости</a></li>#}
-{#            <li><a href="{% url 'webapp:announcements' %}">Объявление</a></li>#}
+            <li><a href="{% url 'webapp:news' %}">Новости</a></li>
+            <li><a href="{% url 'webapp:announcements' %}">Объявление</a></li>
 {#            <li><a href="#">Абитуриент</a></li>#}
 {#            <li><a href="#">Правовая информация</a></li>#}
 {#            <li><a href="#">Выпускники</a></li>#}
-{#            <li><a href="#">Контакты</a></li>#}
+            <li><a href="#">Контакты</a></li>
+            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>
+            <li><a href="{% url 'accounts:progress' %}">Журнал</a></li>
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>

@@ -1,5 +1,8 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
+
+from accounts.views.other_progress_views import ProgressOthersListView, ProgressOthersCreateView, \
+    ProgressOthersUpdateView, ProgressOthersDeleteView, ProgressOthersForProgressCreateView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
@@ -24,8 +27,8 @@ urlpatterns = [
     path('delete_admin_position/<int:pk>/', AdminPositionDeleteView.as_view(), name='delete_admin_position'),
     path('roles/', RoleIndexView.as_view(), name='roles_list' ),
     path('roles/add/', RoleCreateView.as_view(), name='role_add'),
-    path('roles/change/<int:pk>/', RoleUpdateView.as_view(), name='role_change'),
-    path('roles/delete/<int:pk>/', RoleDeleteView.as_view(), name='role_delete'),
+    path('roles/change/<int:pk>', RoleUpdateView.as_view(), name='role_change'),
+    path('roles/delete/<int:pk>', RoleDeleteView.as_view(), name='role_delete'),
     path('all_social_statuses/', SocialStatusListView.as_view(), name='all_social_statuses'),
     path('add_social_statuses/', SocialStatusCreateView.as_view(), name='add_social_status'),
     path('change_social_status/<int:pk>/', SocialStatusUpdateView.as_view(), name='change_social_status'),
@@ -51,4 +54,10 @@ urlpatterns = [
     path('add_progress/', ProgressCreateView.as_view(), name='add_progress'),
     path('change_progress/<int:pk>/', ProgressUpdateView.as_view(), name='change_progress'),
     path('delete_progress/<int:pk>/', ProgressDeleteView.as_view(), name='delete_progresse'),
+    path('progress_others/', ProgressOthersListView.as_view(), name='progress_others_list'),
+    path('progress_others/add/', ProgressOthersCreateView.as_view(), name='progress_others_add'),
+    path('progress_others/<int:pk>/change/', ProgressOthersUpdateView.as_view(), name='progress_others_change'),
+    path('progress_others/<int:pk>/delete/', ProgressOthersDeleteView.as_view(), name='progress_others_delete'),
+    path('progress/<int:pk>/add-progress/', ProgressOthersForProgressCreateView.as_view(), name='progress_progress_add'),
+
 ]
