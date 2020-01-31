@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from webapp.models import Schedule, Lesson, SaturdayLesson
+from webapp.models import Schedule, Lesson, SaturdayLesson, DAY_CHOICES
 from accounts.models import Group, User, Profile
 
 
@@ -12,18 +12,24 @@ class ScheduleView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ScheduleView, self).get_context_data(**kwargs)
-        context["monday"] = self.day_array('Monday')
-        context['tuesday'] = self.day_array('Tuesday')
-        context['wednesday'] = self.day_array('Wednesday')
-        context['thursday'] = self.day_array('Thursday')
-        context['friday'] = self.day_array('Friday')
-        context['saturday'] = self.day_array('Saturday')
+        weekdays = {}
+        for day in DAY_CHOICES:
+            weekdays.update({
+                day[1]: self.day_array(day[0])
+            })
+        context['weekdays'] = weekdays
+        # context["monday"] = self.day_array('Monday')
+        # context['tuesday'] = self.day_array('Tuesday')
+        # context['wednesday'] = self.day_array('Wednesday')
+        # context['thursday'] = self.day_array('Thursday')
+        # context['friday'] = self.day_array('Friday')
+        # context['saturday'] = self.day_array('Saturday')
         context['groups'] = Group.objects.filter(students=self.request.user)
         context['teacher'] = Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user)
-        print(context['teacher'])
+        context['days'] = DAY_CHOICES
         context.update({
             'lessons': Lesson.objects.all(),
-            'saturday_lesson': SaturdayLesson.objects.all(),
+            # 'saturday_lesson': SaturdayLesson.objects.all(),
         })
         return context
 
