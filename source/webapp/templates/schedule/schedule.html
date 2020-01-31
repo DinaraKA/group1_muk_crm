@@ -13,7 +13,7 @@
             <th scope="col" class="schedule-days"></th>
             {% for lesson in lessons %}
                 <th scope="col" class="schedule-block">
-                    <p>{{ lesson.name }} пара</p>
+                    <p>{{ lesson.index }} пара</p>
                     <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
                 </th>
             {% endfor %}
@@ -47,35 +47,6 @@
         {% endfor %}
 
 {#старая версия#}
-        {#        {% for day in days %}#}
-        {#            <tr>#}
-        {#                <th scope="row" class="schedule-days">{{ day.1 }}</th>#}
-        {#                {% for schedule in weekdays%}#}
-        {#                    <p>yes</p>{{ schedule }}#}
-        {#                    <td>#}
-        {#                        {% if schedule %}#}
-        {#                            {% for item in schedule %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    {% if request.user == item.teacher %}#}
-        {#                                        <h5>Группа:{{ item.group }}</h5>#}
-        {#                                        <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                    {% elif item.group in groups %}#}
-        {#                                        <h5>Группа:{{ item.group }}</h5>#}
-        {#                                        {% if self.request.user in groups %}#}
-        {#                                            <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                        {% endif %}#}
-        {#                                        <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                        <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                        <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                        <hr style="border-color: rgb(66 66 66)">#}
-        {#                                    {% endif %}#}
-        {#                                </a>#}
-        {#                            {% endfor %}#}
-        {#                        {% endif %}#}
-        {#                    </td>#}
-        {#                {% endfor %}#}
-        {#            </tr>#}
-        {#        {% endfor %}#}
         {#        <tr>#}
         {#            <th scope="row" class="schedule-days">Понедельник</th>#}
         {#            {% for schedule in monday%}#}
