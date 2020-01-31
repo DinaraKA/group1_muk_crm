@@ -9,3 +9,5 @@ from webapp.views.personalgrades_views import PersonalGradesListView
 from webapp.views.journal_views import JournalCreateView, JournalIndexView, JournalUpdateView, JournalDeleteView
 from webapp.views.theme_views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 
+from webapp.views.lesson_views import SaturdayLessonCreateView, SaturdayLessonUpdateView, SaturdayLessonDeleteView
+from webapp.views.schedule_views import ScheduleDeleteView, ScheduleUpdateView, ScheduleAddView, ScheduleView

@@ -3,6 +3,8 @@ from django.db import models
 from phone_field import PhoneField
 
 
+
+
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
 
@@ -29,7 +31,7 @@ class AdminPosition(models.Model):
 
 
 class SocialStatus(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Социальный статус')
+    name = models.CharField(max_length=30, verbose_name='Социальный статус')
 
     def __str__(self):
         return self.name
@@ -45,12 +47,12 @@ class Profile(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
                                default=None)
     admin_position = models.ForeignKey(AdminPosition, on_delete=models.CASCADE, related_name='admin_position',
-                                       verbose_name='Должность', null=True, blank=True)
+                                 verbose_name='Должность', null=True, blank=True)
     social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name() + "'s Profile"
+        return self.user.get_full_name()
 
 
 SEX_CHOICES = (
@@ -93,6 +95,7 @@ class UserAdminPosition(models.Model):
 #         return self.user.get_full_name()
 
 
+
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
     students = models.ManyToManyField(User, related_name='student_group')
@@ -110,3 +113,4 @@ class Theme(models.Model):
 
     def __str__(self):
         return self.name
+

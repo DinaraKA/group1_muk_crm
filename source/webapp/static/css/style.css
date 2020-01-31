@@ -192,3 +192,18 @@ h1 {
 .statuses {
     margin-top: 30px;
 }
+.schedule th, .schedule td, .schedule tr{
+    border-color:  rgb(66 66 66);
+}
+.schedule-link{
+    color: black;
+    text-decoration: none;
+}
+.schedule-block{
+    width: 10%;
+    background: lightgray;
+}
+.schedule-days{
+    background: lightgray;
+    width: 10%;
+}
