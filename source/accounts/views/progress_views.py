@@ -1,12 +1,11 @@
-from accounts.models import Progress
-from django.urls import reverse, reverse_lazy
+from webapp.models import Journal
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 class ProgressIndexView(ListView):
     template_name = 'progress/list.html'
-    model = Progress
+    model = Journal
     context_object_name = 'progress'
     paginate_by = 30
     paginate_orphans = 0
@@ -18,7 +17,7 @@ class ProgressIndexView(ListView):
 
 
 class ProgressCreateView(CreateView):
-    model = Progress
+    model = Journal
     template_name = 'add.html'
     fields = ['student', 'date', 'discipline', 'theme', 'grade']
 
@@ -27,7 +26,7 @@ class ProgressCreateView(CreateView):
 
 
 class ProgressUpdateView(UpdateView):
-    model = Progress
+    model = Journal
     template_name = 'change.html'
     fields = ['grade']
 
@@ -36,7 +35,7 @@ class ProgressUpdateView(UpdateView):
 
 
 class ProgressDeleteView(DeleteView):
-    model = Progress
+    model = Journal
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:progress')
 

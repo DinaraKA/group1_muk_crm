@@ -1,62 +1,127 @@
 {% extends 'base.html' %}
 {% block title %}
-    <p>Дневник</p>
+    Дневник
 {% endblock %}
+
 {% block content %}
-        <div class="lessons">
-        <br>
-            <h3 class="text-center">Успеваемость: </h3>
-        <br>
-    <table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Название предмета</th>
-      <th class="text-center">
-        Дата
-      </th>
-{#      <th class="text-center">#}
-{#        Время окончания#}
-{#      </th>#}
-    </tr>
-  </thead>
-        {% for discipline in disciplines %}
-  <tbody>
-    <tr>
-      <th class="text-nowrap text-center" scope="row">{{ discipline.name }}</th>
-        {% for grade in progress.grades %}
-      <td class="text-center">{{grade}}</td>
+
+    <div class="container">
+        <h2 class="mt-2 mb-4">Страница студента {{ student.first_name}}  {{ student.last_name}} </h2>
+        <h3 class="mt-2 mb-4">Успеваемость</h3>
+        <table class="table table-striped mt-2">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Название предмета</th>
+              {% for object in profiles %}
+                <th scope="col" style="text-align:center;">{{object.date|date:'d.m.Y'}}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in profiles %}
+                <tr>
+                    <th scope="row">{{object.discipline}}
+{#                        <a href="{% url "journal" letter=schoolkid.group_letter year=schoolkid.year_of_study subject_id=subject.id%}">журнал</a></th>#}
+{#                    {% for date, grade_that_date in discipline_grades.items %}#}
+                    {% for object in profiles %}
+                        <td style="text-align:center;">
+{#                            {% for grade in grades_that_day %}#}
+{#                                {% for object in profiles %}#}
+                                    {{object.grade}}
+{#                                {%endfor%}#}
+{#                            {% endfor %}#}
+                        </td>
+                    {% endfor %}
+{#                        {% endfor %}#}
+                </tr>
             {% endfor %}
-{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-        </div>
-{#     <div class="lessons">#}
+          </tbody>
+        </table>
+{#        <div class="text-center mb-4">#}
+{#          <a href="{% url "schoolkid" schoolkid_id=schoolkid.id %}?week={{previous_week.week}}&year={{previous_week.year}}"><== Предыдущая неделя</a>#}
+{#          <a href="{% url "schoolkid" schoolkid_id=schoolkid.id %}?week={{next_week.week}}&year={{next_week.year}}">Следующая неделя ==></a>#}
+{#        </div>#}
+{#        {% if all_commendations %}#}
+{#          <h2 class="mt-2 mb-4">Похвалы от учителей</h2>#}
+{#          <table class="table table-striped mt-2 mb-4">#}
+{#            <thead class="thead-dark">#}
+{#              <tr>#}
+{#                <th scope="col">Дата</th>#}
+{#                <th scope="col">Учитель</th>#}
+{#                <th scope="col">Предмет</th>#}
+{#                <th scope="col">Текст</th>#}
+{#              </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#              {% for commendation in all_commendations %}#}
+{#                  <tr>#}
+{#                      <th scope="row">{{commendation.created|date:"d/m Y"}}</th>#}
+{#                      <td>{{commendation.teacher.full_name}}</td>#}
+{#                      <td>{{commendation.subject.title}}</td>#}
+{#                      <td>{{commendation.text}}</td>#}
+{#                  </tr>#}
+{#              {% endfor %}#}
+{#            </tbody>#}
+{#          </table>#}
+{#        {% endif %}#}
+{#        {% if all_chastisements %}#}
+{#          <h2  class="mt-2 mb-4">Замечания от учителей</h2>#}
+{#          <table class="table table-striped mt-2 mb-4">#}
+{#            <thead class="thead-dark">#}
+{#              <tr>#}
+{#                <th scope="col">Дата</th>#}
+{#                <th scope="col">Учитель</th>#}
+{#                <th scope="col">Предмет</th>#}
+{#                <th scope="col">Текст</th>#}
+{#              </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#              {% for chastisement in all_chastisements %}#}
+{#                <tr>#}
+{#                  <th scope="row">{{chastisement.created|date:"d/m Y"}}</th>#}
+{#                  <td>{{chastisement.teacher.full_name}}</td>#}
+{#                  <td>{{chastisement.subject.title}}</td>#}
+{#                  <td>{{chastisement.text}}</td>#}
+{#                </tr>#}
+{#              {% endfor %}#}
+{#            </tbody>#}
+{#          </table>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>#}
+{#  </body>#}
+{#</html>#}
+
+{#        <div class="gradespersonal">#}
 {#        <br>#}
-{#            <h3 class="text-center">Суббота:</h3>#}
+{##}
+{#             <h3 class="text-center mt-5">Успеваемость: {{ student.first_name}}  {{ student.last_name}} </h3>#}
+{##}
 {#        <br>#}
 {#    <table class="table table-bordered table-striped">#}
 {#  <thead>#}
 {#    <tr>#}
-{#      <th></th>#}
+{#      <th>Название предмета</th>#}
+{#    {% for object in profiles %}#}
 {#      <th class="text-center">#}
-{#        Время начала#}
+{#       Дата: {{ object.date|date:'d.m.Y'}}#}
+{#    {% endfor %}#}
 {#      </th>#}
 {#      <th class="text-center">#}
-{#        Время окончания#}
+{#        Средняя оценка#}
 {#      </th>#}
 {#    </tr>#}
 {#  </thead>#}
-{#        {% for lesson in saturdaylessons %}#}
+{#{% for object in profiles %}#}
 {#  <tbody>#}
 {#    <tr>#}
-{#      <th class="text-nowrap text-center" scope="row">{{ lesson.name }}</th>#}
-{#      <td class="text-center">{{lesson.start_time|time:"H:i"}}</td>#}
-{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
+{#        <td class="text-nowrap text-center" scope="row">{{object.discipline }}</td>#}
+{#        <td class="text-center">{{object.grade}}</td>#}
+{#        <td>{{ obj.avg_grade }}</td>#}
 {#    </tr>#}
 {#  {% endfor %}#}
 {#  </tbody>#}
 {#</table>#}
-{#        </div>#}
+{#</div>#}
 {% endblock %}
