@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
-from webapp.models import Schedule, Lesson, SaturdayLesson, DAY_CHOICES
+from webapp.models import Schedule, Lesson,  DAY_CHOICES
 from accounts.models import Group, User, Profile
 
 

@@ -1,8 +1,6 @@
 from django.contrib import admin
-from accounts.models import User, Profile, Passport, AdminPosition, UserAdminPosition, Role, SocialStatus, \
-    Status, Group
+from accounts.models import User, Profile, Passport, AdminPosition, UserAdminPosition, Role, SocialStatus, Status, Group
 from webapp.models import Theme, Journal
-    Status, Group
 from django.contrib.auth.admin import UserAdmin
 
 

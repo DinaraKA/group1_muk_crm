@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import News, Announcements, Auditory, Grade, Discipline, Lesson
+from webapp.models import News, Announcements, Auditory, Grade, Discipline, Lesson, Schedule
 
 admin.site.register(News)
 admin.site.register(Announcements)
