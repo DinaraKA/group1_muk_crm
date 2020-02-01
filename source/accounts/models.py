@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from phone_field import PhoneField
 
-from webapp.models import Discipline, Grade
-
 
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
@@ -31,7 +29,7 @@ class AdminPosition(models.Model):
 
 
 class SocialStatus(models.Model):
-    name = models.CharField(max_length=500, verbose_name='Социальный статус')
+    name = models.CharField(max_length=30, verbose_name='Социальный статус')
 
     def __str__(self):
         return self.name
@@ -47,7 +45,7 @@ class Profile(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
                                default=None)
     admin_position = models.ForeignKey(AdminPosition, on_delete=models.CASCADE, related_name='admin_position',
-                                       verbose_name='Должность', null=True, blank=True)
+                                 verbose_name='Должность', null=True, blank=True)
     social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
@@ -56,8 +54,8 @@ class Profile(models.Model):
 
 
 SEX_CHOICES = (
-    ('man', 'мужской'),
-    ("women", "женский"),
+    ('мужской', 'мужской'),
+    ("женский", "женский"),
 )
 
 
@@ -72,7 +70,6 @@ class Passport(models.Model):
     nationality = models.CharField(max_length=30, blank="True", null="True", verbose_name='Национальность')
     sex = models.CharField(max_length=15, choices=SEX_CHOICES, verbose_name='Пол')
     birth_date = models.DateField(verbose_name='Дата Рождения')
-    citizenship = models.CharField(max_length=20, default='Кыргызстан')
 
     def __str__(self):
         return self.user.get_full_name() + "'s Passport"
@@ -87,43 +84,12 @@ class UserAdminPosition(models.Model):
         return self.user.get_full_name()
 
 
-# class UserRole(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
-#     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
-#
-#     def __str__(self):
-#         return self.user.get_full_name()
-
-
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User, related_name='student_group')
+    students = models.ManyToManyField(User)
     starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
     kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')
 
     def __str__(self):
         return self.name
-
-
-class Theme(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Тема')
-
-    def __str__(self):
-        return self.name
-
-
-class Progress(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='discipline',
-                                   verbose_name='Дисциплина')
-
-    def __str__(self):
-        return self.student.get_full_name()
-
-
-class ProgressOthers(models.Model):
-    progress = models.ForeignKey(Progress, on_delete=models.CASCADE, related_name='progressot', verbose_name='Прогресс')
-    date = models.DateField(verbose_name='Дата')
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')

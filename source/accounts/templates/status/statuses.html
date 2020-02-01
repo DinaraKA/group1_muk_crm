@@ -19,8 +19,8 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ status.name }}</td>
-                        <td class="symbol"><a href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
+                        <td class="symbol"><a class='update' href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
+                        <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
