@@ -3,6 +3,8 @@ from django.db import models
 from phone_field import PhoneField
 
 
+
+
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
 
@@ -50,7 +52,7 @@ class Profile(models.Model):
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name() + "'s Profile"
+        return self.user.get_full_name()
 
 
 SEX_CHOICES = (
@@ -84,9 +86,19 @@ class UserAdminPosition(models.Model):
         return self.user.get_full_name()
 
 
+
+# class UserRole(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
+#     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
+#
+#     def __str__(self):
+#         return self.user.get_full_name()
+
+
+
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User)
+    students = models.ManyToManyField(User, related_name='student_group')
     starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
     kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')
@@ -94,8 +106,11 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
-class ProgressOthers(models.Model):
-    progress = models.ForeignKey(Progress, on_delete=models.CASCADE, related_name='progressot', verbose_name='Прогресс')
-    date = models.DateField(verbose_name='Дата')
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
+
+
+class Theme(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Тема')
+
+    def __str__(self):
+        return self.name
+

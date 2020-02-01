@@ -7,9 +7,9 @@
         Registered {{ list.user.date_joined|date:'d.m.Y H:i:s' }}</p>
 {#    {% include 'partial/tag_bar.html' with object=article %}#}
     <p>
-        <a href="{% url 'accounts:detail' list.user.pk %}">Detail...</a>
-        <a href="{% url 'accounts:update' list.user.pk %}">Edit</a>
-        <a href="{% url "accounts:user_delete" list.user.pk %}">Delete</a>
+        <a href="{% url 'accounts:user_detail' list.user.pk %}">Detail...</a>
+        <a href="{% url 'accounts:user_update' list.user.pk %}">Edit</a>
+{#        <a href="{% url "accounts:user_delete" list.user.pk %}">Delete</a>#}
     </p>
     <hr/>
 {% endfor %}
