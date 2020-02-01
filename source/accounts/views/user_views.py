@@ -82,7 +82,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -121,15 +121,16 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.social_status = form.cleaned_data['social_status']
         profile.save()
         passport.save()
-        profile.role.set(role)
+        profile.role.set(roles)
+        profile.save()
         user.save()
-        return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
@@ -142,7 +143,7 @@ class UserPasswordChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserDetailView(DetailView):
@@ -243,12 +244,25 @@ class SearchResultsView(ListView):
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
                 query = query | Q(user__first_name__icontains=text)
-                print('FirstName', text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
-                print('Status')
-                print(text, "status")
+                print(query, 'QUERY STATUS')
+            in_role = form.cleaned_data.get('in_role')
+            if in_role:
+                print(text, 'TEXT')
+                query = query | Q(role__name__icontains=text)
+                print(query, 'QUERY ROLE')
+            in_admin_position = form.cleaned_data.get('in_admin_position')
+            if in_admin_position:
+                print(text, 'TEXT')
+                query = query | Q(admin_position__name__icontains=text)
+                print(query, 'AdMIN POSITION')
+            in_social_status = form.cleaned_data.get('in_social_status')
+            if in_social_status:
+                print(text, 'TEXT')
+                query = query | Q(social_status__name__icontains=text)
+                print(query, 'SOCIAL_STATUS')
             # if in_first_name:
                 # query = query | Q(first_name__icontains=text)
             # in_tags = form.cleaned_data.get('in_tags')

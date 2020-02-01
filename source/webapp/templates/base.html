@@ -29,11 +29,12 @@
 {#            <li><a href="#">Выпускники</a></li>#}
             <li><a href="#">Контакты</a></li>
             <li><a href="{% url 'accounts:groups' %}">Группы</a></li>
+            <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a href="{% url 'accounts:detail' request.user.pk %}" class="nav-link">
+                        <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}" class="nav-link">
                             Привет, {{ request.user.username }}!
                         </a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link logout">Выход</a></li>
