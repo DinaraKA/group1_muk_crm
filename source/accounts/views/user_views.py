@@ -80,7 +80,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -121,14 +121,13 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.role.set(roles)
         profile.save()
         user.save()
-        return self.get_success_url()
+        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        # return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": self.object.pk}))
-        return redirect('accounts:user_detail', pk=self.object.pk)
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
@@ -141,7 +140,7 @@ class UserPasswordChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserDetailView(DetailView):
@@ -208,7 +207,6 @@ class SearchResultsView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
         query = self.get_query_string()
-        print(query, 'STRING')
         return super().get_context_data(
             form=form, query=query, object_list=object_list, **kwargs
         )
@@ -218,7 +216,6 @@ class SearchResultsView(ListView):
         for key in self.request.GET:
             if key != 'page':
                 data[key] = self.request.GET.get(key)
-                print(urlencode(data), "DATA")
         return urlencode(data)
 
     # def get_user_query(self, form):

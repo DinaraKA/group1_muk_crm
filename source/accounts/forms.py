@@ -71,7 +71,7 @@ class UserForm(forms.ModelForm):
         return user
 
     def get_initial_for_field(self, field, field_name):
-        if field_name in self.Meta.passport_fields:
+        if field_name in self.Meta.profile_fields:
             try:
                 return getattr(self.instance.passport, field_name)
             except Passport.DoesNotExist:
