@@ -213,11 +213,6 @@ class GroupForm(forms.ModelForm):
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
 
 
-class ThemeForm(forms.ModelForm):
-    class Meta:
-        model = Theme
-        fields = ['name']
-
 class FullSearchForm(forms.Form):
     text = forms.CharField(max_length=100, required=False, label='Поиск')
     in_username = forms.BooleanField(initial=False, required=False, label='По Username')
