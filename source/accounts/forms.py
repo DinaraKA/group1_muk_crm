@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 from accounts.models import AdminPosition
-from webapp.models import Theme, Journal
 from django import forms
 from .models import Profile, Passport, Group, Role, Status, SocialStatus
 
@@ -212,12 +211,6 @@ class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
-
-
-class ThemeForm(forms.ModelForm):
-    class Meta:
-        model = Theme
-        fields = ['name']
 
 class FullSearchForm(forms.Form):
     text = forms.CharField(max_length=100, required=False, label='Текст')

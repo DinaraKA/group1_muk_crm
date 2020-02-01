@@ -21,12 +21,12 @@
           </th>
     <td>
     {% for object in object_list %}
+        {{ object.student }}
 {#      <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">#}
-          <h5>{{ schedule.group }}{{ schedule.lesson }}</h5>
-          <p class="my-0">{{ object.theme }}</p>
-          <p class="my-0">{{ object.date }}</p>
-          <p class="my-0">{{ object.grade }}</p>
-      </a>
+{#            <p class="my-0">{{ object.date   }}</p>#}
+{#            <p class="my-0">{{ object.discipline }}</p>#}
+{#            <p class="my-0">{{ object.theme }}</p>#}
+            <p class="my-0">{{ object.grade }}</p>
     {% endfor %}
 {#      <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>#}
   </td>
