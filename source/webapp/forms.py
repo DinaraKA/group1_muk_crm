@@ -9,3 +9,10 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule
         fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
+from .models import Theme
+
+
+class ThemeForm(forms.ModelForm):
+    class Meta:
+        model = Theme
+        fields = ['name']

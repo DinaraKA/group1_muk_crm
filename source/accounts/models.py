@@ -86,19 +86,9 @@ class UserAdminPosition(models.Model):
         return self.user.get_full_name()
 
 
-
-# class UserRole(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='role', verbose_name='Пользователь')
-#     role = models.ForeignKey('Role', on_delete=models.CASCADE, related_name='role', verbose_name='Роль')
-#
-#     def __str__(self):
-#         return self.user.get_full_name()
-
-
-
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User, related_name='student_group')
+    students = models.ManyToManyField(User)
     starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
     kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')

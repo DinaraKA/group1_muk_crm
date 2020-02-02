@@ -22,7 +22,7 @@ class ThemeCreateView(CreateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('accounts:themes')
+        return reverse('webapp:themes')
 
 
 class ThemeUpdateView(UpdateView):
@@ -31,10 +31,10 @@ class ThemeUpdateView(UpdateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('accounts:themes')
+        return reverse('webapp:themes')
 
 
 class ThemeDeleteView(DeleteView):
     model = Theme
     template_name = 'delete.html'
-    success_url = reverse_lazy('accounts:themes')
+    success_url = reverse_lazy('webapp:themes')
