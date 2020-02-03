@@ -1,14 +1,16 @@
 from django.urls import path
-from .views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
+from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
 from .views import AnnouncementsView, AnnounceDetailView, AnnouncementCreateView, AnnouncementUpdateView, AnnouncementDeleteView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView
 from .views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteView
 from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
+from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
 from .views import PersonalGradesListView
 from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 from .views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
+from .views.journal_views import GradeforStudentCreateView
 
 app_name = 'webapp'
 
@@ -52,4 +54,9 @@ urlpatterns = [
     path('journal/add/', JournalCreateView.as_view(), name='add_journal'),
     path('journal/update/<int:pk>/', JournalUpdateView.as_view(), name='change_journal'),
     path('journal/delete/<int:pk>/', JournalDeleteView.as_view(), name='delete_journal'),
+    path('journal_user/<int:pk>/add-grade/', GradeforStudentCreateView.as_view(), name='grade_student_add'),
+    path('schedule/',  ScheduleView.as_view(), name='schedule'),
+    path('schedule/add/', ScheduleAddView.as_view(), name='schedule_add'),
+    path('schedule/update/<int:pk>/', ScheduleUpdateView.as_view(), name='schedule_update'),
+    path('schedule/delete/<int:pk>/', ScheduleDeleteView.as_view(), name='schedule_delete'),
 ]

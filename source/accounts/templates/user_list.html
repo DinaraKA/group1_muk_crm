@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block menu %}
+
+{% endblock %}
+{% block content %}
+    <h1>Пользователи</h1>
+    <hr/>
+    {#    {% if is_paginated %}#}
+    {#        {% include 'partial/pagination.html' %}#}
+    {#    {% endif %}#}
+    {#    {% if perms.webapp.view_order %}#}
+    {% for use in user %}
+        <div class="card border-primary mb-3" style="max-width: 18rem; text-align: center">
+            <h3 class="card-header">
+                <h3>{{ use.first_name }}{{ use.pk }}<a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a></h3>
+                <h3><a href="{% url 'accounts:user_delete' use.pk %}"> Удалить</a></h3>
+                <h3><a href="{% url 'accounts:user_update' use.pk %}"> Редактировать</a></h3>
+            </h3>
+        </div>
+    {% endfor %}
+{% endblock %}

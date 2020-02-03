@@ -9,7 +9,7 @@
 
 {% block content %}
     <h1>{{ group.name }}</h1>
-    <p>{{ group.started_at }} создана {{ issue.created_at|date:'d.m.Y H:i:s' }}</p>
+    <p>создана {{ group.started_at|date:'d.m.Y' }}</p>
     <hr>
     <div class="pre" style="margin-top: 20px">Староста: {{ group.starosta }}</div>
     <div class="pre" style="margin-top: 5px">Куратор: {{ group.kurator }}</div>

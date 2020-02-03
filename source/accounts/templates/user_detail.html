@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
 
 {% block title %}Пользователь{% endblock %}
-
-{% block menu %}
-        <li class="nav-item"><a class="nav-link" href="{% url "accounts:update" user_obj.pk %}">Редактировать</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля</a></li>
-{% endblock %}
-
 {% block content %}
     <div class="lk-content">
         <h1 class="text-center">Личный кабинет</h1>
@@ -54,4 +48,7 @@
         </div>
     </div>
     </div>
+    <a href="{% url 'accounts:user_update' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Редактировать</a>
+    <a href="{% url 'accounts:password_change' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
+    <a href="{% url 'accounts:user_delete' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Удалить</a>
 {% endblock %}
