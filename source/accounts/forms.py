@@ -30,7 +30,7 @@ class UserCreationForm(forms.ModelForm):
     address_fact = forms.CharField(label='Фактический адрес')
     role = forms.ModelMultipleChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
-    social_status=forms.ModelChoiceField(label='Социальный статус', queryset=SocialStatus.objects.all())
+    social_status = forms.ModelChoiceField(label='Социальный статус', queryset=SocialStatus.objects.all(), required=False)
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
 
     def clean_password_confirm(self):
@@ -39,6 +39,46 @@ class UserCreationForm(forms.ModelForm):
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Пароли не совпадают!')
         return password_confirm
+
+    def clean_status(self):
+        roles = self.cleaned_data.get("role", '')
+        print("РОли", roles)
+        status = self.cleaned_data.get('status')
+        print("status", status)
+        # for role in roles:
+        #     if role.name == "Студент":
+        #         if status.name in ["Очная форма обучения", "Заочная форма обучения", "Дистанционная форма обучения", "Отчислен"]:
+        #             return status
+        #         else:
+        #             raise forms.ValidationError('Для студента статус может быть ')
+
+        if status.name in ["Очная форма обучения", "Заочная форма обучения", "Дистанционная форма обучения"]:
+            for role in roles:
+                if role.name == "Студент":
+                    return status
+            raise forms.ValidationError('Статус форма обучения может быть только у студента!')
+        if status.name == "Отчислен":
+            for role in roles:
+                if role.name == "Студент":
+                    return status
+            raise forms.ValidationError('Отчислен может быть только студент!')
+        if status.name == "Уволен":
+            for role in roles:
+                if role.name in ["Технический работник", "Административный работник", "Преподаватель"]:
+                    return status
+            raise forms.ValidationError('Уволен может быть только работник или преподаватель!')
+
+
+        # print(role.get("Студен"))
+        # if "Студент" role.get("")
+            # try:
+            #     ff = role.objects.get('student')
+            #     print(ff)
+            # except:
+            #     raise forms.ValidationError('Гавно')
+
+        # for i in role:
+        #     print(i)
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -73,6 +113,12 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             passport.save()
 
+    # def check_status(self):
+    #     role = self.cleaned_data.get("role", '')
+    #     print("role", role)
+    #     status = self.cleaned_data.get('status')
+    #     print("status", status)
+
     def save_profile(self, commit=True):
         try:
             profile = self.instance.profile
@@ -83,6 +129,8 @@ class UserCreationForm(forms.ModelForm):
         if not profile.photo:
             profile.photo = None
         if commit:
+            print("jjjj")
+            self.check_status()
             profile.save()
 
     class Meta:
@@ -111,8 +159,8 @@ class UserChangeForm(forms.ModelForm):
     role = forms.ModelChoiceField(label='Роль', queryset=Role.objects.all())
     status = forms.ModelChoiceField(label='Статус', queryset=Status.objects.all())
     admin_position = forms.ModelChoiceField(label='Должность', queryset=AdminPosition.objects.all(), required=False)
-    social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(), required=False)
-
+    social_status = forms.ModelChoiceField(label='Социальный Статус', queryset=SocialStatus.objects.all(),
+                                           required=False)
 
     def get_initial_for_field(self, field, field_name):
         if field_name in self.Meta.passport_fields:
@@ -160,7 +208,7 @@ class UserChangeForm(forms.ModelForm):
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
                           'social_status'
                           ]
-        passport_fields = [ 'citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
+        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
                            'birth_date']
 
 

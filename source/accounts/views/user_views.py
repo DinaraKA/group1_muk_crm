@@ -61,7 +61,6 @@ def register_view(request, *args, **kwargs):
 
             profile = Profile(
                 user=user,
-                # role=form.cleaned_data['role'],
                 patronymic=form.cleaned_data['patronymic'],
                 phone_number=form.cleaned_data['phone_number'],
                 address_fact=form.cleaned_data['address_fact'],
@@ -74,7 +73,6 @@ def register_view(request, *args, **kwargs):
             passport.save()
             profile.save()
             role = form.cleaned_data['role']
-            # roles = Role.objects.filter(pk=role.pk)
             profile.save()
             profile.role.set(role)
             login(request, user)
@@ -90,6 +88,7 @@ class UserPersonalInfoChangeView(UpdateView):
     form_class = UserChangeForm
     context_object_name = 'user_obj'
 
+
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
         user = get_object_or_404(User, id=pk)
@@ -97,24 +96,24 @@ class UserPersonalInfoChangeView(UpdateView):
         passport = get_object_or_404(Passport, user=pk)
         profile = get_object_or_404(Profile, user=pk)
         user = get_object_or_404(User, pk=pk)
-        print('yes')
-        profile.save()
+        # print('yes')
+        # profile.save()
         role = form.cleaned_data['role']
-        user.first_name = form.cleaned_data['first_name']
-        user.last_name = form.cleaned_data['last_name']
-        passport.series = form.cleaned_data['series']
-        passport.issued_by = form.cleaned_data['issued_by']
-        passport.issued_date = form.cleaned_data['issued_date']
-        passport.address = form.cleaned_data['address']
-        passport.inn = form.cleaned_data['inn']
-        passport.nationality = form.cleaned_data['nationality']
-        passport.patronymic = form.cleaned_data['patronymic']
-        passport.citizenship = form.cleaned_data['citizenship']
-        profile.phone_number = form.cleaned_data['phone_number']
-        profile.address_fact = form.cleaned_data['address_fact']
-        profile.photo = form.cleaned_data['photo']
+        # user.first_name = form.cleaned_data['first_name']
+        # user.last_name = form.cleaned_data['last_name']
+        # passport.series = form.cleaned_data['series']
+        # passport.issued_by = form.cleaned_data['issued_by']
+        # passport.issued_date = form.cleaned_data['issued_date']
+        # passport.address = form.cleaned_data['address']
+        # passport.inn = form.cleaned_data['inn']
+        # passport.nationality = form.cleaned_data['nationality']
+        # passport.patronymic = form.cleaned_data['patronymic']
+        # passport.citizenship = form.cleaned_data['citizenship']
+        # profile.phone_number = form.cleaned_data['phone_number']
+        # profile.address_fact = form.cleaned_data['address_fact']
+        # profile.photo = form.cleaned_data['photo']
         roles = Role.objects.filter(pk=role.pk)
-        profile.status = form.cleaned_data['status']
+        # profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
         profile.social_status = form.cleaned_data['social_status']
         profile.save()
