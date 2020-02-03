@@ -16,9 +16,6 @@
                 <h3>{{ use.first_name }}{{ use.pk }}<a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a></h3>
                 <h3><a href="{% url 'accounts:user_delete' use.pk %}"> Удалить</a></h3>
                 <h3><a href="{% url 'accounts:user_update' use.pk %}"> Редактировать</a></h3>
-                {#    <h5 class="card-title">{{ todo.description }}</h5>#}
-                {#      <h5 class="card-title">Status: {{ todo.status }}</h5>#}
-                {#      <h5 class="card-title">Type: {{ todo.type }}</h5>#}
             </h3>
         </div>
     {% endfor %}
