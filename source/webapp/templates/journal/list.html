@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     <table class="table table-bordered schedule">
-<<<<<<< HEAD
         <h1>Журнал</h1>
         <a href="{% url 'webapp:add_journal'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать запись в журнале</a>
-=======
-        <h1>Расписание</h1>
->>>>>>> Принятие изменений с репозитория
         <thead>
+        <h1>Расписание</h1>
         <tr>
           <th scope="col"></th>
           {% for object in object_list %}
