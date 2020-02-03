@@ -75,6 +75,7 @@ class ScheduleAddView(CreateView):
     template_name = 'add.html'
     form_class = ScheduleForm
 
+
     def get_success_url(self):
         return reverse('webapp:schedule')
 
@@ -83,7 +84,6 @@ class ScheduleUpdateView(UpdateView):
     model = Schedule
     template_name = 'change.html'
     form_class = ScheduleForm
-
 
     def get_success_url(self):
         return reverse('webapp:schedule')

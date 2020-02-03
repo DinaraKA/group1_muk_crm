@@ -6,7 +6,8 @@
         {% endif %}
         <hr/>
         <div class="statuses">
-            <h1>Social Statuses:</h1>
+            <h1>Социальные статусы:</h1>
+            <a href="{% url 'accounts:add_social_status'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>
         </div>
             {% for status in statuses %}
                 <p>{{ status.name }}</p>
