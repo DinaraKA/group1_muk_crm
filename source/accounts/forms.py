@@ -222,10 +222,6 @@ class FullSearchForm(forms.Form):
     in_admin_position = forms.BooleanField(initial=False, required=False, label='По должности')
     in_social_status = forms.BooleanField(initial=False, required=False, label='По соц статусу')
 
-    # user = forms.CharField(max_length=100, required=False, label='User')
-    # in_articles = forms.BooleanField(initial=True, required=False, label='Статей')
-    # in_comments = forms.BooleanField(initial=False, required=False, label='Комментариев')
-
     def clean(self):
         super().clean()
         data = self.cleaned_data
@@ -247,14 +243,6 @@ class FullSearchForm(forms.Form):
                     'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
                     code='text_search_criteria_empty'
                 ))
-        # if user:
-        #     in_articles = data.get('in_articles')
-        #     in_comments = data.get('in_comments')
-        #     if not (in_articles or in_comments):
-        #         errors.append(ValidationError(
-        #             'One of the checkboxes should be checked: In articles, In comments',
-        #             code='author_search_criteria_empty'
-        #         ))
         if errors:
             raise ValidationError(errors)
         return data

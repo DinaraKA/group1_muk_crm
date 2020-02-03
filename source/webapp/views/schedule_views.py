@@ -1,5 +1,7 @@
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
+from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
 from accounts.models import Group, User, Profile
 
@@ -71,7 +73,7 @@ class ScheduleView(ListView):
 class ScheduleAddView(CreateView):
     model = Schedule
     template_name = 'add.html'
-    fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
+    form_class = ScheduleForm
 
 
     def get_success_url(self):
@@ -81,8 +83,7 @@ class ScheduleAddView(CreateView):
 class ScheduleUpdateView(UpdateView):
     model = Schedule
     template_name = 'change.html'
-    fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
-
+    form_class = ScheduleForm
 
     def get_success_url(self):
         return reverse('webapp:schedule')
