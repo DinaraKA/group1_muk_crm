@@ -1,10 +1,8 @@
 from django import forms
-from .models import Schedule, Lesson
+from .models import Theme
 
 
-class ScheduleForm(forms.ModelForm):
-    lesson = forms.ModelChoiceField(queryset=Lesson.objects.filter(is_saturday=False))
+class ThemeForm(forms.ModelForm):
     class Meta:
-        model = Schedule
-        fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
-
+        model = Theme
+        fields = ['name']

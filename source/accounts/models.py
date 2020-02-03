@@ -3,8 +3,6 @@ from django.db import models
 from phone_field import PhoneField
 
 
-
-
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
 
@@ -52,7 +50,7 @@ class Profile(models.Model):
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name()
+        return self.user.get_full_name() + "'s Profile"
 
 
 SEX_CHOICES = (
@@ -95,12 +93,3 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-class Theme(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Тема')
-
-    def __str__(self):
-        return self.name
-

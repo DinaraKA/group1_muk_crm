@@ -159,7 +159,7 @@ class UserChangeForm(forms.ModelForm):
         profile_fields = ['patronymic', 'phone_number', 'address_fact', 'photo', 'role', 'status', 'admin_position',
                           'social_status'
                           ]
-        passport_fields = ['citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
+        passport_fields = [ 'citizenship', 'series', 'issued_by', 'issued_date', 'address', 'inn', 'nationality', 'sex',
                            'birth_date']
 
 
@@ -212,15 +212,16 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
 
-
 class FullSearchForm(forms.Form):
-    text = forms.CharField(max_length=100, required=False, label='Поиск')
-    in_username = forms.BooleanField(initial=False, required=False, label='По Username')
+    text = forms.CharField(max_length=100, required=False, label='Текст')
+    in_username = forms.BooleanField(initial=True, required=False, label='Username')
     in_first_name = forms.BooleanField(initial=True, required=False, label='По имени')
-    in_role = forms.BooleanField(initial=False, required=False, label='По роли')
+    in_tags = forms.BooleanField(initial=True, required=False, label='В тегах')
     in_status = forms.BooleanField(initial=False, required=False, label='По статусу')
-    in_admin_position = forms.BooleanField(initial=False, required=False, label='По должности')
-    in_social_status = forms.BooleanField(initial=False, required=False, label='По соц статусу')
+
+    # user = forms.CharField(max_length=100, required=False, label='User')
+    # in_articles = forms.BooleanField(initial=True, required=False, label='Статей')
+    # in_comments = forms.BooleanField(initial=False, required=False, label='Комментариев')
 
     def clean(self):
         super().clean()
@@ -234,15 +235,21 @@ class FullSearchForm(forms.Form):
         if text:
             in_username = data.get('in_username')
             in_first_name = data.get('in_first_name')
-            in_role = data.get('in_role')
+            in_tags = data.get('in_tags')
             in_status = data.get('in_status')
-            in_admin_position = data.get('in_admin_position')
-            in_social_status = data.get('in_social_status')
-            if not (in_username or in_first_name or in_role or in_status or in_admin_position or in_social_status):
+            if not (in_username or in_first_name or in_tags or in_status):
                 errors.append(ValidationError(
                     'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
                     code='text_search_criteria_empty'
                 ))
+        # if user:
+        #     in_articles = data.get('in_articles')
+        #     in_comments = data.get('in_comments')
+        #     if not (in_articles or in_comments):
+        #         errors.append(ValidationError(
+        #             'One of the checkboxes should be checked: In articles, In comments',
+        #             code='author_search_criteria_empty'
+        #         ))
         if errors:
             raise ValidationError(errors)
         return data
