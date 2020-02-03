@@ -85,6 +85,8 @@ class Schedule(models.Model):
     def __str__(self):
         return '%s, %s, %s, %s, %s, %s' % (self.lesson, self.day, self.teacher, self.auditoriya, self.discipline, self.group)
 
+    # def __str__(self):
+    #     return self.objects
 
 class Theme(models.Model):
     name = models.CharField(max_length=100, verbose_name='Тема')

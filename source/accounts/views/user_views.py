@@ -65,7 +65,6 @@ def register_view(request, *args, **kwargs):
 
             profile = Profile(
                 user=user,
-                # role=form.cleaned_data['role'],
                 patronymic=form.cleaned_data['patronymic'],
                 phone_number=form.cleaned_data['phone_number'],
                 address_fact=form.cleaned_data['address_fact'],
@@ -78,7 +77,6 @@ def register_view(request, *args, **kwargs):
             passport.save()
             profile.save()
             role = form.cleaned_data['role']
-            # roles = Role.objects.filter(pk=role.pk)
             profile.save()
             profile.role.set(role)
             login(request, user)
@@ -96,12 +94,11 @@ class UserPersonalInfoChangeView(UpdateView):
 
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
-        # user = get_object_or_404(User, id=pk)
+        user = get_object_or_404(User, id=pk)
         passport = get_object_or_404(Passport, user=pk)
         profile = get_object_or_404(Profile, user=pk)
         user = get_object_or_404(User, pk=pk)
-        profile.save()
-        role = form.cleaned_data['role']
+        roles = form.cleaned_data['role']
         user.first_name = form.cleaned_data['first_name']
         user.last_name = form.cleaned_data['last_name']
         passport.series = form.cleaned_data['series']
@@ -110,18 +107,19 @@ class UserPersonalInfoChangeView(UpdateView):
         passport.address = form.cleaned_data['address']
         passport.inn = form.cleaned_data['inn']
         passport.nationality = form.cleaned_data['nationality']
-        passport.patronymic = form.cleaned_data['patronymic']
         passport.citizenship = form.cleaned_data['citizenship']
+        passport.sex = form.cleaned_data['sex']
+        profile.patronymic = form.cleaned_data['patronymic']
         profile.phone_number = form.cleaned_data['phone_number']
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
-        roles = Role.objects.filter(pk=role.pk)
-        profile.status = form.cleaned_data['status']
+        # roles = Role.objects.filter(pk=role.pk)
+        # profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
         profile.social_status = form.cleaned_data['social_status']
-        profile.save()
         passport.save()
-        profile.role.set(role)
+        profile.role.set(roles)
+        profile.save()
         user.save()
         return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
 
@@ -243,12 +241,25 @@ class SearchResultsView(ListView):
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
                 query = query | Q(user__first_name__icontains=text)
-                print('FirstName', text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
-                print('Status')
-                print(text, "status")
+                print(query, 'QUERY STATUS')
+            in_role = form.cleaned_data.get('in_role')
+            if in_role:
+                print(text, 'TEXT')
+                query = query | Q(role__name__icontains=text)
+                print(query, 'QUERY ROLE')
+            in_admin_position = form.cleaned_data.get('in_admin_position')
+            if in_admin_position:
+                print(text, 'TEXT')
+                query = query | Q(admin_position__name__icontains=text)
+                print(query, 'AdMIN POSITION')
+            in_social_status = form.cleaned_data.get('in_social_status')
+            if in_social_status:
+                print(text, 'TEXT')
+                query = query | Q(social_status__name__icontains=text)
+                print(query, 'SOCIAL_STATUS')
             # if in_first_name:
                 # query = query | Q(first_name__icontains=text)
             # in_tags = form.cleaned_data.get('in_tags')

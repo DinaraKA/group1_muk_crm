@@ -2,10 +2,10 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block menu %}
-{#    <p><a href="{% url 'accounts:add_group'%}" class="add">Создать</a></p>#}
 {% endblock %}
 {% block content %}
-    <h1 style="padding-top: 20px">Группы</h1>
+    <h1 style="padding-top: 20px">Темы</h1>
+        <a href="{% url 'webapp:add_theme'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать</a>
     {% for object in object_list %}
     <div class="object">
         <div class="row my-5">

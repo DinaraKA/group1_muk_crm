@@ -10,6 +10,7 @@ from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDe
 from .views import PersonalGradesListView
 from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 from .views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
+from .views.journal_views import GradeforStudentCreateView
 
 app_name = 'webapp'
 
@@ -53,6 +54,7 @@ urlpatterns = [
     path('journal/add/', JournalCreateView.as_view(), name='add_journal'),
     path('journal/update/<int:pk>/', JournalUpdateView.as_view(), name='change_journal'),
     path('journal/delete/<int:pk>/', JournalDeleteView.as_view(), name='delete_journal'),
+    path('journal_user/<int:pk>/add-grade/', GradeforStudentCreateView.as_view(), name='grade_student_add'),
     path('schedule/',  ScheduleView.as_view(), name='schedule'),
     path('schedule/add/', ScheduleAddView.as_view(), name='schedule_add'),
     path('schedule/update/<int:pk>/', ScheduleUpdateView.as_view(), name='schedule_update'),
