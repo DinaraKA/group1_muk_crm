@@ -114,20 +114,21 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
         # roles = Role.objects.filter(pk=role.pk)
-        # profile.status = form.cleaned_data['status']
+        profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
         profile.social_status = form.cleaned_data['social_status']
         passport.save()
         profile.role.set(roles)
         profile.save()
         user.save()
-        return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+        return self.get_success_url()
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        # return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": self.object.pk}))
+        return redirect('accounts:user_detail', pk=self.object.pk)
 
 
 class UserPasswordChangeView(UpdateView):
@@ -147,6 +148,7 @@ class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+
 
 
 class UserListView(ListView):
@@ -207,6 +209,7 @@ class SearchResultsView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
         query = self.get_query_string()
+        print(query, 'STRING')
         return super().get_context_data(
             form=form, query=query, object_list=object_list, **kwargs
         )
@@ -216,6 +219,7 @@ class SearchResultsView(ListView):
         for key in self.request.GET:
             if key != 'page':
                 data[key] = self.request.GET.get(key)
+                print(urlencode(data), "DATA")
         return urlencode(data)
 
     # def get_user_query(self, form):
@@ -233,7 +237,6 @@ class SearchResultsView(ListView):
     def get_search_query(self, form):
         query = Q()
         text = form.cleaned_data.get('text').capitalize()
-        print(text, 'Text')
         if text:
             in_username = form.cleaned_data.get('in_username')
             if in_username:
@@ -244,22 +247,15 @@ class SearchResultsView(ListView):
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
-                print(query, 'QUERY STATUS')
             in_role = form.cleaned_data.get('in_role')
             if in_role:
-                print(text, 'TEXT')
                 query = query | Q(role__name__icontains=text)
-                print(query, 'QUERY ROLE')
             in_admin_position = form.cleaned_data.get('in_admin_position')
             if in_admin_position:
-                print(text, 'TEXT')
                 query = query | Q(admin_position__name__icontains=text)
-                print(query, 'AdMIN POSITION')
             in_social_status = form.cleaned_data.get('in_social_status')
             if in_social_status:
-                print(text, 'TEXT')
                 query = query | Q(social_status__name__icontains=text)
-                print(query, 'SOCIAL_STATUS')
             # if in_first_name:
                 # query = query | Q(first_name__icontains=text)
             # in_tags = form.cleaned_data.get('in_tags')
@@ -278,3 +274,16 @@ class SearchResultsView(ListView):
 
         return query
 
+
+class StudentListView(ListView):
+    model = User
+    template_name = 'user_list.html'
+    context_object_name = 'user'
+    # permission_required = 'webapp.user_list'
+    # permission_denied_message = '403 Доступ запрещён!'
+
+    def get_queryset(self):
+        status = self.kwargs.get('status')
+        users = User.objects.filter(profile__status__name__contains=status)
+        print(users)
+        return users
