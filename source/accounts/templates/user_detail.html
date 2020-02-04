@@ -45,8 +45,8 @@
                         </div>
                     {% endif %}
                     <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Редактировать</a>
-    <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
-    <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-outline-danger  ml-5 mt-3">Удалить</a>
+                    <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
+                    <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-outline-danger  ml-5 mt-3">Удалить</a>
             </div>
         </div>
     </div>
