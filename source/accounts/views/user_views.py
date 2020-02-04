@@ -150,7 +150,6 @@ class UserDetailView(DetailView):
     context_object_name = 'user_obj'
 
 
-
 class UserListView(ListView):
     model = User
     template_name = 'user_list.html'

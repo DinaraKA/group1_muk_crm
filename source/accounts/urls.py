@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, StudentListView
+    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
@@ -18,6 +18,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('user_create/', register_view, name='user_create'),
     path('user_detail/<int:pk>/', UserDetailView.as_view(), name='user_detail'),
+    path('user_list/', UserListView.as_view(), name='user_list'),
     path('user_update/<int:pk>/', UserPersonalInfoChangeView.as_view(), name='user_update'),
     path('user_password_change/<int:pk>/', UserPasswordChangeView.as_view(), name='password_change'),
     path('user_delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
