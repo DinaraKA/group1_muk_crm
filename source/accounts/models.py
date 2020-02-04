@@ -96,11 +96,3 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
-
-
-class Theme(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Тема')
-
-    def __str__(self):
-        return self.name
-
