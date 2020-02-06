@@ -25,10 +25,11 @@ class ScheduleView(ListView):
         # context['days'] = DAY_CHOICES
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
+            'saturdaylessons': Lesson.objects.filter(is_saturday=True),
             'groups': Group.objects.filter(students=self.request.user),
             'days': DAY_CHOICES,
             'teacher': Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user),
-            'weekdays': self.get_weekdays()
+            'weekdays': self.get_weekdays(),
         })
         return context
 
@@ -69,11 +70,16 @@ class ScheduleView(ListView):
     def get_queryset(self):
         return Schedule.objects.all()
 
+
 class ScheduleAddView(CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
 
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['teachers'] = User.objects.filter(profile__role__name__exact='Преподаватель').values_list('first_name', 'last_name')
+    #     return kwargs
 
     def get_success_url(self):
         return reverse('webapp:schedule')

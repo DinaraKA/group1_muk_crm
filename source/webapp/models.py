@@ -30,7 +30,7 @@ class Auditory(models.Model):
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
 
     def __str__(self):
-        return self.name
+        return "%s -  %s мест( %s )" %(self.name, self.places, self.description)
 
 
 class Grade(models.Model):
@@ -85,8 +85,19 @@ class Schedule(models.Model):
     def __str__(self):
         return '%s, %s, %s, %s, %s, %s' % (self.lesson, self.day, self.teacher, self.auditoriya, self.discipline, self.group)
 
-    # def __str__(self):
-    #     return self.objects
+    class Meta:
+        unique_together = ['lesson', 'day', 'group'], ['lesson', 'day', 'teacher'], ['lesson', 'day', 'auditoriya']
+
+    def unique_error_message(self, model_class, unique_check):
+        if model_class == type(self) and unique_check == ('lesson', 'day', 'group'):
+            return 'У выбранной группы есть пара в это время'
+        elif model_class == type(self) and unique_check == ('lesson', 'day', 'teacher'):
+            return 'У выбранного преподавателя есть пара в это время'
+        elif model_class == type(self) and unique_check == ('lesson', 'day', 'auditoriya'):
+            return 'Выбранная аудитория занята в это время'
+        else:
+            return super(Schedule, self).unique_error_message(model_class, unique_check)
+
 
 class Theme(models.Model):
     name = models.CharField(max_length=100, verbose_name='Тема')
