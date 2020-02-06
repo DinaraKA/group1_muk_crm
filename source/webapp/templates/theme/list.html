@@ -13,11 +13,8 @@
                 <h5>{{ object.pk }}.{{ object.name }}</h5>
             </div>
             <div class="right col-4 d-flex justify-content-end">
-                <p class="mr-5"><a href="{% url 'accounts:change_group' object.pk %}" class="update">Редактироать</a></p>
-                <p class="mr-3"><a href="{% url 'accounts:delete_group' object.pk %}" class="delete">Удалить</a></p>
-            </div>
-            <div>
-                <p class="mr-3"><a href="{% url 'accounts:detail_group' object.pk %}" class="delete">Подробнее</a></p>
+                <p class="mr-5"><a href="{% url 'webapp:change_theme' object.pk %}" class="update">Редактироать</a></p>
+                <p class="mr-3"><a href="{% url 'webapp:delete_theme' object.pk %}" class="delete">Удалить</a></p>
             </div>
         </div>
     </div>
