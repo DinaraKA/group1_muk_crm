@@ -223,3 +223,4 @@ class FullSearchForm(forms.Form):
         if errors:
             raise ValidationError(errors)
         return data
+
