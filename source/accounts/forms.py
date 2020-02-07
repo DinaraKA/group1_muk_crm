@@ -185,6 +185,9 @@ class AdminPositionForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
+    students = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name__contains='Студент'), label='Студенты')
+    starosta = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains='Студент'), label='Староста')
+    kurator = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Куратор')
     class Meta:
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
