@@ -21,15 +21,17 @@
   </thead>
   <tbody>
       {% for use in user %}
+          {% if use.last_name %}
     <tr data-href="{% url 'accounts:user_detail' use.pk %}">
 
-      <th scope="row">{{ use.id }}</th>
+      <th scope="row">{{ forloop.counter0 }}</th>
         <td data-href="{% url 'accounts:user_detail' use.pk %}">{{ use.first_name }}</td>
       <td>{{ use.last_name }}</td>
       <td>{{ use.profile.status}}</td>
         <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>
         <a href="{% url 'accounts:user_update' use.pk %}">Edit</a></td>
     </tr>
+          {% endif %}
       {% endfor %}
   </tbody>
 </table>
