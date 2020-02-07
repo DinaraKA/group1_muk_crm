@@ -1,42 +1,54 @@
 {% extends 'base.html' %}
+
 {% block title %}
     Дневник
 {% endblock %}
 
+
 {% block content %}
+    {% regroup profiles by date|date:"d.m.Y"  as profile_list %}
 
-    <div class="container">
-        <h2 class="mt-2 mb-4">Страница студента {{ student.first_name}}  {{ student.last_name}} </h2>
-        <h3 class="mt-2 mb-4">Успеваемость</h3>
-        <table class="table table-striped mt-2">
+     <div class="container">
+        <h2 class="mt-5 mb-5" style="color: blue; font-weight: bold">Успеваемость студента {{ student.first_name}}  {{ student.last_name}} </h2>
 
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Название предмета</th>
-              {% for object in profiles %}
 
-                <th scope="col" style="text-align:center;">{{object.date|date:'d.m.Y'}}</th>
-
-              {% endfor %}
-            </tr>
-          </thead>
-
+    {% for profile in profile_list%}
+        <table class="table table-bordered mb-5 pb-4">
+            <thead class="thead-light">
+                <tr>
+                    <th>Дисциплина</th>
+                    <th>Оценка</th>
+                </tr>
+            </thead>
             <tbody>
-             {% for object in profiles %}
-            <tr>
-
-                <th scope="row" class="schedule-days">{{ object.discipline }}</th>
-                 {% for object in profiles %}
-                 <td>
-                      <p class="my-0">{{ object.grade }}</p>
-                 {{ object.student }}
-                 {{ object.date }}
-                 {{ object.discipline }}
-
-                 </td>
-                 {%  endfor %}
-            </tr>
-            {% endfor %}
+                <p>{{ profile.grouper }}</p>
+                {% for day in profile.list %}
+                    <tr>
+                        <td>{{ day.discipline }}</td>
+                        <td>{{ day.grade }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
+    {%  endfor %}
+</div>
 {% endblock %}
+
+
+
+{#через tables2#}
+{#{% extends 'base.html' %}#}
+{#{% load render_table from django_tables2 %}#}
+{##}
+{#{% block title %}#}
+{#    Дневник#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#     <div class="container">#}
+{#        <h2 class="mt-2 mb-4">Страница студента {{ student.first_name}}  {{ student.last_name}} </h2>#}
+{#        <h3 class="mt-2 mb-4">Успеваемость</h3>#}
+{#    #}
+{#    {% render_table table %}#}
+{#{% endblock %}#}
+

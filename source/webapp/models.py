@@ -114,3 +114,5 @@ class Journal(models.Model):
         avg = round(avg, 1)
         return avg
 
+    class Meta:
+        ordering = ['date']
