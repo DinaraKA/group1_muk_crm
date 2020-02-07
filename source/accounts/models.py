@@ -63,7 +63,7 @@ SEX_CHOICES = (
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
-    citizenship = models.CharField(max_length=20, default="Кыргызская Республика", verbose_name="Гражданство")
+    citizenship = models.CharField(max_length=50, default="Кыргызская Республика", verbose_name="Гражданство")
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, blank="True", null="True", verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
