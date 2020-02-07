@@ -90,6 +90,7 @@ class Schedule(models.Model):
 
 class Theme(models.Model):
     name = models.CharField(max_length=100, verbose_name='Тема')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='theme_discipline', verbose_name='Дисциплина')
 
     def __str__(self):
         return self.name
@@ -98,7 +99,7 @@ class Theme(models.Model):
 class Journal(models.Model):
     date = models.DateField(verbose_name='Дата')
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student', verbose_name='Студент')
-    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='dicipline', verbose_name='Дисциплина')
+    discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='discipline', verbose_name='Дисциплина')
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='theme', verbose_name='Тема')
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, related_name='grade', verbose_name='Оценка')
 

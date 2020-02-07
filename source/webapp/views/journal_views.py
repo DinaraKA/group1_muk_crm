@@ -1,26 +1,37 @@
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 
 from accounts.models import Group
 from webapp.models import Journal, Discipline
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django_tables2 import SingleTableView, RequestConfig
+from webapp.tables import JournalTable
+from webapp.filtres import JournalFilter
 
-
-class JournalIndexView(ListView):
+class JournalIndexView(SingleTableView):
     template_name = 'journal/list.html'
     model = Journal
+    table_class = JournalTable
     context_object_name = 'journals'
     paginate_by = 30
     paginate_orphans = 0
     page_kwarg = 'page'
+    context_filter_name = 'filter'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
+    def get_queryset(self, **kwargs):
+        return Journal.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(JournalIndexView, self).get_context_data(**kwargs)
         context.update({
-            'groups': Group.objects.all(),
-            'disciplines': Discipline.objects.all()
+            'groups': Group.objects.filter()
         })
+        filter = JournalFilter(self.request.GET, queryset=self.get_queryset(**kwargs))
+        table = JournalTable(filter.qs)
+        RequestConfig(self.request).configure(table)
+        context['filter'] = filter
+        context['table'] = table
         return context
 
 

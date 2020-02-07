@@ -19,7 +19,10 @@ class ThemeListView(ListView):
 class ThemeCreateView(CreateView):
     model = Theme
     template_name = 'add.html'
-    fields = ['name']
+    fields = ['name', 'discipline']
+
+    def theme(self):
+        pass
 
     def get_success_url(self):
         return reverse('webapp:themes')
@@ -28,7 +31,7 @@ class ThemeCreateView(CreateView):
 class ThemeUpdateView(UpdateView):
     model = Theme
     template_name = 'change.html'
-    fields = ['name']
+    fields = ['name', 'discipline']
 
     def get_success_url(self):
         return reverse('webapp:themes')
