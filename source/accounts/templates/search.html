@@ -2,19 +2,25 @@
 
 {% block content %}
     <form method="post" action="{% url "accounts:user_search" %}">
+    <div class="form-group">
         {% csrf_token %}
         {% for error in form.non_field_errors %}
             <p class="form-error">{{ error }}</p>
         {% endfor %}
         {% for field in form %}
-            <p><label for="{{ field.id_for_label }}">{{ field.label }}</label>: {{ field }}</p>
+            <div class="form-group">
+            <label for="{{ field.id_for_label }}"></label>
+                <div class="form-group" id="{{ field.label }}" aria-describedby="{{ field.label }}">{{ field.label }}: {{ field }}
             {% for error in field.errors %}
                 <p class="form-error">{{ error }}</p>
             {% endfor %}
         {% endfor %}
-        <p><input type="submit" value="Search"></p>
+        <p><input type="submit" value="Search" class="btn btn-primary"></p>
+    </div>
+        </div>
     </form>
-    <h1>Results</h1>
+
+    <h3>Results</h3>
     {% if user %}
         {% if is_paginated %}
         {% endif %}
