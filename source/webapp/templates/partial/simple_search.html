@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <p class="form-error">{{ error }}</p>
+        {% endfor %}
+
+        {% for field in form %}
+            <p class="label"><label for="{{ field.id_for_label }}">{{ field.label }}</label>: {{ field }}</p>
+            {% for error in field.errors %}
+                <p class="form-error">{{ error }}</p>
+            {% endfor %}
+            <p></p>
+        {% endfor %}
+
+        <p class="text-left"><input type="submit" value="Search" class="btn btn-outline-dark mt-5 font-weight-bolder"></p>
+    </form>
+
+    <h1>Results</h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}

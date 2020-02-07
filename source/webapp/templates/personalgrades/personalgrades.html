@@ -10,7 +10,7 @@
 
      <div class="container">
         <h2 class="mt-5 mb-5" style="color: blue; font-weight: bold">Успеваемость студента {{ student.first_name}}  {{ student.last_name}} </h2>
-
+ {% include 'partial/simple_search.html' %}
 
     {% for profile in profile_list%}
         <table class="table table-bordered mb-5 pb-4">

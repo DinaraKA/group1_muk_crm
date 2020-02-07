@@ -8,3 +8,17 @@ class ScheduleForm(forms.ModelForm):
         model = Schedule
         fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
 
+
+YEARS= [x for x in range(2000,2022)]
+
+
+class FullSearchForm(forms.Form):
+    start_date= forms.DateField(label='Введите дату начала!', widget=forms.SelectDateWidget(years=YEARS))
+    end_date = forms.DateField(label='Введите дату окончания!', widget=forms.SelectDateWidget(years=YEARS))
+    discipline = forms.CharField(max_length=100, required=False, label="По дисциплине")
+
+#
+# class FullSearchForm(forms.Form):
+#     date = forms.DateField(max_length=12, required=False, label="По дате")
+#     discipline = forms.CharField(max_length=100, required=False, label="По дисциплине")
+
