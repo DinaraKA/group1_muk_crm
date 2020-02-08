@@ -1,4 +1,4 @@
-from accounts.models import Theme
+from webapp.models import Theme
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 

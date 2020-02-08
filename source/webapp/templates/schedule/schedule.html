@@ -2,6 +2,12 @@
 {% block content %}
     <table class="table table-bordered schedule">
         <h1>Расписание</h1>
+        <!-- Button trigger modal -->
+{#        <button type="button"class="btn btn-primary" data-toggle="modal"#}
+{#                data-target="#exampleModal">#}
+{#            Добавить в расписание#}
+{#        </button>#}
+                <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
         {% for group in groups %}
             <h4>Группа - {{ group.name }}</h4>
         {% endfor %}
@@ -27,23 +33,46 @@
                     <td>
                         {% for item in items %}
                             <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                            {% if request.user == item.teacher %}
-                                <h5>Группа:{{ item.group }}</h5>
-                                <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
-                            {% elif item.group in groups %}
-                                <h5>Группа:{{ item.group }}</h5>
-                                <p class="my-0">{{ item.teacher.get_full_name }}</p>
-                                <p class="my-0">{{ item.discipline }}</p>
-                                <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
-                                <hr style="border-color: rgb(66 66 66)">
-                            {% endif %}
+                                {% if request.user.is_superuser %}
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    <p class="my-0">{{ item.discipline }}</p>
+                                    <p class="my-0">{{ item.auditoriya.name }}</p>
+                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                    <hr style="border-color: rgb(66 66 66)">
+                                {% elif request.user == item.teacher %}
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    <p class="my-0">{{ item.discipline }}</p>
+                                    <p class="my-0">{{ item.auditoriya.name }}</p>
+                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                {% elif item.group in groups %}
+                                    <h5>Группа:{{ item.group }}</h5>
+                                    <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    <p class="my-0">{{ item.discipline }}</p>
+                                    <p class="my-0">{{ item.auditoriya.name }}</p>
+                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                {% endif %}
                             </a>
                         {% endfor %}
                     </td>
                 {% endfor %}
             </tr>
+            {% if day == 'Пятница' %}
+                <tr>
+                    <th scope="col" class="schedule-days"></th>
+                    {% for lesson in saturdaylessons %}
+                        <th scope="col" class="schedule-block">
+                            <p>{{ lesson.index }} пара</p>
+                            <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
+                        </th>
+                    {% endfor %}
+                    {% if saturdaylessons|length != lessons|length%}
+                        {% for item in difference %}
+                            <th scope="col" class="schedule-block"></th>
+                        {% endfor %}
+                    {% endif %}
+                </tr>
+            {% endif %}
         {% endfor %}
 
 {#старая версия#}
@@ -73,126 +102,39 @@
         {#                </td>#}
         {#            {% endfor %}#}
         {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Вторник</th>#}
-        {#            {% for schedule in tuesday %}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            {% if item.group in groups or item.teacher in teachers %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                </a>#}
-        {#                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                <hr style="border-color: rgb(66 66 66)">#}
-        {#                            {% endif %}#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Среда</th>#}
-        {#            {% for schedule in wednesday %}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            {% if item.group in groups or item.teacher in teachers %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                </a>#}
-        {#                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                <hr style="border-color: rgb(66 66 66)">#}
-        {#                            {% endif %}#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Четверг</th>#}
-        {#            {% for schedule in thursday %}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            {% if item.group in groups or item.teacher in teachers %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                </a>#}
-        {#                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                <hr style="border-color: rgb(66 66 66)">#}
-        {#                            {% endif %}#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Пятница</th>#}
-        {#            {% for schedule in friday %}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            {% if item.group in groups or item.teacher in teachers %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                </a>#}
-        {#                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                <hr style="border-color: rgb(66 66 66)">#}
-        {#                            {% endif %}#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="col" class="schedule-days"></th>#}
-        {#            {% for lesson in lessons %}#}
-        {#                <th scope="col" class="schedule-block">#}
-        {#                    <p>{{ lesson.name }} пара</p>#}
-        {#                    <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>#}
-        {#                </th>#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Суббота</th>#}
-        {#            {% for schedule in saturday %}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            {% if item.group in groups or item.teacher in teachers %}#}
-        {#                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                </a>#}
-        {#                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                <hr style="border-color: rgb(66 66 66)">#}
-        {#                            {% endif %}#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
         </tbody>
     </table>
-    <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
+
+    <!-- Modal -->
+
+{#        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#            <div class="modal-dialog" role="document">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header">#}
+{#                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                            <span aria-hidden="true">&times;</span>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        <form action="{% url 'webapp:schedule_add' %}">#}
+{#                            {% include 'partial/form.html' with button_text='Создать' %}#}
+{#                        </form>#}
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
 {% endblock %}
+
+{#{% block scripts %}#}
+{#    {% if basket and form.errors %}#}
+{#        <script type="application/javascript">#}
+{#            $(window).on('load', function(){#}
+{#                $('#exampleModal').modal('show');#}
+{#            });#}
+{#        </script>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
