@@ -3,8 +3,6 @@ from django.db import models
 from phone_field import PhoneField
 
 
-
-
 class Role(models.Model):
     name = models.CharField(max_length=500, verbose_name='Роль')
 
@@ -51,6 +49,7 @@ class Profile(models.Model):
     social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
                                       verbose_name='Соц. Статус', null=True, blank=True)
 
+
     def __str__(self):
         return self.user.get_full_name()
 
@@ -63,7 +62,7 @@ SEX_CHOICES = (
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
-    citizenship = models.CharField(max_length=50, default="Кыргызская Республика", verbose_name="Гражданство")
+    citizenship = models.CharField(max_length=20, default="Кыргызская Республика", verbose_name="Гражданство")
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, blank="True", null="True", verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
@@ -96,3 +95,8 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
+
+def get_full_name(self):
+    return self.first_name + " " + self.last_name
+
+User.add_to_class("__str__", get_full_name)
