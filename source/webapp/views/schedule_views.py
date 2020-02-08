@@ -1,9 +1,8 @@
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
 from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
-from accounts.models import Group, User, Profile
+from accounts.models import Group, Profile
 
 
 class ScheduleView(ListView):
@@ -13,7 +12,6 @@ class ScheduleView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ScheduleView, self).get_context_data(**kwargs)
-
         # context['weekdays'] = weekdays
         # context["monday"] = self.day_array('Monday')
         # context['tuesday'] = self.day_array('Tuesday')
@@ -22,7 +20,6 @@ class ScheduleView(ListView):
         # context['friday'] = self.day_array('Friday')
         # context['saturday'] = self.day_array('Saturday')
         # context['groups'] = Group.objects.filter(students=self.request.user)
-        # context['teacher'] = Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user)
         # context['days'] = DAY_CHOICES
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
@@ -31,8 +28,18 @@ class ScheduleView(ListView):
             'days': DAY_CHOICES,
             'teacher': Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user),
             'weekdays': self.get_weekdays(),
+            'difference': self.get_len(),
         })
         return context
+
+    def get_len(self):
+        difference = []
+        lesson = len(Lesson.objects.filter(is_saturday=False))
+        saturdaylesson = len(Lesson.objects.filter(is_saturday=True))
+        # difference.append((lesson - saturdaylesson) * " ")
+        for item in range(lesson - saturdaylesson):
+            difference.append(" ")
+        return difference
 
     # def day_array(self, day):
     #     day_array = ["","","","","","","",""]
@@ -76,11 +83,6 @@ class ScheduleAddView(CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
-
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['teachers'] = User.objects.filter(profile__role__name__exact='Преподаватель').values_list('first_name', 'last_name')
-    #     return kwargs
 
     def get_success_url(self):
         return reverse('webapp:schedule')
