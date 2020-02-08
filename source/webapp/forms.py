@@ -14,6 +14,7 @@ class ScheduleForm(forms.ModelForm):
     lesson = forms.ModelChoiceField(queryset=Lesson.objects.filter(is_saturday=False))
     teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
 
+
     class Meta:
         model = Schedule
         fields = ['day', 'lesson', 'discipline', 'group', 'teacher', 'auditoriya']

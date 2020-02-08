@@ -66,6 +66,11 @@
                             <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
                         </th>
                     {% endfor %}
+                    {% if saturdaylessons|length != lessons|length%}
+                        {% for item in difference %}
+                            <th scope="col" class="schedule-block"></th>
+                        {% endfor %}
+                    {% endif %}
                 </tr>
             {% endif %}
         {% endfor %}
