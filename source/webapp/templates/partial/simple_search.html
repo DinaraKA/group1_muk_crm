@@ -1,6 +1,5 @@
-{% extends 'base.html' %}
 {% block content %}
-    <form action="" method="post">
+    <form action="" method="get">
         {% csrf_token %}
 
         {% for error in form.non_field_errors %}
@@ -14,12 +13,6 @@
             {% endfor %}
             <p></p>
         {% endfor %}
-
         <p class="text-left"><input type="submit" value="Search" class="btn btn-outline-dark mt-5 font-weight-bolder"></p>
     </form>
-
-    <h1>Results</h1>
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
 {% endblock %}
