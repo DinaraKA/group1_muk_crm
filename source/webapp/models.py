@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import Group
@@ -115,3 +114,8 @@ class Journal(models.Model):
 
     def __str__(self):
         return self.student.last_name + self.student.first_name
+
+def get_full_name(self):
+    return self.first_name + ' ' + self.last_name
+
+User.add_to_class("__str__", get_full_name)
