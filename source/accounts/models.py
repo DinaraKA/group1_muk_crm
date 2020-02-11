@@ -38,7 +38,7 @@ class SocialStatus(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Пользователь')
     patronymic = models.CharField(max_length=30, null=True, blank=True, verbose_name='Отчество')
-    phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телеофона')
+    phone_number = PhoneField(null=True, blank=True, verbose_name='Номер телефона')
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     role = models.ManyToManyField(Role, related_name='role', verbose_name='Роль')
@@ -48,7 +48,6 @@ class Profile(models.Model):
                                  verbose_name='Должность', null=True, blank=True)
     social_status = models.ForeignKey(SocialStatus, on_delete=models.CASCADE, related_name='social_status',
                                       verbose_name='Соц. Статус', null=True, blank=True)
-
 
     def __str__(self):
         return self.user.get_full_name()
@@ -100,4 +99,9 @@ def get_full_name(self):
     return self.first_name + " " + self.last_name
 
 User.add_to_class("__str__", get_full_name)
+class Family(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_family', verbose_name='Студент')
+    family_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='family_user', verbose_name='Родственники')
 
+    def __str__(self):
+        return self.family_user.get_full_name()

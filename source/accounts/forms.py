@@ -70,7 +70,7 @@ class UserForm(forms.ModelForm):
         return user
 
     def get_initial_for_field(self, field, field_name):
-        if field_name in self.Meta.profile_fields:
+        if field_name in self.Meta.passport_fields:
             try:
                 return getattr(self.instance.passport, field_name)
             except Passport.DoesNotExist:
@@ -184,6 +184,8 @@ class AdminPositionForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
+    kurator = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
+
     class Meta:
         model = Group
         fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
@@ -223,3 +225,21 @@ class FullSearchForm(forms.Form):
             raise ValidationError(errors)
         return data
 
+
+class UserFamilyForm(forms.ModelForm):
+    first_name = forms.CharField(label='Имя')
+    last_name = forms.CharField(label='Фамилия')
+    phone_number = forms.CharField(max_length=20, label='Контакты', empty_value=True)
+    password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+
+    def clean_password_confirm(self):
+        password = self.cleaned_data.get("password")
+        password_confirm = self.cleaned_data.get("password_confirm")
+        if password and password_confirm and password != password_confirm:
+            raise forms.ValidationError('Пароли не совпадают!')
+        return password_confirm
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'password', 'password_confirm', 'email', 'phone_number']
