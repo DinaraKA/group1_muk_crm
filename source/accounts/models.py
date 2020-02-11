@@ -98,7 +98,10 @@ class Group(models.Model):
 def get_full_name(self):
     return self.first_name + " " + self.last_name
 
+
 User.add_to_class("__str__", get_full_name)
+
+
 class Family(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_family', verbose_name='Студент')
     family_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='family_user', verbose_name='Родственники')
