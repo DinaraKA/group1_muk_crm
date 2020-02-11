@@ -13,18 +13,22 @@
                     <p><b>Логин:</b> {{ user_obj.username }}</p>
                     <p><b>Имя:</b> {{ user_obj.first_name }}</p>
                     <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
-                    {% if user_obj.profile %}
+                    {% if user_obj.profile.patronymic %}
                         <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
                     {% endif %}
                     <p><b>Почта:</b> {{ user_obj.email }}</p>
                     {% if user_obj.profile.phone_number %}
                         <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
                     {% endif %}
+                    {% if user_obj.profile.address_fact %}
                         <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
+                    {% endif %}
                     {% if user_obj.profile.role %}
                         <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}</p>
                     {% endif %}
+                    {% if user_obj.profile.status %}
                         <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
+                    {% endif %}
                     {% if user_obj.profile.social_status %}
                         <p><b>Социальный статус:</b> {{ user_obj.profile.social_status }}</p>
                     {% endif %}
@@ -44,11 +48,26 @@
                             <p><b>Дата рождения:</b> {{ user_obj.passport.birth_date }}</p>
                         </div>
                     {% endif %}
+                </div>
             </div>
         </div>
+        {% if user_obj in student_user %}
+            <h4>Родители</h4>
+            {% for parent in family %}
+                <p>{{ parent }}, {{ parent.family_user.email }}</p>
+                <p>Контакты: {{ parent.family_user.profile.phone_number }}</p>
+            {% endfor %}
+        {% elif user_obj in parent_user %}
+            <h4>Студенты</h4>
+            {% for student in students %}
+                <p>{{ student }}. Группа: {% for group in groups %}{{ group.name }}, {% endfor %}</p>
+            {% endfor %}
+        {% endif %}
     </div>
-    </div>
-    <a href="{% url 'accounts:user_update' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Редактировать</a>
-    <a href="{% url 'accounts:password_change' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
-    <a href="{% url 'accounts:user_delete' user.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Удалить</a>
+    <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Редактировать</a>
+    <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
+    <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Удалить</a>
+    {% if user_obj in student_user %}
+        <a href="{% url 'accounts:user_family_create' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить родителя</a>
+    {% endif %}
 {% endblock %}

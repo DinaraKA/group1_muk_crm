@@ -662,104 +662,6 @@
   }
 },
 {
-  "model": "webapp.schedule",
-  "pk": 1,
-  "fields": {
-    "lesson": 1,
-    "day": "Monday",
-    "teacher": [
-      "student-10"
-    ],
-    "auditoriya": 2,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 2,
-  "fields": {
-    "lesson": 1,
-    "day": "Monday",
-    "teacher": [
-      "student-10"
-    ],
-    "auditoriya": 2,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 3,
-  "fields": {
-    "lesson": 2,
-    "day": "Thursday",
-    "teacher": [
-      "student-10"
-    ],
-    "auditoriya": 3,
-    "discipline": 4,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 4,
-  "fields": {
-    "lesson": 8,
-    "day": "Thursday",
-    "teacher": [
-      "student-10"
-    ],
-    "auditoriya": 4,
-    "discipline": 6,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 5,
-  "fields": {
-    "lesson": 8,
-    "day": "Saturday",
-    "teacher": [
-      "admin"
-    ],
-    "auditoriya": 5,
-    "discipline": 6,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 6,
-  "fields": {
-    "lesson": 3,
-    "day": "Wednesday",
-    "teacher": [
-      "admin"
-    ],
-    "auditoriya": 4,
-    "discipline": 5,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 7,
-  "fields": {
-    "lesson": 6,
-    "day": "Monday",
-    "teacher": [
-      "student-10"
-    ],
-    "auditoriya": 3,
-    "discipline": 3,
-    "group": 3
-  }
-},
-{
   "model": "accounts.role",
   "pk": 1,
   "fields": {
@@ -1524,20 +1426,6 @@
         "student-4"
       ]
     ]
-  }
-},
-{
-  "model": "accounts.theme",
-  "pk": 1,
-  "fields": {
-    "name": "\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435"
-  }
-},
-{
-  "model": "accounts.theme",
-  "pk": 2,
-  "fields": {
-    "name": "\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0435 \u0433\u043b\u0430\u0433\u043e\u043b\u044b"
   }
 },
 {

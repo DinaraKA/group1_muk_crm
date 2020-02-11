@@ -6,8 +6,7 @@ from .models import Schedule, Lesson
 
 class ScheduleForm(forms.ModelForm):
     lesson = forms.ModelChoiceField(queryset=Lesson.objects.filter(is_saturday=False), label='Пара')
-    teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains ='Преподаватель'), label='Преподаватель')
-
+    teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name ='Преподаватель'), label='Преподаватель')
 
     class Meta:
         model = Schedule
