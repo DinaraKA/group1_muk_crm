@@ -17,17 +17,24 @@
           {% for group in groups %}
             {% for students in group.students.all %}
                 <p>{{ students }}</p>
+                <form action="{% url 'webapp:grade_student_add' students.pk %}" method="POST" id="add_grade">
+                    {% include 'partial/form.html' with button_text='Добавить Оценку' %}
+                </form>
             {% endfor %}
         {% endfor %}
           </th>
     <td>
     {% for object in object_list %}
         {{ object.student }}
+
 {#      <a class="schedule-link" href="{% url 'webapp:schedule_update' schedule.pk %}">#}
 {#            <p class="my-0">{{ object.date   }}</p>#}
 {#            <p class="my-0">{{ object.discipline }}</p>#}
 {#            <p class="my-0">{{ object.theme }}</p>#}
             <p class="my-0">{{ object.grade }}</p>
+            <form action="{% url 'webapp:change_journal' object.pk %}" class="update" method="POST">
+                {% include 'partial/form.html' with button_text='Обновить Оценку' %}
+            </form>
     {% endfor %}
 {#      <a href="{% url 'webapp:schedule_delete' schedule.pk %}">Очистить</a>#}
   </td>
