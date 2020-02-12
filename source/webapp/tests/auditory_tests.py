@@ -129,7 +129,7 @@ class AuditoryViewTest(TestCase):
     def test_deleted_post(self):
         auditory = Auditory.objects.get(id=1)
         response = self.client.delete(
-            reverse_lazy('webapp:delete_auditory', kwargs={'pk': auditory.id}),
+            reverse_lazy('webapp:delete_auditory', kwargs={'pk': auditory.pk}),
             {
                 'name': 'New Test',
                 'places': 35,
