@@ -7,7 +7,6 @@ from django.urls import reverse, reverse_lazy, resolve
 
 from webapp.models import Lesson
 from webapp.views import LessonListView, LessonCreateView
-from webapp.views.auditory_views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
 
 
 class AuditoryModelTest(TestCase):
