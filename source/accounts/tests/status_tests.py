@@ -3,7 +3,6 @@ from accounts.models import Status
 from selenium.webdriver import Chrome
 
 
-
 class StatusModelTest(TestCase):
 
     @classmethod
@@ -30,7 +29,6 @@ class StatusModelTest(TestCase):
         self.assertEquals(expected_object_name, str(status))
 
 
-
 class StatusViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
@@ -39,8 +37,7 @@ class StatusViewTest(TestCase):
         self.driver.close()
 
     def test_list_statuses(self):
-        self.driver.get('http://127.0.0.1:8000/')
-        self.driver.find_element_by_class_name('statuses').click()
+        self.driver.get('http://127.0.0.1:8000/accounts/statuses/')
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
 
     def test_created_status(self):

@@ -1,6 +1,5 @@
 from accounts.models import AdminPosition
 from django.urls import reverse, reverse_lazy
-from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 

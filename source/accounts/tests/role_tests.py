@@ -39,8 +39,7 @@ class RoleViewTest(TestCase):
         self.driver.close()
 
     def test_list_roles(self):
-        self.driver.get('http://127.0.0.1:8000/')
-        self.driver.find_element_by_class_name('roles').click()
+        self.driver.get('http://127.0.0.1:8000/accounts/roles/')
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
 
     def test_created_role(self):

@@ -80,7 +80,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})

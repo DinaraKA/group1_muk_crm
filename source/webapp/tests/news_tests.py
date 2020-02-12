@@ -83,7 +83,6 @@ class NewsListViewTest(TestCase):
         self.driver.find_element_by_name('text').clear()
         self.driver.find_element_by_name('text').send_keys('it new news')
         self.driver.find_element_by_name('photo').clear()
-        # self.driver.find_element_by_xpath('//*[@id="id_photo"]').clear()
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/aisuluu/projects/group1_muk_crm/source/uploads/news_images/nadina.jpg')
         self.driver.find_element_by_class_name('btn-primary').click()
         self.driver.find_element_by_class_name('btn-danger').click()
