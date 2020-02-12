@@ -4,7 +4,6 @@ from accounts.models import AdminPosition
 from selenium.webdriver import Chrome
 
 
-
 class AdminPositionModelTest(TestCase):
 
     @classmethod
@@ -113,7 +112,6 @@ class AdminPositionViewTest(TestCase):
     #         self.assertEqual(response.status_code, 200)
     #
     #         self.assertTemplateUsed(response, 'list.html')
-
 
     # class AdminPositionViewTest(TestCase):
     # def test_created_position(self):
