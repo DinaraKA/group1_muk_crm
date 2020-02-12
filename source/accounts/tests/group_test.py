@@ -56,8 +56,14 @@ class GroupViewTest(TestCase):
         assert self.driver.current_url == 'http://localhost:8000/accounts/groups/'
 
     def test_created_group(self):
-        self.driver.get('http://localhost:8000/accounts/add_group/')
+        self.driver.get('http://localhost:8000/accounts/group/add/')
         self.driver.find_element_by_name('name').send_keys('Mama')
+        self.driver.find_element_by_name('students').send_keys('student-1', 'student-2')
+        self.driver.find_element_by_name('starosta').click()
+        self.driver.find_element_by_name('starosta').send_keys('student-1')
+        self.driver.find_element_by_name('kurator').click()
+        self.driver.find_element_by_name('kurator').send_keys('student-2')
+        self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/accounts/groups/'
 
@@ -66,6 +72,12 @@ class GroupViewTest(TestCase):
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('Islam_Cool')
+        self.driver.find_element_by_name('students').send_keys('student-3', 'student-4')
+        self.driver.find_element_by_name('starosta').click()
+        self.driver.find_element_by_name('starosta').send_keys('student-3')
+        self.driver.find_element_by_name('kurator').click()
+        self.driver.find_element_by_name('kurator').send_keys('student-4')
+        self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/groups/'
 
