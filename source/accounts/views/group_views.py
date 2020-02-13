@@ -1,3 +1,4 @@
+from accounts.forms import GroupForm
 from accounts.models import Group
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -24,7 +25,7 @@ class GroupDetailView(DetailView):
 class GroupCreateView(CreateView):
     model = Group
     template_name = 'add.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+    form_class = GroupForm
 
     def get_success_url(self):
         return reverse('accounts:groups')
@@ -33,7 +34,7 @@ class GroupCreateView(CreateView):
 class GroupUpdateView(UpdateView):
     model = Group
     template_name = 'change.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']  
+    form_class = GroupForm
 
     def get_success_url(self):
         return reverse('accounts:groups')

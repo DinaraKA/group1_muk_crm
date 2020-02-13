@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
-from accounts.models import Group, Profile
+from accounts.models import Group, Profile, Family
 
 
 class ScheduleView(ListView):
@@ -21,14 +21,17 @@ class ScheduleView(ListView):
         # context['saturday'] = self.day_array('Saturday')
         # context['groups'] = Group.objects.filter(students=self.request.user)
         # context['days'] = DAY_CHOICES
+        student = Family.objects.filter(family_user=self.request.user).values('student')
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
             'saturdaylessons': Lesson.objects.filter(is_saturday=True),
             'groups': Group.objects.filter(students=self.request.user),
             'days': DAY_CHOICES,
-            'teacher': Profile.objects.filter(role__name='Преподаватель', user__username=self.request.user),
+            'teacher': Profile.objects.filter(role__name='Преподаватель', user=self.request.user),
             'weekdays': self.get_weekdays(),
             'difference': self.get_len(),
+            'family_users': Family.objects.filter(family_user=self.request.user),
+            'groups_for_parent': Group.objects.filter(students__in=student),
         })
         return context
 

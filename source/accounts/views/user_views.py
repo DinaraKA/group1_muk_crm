@@ -4,14 +4,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView
-from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm
-from accounts.models import Passport, Profile, Role, Status
-from accounts.forms import UserCreationForm, PasswordChangeForm
+from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, PasswordChangeForm, UserFamilyForm
+from accounts.models import Passport, Profile, Role, Status, Family, Group
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
-
 
 
 def login_view(request, *args, **kwargs):
@@ -80,7 +78,7 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
@@ -121,14 +119,13 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.role.set(roles)
         profile.save()
         user.save()
-        return self.get_success_url()
+        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        # return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": self.object.pk}))
-        return redirect('accounts:user_detail', pk=self.object.pk)
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
 class UserPasswordChangeView(UpdateView):
@@ -148,6 +145,20 @@ class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = User.objects.get(pk=self.kwargs['pk'])
+        student = Family.objects.filter(family_user=user).values('student')
+        context.update({
+            'family':Family.objects.filter(student=user),
+            'groups': Group.objects.filter(students=student),
+            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'students': student,
+            'student_user': User.objects.filter(profile__role__name__contains='Студент'),
+            'parent_user': User.objects.filter(profile__role__name__contains='Родитель')
+        })
+        return context
 
 
 class UserListView(ListView):
@@ -208,7 +219,6 @@ class SearchResultsView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
         query = self.get_query_string()
-        print(query, 'STRING')
         return super().get_context_data(
             form=form, query=query, object_list=object_list, **kwargs
         )
@@ -218,7 +228,6 @@ class SearchResultsView(ListView):
         for key in self.request.GET:
             if key != 'page':
                 data[key] = self.request.GET.get(key)
-                print(urlencode(data), "DATA")
         return urlencode(data)
 
     # def get_user_query(self, form):
@@ -286,3 +295,34 @@ class StudentListView(ListView):
         users = User.objects.filter(profile__status__name__contains=status)
         print(users)
         return users
+class UserFamilyCreateView(CreateView):
+    template_name = 'user_family_create.html'
+    form_class = UserFamilyForm
+
+
+    def form_valid(self, form):
+        self.student_pk = self.kwargs.get('pk')
+        student = get_object_or_404(User, pk=self.student_pk)
+        user = User(
+            first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name'],
+            username=form.cleaned_data['username'],
+            email=form.cleaned_data['email']
+        )
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        profile = Profile(
+            user=user,
+            phone_number=form.cleaned_data['phone_number']
+        )
+        profile.save()
+        role = Role.objects.get(name='Родитель')
+        profile.save()
+        profile.role.add(role)
+        Family.objects.create(student=student, family_user= user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
+
+
