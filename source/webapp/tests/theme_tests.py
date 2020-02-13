@@ -58,17 +58,18 @@ class ThemeViewTest(TestCase):
         self.driver.close()
 
     def test_list_theme(self):
-        self.driver.get('http://localhost:8000/accounts/themes/')
-        assert self.driver.current_url == 'http://localhost:8000/accounts/themes/'
+        self.driver.get('http://localhost:8000/themes/')
+        assert self.driver.current_url == 'http://localhost:8000/themes/'
 
     def test_created_theme(self):
-        self.driver.get('http://localhost:8000/accounts/add_theme/')
+        self.driver.get('http://localhost:8000/themes/')
+        self.driver.find_element_by_class_name('btn-outline-primary').click()
         self.driver.find_element_by_name('name').send_keys('Mama')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/themes/'
 
     def test_updated_theme(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/themes/')
+        self.driver.get('http://127.0.0.1:8000/themes/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('Islam_Cool')
@@ -76,7 +77,7 @@ class ThemeViewTest(TestCase):
         assert self.driver.current_url == 'http://127.0.0.1:8000/themes/'
 
     def test_deleted_theme(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/themes/')
+        self.driver.get('http://127.0.0.1:8000/themes/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/themes/'

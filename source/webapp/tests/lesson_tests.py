@@ -9,7 +9,7 @@ from webapp.models import Lesson
 from webapp.views import LessonListView, LessonCreateView
 
 
-class AuditoryModelTest(TestCase):
+class LessonModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -20,50 +20,32 @@ class AuditoryModelTest(TestCase):
             end_time='14:14:00'
         )
 
-    def test_index_field(self):
-        auditory = Lesson.objects.get(id=1)
-        self.assertEquals(auditory.index, 1)
-
-    def test_is_saturday_field(self):
+    def test_object_is_object(self):
         lesson = Lesson.objects.get(id=1)
+        self.assertEquals(lesson.index, 1)
         self.assertEquals(lesson.is_saturday, False)
+        start_date = datetime(2020, 6, 6, 12, 12, 00)
+        self.assertEquals(lesson.start_time.hour, start_date.hour)
+        self.assertEquals(lesson.start_time.minute, start_date.minute)
+        self.assertEquals(lesson.start_time.second, start_date.second)
+        end_date = datetime(2020, 6, 6, 14, 14, 00)
+        self.assertEquals(lesson.end_time.hour, end_date.hour)
+        self.assertEquals(lesson.end_time.minute, end_date.minute)
+        self.assertEquals(lesson.end_time.second, end_date.second)
 
-    def test_start_time_field(self):
+    def test_verbose_name(self):
         lesson = Lesson.objects.get(id=1)
-        date = datetime(2020, 6, 6, 12, 12, 00)
-        self.assertEquals(lesson.start_time.hour, date.hour)
-        self.assertEquals(lesson.start_time.minute, date.minute)
-        self.assertEquals(lesson.start_time.second, date.second)
-
-    def test_end_time_field(self):
-        lesson = Lesson.objects.get(id=1)
-        date = datetime(2020, 6, 6, 14, 14, 00)
-        self.assertEquals(lesson.end_time.hour, date.hour)
-        self.assertEquals(lesson.end_time.minute, date.minute)
-        self.assertEquals(lesson.end_time.second, date.second)
-
-    def test_index_verbose_name(self):
-        passport = Lesson.objects.get(id=1)
-        field_label = passport._meta.get_field('index').verbose_name
+        field_label = lesson._meta.get_field('index').verbose_name
         self.assertEquals(field_label, 'Порядковый номер')
-
-    def test_is_saturday_verbose_name(self):
-        passport = Lesson.objects.get(id=1)
-        field_label = passport._meta.get_field('is_saturday').verbose_name
+        field_label = lesson._meta.get_field('is_saturday').verbose_name
         self.assertEquals(field_label, 'Суббота')
-
-    def test_start_time_verbose_name(self):
-        passport = Lesson.objects.get(id=1)
-        field_label = passport._meta.get_field('start_time').verbose_name
+        field_label = lesson._meta.get_field('start_time').verbose_name
         self.assertEquals(field_label, 'Время начала')
-
-    def test_end_time_verbose_name(self):
-        passport = Lesson.objects.get(id=1)
-        field_label = passport._meta.get_field('end_time').verbose_name
+        field_label = lesson._meta.get_field('end_time').verbose_name
         self.assertEquals(field_label, 'Время окончания')
 
 
-class AuditoryViewTest(TestCase):
+class LessonViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
@@ -134,10 +116,7 @@ class AuditoryViewTest(TestCase):
         response = self.client.delete(
             reverse_lazy('webapp:lesson_delete', kwargs={'pk': lesson.pk}),
             {
-                'index': 1,
-                'is_saturday': False,
-                'start_time': '12:12:00',
-                'end_time': '14:14:00',
+                'index': 1
             })
 
         self.assertEqual(response.status_code, 302)
@@ -148,7 +127,7 @@ class AuditoryViewTest(TestCase):
         self.assertFalse(Lesson.objects.filter(pk=lesson.pk).exists())
 
 
-class AuditorySeleniumViewTest(TestCase):
+class LessonSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 

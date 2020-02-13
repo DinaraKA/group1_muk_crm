@@ -1,17 +1,21 @@
-from urllib import response
 from django.test import TestCase
-from django.urls import reverse
+
+from selenium.webdriver import Chrome
 
 from webapp.models import News
-from selenium.webdriver import Chrome
 
 
 class NewsModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        News.objects.create(title='TestModel')
+        News.objects.create(title='TestModel', text='Test Text')
 
-    def test_name_label(self):
+    def test_object_is_object(self):
+        news = News.objects.get(id=1)
+        self.assertEquals(news.title, 'TestModel')
+        self.assertEquals(news.text, 'Test Text')
+
+    def test_verbose_name(self):
         news = News.objects.get(id=1)
         field_label = news._meta.get_field('title').verbose_name
         self.assertEquals(field_label, 'Заголовок')
@@ -40,13 +44,9 @@ class NewsModelTest(TestCase):
         self.assertEquals(upload_to, 'news_images')
 
     def test_string_representation(self):
-        news = News(title="Test Name")
-        self.assertEqual(str(news), news.title)
-
-    def test_object_title_is_title(self):
         news = News.objects.get(id=1)
-        expected_object_name = '%s' % news.title
-        self.assertEquals(expected_object_name, str(news))
+        self.assertEqual(str(news.title), news.title)
+        self.assertEqual(str(news.text), news.text)
 
 
 class NewsListViewTest(TestCase):
@@ -89,7 +89,7 @@ class NewsListViewTest(TestCase):
         assert self.driver.current_url == 'http://127.0.0.1:8000/news/'
 
     def test_deleted_news(self):
-        self.driver.get('http://127.0.0.1:8000/news/delete/')
-        self.driver.find_element_by_class_name('btn-primary').click()
+        self.driver.get('http://127.0.0.1:8000/news/')
+        self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/news/'
