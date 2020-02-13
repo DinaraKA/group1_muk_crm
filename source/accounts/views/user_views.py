@@ -149,13 +149,12 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = User.objects.get(pk=self.kwargs['pk'])
-        family = []
-        student = Family.objects.get(family_user=user)
-        family.append(student.student)
+        student = Family.objects.filter(family_user=user).values('student')
         context.update({
             'family':Family.objects.filter(student=user),
-            'groups': Group.objects.filter(students=student.student),
-            'students': family,
+            'groups': Group.objects.filter(students=student),
+            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'students': student,
             'student_user': User.objects.filter(profile__role__name__contains='Студент'),
             'parent_user': User.objects.filter(profile__role__name__contains='Родитель')
         })
