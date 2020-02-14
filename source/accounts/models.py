@@ -75,15 +75,6 @@ class Passport(models.Model):
         return self.user.get_full_name() + "'s Passport"
 
 
-class UserAdminPosition(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='position', verbose_name='Пользователь')
-    admin_position = models.ForeignKey('AdminPosition', on_delete=models.CASCADE, related_name='position',
-                                       verbose_name='Админпоз')
-
-    def __str__(self):
-        return self.user.get_full_name()
-
-
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
     students = models.ManyToManyField(User)
