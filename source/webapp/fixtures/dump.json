@@ -1276,23 +1276,6 @@
 },
 {
   "model": "accounts.profile",
-  "pk": 14,
-  "fields": {
-    "user": [
-      "test"
-    ],
-    "patronymic": null,
-    "phone_number": "12345",
-    "photo": "",
-    "address_fact": "",
-    "status": null,
-    "admin_position": null,
-    "social_status": null,
-    "role": []
-  }
-},
-{
-  "model": "accounts.profile",
   "pk": 33,
   "fields": {
     "user": [
@@ -1307,25 +1290,6 @@
     "social_status": null,
     "role": [
       1
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 34,
-  "fields": {
-    "user": [
-      "parent-3"
-    ],
-    "patronymic": null,
-    "phone_number": "93218-04",
-    "photo": "",
-    "address_fact": "",
-    "status": null,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      3
     ]
   }
 },
