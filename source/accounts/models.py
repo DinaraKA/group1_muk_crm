@@ -42,7 +42,7 @@ class Profile(models.Model):
     photo = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Фото')
     address_fact = models.CharField(max_length=100, verbose_name='Фактический Адрес')
     role = models.ManyToManyField(Role, related_name='role', verbose_name='Роль')
-    status = models.ForeignKey(Status, null=True, blank=True, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name='status', verbose_name='Статус',
                                default=None)
     admin_position = models.ForeignKey(AdminPosition, on_delete=models.CASCADE, related_name='admin_position',
                                  verbose_name='Должность', null=True, blank=True)
@@ -61,7 +61,7 @@ SEX_CHOICES = (
 
 class Passport(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='passport', verbose_name='Пользователь')
-    citizenship = models.CharField(max_length=20, default="Кыргызская Республика", verbose_name="Гражданство")
+    citizenship = models.CharField(max_length=50, default="Кыргызская Республика", verbose_name="Гражданство")
     series = models.CharField(max_length=15, verbose_name='Серия')
     issued_by = models.CharField(max_length=255, blank="True", null="True", verbose_name='Кем выдан')
     issued_date = models.DateField(verbose_name='Дата выдачи')
