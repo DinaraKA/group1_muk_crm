@@ -1,5 +1,4 @@
 from django.test import TestCase
-# from accounts.forms import ThemeForm
 from webapp.models import Theme
 from selenium.webdriver import Chrome
 

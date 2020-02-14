@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, UserFamilyCreateView, StudentListView, UserListView
+    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
@@ -24,6 +24,7 @@ urlpatterns = [
     path('user/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('user/search/', UserSearchView.as_view(), name='user_search'),
     path('user/search/results/', SearchResultsView.as_view(), name='search_results'),
+    path('user/family/add/<int:pk>/', UserFamilyCreateView.as_view(), name='user_family_create'),
     path('user/student/<str:status>/', StudentListView.as_view(), name='student_list'),
     path('user/family/add/<int:pk>/', UserFamilyCreateView.as_view(), name='user_family_create'),
     path('adminpositions/', AdminPositionIndexView.as_view(), name='adminpositions'),
