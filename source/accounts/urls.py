@@ -46,5 +46,9 @@ urlpatterns = [
     path('group/add/', GroupCreateView.as_view(), name='add_group'),
     path('group/change/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
     path('group/delete/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
+    path('detail_group/<int:pk>/', GroupDetailView.as_view(), name='detail_group'),
+    path('add_group/', GroupCreateView.as_view(), name='add_group'),
+    path('change_group/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
+    path('delete_group/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
 ]
 
