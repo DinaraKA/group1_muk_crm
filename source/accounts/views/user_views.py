@@ -149,14 +149,16 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = User.objects.get(pk=self.kwargs['pk'])
-        student = Family.objects.filter(family_user=user).values('student')
+        students = Family.objects.filter(family_user=user)
+        role_student = User.objects.filter(profile__role__name__icontains='Студент')
         context.update({
+            'role_student': role_student,
             'family':Family.objects.filter(student=user),
-            'groups': Group.objects.filter(students=student),
+            'groups': Group.objects.filter(students__in=students.values('student')),
             'groups_for_student': Group.objects.filter(students=self.request.user),
-            'students': student,
-            'student_user': User.objects.filter(profile__role__name__contains='Студент'),
-            'parent_user': User.objects.filter(profile__role__name__contains='Родитель')
+            'students': students,
+            'student_user': User.objects.filter(profile__role__name ='Студент'),
+            'parent_user': User.objects.filter(profile__role__name ='Родитель')
         })
         return context
 
@@ -321,4 +323,21 @@ class UserFamilyCreateView(CreateView):
     def get_success_url(self):
         return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
 
+
+class UserFamilyCreate2View(CreateView):
+    model = Family
+    template_name = 'add.html'
+    fields = ['family_user']
+
+    def form_valid(self, form):
+        self.student_pk = self.kwargs.get('pk')
+        student = get_object_or_404(User, pk=self.student_pk)
+        family_user = form.cleaned_data['family_user']
+        role = Role.objects.get(name='Родитель')
+        family_user.profile.role.add(role)
+        Family.objects.create(student=student, family_user=family_user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
 
