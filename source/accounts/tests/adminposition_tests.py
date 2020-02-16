@@ -60,8 +60,8 @@ class AdminPositionViewTest(TestCase):
         )
 
     def test_created_position(self):
-        response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'test'})
-        self.assertEqual(AdminPosition.objects.get().name, 'test')
+        response = self.client.post(reverse('accounts:add_admin_position'), {'name': 'Test'})
+        self.assertEqual(AdminPosition.objects.get(pk=2).name, 'Test')
         self.assertEqual(response.status_code, 302)
 
     def test_updated_position(self):

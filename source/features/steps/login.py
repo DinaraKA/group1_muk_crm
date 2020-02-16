@@ -1,5 +1,4 @@
 from behave import given, when, then, step
-from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
 

@@ -17,71 +17,45 @@ class AuditoryModelTest(TestCase):
             description='Test Description.'
         )
 
-    def test_name_field(self):
+    def test_field(self):
         auditory = Auditory.objects.get(id=1)
         self.assertEquals(auditory.name, 'Test')
-
-    def test_places_field(self):
         auditory = Auditory.objects.get(id=1)
         self.assertEquals(auditory.places, 33)
-
-    def test_description_field(self):
-        auditory = Auditory.objects.get(id=1)
         self.assertEquals(auditory.description, 'Test Description.')
 
-    def test_name_verbose_name(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('name').verbose_name
+    def test_verbose_name(self):
+        auditory = Auditory.objects.get(id=1)
+        field_label = auditory._meta.get_field('name').verbose_name
         self.assertEquals(field_label, 'Название')
-
-    def test_places_verbose_name(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('places').verbose_name
+        field_label = auditory._meta.get_field('places').verbose_name
         self.assertEquals(field_label, 'Вместимость')
-
-    def test_description_verbose_name(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('description').verbose_name
+        field_label = auditory._meta.get_field('description').verbose_name
         self.assertEquals(field_label, 'Описание')
 
-    def test_name_max_length(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('name').max_length
+    def test_length(self):
+        auditory = Auditory.objects.get(id=1)
+        field_label = auditory._meta.get_field('name').max_length
         self.assertEquals(field_label, 100)
-
-    def test_description_max_length(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('description').max_length
+        field_label = auditory._meta.get_field('description').max_length
         self.assertEquals(field_label, 2000)
 
-    def test_name_blank(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('name').blank
+    def test_blank(self):
+        auditory = Auditory.objects.get(id=1)
+        field_label = auditory._meta.get_field('name').blank
         self.assertEquals(field_label, False)
-
-    def test_places_blank(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('places').blank
+        field_label = auditory._meta.get_field('places').blank
+        self.assertEquals(field_label, True)
+        field_label = auditory._meta.get_field('description').blank
         self.assertEquals(field_label, True)
 
-    def test_description_blank(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('description').blank
-        self.assertEquals(field_label, True)
-
-    def test_name_null(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('name').null
+    def test_null(self):
+        auditory = Auditory.objects.get(id=1)
+        field_label = auditory._meta.get_field('name').null
         self.assertEquals(field_label, False)
-
-    def test_places_null(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('places').null
+        field_label = auditory._meta.get_field('places').null
         self.assertEquals(field_label, True)
-
-    def test_description_null(self):
-        passport = Auditory.objects.get(id=1)
-        field_label = passport._meta.get_field('description').null
+        field_label = auditory._meta.get_field('description').null
         self.assertEquals(field_label, True)
 
 

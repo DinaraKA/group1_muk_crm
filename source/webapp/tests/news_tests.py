@@ -49,7 +49,7 @@ class NewsModelTest(TestCase):
         self.assertEqual(str(news.text), news.text)
 
 
-class NewsListViewTest(TestCase):
+class NewsSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 

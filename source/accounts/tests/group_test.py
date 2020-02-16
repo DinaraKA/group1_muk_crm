@@ -70,60 +70,6 @@ class GroupFormTest(TestCase):
         self.assertEquals(len(form.errors), 5)
 
 
-class GroupViewTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        User.objects.create(first_name='Emir', last_name='Karamoldoev',
-                            username='karamoldoevee', password='aw12345678')
-        User.objects.create(first_name='Emir2', last_name='Karamoldoev2',
-                            username='karamoldoevee2', password='aw12345678')
-        Group.objects.create(name='Test', starosta_id=1, kurator_id=2, started_at='2020-06-06')
-
-    def test_group_list(self):
-        response = self.client.get(reverse('accounts:groups'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Test')
-
-    def test_created_group(self):
-        response = self.client.post(reverse('accounts:add_group'), {
-            'name': 'Test',
-            'students': None,
-            'starosta': None,
-            'kurator': None,
-            'started_at': '2020-06-06'
-        })
-        print(Group.objects.get(pk=3).starosta)
-        self.assertEqual(Group.objects.get(pk=1).name, 'Test')
-        self.assertEqual(response.status_code, 302)
-
-    def test_updated_group(self):
-        group = Group.objects.get(id=1)
-        response = self.client.post(
-            reverse('accounts:change_group', kwargs={'pk': group.pk}),
-            {
-                'name': 'NewTest'
-            })
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(Group.objects.get().name, 'NewTest')
-
-    def test_deleted_group(self):
-        group = Group.objects.get(id=1)
-        response = self.client.delete(
-            reverse_lazy('accounts:delete_group', kwargs={'pk': group.pk}),
-            {
-                'name': 'Test'
-            })
-
-        self.assertEqual(response.status_code, 302)
-        response = self.client.get(reverse_lazy('accounts:delete_group', kwargs={'pk': group.pk}),
-                                   {'name': 'Test'})
-        self.assertEqual(response.status_code, 404)
-
-        self.assertFalse(Group.objects.filter(pk=group.pk).exists())
-
-
 class GroupSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()

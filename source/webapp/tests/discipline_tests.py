@@ -29,7 +29,7 @@ class DisciplineModelTest(TestCase):
         self.assertEquals(expected_object_name, str(discipline))
 
 
-class DisciplineViewTest(TestCase):
+class DisciplineSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
