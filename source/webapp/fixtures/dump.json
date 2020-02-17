@@ -3,11 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-<<<<<<< HEAD
-    "last_login": "2020-02-17T09:13:00.477Z",
-=======
     "last_login": "2020-02-17T09:53:05.388Z",
->>>>>>> personalgrades
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -24,11 +20,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-<<<<<<< HEAD
-    "last_login": "2020-02-14T18:25:18.548Z",
-=======
     "last_login": "2020-02-17T09:53:56.265Z",
->>>>>>> personalgrades
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -300,11 +292,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$H7LZL8jQVCF5$ZxToCG6ggi5R4HByoE/PCCaqQ+C1/rD6+Ngavzx140M=",
-<<<<<<< HEAD
-    "last_login": "2020-02-14T18:27:11.296Z",
-=======
     "last_login": "2020-02-17T09:37:10.226Z",
->>>>>>> personalgrades
     "is_superuser": false,
     "username": "teacher-2",
     "first_name": "\u0424\u0430\u0440\u0438\u0434",
