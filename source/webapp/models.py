@@ -115,7 +115,6 @@ class Journal(models.Model):
     def __str__(self):
         return self.student.last_name + self.student.first_name
 
-
     def avg_grade(self):
         grades = Grade.objects.filter(grade=self.pk)
         count = 0

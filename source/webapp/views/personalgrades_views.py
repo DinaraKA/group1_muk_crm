@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
+
+from accounts.models import Family
 from webapp.forms import FullSearchForm
 from webapp.models import Journal
 
@@ -24,6 +26,7 @@ class PersonalGradesDetailView(DetailView):
         context.update({
             'student': student,
             'profiles': student_marks,
+            'family_users': Family.objects.filter(family_user=self.request.user),
         })
         return context
 
