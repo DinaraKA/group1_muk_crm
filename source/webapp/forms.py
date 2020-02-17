@@ -1,20 +1,15 @@
 from django import forms
-<<<<<<< HEAD
-from .models import Schedule, Lesson, Discipline
+from .models import Schedule, Lesson, Theme, Discipline
 from django.forms import DateInput
-=======
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
-from .models import Schedule, Lesson, Theme
+
 
 
 class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
         fields = ['name']
-
-
->>>>>>> a6762a7497c1ba4512d890dccc132046ac73617c
 
 
 class ScheduleForm(forms.ModelForm):
