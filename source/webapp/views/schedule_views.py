@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
@@ -82,27 +83,33 @@ class ScheduleView(ListView):
         return Schedule.objects.all()
 
 
-class ScheduleAddView(CreateView):
+class ScheduleAddView(PermissionRequiredMixin, CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
+    permission_required = "webapp.add_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleUpdateView(UpdateView):
+class ScheduleUpdateView(PermissionRequiredMixin, UpdateView):
     model = Schedule
     template_name = 'change.html'
     form_class = ScheduleForm
+    permission_required = "webapp.change_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleDeleteView(DeleteView):
+class ScheduleDeleteView(PermissionRequiredMixin, DeleteView):
     model = Schedule
     template_name = 'delete.html'
+    permission_required = "webapp.delete_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')

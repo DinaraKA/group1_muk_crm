@@ -4,8 +4,10 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Роли</h2>
-            <a href="{% url 'accounts:role_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить роль</a>
+            <h1>Роли</h1>
+            {% if perms.webapp.add_role %}
+                <a href="{% url 'accounts:role_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить роль</a>
+            {% endif %}
             <thead>
                 <tr>
                    <th scope="col">#</th>
@@ -19,8 +21,12 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ role.name }}</td>
-                        <td class="symbol"><a class='update' href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a class='delete' href="{%  url 'accounts:role_delete' role.pk %}">X</a></td>
+                        {% if perms.webapp.change_role %}
+                            <td class="symbol"><a class='update' href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
+                        {% endif %}
+                        {% if perms.webapp.delete_role %}
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:role_delete' role.pk %}">&times;</a></td>
+                        {% endif %}
                     </tr>
                 </tbody>
             {% endfor %}

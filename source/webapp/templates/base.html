@@ -16,10 +16,15 @@
     {% block styles %}{% endblock %}
 </head>
 <body>
+<div class="main">
 <nav class="navbar-my">
     <div class="container">
         <ul class="menu">
+        {% if request.user.is_staff %}
+            <li><span onclick="openNav()">&#9776; Меню</span></li>
+        {% endif %}
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
+
 {#            <li><a href="#">Миссия и стратегия</a></li>#}
 {#            <li><a href="#">Специальности</a></li>#}
             <li><a href="{% url 'webapp:news' %}">Новости</a></li>
@@ -29,7 +34,7 @@
 {#            <li><a href="#">Правовая информация</a></li>#}
 {#            <li><a href="#">Выпускники</a></li>#}
             <li><a href="#">Контакты</a></li>
-            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>
+{#            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>#}
             <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
             {% if request.user in family %}{{ yes }}{% endif %}
@@ -55,12 +60,22 @@
         </ul>
     </div>
 </nav>
+{#<div class="sidenav">#}
+{#{% include 'partial/staff_menu.html' %}#}
+{#</div>#}
 <div class="carousel">
     {% block carousel %} {% endblock %}
 </div>
+{#<div class="side_nav">#}
+{#{% include 'partial/staff_menu.html' %}#}
+{#</div>#}
 <div class="container">
     {% block content %}{% endblock %}
 </div>
+</div>
+{% include 'partial/staff_menu.html' %}
+
+
 <footer>
     {% block footer %}{% endblock %}
 </footer>
@@ -74,6 +89,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script type="application/javascript" src="{% static "js/main.js" %}"></script>
+
+
 {% block scripts %}{% endblock %}
 </body>
 </html>
+
+

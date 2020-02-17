@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .settings_local import DB_NAME, DB_USER, DP_PASSWORD, DP_HOST, DP_PORT
+from .settings_local import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'accounts',
     'phone_field',
     'behave_django',
-    'bootstrap_datepicker',
 ]
 
 MIDDLEWARE = [
@@ -90,11 +89,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': DB_NAME,
         'USER': DB_USER,
-        'PASSWORD': DP_PASSWORD,
-        'HOST': DP_HOST,
-        'PORT': DP_PORT,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
+
 
 
 

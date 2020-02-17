@@ -35,6 +35,22 @@
                 {% for items in event %}
                     <td>
                         {% for item in items %}
+                            {% if perms.webapp.change_schedule %}
+                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
+                            {% endif %}
+                            {% if request.user == item.teacher or perms.webapp.delete_schedule %}
+                                <h5>Группа:{{ item.group }}</h5>
+                                <p class="my-0">{{ item.auditoriya }}</p>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                            {% elif item.group in groups %}
+                                <h5>Группа:{{ item.group }}</h5>
+                                <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                <p class="my-0">{{ item.discipline }}</p>
+                                <p class="my-0">{{ item.auditoriya }}</p>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                <hr style="border-color: rgb(66 66 66)">
+                            {% endif %}
+                            </a>
                             {% if request.user.is_superuser %}
                                 <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
                                     <h5>Группа:{{ item.group }}</h5>
