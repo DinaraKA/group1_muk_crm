@@ -207,3 +207,6 @@ h1 {
     background: lightgray;
     width: 10%;
 }
+.label-form{
+    display: inline-flex;
+}

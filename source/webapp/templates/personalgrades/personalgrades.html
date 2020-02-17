@@ -6,22 +6,22 @@
 
 {% block content %}
     {% regroup profiles by date|date:"d.m.Y"  as profile_list %}
-     <div class="container">
-        <h2 class="mt-5 mb-5" style="color: blue; font-weight: bold">Успеваемость студента {{ student.first_name}}  {{ student.last_name}} </h2>
+    <div class="container">
+        <h2 class="text-center mt-5 mb-5" style="color: darkslategray; font-weight: bold; font-size: 30px;">Успеваемость студента: {{ student.first_name}}  {{ student.last_name}} </h2>
  {% include 'partial/simple_search.html' %}
     {% for profile in profile_list%}
-        <table class="table table-bordered mb-5 pb-4">
-            <thead class="thead-light">
+        <table class="table table-bordered mb-5 pb-4" style="font-size: 18px;">
+            <thead class="thead-light" style="font-size: 18px; font-weight: bolder">
                 <tr>
                     <th>Дисциплина</th>
                     <th>Оценка</th>
                 </tr>
             </thead>
             <tbody>
-                <p>{{ profile.grouper }}</p>
+                <p class="text-center" style="font-weight: bold; font-size: 18px; color:darkblue">{{ profile.grouper }}</p>
                 {% for day in profile.list %}
                     <tr>
-                        <td>{{ day.discipline }}</td>
+                        <td class="dis" style="width:800px">{{ day.discipline }}</td>
                         <td>{{ day.grade }}</td>
                     </tr>
                 {% endfor %}

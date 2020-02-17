@@ -1,5 +1,6 @@
 from django import forms
 from .models import Schedule, Lesson, Discipline
+from django.forms import DateInput
 
 
 class ScheduleForm(forms.ModelForm):
@@ -9,10 +10,11 @@ class ScheduleForm(forms.ModelForm):
         fields = ['lesson', 'day', 'discipline', 'group', 'teacher', 'auditoriya']
 
 
-YEARS = [x for x in range(2019,2021)]
+class DateJournalInput(DateInput):
+    input_type = 'date'
 
 
 class FullSearchForm(forms.Form):
-    start_date= forms.DateField(label='Введите дату начала!', widget=forms.SelectDateWidget(years=YEARS))
-    end_date = forms.DateField(label='Введите дату окончания!', widget=forms.SelectDateWidget(years=YEARS))
+    start_date = forms.DateField(label='Введите дату начала', required=False, widget=DateJournalInput)
+    end_date = forms.DateField(label='Введите дату окончания', required=False, widget=DateJournalInput)
     discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине")
