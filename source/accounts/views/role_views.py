@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from accounts.models import Role
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -5,23 +6,25 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.shortcuts import render
 
-class RoleIndexView(ListView):
+class RoleIndexView(PermissionRequiredMixin, ListView):
     template_name = 'role/roles.html'
     model = Role
     context_object_name = 'roles'
-    # paginate_by = 4
-    # paginate_orphans = 0
-    # page_kwarg = 'page'
+    page_kwarg = 'page'
+    permission_required = "webapp.view_role"
+    permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class RoleCreateView(CreateView):
+class RoleCreateView(PermissionRequiredMixin, CreateView):
     model = Role
     template_name = 'add.html'
     fields = ['name']
+    permission_required = "webapp.add_role"
+    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -38,10 +41,12 @@ class RoleCreateView(CreateView):
         return redirect('accounts:roles_list')
 
 
-class RoleUpdateView(UpdateView):
+class RoleUpdateView(PermissionRequiredMixin, UpdateView):
     model = Role
     template_name = 'change.html'
     fields = ['name']
+    permission_required = "webapp.change_role"
+    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -66,7 +71,9 @@ class RoleUpdateView(UpdateView):
     #     return redirect('accounts:roles_list')
 
 
-class RoleDeleteView(DeleteView):
+class RoleDeleteView(PermissionRequiredMixin, DeleteView):
     model = Role
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:roles_list')
+    permission_required = "webapp.delete_role"
+    permission_denied_message = "Доступ запрещен"

@@ -1,62 +1,34 @@
 {% extends 'base.html' %}
+
 {% block title %}
-    <p>Дневник</p>
+    Дневник
 {% endblock %}
+
 {% block content %}
-        <div class="lessons">
-        <br>
-            <h3 class="text-center">Успеваемость: </h3>
-        <br>
-    <table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Название предмета</th>
-      <th class="text-center">
-        Дата
-      </th>
-{#      <th class="text-center">#}
-{#        Время окончания#}
-{#      </th>#}
-    </tr>
-  </thead>
-        {% for discipline in disciplines %}
-  <tbody>
-    <tr>
-      <th class="text-nowrap text-center" scope="row">{{ discipline.name }}</th>
-        {% for grade in journal.grades %}
-      <td class="text-center">{{grade}}</td>
-            {% endfor %}
-{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-        </div>
-{#     <div class="lessons">#}
-{#        <br>#}
-{#            <h3 class="text-center">Суббота:</h3>#}
-{#        <br>#}
-{#    <table class="table table-bordered table-striped">#}
-{#  <thead>#}
-{#    <tr>#}
-{#      <th></th>#}
-{#      <th class="text-center">#}
-{#        Время начала#}
-{#      </th>#}
-{#      <th class="text-center">#}
-{#        Время окончания#}
-{#      </th>#}
-{#    </tr>#}
-{#  </thead>#}
-{#        {% for lesson in saturdaylessons %}#}
-{#  <tbody>#}
-{#    <tr>#}
-{#      <th class="text-nowrap text-center" scope="row">{{ lesson.name }}</th>#}
-{#      <td class="text-center">{{lesson.start_time|time:"H:i"}}</td>#}
-{#      <td class="text-center">{{lesson.end_time|time:"H:i"}}</td>#}
-{#    </tr>#}
-{#  {% endfor %}#}
-{#  </tbody>#}
-{#</table>#}
-{#        </div>#}
+
+    {% regroup profiles by date|date:"d.m.Y"  as profile_list %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-5" style="color: darkslategray; font-weight: bold; font-size: 30px;">Успеваемость студента: {{ student.first_name}}  {{ student.last_name}} </h2>
+ {% include 'partial/simple_search.html' %}
+    {% for profile in profile_list%}
+        <table class="table table-bordered mb-5 pb-4" style="font-size: 18px;">
+            <thead class="thead-light" style="font-size: 18px; font-weight: bolder">
+                <tr>
+                    <th>Дисциплина</th>
+                    <th>Оценка</th>
+                </tr>
+            </thead>
+            <tbody>
+                <p class="text-center" style="font-weight: bold; font-size: 18px; color:darkblue">{{ profile.grouper }}</p>
+                {% for day in profile.list %}
+                    <tr>
+                        <td class="dis" style="width:800px">{{ day.discipline }}</td>
+                        <td>{{ day.grade }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {%  endfor %}
+</div>
 {% endblock %}
+

@@ -1,0 +1,20 @@
+{% load widget_tweaks %}
+{% block content %}
+    <form action="" method="get">
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <p class="form-error">{{ error }}</p>
+        {% endfor %}
+
+        {% for field in form %}
+             <div class="label-form mt-3">
+            <p class="ml-4" style="width: content-box; font-size: 18px;"><label for="{{ field.id_for_label }}">{{ field.label }}</label>: {{ field }}</p>
+             </div>
+            {% for error in field.errors %}
+                <p class="form-error">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        <p class="text-left ml-4"><input type="submit" value="Найти" class="btn btn-outline-dark font-weight-bolder" style="width: 125px; margin-bottom: 25px;"></p>
+    </form>
+{% endblock %}

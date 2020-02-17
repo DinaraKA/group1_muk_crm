@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}
     <p>Расписание звонков</p>
+    <a href="{% url 'webapp:lesson_create'%}" class="btn btn-success  ml-5 mt-3">+ Добавить пару</a>
 {% endblock %}
 {% block content %}
         <div class="lessons">

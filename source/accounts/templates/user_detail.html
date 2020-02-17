@@ -4,15 +4,20 @@
 {% block content %}
     <div class="lk-content">
         <h1 class="text-center">Личный кабинет</h1>
-        <div class="row">
-            <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+        <div class="row" style="background-color: lightgray">
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-3" style="width: 25%">
                 <div class="mt-3">
-                    {% if user_obj.profile.photo.url %}
+                    {% if user_obj.profile.photo %}
                         <img src="{{ user_obj.profile.photo.url }}" class="user_photo">
                     {% endif %}
+                </div>
+            </div>
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-5" style="width: 25%">
+                <div class="mt-3">
                     <p><b>Логин:</b> {{ user_obj.username }}</p>
                     <p><b>Имя:</b> {{ user_obj.first_name }}</p>
                     <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
+                    {% if user_obj.profile.patronymic %}
                 {% for gr in group %}
                 <p><b>Группа:</b> {{ gr.name }}</p>
                 {% endfor %}
@@ -23,35 +28,110 @@
                     {% if user_obj.profile.phone_number %}
                         <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
                     {% endif %}
+                    {% if user_obj.profile.address_fact %}
                         <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
-                    {% if user_obj.profile.role %}
-                        <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}</p>
                     {% endif %}
+                    {% if user_obj.profile.role %}
+                        <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}
+                            {% if request.user in role_student %} - <b>Группа:</b>
+                                {% for group in groups_for_student %} {{ group }} {% endfor %}{% endif %}</p>
+                    {% endif %}
+                    {% if user_obj.profile.status %}
                         <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
+                    {% endif %}
                     {% if user_obj.profile.social_status %}
                         <p><b>Социальный статус:</b> {{ user_obj.profile.social_status }}</p>
                     {% endif %}
                     {% if user_obj.profile.admin_position %}
                         <p><b>Должность:</b> {{ user_obj.profile.admin_position }}</p>
                     {% endif %}
+                </div>
+            </div>
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-4" style="width: 25%">
+                <div>
                     {% if user_obj.passport %}
-                        <div class="passport">
+                        <div class="passport mt-3">
                             <h5><b>Паспортные данные:</b></h5>
                             <p><b>Серия:</b> {{ user_obj.passport.series }}</p>
                             <p><b>Кем выдан:</b> {{ user_obj.passport.issued_by }}</p>
                             <p><b>Дата выдачи:</b> {{ user_obj.passport.issued_date }}</p>
-                            <p><b>Адрес:</b> {{ user_obj.passport.address}}</p>
+                            <p><b>Адрес:</b> {{ user_obj.passport.address }}</p>
                             <p><b>ИНН:</b> {{ user_obj.passport.inn }}</p>
                             <p><b>Национальность:</b> {{ user_obj.passport.nationality }}</p>
                             <p><b>Пол:</b> {{ user_obj.passport.sex }}</p>
                             <p><b>Дата рождения:</b> {{ user_obj.passport.birth_date }}</p>
                         </div>
                     {% endif %}
-                    <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Редактировать</a>
-                    <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-outline-primary  ml-5 mt-3">Изменить пароль</a>
-                    <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-outline-danger  ml-5 mt-3">Удалить</a>
+                </div>
             </div>
         </div>
     </div>
+    <div class="row" style="justify-content: center">
+        <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3" style="width: 15%"><i
+                class="fas fa-pencil-alt mx-2"></i>Редактировать</a>
+        <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3"
+           style="width: 15%"><i class="fas fa-key mx-2"></i>Изменить
+            пароль</a>
+        <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-danger  ml-5 mt-3" style="width: 15%"><i
+                class="far fa-trash-alt mx-2"></i>Удалить</a>
+        {% if user_obj in student_user %}
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle ml-5 mt-3" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    + Добавить родителя
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'accounts:user_family_create' user_obj.pk %}">Создать
+                        пользоваеля родитель</a>
+                    <a class="dropdown-item" href="{% url 'accounts:user_family_create2' user_obj.pk %}">Добавить
+                        родителя из существующих пользователей</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
+    <table class="table my-5">
+        {% if user_obj in student_user %}
+            {#            {% if family %}#}
+            <thead>
+            <tr>
+                <th scope="col">Родители</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Почта</th>
+                <th scope="col">Контакты</th>
+            </tr>
+            </thead>
+            {% for parent in family %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ parent }}</td>
+                    <td>{{ parent.family_user.email }}</td>
+                    <td>{{ parent.family_user.profile.phone_number }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        {% endif %}
+        {% if user_obj in parent_user %}
+            {#            {% if parent_user %}#}
+            <thead>
+            <tr>
+                <th scope="col">Студенты</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Группа</th>
+            </tr>
+            </thead>
+            {% for student in students %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ student.student }}</td>
+                    {% for group in groups %}
+                        <td>{{ group.name }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            {% endfor %}
+        {% endif %}
+        {#    {% endif %}#}
+    </table>
 {% endblock %}

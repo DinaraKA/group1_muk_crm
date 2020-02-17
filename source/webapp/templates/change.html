@@ -4,7 +4,8 @@
 {% block content %}
     <h1>Обновление {{ title }}</h1>
      <form method="POST">
-        {% include 'partial/form.html' with button_text='Обновить'%}
+        {% include 'partial/form.html'%}
+        <p class="text-center"><input type="submit" value="Обновить" class="btn btn-primary"></p>
      </form>
         {% for message in messages %}
 <h3 class="text-center" style="color: red">

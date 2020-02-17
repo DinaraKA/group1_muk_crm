@@ -1,12 +1,13 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView
-from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm
-from accounts.models import Passport, Profile, Role, Status, Group
+from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
+from accounts.models import Passport, Profile, Role, Status, Family, Group
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
@@ -80,17 +81,19 @@ def register_view(request, *args, **kwargs):
             profile.save()
             profile.role.set(role)
             login(request, user)
-            return HttpResponseRedirect(reverse('accounts:detail', kwargs={"pk": user.pk}))
+            return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
 
 
-class UserPersonalInfoChangeView(UpdateView):
+class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_info_change.html'
     form_class = UserChangeForm
     context_object_name = 'user_obj'
+    permission_required = "accounts.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
@@ -127,58 +130,63 @@ class UserPersonalInfoChangeView(UpdateView):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        # return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": self.object.pk}))
-        return redirect('accounts:user_detail', pk=self.object.pk)
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
+    permission_required = "accounts.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self):
-        return reverse('accounts:detail', kwargs={"pk": self.object.pk})
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView(DetailView):
+class UserDetailView(PermissionRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+    permission_required = "accounts.view_user"
+    permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, **kwargs):
-        context = super(UserDetailView, self).get_context_data(**kwargs)
-        user = self.object = self.get_object()
-        context['group'] = Group.objects.filter(students__username__contains=user)
+        context = super().get_context_data(**kwargs)
+        user = User.objects.get(pk=self.kwargs['pk'])
+        students = Family.objects.filter(family_user=user)
+        role_student = User.objects.filter(profile__role__name__icontains='Студент')
+        context.update({
+            'role_student': role_student,
+            'family':Family.objects.filter(student=user),
+            'groups': Group.objects.filter(students__in=students.values('student')),
+            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'students': students,
+            'student_user': User.objects.filter(profile__role__name ='Студент'),
+            'parent_user': User.objects.filter(profile__role__name ='Родитель')
+        })
         return context
 
 
-class UserListView(ListView):
+class UserListView(PermissionRequiredMixin, ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(UserListView, self).get_context_data(**kwargs)
-    #     # user = self.object = self.get_o
-    #     # print(user)
-    #     context['group'] = Group.objects.all()
-    #     print(context, 'CONTEXT')
-    #     return context
+    permission_required = "accounts.view_user"
+    permission_denied_message = "Доступ запрещен"
 
 
-class UserDeleteView(DeleteView):
+class UserDeleteView(PermissionRequiredMixin, DeleteView):
     model = User
     template_name = 'user_delete.html'
     success_url = reverse_lazy('webapp:index')
     context_object_name = 'user'
-    # permission_required = 'accounts.user_delete'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = 'accounts.delete_user'
+    permission_denied_message = '403 Доступ запрещён!'
 
     def delete(self, request, *args, **kwargs):
         user = self.object = self.get_object()
@@ -203,13 +211,15 @@ class UserSearchView(FormView):
         return redirect(url)
 
 
-class SearchResultsView(ListView):
+class SearchResultsView(PermissionRequiredMixin, ListView):
     # model = User
     model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'
     paginate_by = 5
     paginate_orphans = 2
+    permission_required = "webapp.view_profile"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -275,12 +285,60 @@ class StudentListView(ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = "webapp.view_user"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         status = self.kwargs.get('status')
         users = User.objects.filter(profile__status__name__contains=status)
         print(users)
         return users
+
+class UserFamilyCreateView(CreateView):
+    template_name = 'user_family_create.html'
+    form_class = UserFamilyForm
+
+
+    def form_valid(self, form):
+        self.student_pk = self.kwargs.get('pk')
+        student = get_object_or_404(User, pk=self.student_pk)
+        user = User(
+            first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name'],
+            username=form.cleaned_data['username'],
+            email=form.cleaned_data['email']
+        )
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        profile = Profile(
+            user=user,
+            phone_number=form.cleaned_data['phone_number']
+        )
+        profile.save()
+        role = Role.objects.get(name='Родитель')
+        profile.save()
+        profile.role.add(role)
+        Family.objects.create(student=student, family_user= user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
+
+
+class UserFamilyCreate2View(CreateView):
+    model = Family
+    template_name = 'add.html'
+    fields = ['family_user']
+
+    def form_valid(self, form):
+        self.student_pk = self.kwargs.get('pk')
+        student = get_object_or_404(User, pk=self.student_pk)
+        family_user = form.cleaned_data['family_user']
+        role = Role.objects.get(name='Родитель')
+        family_user.profile.role.add(role)
+        Family.objects.create(student=student, family_user=family_user)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
 
