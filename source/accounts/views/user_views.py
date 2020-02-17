@@ -92,7 +92,7 @@ class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
     template_name = 'user_info_change.html'
     form_class = UserChangeForm
     context_object_name = 'user_obj'
-    permission_required = "webapp.change_user"
+    permission_required = "accounts.change_user"
     permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
@@ -139,7 +139,7 @@ class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
-    permission_required = "webapp.change_user"
+    permission_required = "accounts.change_user"
     permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
@@ -153,7 +153,7 @@ class UserDetailView(PermissionRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
-    permission_required = "webapp.view_user"
+    permission_required = "accounts.view_user"
     permission_denied_message = "Доступ запрещен"
 
 
@@ -161,7 +161,7 @@ class UserListView(PermissionRequiredMixin, ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    permission_required = "webapp.view_user"
+    permission_required = "accounts.view_user"
     permission_denied_message = "Доступ запрещен"
 
 
