@@ -37,6 +37,8 @@
 {#            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>#}
             <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
+            {% if request.user in family %}{{ yes }}{% endif %}
+
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
             {% endif %}
