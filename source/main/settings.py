@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .settings_local import DB_NAME, DB_USER, DP_PASSWORD, DP_HOST, DP_PORT
+from .settings_local import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,13 +21,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
+# SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
 
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -84,17 +87,27 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME,
+#         'USER': DB_USER,
+#         'PASSWORD': DP_PASSWORD,
+#         'HOST': DP_HOST,
+#         'PORT': DP_PORT,
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DP_PASSWORD,
-        'HOST': DP_HOST,
-        'PORT': DP_PORT,
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql'),
+        "NAME": os.environ.get("SQL_DATABASE", DB_NAME),
+        "USER": os.environ.get("SQL_USER", "postgres"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "0007"),
+        "HOST": os.environ.get("SQL_HOST", DB_HOST),
+        # "PORT": os.environ.get("SQL_PORT", "5444"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
-
 
 
 

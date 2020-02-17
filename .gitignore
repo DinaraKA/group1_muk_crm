@@ -3,9 +3,11 @@ virtualenv
 .idea
 .vscode
 .DS_Store
+.env.dev
 __pycache__
 *.pyc
 *.log
 uploads
 *.sqlite3
 settings_local.py
+
