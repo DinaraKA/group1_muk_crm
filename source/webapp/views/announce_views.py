@@ -34,7 +34,7 @@ class AnnouncementUpdateView(UpdateView):
     context_object_name = 'announcement'
 
     def get_success_url(self):
-        return reverse('webapp:announce_detail')
+        return reverse('webapp:announcements')
 
 
 class AnnouncementDeleteView(DeleteView):

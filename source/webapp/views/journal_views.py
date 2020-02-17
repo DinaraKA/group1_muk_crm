@@ -55,7 +55,7 @@ class GradeforStudentCreateView(CreateView):
 class JournalUpdateView(UpdateView):
     model = Journal
     template_name = 'change.html'
-    fields = ['theme']
+    fields = ['discipline', 'date', 'theme']
 
     def get_success_url(self):
         return reverse('webapp:journal')

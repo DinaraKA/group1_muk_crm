@@ -7,12 +7,23 @@ from django.contrib.auth.models import User
 class ScheduleModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Lesson.objects.create(index=1, is_saturday=False, start_time='07:00', end_time='08:00')
+        Lesson.objects.create(index=1, is_saturday=False, start_time='12:00', end_time='12:20')
         User.objects.create(username='Test')
         Auditory.objects.create(name='555')
         Discipline.objects.create(name='Английский язык')
         Group.objects.create(name="test", starosta_id=1, kurator_id=1, started_at='2020-01-20')
-        Schedule.objects.create(lesson_id=1, day=DAY_CHOICES[0], teacher_id=1, auditoriya_id=1, discipline_id=1, group_id=1)
+        Schedule.objects.create(lesson_id=1, day=DAY_CHOICES[0], teacher_id=1, auditoriya_id=1, discipline_id=1,
+                                group_id=1)
+
+    def test_object_is_object(self):
+        schedule = Schedule.objects.get(id=1)
+        self.assertEquals(schedule.lesson.index, 1)
+        self.assertEquals(schedule.lesson.index, 1)
+        self.assertEquals(schedule.day, 'Понедельник')
+        self.assertEquals(schedule.teacher.username, 'Test')
+        self.assertEquals(schedule.auditoriya.name, '555')
+        self.assertEquals(schedule.discipline.name, 'Английский язык')
+        self.assertEquals(schedule.group.name, 'test')
 
     def test_name_label(self):
         schedule = Schedule.objects.get(id=1)
