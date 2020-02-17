@@ -38,7 +38,7 @@
                 <ul>
                     {% if request.user.is_authenticated %}
                         <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}" class="nav-link">
-                            Привет, {{ request.user.username }}!
+                            Привет, {{ request.user }}!
                         </a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link logout">Выход</a></li>
                     {% else %}
