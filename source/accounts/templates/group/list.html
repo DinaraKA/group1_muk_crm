@@ -1,29 +1,73 @@
+{##}
+{#{% extends 'base.html' %}#}
+{#{% load widget_tweaks %}#}
+{#{% block menu %}#}
+{#{% endblock %}#}
+{#{% block content %}#}
+{#    <h1 style="padding-top: 20px">Группы</h1>#}
+{#    {% if perms.accounts.add_group %}#}
+{#        <a href="{% url 'accounts:add_group'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>#}
+{#    {% endif %}#}
+{#    {% for object in object_list %}#}
+{#    <div class="object">#}
+{#        <div class="row my-5">#}
+{#            <div class="left col-8 justify-content-center">#}
+{#                <h5>{{ object.pk }}.{{ object.name }}</h5>#}
+{#                {% for student in object.students.all %}#}
+{#                    {{ student }}#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="right col-4 d-flex justify-content-end">#}
+{#                <p class="mr-5"><a href="{% url 'accounts:change_group' object.pk %}" class="update">Редактироать</a></p>#}
+{#                <p class="mr-3"><a href="{% url 'accounts:delete_group' object.pk %}" class="delete">Удалить</a></p>#}
+{#            </div>#}
+{#            <div>#}
+{#                <p class="mr-3"><a href="{% url 'accounts:detail_group' object.pk %}" class="delete">Подробнее</a></p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    {% endfor %}#}
+{#        {% include 'partial/pagination.html' %}#}
+{#{% endblock %}#}
 
 {% extends 'base.html' %}
-{% load widget_tweaks %}
-{% block menu %}
-{% endblock %}
+
 {% block content %}
-    <h1 style="padding-top: 20px">Группы</h1>
-    <a href="{% url 'accounts:add_group'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>
-    {% for object in object_list %}
-    <div class="object">
-        <div class="row my-5">
-            <div class="left col-8 justify-content-center">
-                <h5>{{ object.pk }}.{{ object.name }}</h5>
-                {% for student in object.students.all %}
-                    {{ student }}
-                {% endfor %}
-            </div>
-            <div class="right col-4 d-flex justify-content-end">
-                <p class="mr-5"><a href="{% url 'accounts:change_group' object.pk %}" class="update">Редактироать</a></p>
-                <p class="mr-3"><a href="{% url 'accounts:delete_group' object.pk %}" class="delete">Удалить</a></p>
-            </div>
-            <div>
-                <p class="mr-3"><a href="{% url 'accounts:detail_group' object.pk %}" class="delete">Подробнее</a></p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-        {% include 'partial/pagination.html' %}
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <table class="table">
+            <h1>Группы</h1>
+        {% if perms.accounts.add_group %}
+            <a href="{% url 'accounts:add_group'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>
+        {% endif %}
+            <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Название</th>
+                   <th class="symbol" scope="col">Редактировать</th>
+                   <th class="symbol" scope="col">Удалить</th>
+                   <th class="symbol" scope="col">Подробнее</th>
+                </tr>
+            </thead>
+            {% for object in object_list %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ object.name }}</td>
+                        {% if perms.accounts.change_group %}
+                            <td class="symbol"><a class='update' href="{% url 'accounts:change_group' object.pk %}">&#x270E;</a></td>
+                        {% endif %}
+                        {% if perms.accounts.delete_group %}
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_group' object.pk %}">&times;</a></td>
+                        {% endif %}
+                        {% if perms.accounts.view_group %}
+                            <td class="symbol"><a class='detail' href="{%  url 'accounts:detail_group' object.pk %}">&#8594;</a></td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </form>
 {% endblock %}
+
+

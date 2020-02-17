@@ -25,7 +25,7 @@
                             <td class="symbol"><a class='update' href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
                         {% endif %}
                         {% if perms.accounts.delete_status %}
-                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">&times;</a></td>
                         {% endif %}
                     </tr>
                 </tbody>

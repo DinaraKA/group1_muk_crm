@@ -25,7 +25,7 @@
                             <td class="symbol"><a class='update' href="{% url 'accounts:change_admin_position' object.pk %}">&#x270E;</a></td>
                         {% endif %}
                         {% if perms.accounts.delete_adminposition %}
-                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_admin_position' object.pk %}">X</a></td>
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_admin_position' object.pk %}">&times;</a></td>
                         {% endif %}
                     </tr>
                 </tbody>
