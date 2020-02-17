@@ -10,6 +10,7 @@ class PersonalGradesDetailView(DetailView):
     model = Journal
     ordering = ['discipline']
 
+
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
         return super().get(request, *args, **kwargs)
