@@ -32,7 +32,9 @@
             <li><a href="{% url 'accounts:groups' %}">Группы</a></li>
             <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
-{#            <li><a href="{% url 'webapp:personal_grades' %}">Дневник</a></li>#}
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
+            {% endif %}
             <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
             <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
