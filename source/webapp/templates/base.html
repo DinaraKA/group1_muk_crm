@@ -34,32 +34,12 @@
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
 {#            <li><a href="{% url 'webapp:personal_grades' %}">Дневник</a></li>#}
             <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
-            <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Студенты</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'accounts:student_list' "Очная" %}">Очники</a>
-                <a class="dropdown-item" href="{% url 'accounts:student_list' "Заочная" %}">Заочники</a>
-{#          <div class="dropdown-divider"></div>#}
-{#          <a class="dropdown-item" href="#">Something else here</a>#}
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Преподаватели</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'accounts:student_list' "Полная" %}">Полная занятость</a>
-                <a class="dropdown-item" href="{% url 'accounts:student_list' "Часовая" %}">Часовая занятость</a>
-{#          <div class="dropdown-divider"></div>#}
-{#          <a class="dropdown-item" href="#">Something else here</a>#}
-                </div>
-            </li>
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}"  class="nav-link">
-                            Привет, {{ request.user.username }}!
+                        <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}" class="nav-link">
+                            Привет, {{ request.user }}!
                         </a></li>
                         <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link logout">Выход</a></li>
                     {% else %}
