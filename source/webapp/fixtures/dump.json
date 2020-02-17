@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-02-13T04:30:35.458Z",
+    "last_login": "2020-02-17T09:13:00.477Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -20,7 +20,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-    "last_login": "2020-02-13T04:17:16.428Z",
+    "last_login": "2020-02-14T18:25:18.548Z",
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -292,7 +292,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$H7LZL8jQVCF5$ZxToCG6ggi5R4HByoE/PCCaqQ+C1/rD6+Ngavzx140M=",
-    "last_login": "2020-02-13T04:29:38.749Z",
+    "last_login": "2020-02-14T18:27:11.296Z",
     "is_superuser": false,
     "username": "teacher-2",
     "first_name": "\u0424\u0430\u0440\u0438\u0434",
@@ -344,6 +344,14 @@
   "fields": {
     "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
     "expire_date": "2020-01-22T08:23:22.758Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ffcmbe1midkp1wy77bklnrthh7nyz3df",
+  "fields": {
+    "session_data": "ODdiNDM5OWI2ZWZlZDZjYzIxODc3MTkzNDk2MGJmYjk4YjAwZjk3Mjp7Il9hdXRoX3VzZXJfaWQiOiI1NiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiYjUyZWM3NTkxNzQ1ZGM1ZGYzMmVkYjNiMjY2OTM1NzkxOTc3ZjkxNSJ9",
+    "expire_date": "2020-02-28T18:27:11.300Z"
   }
 },
 {
