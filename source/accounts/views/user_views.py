@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -86,11 +87,13 @@ def register_view(request, *args, **kwargs):
     return render(request, 'user_create.html', context={'form': form})
 
 
-class UserPersonalInfoChangeView(UpdateView):
+class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_info_change.html'
     form_class = UserChangeForm
     context_object_name = 'user_obj'
+    permission_required = "webapp.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
@@ -131,11 +134,13 @@ class UserPersonalInfoChangeView(UpdateView):
         return redirect('accounts:user_detail', pk=self.object.pk)
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
+    permission_required = "webapp.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -144,27 +149,29 @@ class UserPasswordChangeView(UpdateView):
         return reverse('accounts:detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView(DetailView):
+class UserDetailView(PermissionRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+    permission_required = "webapp.view_user"
+    permission_denied_message = "Доступ запрещен"
 
 
-class UserListView(ListView):
+class UserListView(PermissionRequiredMixin, ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = "webapp.view_user"
+    permission_denied_message = "Доступ запрещен"
 
 
-class UserDeleteView(DeleteView):
+class UserDeleteView(PermissionRequiredMixin, DeleteView):
     model = User
     template_name = 'user_delete.html'
     success_url = reverse_lazy('webapp:index')
     context_object_name = 'user'
-    # permission_required = 'accounts.user_delete'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = 'accounts.delete_user'
+    permission_denied_message = '403 Доступ запрещён!'
 
     def delete(self, request, *args, **kwargs):
         user = self.object = self.get_object()
@@ -189,13 +196,15 @@ class UserSearchView(FormView):
         return redirect(url)
 
 
-class SearchResultsView(ListView):
+class SearchResultsView(PermissionRequiredMixin, ListView):
     # model = User
     model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'
     paginate_by = 5
     paginate_orphans = 2
+    permission_required = "webapp.view_profile"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -269,8 +278,6 @@ class SearchResultsView(ListView):
         #         # query = query | Q(user__username__icontains=text)
         #         query = query
         #         print(query)
-
-
         return query
 
 
@@ -278,8 +285,8 @@ class StudentListView(ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = "webapp.view_user"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         status = self.kwargs.get('status')
