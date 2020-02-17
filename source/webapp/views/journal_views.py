@@ -11,6 +11,7 @@ class JournalIndexView(ListView):
     template_name = 'journal/list.html'
     model = Journal
     context_object_name = 'journals'
+
     paginate_by = 30
     paginate_orphans = 0
     page_kwarg = 'page'

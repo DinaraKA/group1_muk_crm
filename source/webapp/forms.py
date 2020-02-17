@@ -1,4 +1,8 @@
 from django import forms
+<<<<<<< HEAD
+from .models import Schedule, Lesson, Discipline
+from django.forms import DateInput
+=======
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
 from .models import Schedule, Lesson, Theme
@@ -10,6 +14,7 @@ class ThemeForm(forms.ModelForm):
         fields = ['name']
 
 
+>>>>>>> a6762a7497c1ba4512d890dccc132046ac73617c
 
 
 class ScheduleForm(forms.ModelForm):
@@ -27,3 +32,12 @@ class ScheduleForm(forms.ModelForm):
         }
 
 
+
+class DateJournalInput(DateInput):
+    input_type = 'date'
+
+
+class FullSearchForm(forms.Form):
+    start_date = forms.DateField(label='Введите дату начала', required=False, widget=DateJournalInput)
+    end_date = forms.DateField(label='Введите дату окончания', required=False, widget=DateJournalInput)
+    discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине")

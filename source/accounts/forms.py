@@ -243,3 +243,4 @@ class UserFamilyForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'password', 'password_confirm', 'email', 'phone_number']
+
