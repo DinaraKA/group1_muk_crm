@@ -7,7 +7,7 @@ class GroupListView(ListView):
     template_name = 'group/list.html'
     model = Group
     ordering = ["-name"]
-    context_object_name = 'groups'
+    context_object_name = 'group_list'
     paginate_by = 10
     paginate_orphans = 2
 

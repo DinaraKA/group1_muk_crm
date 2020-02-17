@@ -88,7 +88,7 @@ class UserAdminPosition(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User)
+    students = models.ManyToManyField(User, related_name='students')
     starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
     kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')

@@ -6,4 +6,9 @@
      <form method="POST">
         {% include 'partial/form.html' with button_text='Обновить'%}
      </form>
+        {% for message in messages %}
+<h3 class="text-center" style="color: red">
+    {{ message }}
+</h3>
+    {% endfor %}
 {% endblock %}

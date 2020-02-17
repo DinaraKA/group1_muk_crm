@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView
 from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm
-from accounts.models import Passport, Profile, Role, Status
+from accounts.models import Passport, Profile, Role, Status, Group
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
@@ -149,6 +149,12 @@ class UserDetailView(DetailView):
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
 
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = self.object = self.get_object()
+        context['group'] = Group.objects.filter(students__username__contains=user)
+        return context
+
 
 class UserListView(ListView):
     model = User
@@ -156,6 +162,14 @@ class UserListView(ListView):
     context_object_name = 'user'
     # permission_required = 'webapp.user_list'
     # permission_denied_message = '403 Доступ запрещён!'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(UserListView, self).get_context_data(**kwargs)
+    #     # user = self.object = self.get_o
+    #     # print(user)
+    #     context['group'] = Group.objects.all()
+    #     print(context, 'CONTEXT')
+    #     return context
 
 
 class UserDeleteView(DeleteView):
@@ -205,12 +219,18 @@ class SearchResultsView(ListView):
             queryset = queryset.filter(query).distinct()
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, group_list=None, text=None, user_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
+        if form.is_valid():
+            text = form.cleaned_data.get("text")
         query = self.get_query_string()
-        print(query, 'STRING')
+        group_list = Group.objects.filter(name__icontains=text)
+        if not group_list.exists():
+            group_list = None
+        user_list = User.objects.filter(first_name__icontains=text)
         return super().get_context_data(
-            form=form, query=query, object_list=object_list, **kwargs
+            form=form, query=query, object_list=object_list,
+            group_list=group_list, user_list=user_list
         )
 
     def get_query_string(self):
@@ -218,20 +238,7 @@ class SearchResultsView(ListView):
         for key in self.request.GET:
             if key != 'page':
                 data[key] = self.request.GET.get(key)
-                print(urlencode(data), "DATA")
         return urlencode(data)
-
-    # def get_user_query(self, form):
-    #     query = Q()
-    #     user = form.cleaned_data.get('user')
-    #     if user:
-    #         user = form.cleaned_data.get('user')
-    #         if user:
-    #             query = query | Q(user__username__iexact=user)
-    #         comment_author = form.cleaned_data.get('comment_author')
-    #         if comment_author:
-    #             query = query | Q(comments__user__username__iexact=user)
-    #     return query
 
     def get_search_query(self, form):
         query = Q()
@@ -242,7 +249,7 @@ class SearchResultsView(ListView):
                 query = query | Q(user__username__icontains=text)
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
-                query = query | Q(user__first_name__icontains=text)
+                query = query | Q(user__first_name__icontains=text) | Q(user__last_name__icontains=text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
@@ -255,21 +262,11 @@ class SearchResultsView(ListView):
             in_social_status = form.cleaned_data.get('in_social_status')
             if in_social_status:
                 query = query | Q(social_status__name__icontains=text)
-            # if in_first_name:
-                # query = query | Q(first_name__icontains=text)
-            # in_tags = form.cleaned_data.get('in_tags')
-            # if in_first_name:
-            #     query = query | Q(first_name__iexact=user)
-            # in_comment_text = form.cleaned_data.get('in_comment_text')
-            # if in_comment_text:
-            #     query = query | Q(comments__text__icontains=user)
-        # if text==None:
-        #     in_username = form.cleaned_data.get('in_username')
-        #     if in_username:
-        #         # query = query | Q(user__username__icontains=text)
-        #         query = query
-        #         print(query)
-
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
+            #     group = Group.objects.filter(name__icontains=text)
+            #     # query = query | Q(user__students__name__icontains=text)
+            #     print(query, "IN GROUP")
 
         return query
 
@@ -286,3 +283,4 @@ class StudentListView(ListView):
         users = User.objects.filter(profile__status__name__contains=status)
         print(users)
         return users
+

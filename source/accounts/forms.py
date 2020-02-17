@@ -198,6 +198,7 @@ class FullSearchForm(forms.Form):
     in_status = forms.BooleanField(initial=False, required=False, label='По статусу')
     in_admin_position = forms.BooleanField(initial=False, required=False, label='По должности')
     in_social_status = forms.BooleanField(initial=False, required=False, label='По соц статусу')
+    in_group = forms.BooleanField(initial=False, required=False, label='По группе')
 
     def clean(self):
         super().clean()
@@ -205,8 +206,8 @@ class FullSearchForm(forms.Form):
         text = data.get('text')
         # user = data.get('user')
         if not (text):
-            raise ValidationError('No search text or author provided',
-                                  code='text_and_author_empty')
+            raise ValidationError('Вы не ввели текст поиска!',
+                                  code='text_search_empty')
         errors = []
         if text:
             in_username = data.get('in_username')
@@ -215,12 +216,13 @@ class FullSearchForm(forms.Form):
             in_status = data.get('in_status')
             in_admin_position = data.get('in_admin_position')
             in_social_status = data.get('in_social_status')
-            if not (in_username or in_first_name or in_role or in_status or in_admin_position or in_social_status):
+            in_group = data.get('in_group')
+            if not (in_username or in_first_name or in_role or in_status or in_admin_position or in_social_status
+                    or in_group):
                 errors.append(ValidationError(
-                    'One of the checkboxes should be checked: In title, In text, In tags, In comment text',
+                    'Пожулайста отметте критерии поиска, выставите галочки, где необходимо искать',
                     code='text_search_criteria_empty'
                 ))
         if errors:
             raise ValidationError(errors)
         return data
-

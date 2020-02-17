@@ -1,6 +1,11 @@
 from accounts.models import SocialStatus
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.core.exceptions import ValidationError
+from django.shortcuts import render, redirect
+from django.utils.http import urlencode
+from django.contrib import messages
+from django.shortcuts import redirect, get_object_or_404
 
 
 class SocialStatusListView(ListView):
@@ -21,8 +26,20 @@ class SocialStatusCreateView(CreateView):
     template_name = 'add.html'
     fields = ['name']
 
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        if SocialStatus.objects.filter(name=text):
+            print(text)
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'add.html', {})
+        else:
+            social_status = SocialStatus(name=text.capitalize())
+            social_status.save()
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('accounts:all_social_statuses')
+        # return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": self.object.pk}))
+        return redirect('accounts:all_social_statuses')
 
 
 class SocialStatusUpdateView(UpdateView):
