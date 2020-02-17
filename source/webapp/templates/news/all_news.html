@@ -2,7 +2,8 @@
 
 {% block content %}
     <h1>Новости</h1>
-        <a href="{% url 'webapp:news_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить новость</a>
+        <a href="{% url 'webapp:news_add' %}" class="btn btn-success ml-5 mt-3">
+            + Добавить новость</a>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}

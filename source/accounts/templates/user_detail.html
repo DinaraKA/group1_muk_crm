@@ -28,8 +28,9 @@
                         <p><b>Фактический адрес:</b> {{ user_obj.profile.address_fact }}</p>
                     {% endif %}
                     {% if user_obj.profile.role %}
-                        <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}{% if request.user in role_student %} - <b>Группа:</b>
-                            {% for group in groups_for_student %} {{ group }} {% endfor %}{% endif %}</p>
+                        <p><b>Роль:</b> {% for roles in user_obj.profile.role.all %} {{ roles }}{% endfor %}
+                            {% if request.user in role_student %} - <b>Группа:</b>
+                                {% for group in groups_for_student %} {{ group }} {% endfor %}{% endif %}</p>
                     {% endif %}
                     {% if user_obj.profile.status %}
                         <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
@@ -62,67 +63,71 @@
         </div>
     </div>
     <div class="row" style="justify-content: center">
-        <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3" style="width: 15%"><i class="fas fa-pencil-alt mx-2"></i>Редактировать</a>
-        <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3" style="width: 15%"><i class="fas fa-key mx-2"></i>Изменить
+        <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3" style="width: 15%"><i
+                class="fas fa-pencil-alt mx-2"></i>Редактировать</a>
+        <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3"
+           style="width: 15%"><i class="fas fa-key mx-2"></i>Изменить
             пароль</a>
-        <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-danger  ml-5 mt-3" style="width: 15%"><i class="far fa-trash-alt mx-2"></i>Удалить</a>
+        <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-danger  ml-5 mt-3" style="width: 15%"><i
+                class="far fa-trash-alt mx-2"></i>Удалить</a>
         {% if user_obj in student_user %}
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle ml-5 mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            + Добавить родителя
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{% url 'accounts:user_family_create' user_obj.pk %}">Создать пользоваеля родитель</a>
-            <a class="dropdown-item" href="{% url 'accounts:user_family_create2' user_obj.pk %}">Добавить родителя из существующих пользователей</a>
-          </div>
-        </div>
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle ml-5 mt-3" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    + Добавить родителя
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'accounts:user_family_create' user_obj.pk %}">Создать
+                        пользоваеля родитель</a>
+                    <a class="dropdown-item" href="{% url 'accounts:user_family_create2' user_obj.pk %}">Добавить
+                        родителя из существующих пользователей</a>
+                </div>
+            </div>
         {% endif %}
     </div>
     <table class="table my-5">
         {% if user_obj in student_user %}
-{#            {% if family %}#}
-                <h4 class="my-5">Родители</h4>
-                <thead>
+            {#            {% if family %}#}
+            <thead>
+            <tr>
+                <th scope="col">Родители</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Почта</th>
+                <th scope="col">Контакты</th>
+            </tr>
+            </thead>
+            {% for parent in family %}
+                <tbody>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ФИО</th>
-                    <th scope="col">Почта</th>
-                    <th scope="col">Контакты</th>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ parent }}</td>
+                    <td>{{ parent.family_user.email }}</td>
+                    <td>{{ parent.family_user.profile.phone_number }}</td>
                 </tr>
-                </thead>
-                {% for parent in family %}
-                    <tbody>
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ parent }}</td>
-                        <td>{{ parent.family_user.email }}</td>
-                        <td>{{ parent.family_user.profile.phone_number }}</td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
-{#            {% endif %}#}
-        {% elif user_obj in parent_user %}
-{#            {% if parent_user %}#}
-                <h4>Студенты</h4>
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ФИО</th>
-                    <th scope="col">Группа</th>
-                </tr>
-                </thead>
-                {% for student in students %}
-                    <tbody>
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ student.student }}</td>
-                        {% for group in groups %}
-                            <td>{{ group.name }}</td>
-                        {% endfor %}
-                    </tr>
-                    </tbody>
-                {% endfor %}
-{#            {% endif %}#}
+                </tbody>
+            {% endfor %}
         {% endif %}
+        {% if user_obj in parent_user %}
+            {#            {% if parent_user %}#}
+            <thead>
+            <tr>
+                <th scope="col">Студенты</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Группа</th>
+            </tr>
+            </thead>
+            {% for student in students %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ student.student }}</td>
+                    {% for group in groups %}
+                        <td>{{ group.name }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            {% endfor %}
+        {% endif %}
+        {#    {% endif %}#}
     </table>
 {% endblock %}

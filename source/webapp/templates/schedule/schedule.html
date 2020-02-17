@@ -7,7 +7,7 @@
 {#                data-target="#exampleModal">#}
 {#            Добавить в расписание#}
 {#        </button>#}
-        <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
+        <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3">+ Добавить в расписание</a>
         {% if teacher %}
             <h4>Преподаватель: {{ teacher.get }}</h4>
         {% endif %}
@@ -35,35 +35,32 @@
                 {% for items in event %}
                     <td>
                         {% for item in items %}
-                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                {% if request.user.is_superuser %}
+                            {% if request.user.is_superuser %}
+                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
                                     <h5>Группа:{{ item.group }}</h5>
                                     <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                     <p class="my-0">{{ item.discipline }}</p>
-                                    <p class="my-0">{{ item.auditoriya.name }}</p>
-                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                    <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
+                                    <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger" style="margin: auto;"><i class="far fa-trash-alt mx-2"></i></a>
                                     <hr style="border-color: rgb(66 66 66)">
+                                </a>
                                 {% elif request.user == item.teacher %}
                                     <h5>Группа:{{ item.group }}</h5>
                                     <p class="my-0">{{ item.discipline }}</p>
-                                    <p class="my-0">{{ item.auditoriya.name }}</p>
-                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                    <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                 {% elif item.group in groups %}
                                     <h5>Группа:{{ item.group }}</h5>
                                     <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                     <p class="my-0">{{ item.discipline }}</p>
-                                    <p class="my-0">{{ item.auditoriya.name }}</p>
-                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                    <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                 {% elif request.user == family_users %}
                                     {% if item.group in groups_for_parent  %}
                                         <h5>Группа:{{ item.group }}</h5>
                                         <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                         <p class="my-0">{{ item.discipline }}</p>
-                                        <p class="my-0">{{ item.auditoriya.name }}</p>
-                                        <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                        <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                     {% endif %}
                                 {% endif %}
-                            </a>
                         {% endfor %}
                     </td>
                 {% endfor %}
