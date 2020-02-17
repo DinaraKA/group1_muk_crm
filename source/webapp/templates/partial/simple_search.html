@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 {% block content %}
     <form action="" method="get">
         {% csrf_token %}
@@ -7,12 +8,13 @@
         {% endfor %}
 
         {% for field in form %}
-            <p class="label"><label for="{{ field.id_for_label }}">{{ field.label }}</label>: {{ field }}</p>
+             <div class="label-form mt-3">
+            <p class="ml-4" style="width: content-box; font-size: 18px;"><label for="{{ field.id_for_label }}">{{ field.label }}</label>: {{ field }}</p>
+             </div>
             {% for error in field.errors %}
                 <p class="form-error">{{ error }}</p>
             {% endfor %}
-            <p></p>
         {% endfor %}
-        <p class="text-left"><input type="submit" value="Search" class="btn btn-outline-dark mt-5 font-weight-bolder"></p>
+        <p class="text-left ml-4"><input type="submit" value="Найти" class="btn btn-outline-dark font-weight-bolder" style="width: 125px; margin-bottom: 25px;"></p>
     </form>
 {% endblock %}
