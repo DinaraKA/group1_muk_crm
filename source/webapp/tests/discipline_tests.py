@@ -43,7 +43,7 @@ class DisciplineSeleniumViewTest(TestCase):
     def test_created_discipline(self):
         self.driver.get('http://localhost:8000/disciplines/add/')
         self.driver.find_element_by_name('name').send_keys('Международные отношения')
-        self.driver.find_element_by_class_name('teacher').send_keys('student-1', 'student-2')
+        self.driver.find_element_by_name('teacher').send_keys('student-1', 'student-2')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/disciplines/'
 
@@ -52,7 +52,7 @@ class DisciplineSeleniumViewTest(TestCase):
         self.driver.find_element_by_id('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('Черчение')
-        self.driver.find_element_by_class_name('teacher').send_keys('student-1', 'student-2')
+        self.driver.find_element_by_name('teacher').send_keys('student-1', 'student-2')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/disciplines/'
 

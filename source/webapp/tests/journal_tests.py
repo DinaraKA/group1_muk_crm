@@ -95,10 +95,10 @@ class JournalSeleniumViewTest(TestCase):
         self.driver.get('http://localhost:8000/journal/')
         self.driver.find_element_by_id('add_grade').click()
         self.driver.find_element_by_name('discipline').click()
-        self.driver.find_element_by_name('discipline').send_keys('История Кыргызстана')
+        self.driver.find_element_by_name('discipline').send_keys('Русский Язык')
         self.driver.find_element_by_name('date').send_keys('2020-06-06')
         self.driver.find_element_by_name('theme').click()
-        self.driver.find_element_by_name('theme').send_keys('Третья Тема')
+        self.driver.find_element_by_name('theme').send_keys('Test')
         self.driver.find_element_by_name('grade').click()
         self.driver.find_element_by_name('grade').send_keys('5')
         self.driver.find_element_by_class_name('btn-primary').click()
@@ -112,7 +112,7 @@ class JournalSeleniumViewTest(TestCase):
         self.driver.find_element_by_name('discipline').send_keys('Право')
         self.driver.find_element_by_name('date').send_keys('2020-05-05')
         self.driver.find_element_by_name('theme').click()
-        self.driver.find_element_by_name('theme').send_keys('Третья Тема')
+        self.driver.find_element_by_name('theme').send_keys('Test')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/journal/'
 
