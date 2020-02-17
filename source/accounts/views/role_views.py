@@ -7,9 +7,6 @@ class RoleIndexView(ListView):
     template_name = 'role/roles.html'
     model = Role
     context_object_name = 'roles'
-    paginate_by = 4
-    paginate_orphans = 0
-    page_kwarg = 'page'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
