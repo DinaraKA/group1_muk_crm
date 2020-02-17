@@ -40,41 +40,41 @@ class AnnouncementModelTest(TestCase):
         announcement = Announcements(title="Test Name")
         self.assertEqual(str(announcement), announcement.title)
 
-    def test_object_title_is_title(self):
+    def test_object_is_object(self):
         announcement = Announcements.objects.get(id=1)
-        expected_object_name = '%s' % announcement.title
-        self.assertEquals(expected_object_name, str(announcement))
+        self.assertEquals(announcement.title, str(announcement.title))
 
 
-class AnnouncementsViewTest(TestCase):
+class AnnouncementsSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
     def tearDown(self):
         self.driver.close()
 
-    def test_list_announcements(self):
+    def test_list_announcement(self):
+        self.driver.get('http://localhost:8000/announcements/')
+        assert self.driver.current_url == 'http://localhost:8000/announcements/'
+
+    def test_created_announcement(self):
         self.driver.get('http://localhost:8000/announcements/add/')
-        self.driver.find_element_by_name('title').send_keys('Bla bla')
-        response = self.client.get('http://127.0.0.1:8000/announcements/')
-        assert self.driver.find_element_by_name('title')
-#
-#     def test_created_position(self):
-#         self.driver.get('http://localhost:8000/accounts/add_statuses/')
-#         self.driver.find_element_by_name('name').send_keys('Отчислен')
-#         self.driver.find_element_by_class_name('btn.btn-primary').click()
-#         assert self.driver.current_url == 'http://localhost:8000/accounts/statuses/'
-#
-#     def test_updated_position(self):
-#         self.driver.get('http://127.0.0.1:8000/accounts/statuses/')
-#         self.driver.find_element_by_class_name('update').click()
-#         self.driver.find_element_by_name('name').clear()
-#         self.driver.find_element_by_name('name').send_keys('Восстановлен')
-#         self.driver.find_element_by_class_name('btn.btn-primary').click()
-#         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
-#
-#     def test_deleted_position(self):
-#         self.driver.get('http://127.0.0.1:8000/accounts/statuses/')
-#         self.driver.find_element_by_class_name('delete').click()
-#         self.driver.find_element_by_class_name('btn.btn-danger').click()
-#         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/statuses/'
+        self.driver.find_element_by_name('title').send_keys('Test')
+        self.driver.find_element_by_name('text').send_keys('Test Text')
+        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
+        self.driver.find_element_by_class_name('btn.btn-primary').click()
+        assert self.driver.current_url == 'http://localhost:8000/announcements/'
+
+    def test_updated_position(self):
+        self.driver.get('http://127.0.0.1:8000/announcements/4/')
+        self.driver.find_element_by_class_name('btn-primary').click()
+        self.driver.find_element_by_name('title').send_keys('Test')
+        self.driver.find_element_by_name('text').send_keys('Test Text')
+        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
+        self.driver.find_element_by_class_name('btn-primary').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/announcements/'
+
+    def test_deleted_position(self):
+        self.driver.get('http://127.0.0.1:8000/announcements/4/')
+        self.driver.find_element_by_class_name('btn-danger').click()
+        self.driver.find_element_by_class_name('btn-danger').click()
+        assert self.driver.current_url == 'http://127.0.0.1:8000/announcements/'
