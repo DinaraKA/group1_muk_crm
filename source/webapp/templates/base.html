@@ -19,7 +19,9 @@
 <nav class="navbar-my">
     <div class="container">
         <ul class="menu">
+        {% if request.user.is_staff %}
             <li><span onclick="openNav()">&#9776; Меню</span></li>
+        {% endif %}
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
 
 {#            <li><a href="#">Миссия и стратегия</a></li>#}
