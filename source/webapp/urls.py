@@ -7,7 +7,7 @@ from .views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteV
 from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
-from .views import PersonalGradesListView
+from .views import PersonalGradesDetailView
 from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 from .views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
 from .views.journal_views import GradeforStudentCreateView
@@ -45,7 +45,7 @@ urlpatterns = [
     path('lessons/add/', LessonCreateView.as_view(), name='lesson_create'),
     path('lessons/update/<int:pk>/', LessonUpdateView.as_view(), name='lesson_update'),
     path('lessons/delete/<int:pk>/', LessonDeleteView.as_view(), name='lesson_delete'),
-    path('personal_grades/all/', PersonalGradesListView.as_view(), name='personal_grades'),
+    path('personalgrades/<int:pk>/', PersonalGradesDetailView.as_view(), name='personal_grades'),
     path('themes/', ThemeListView.as_view(), name='themes'),
     path('theme/add/', ThemeCreateView.as_view(), name='add_theme'),
     path('theme/change/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
@@ -59,4 +59,5 @@ urlpatterns = [
     path('schedule/add/', ScheduleAddView.as_view(), name='schedule_add'),
     path('schedule/update/<int:pk>/', ScheduleUpdateView.as_view(), name='schedule_update'),
     path('schedule/delete/<int:pk>/', ScheduleDeleteView.as_view(), name='schedule_delete'),
+
 ]

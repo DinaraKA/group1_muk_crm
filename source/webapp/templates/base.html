@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
             <li><a href="{% url 'accounts:groups' %}">Группы</a></li>
             <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
-            <li><a href="{% url 'webapp:personal_grades' %}">Дневник</a></li>
+{#            <li><a href="{% url 'webapp:personal_grades' %}">Дневник</a></li>#}
             <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
             {% block menu %}{% endblock %}
             <li class="menu-right">

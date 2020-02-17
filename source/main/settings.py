@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'webapp',
     'accounts',
     'phone_field',
-    'behave_django'
+    'behave_django',
 ]
 
 MIDDLEWARE = [
