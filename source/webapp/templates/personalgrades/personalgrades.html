@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
     {% regroup profiles by date|date:"d.m.Y"  as profile_list %}
     <div class="container">
         <h2 class="text-center mt-5 mb-5" style="color: darkslategray; font-weight: bold; font-size: 30px;">Успеваемость студента: {{ student.first_name}}  {{ student.last_name}} </h2>

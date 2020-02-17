@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule, Lesson, Theme, Discipline
+from .models import Schedule, Lesson, Discipline, Theme
 from django.forms import DateInput
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
