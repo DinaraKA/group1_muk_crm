@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'phone_field',
     'behave_django',
+    'bootstrap_datepicker',
 ]
 
 MIDDLEWARE = [
