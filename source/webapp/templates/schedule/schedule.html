@@ -26,8 +26,10 @@
                 {% for items in event %}
                     <td>
                         {% for item in items %}
+                            {% if perms.webapp.change_schedule %}
                             <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                            {% if request.user == item.teacher %}
+                            {% endif %}
+                            {% if request.user == item.teacher or perms.webapp.delete_schedule %}
                                 <h5>Группа:{{ item.group }}</h5>
                                 <p class="my-0">{{ item.auditoriya }}</p>
                                 <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
@@ -194,5 +196,7 @@
         {#        </tr>#}
         </tbody>
     </table>
+    {% if perms.webapp.add_schedule %}
     <a href="{% url 'webapp:schedule_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить в расписание</a>
+    {% endif %}
 {% endblock %}
