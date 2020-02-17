@@ -4,7 +4,7 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Роли</h2>
+            <h1>Роли</h1>
             {% if perms.webapp.add_role %}
                 <a href="{% url 'accounts:role_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить роль</a>
             {% endif %}

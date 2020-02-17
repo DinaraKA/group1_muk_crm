@@ -4,8 +4,10 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Статусы преподавателей, студентов и персонала</h2>
+            <h1>Статусы преподавателей, студентов и персонала</h1>
+        {% if perms.accounts.add_status %}
             <a href="{% url 'accounts:add_status' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить статус</a>
+        {% endif %}
             <thead>
                 <tr>
                    <th scope="col">#</th>
@@ -19,8 +21,12 @@
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ status.name }}</td>
-                        <td class="symbol"><a class='update' href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
+                        {% if perms.accounts.change_status %}
+                            <td class="symbol"><a class='update' href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
+                        {% endif %}
+                        {% if perms.accounts.delete_status %}
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">X</a></td>
+                        {% endif %}
                     </tr>
                 </tbody>
             {% endfor %}

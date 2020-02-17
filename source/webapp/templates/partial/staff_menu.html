@@ -58,10 +58,12 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{% url 'accounts:groups' %}">Группы</a>
-    <a href="{% url 'accounts:roles_list' %}">Роли</a>
     <a href="{% url 'accounts:user_create' %}">Регистрация</a>
     <a href="{% url 'accounts:user_list' %}">Пользователи</a>
+    <a href="{% url 'accounts:adminpositions' %}">Админ позиции</a>
+    <a href="{% url 'accounts:roles_list' %}">Роли</a>
+    <a href="{% url 'accounts:groups' %}">Группы</a>
+
 
     <a href="#">About</a>
     <a href="#">Services</a>
