@@ -29,7 +29,6 @@ class SocialStatusCreateView(CreateView):
     def form_valid(self, form):
         text = form.cleaned_data['name']
         if SocialStatus.objects.filter(name=text):
-            print(text)
             messages.error(self.request, 'Объект с таким названием уже существует!')
             return render(self.request, 'add.html', {})
         else:
@@ -46,6 +45,8 @@ class SocialStatusUpdateView(UpdateView):
     model = SocialStatus
     template_name = 'change.html'
     fields = ['name']
+
+
 
     def get_success_url(self):
         return reverse('accounts:all_social_statuses')

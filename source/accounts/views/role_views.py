@@ -6,6 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.shortcuts import render
 
+
 class RoleIndexView(PermissionRequiredMixin, ListView):
     template_name = 'role/roles.html'
     model = Role
@@ -60,15 +61,11 @@ class RoleUpdateView(PermissionRequiredMixin, UpdateView):
             print(role, "ROLE")
             print(pk, "PK")
             role.name = text.capitalize()
-            # role.name.set(pk)
             role.save()
-            # role.save(update_fields=['name'])
         return self.get_success_url()
 
     def get_success_url(self):
         return redirect('accounts:roles_list')
-    # def get_success_url(self):
-    #     return redirect('accounts:roles_list')
 
 
 class RoleDeleteView(PermissionRequiredMixin, DeleteView):

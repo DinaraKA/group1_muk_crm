@@ -274,6 +274,9 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
                 query = query | Q(social_status__name__icontains=text)
             # in_group = form.cleaned_data.get('in_group')
             # if in_group:
+            #     query = query | Q(Group.objects.filter(name__icontains=text))
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
             #     group = Group.objects.filter(name__icontains=text)
             #     # query = query | Q(user__students__name__icontains=text)
             #     print(query, "IN GROUP")
@@ -294,10 +297,10 @@ class StudentListView(ListView):
         print(users)
         return users
 
+
 class UserFamilyCreateView(CreateView):
     template_name = 'user_family_create.html'
     form_class = UserFamilyForm
-
 
     def form_valid(self, form):
         self.student_pk = self.kwargs.get('pk')

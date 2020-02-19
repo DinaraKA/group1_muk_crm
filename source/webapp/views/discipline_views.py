@@ -1,6 +1,9 @@
 from webapp.models import Discipline
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render
 
 
 class DisciplineListView(ListView):
@@ -21,8 +24,19 @@ class DisciplineCreateView(CreateView):
     template_name = 'add.html'
     fields = ['name', 'teacher']
 
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        teacher = form.cleaned_data['teacher']
+        if Discipline.objects.filter(name=text.capitalize()):
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'add.html', {})
+        else:
+            discipline = Discipline(name=text.capitalize())
+            discipline.save()
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('webapp:disciplines')
+        return redirect('webapp:disciplines')
 
 
 class DisciplineUpdateView(UpdateView):
@@ -30,8 +44,22 @@ class DisciplineUpdateView(UpdateView):
     template_name = 'change.html'
     fields = ['name', 'teacher']
 
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        teacher_text = form.cleaned_data['teacher']
+        teacher = Discipline.objects.filter(teacher=teacher_text)
+        if Discipline.objects.filter(name=text.capitalize()) and teacher_text == teacher:
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'change.html', {})
+        else:
+            pk = self.kwargs.get('pk')
+            discipline = get_object_or_404(Discipline, id=pk)
+            discipline.name = text.capitalize()
+            discipline.save()
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('webapp:disciplines')
+        return redirect('webapp:disciplines')
 
 
 class DisciplineDeleteView(DeleteView):
