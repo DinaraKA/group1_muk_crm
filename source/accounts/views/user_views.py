@@ -76,11 +76,13 @@ def register_view(request, *args, **kwargs):
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
+            roles = form.cleaned_data['role']
             profile.save()
-            role = form.cleaned_data['role']
-            profile.save()
-            profile.role.set(role)
-            login(request, user)
+            profile.role.set(roles)
+            for role in roles:
+                if role.name == "Учебная часть":
+                    user.is_staff = True
+                    user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()

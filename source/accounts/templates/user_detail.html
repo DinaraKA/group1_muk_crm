@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}Пользователь{% endblock %}
 {% block content %}
     <div class="lk-content">
@@ -18,13 +17,14 @@
                     <p><b>Имя:</b> {{ user_obj.first_name }}</p>
                     <p><b>Фамилия:</b> {{ user_obj.last_name }}</p>
                     {% if user_obj.profile.patronymic %}
+                        <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
+                    {% endif %}
                 {% for gr in group %}
                 <p><b>Группа:</b> {{ gr.name }}</p>
                 {% endfor %}
-                    {% if user_obj.profile %}
-                        <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
-                    {% endif %}
+                    {% if user_obj.email %}
                     <p><b>Почта:</b> {{ user_obj.email }}</p>
+                    {% endif %}
                     {% if user_obj.profile.phone_number %}
                         <p><b>Номер телефона:</b> {{ user_obj.profile.phone_number }}</p>
                     {% endif %}

@@ -34,6 +34,8 @@ h3 {
 }
 
 .menu {
+    position: relative;
+    text-align: center;
     font-size: 14px;
     line-height: 1;
     padding: 0;
@@ -44,6 +46,14 @@ h3 {
 
 .menu li {
     display: inline-block;
+}
+
+.staff-menu {
+    /*!*position: relative;*!*/
+    /*line-height: 1.5;*/
+    padding-top: 5px;
+    float: left;
+
 }
 
 .menu a {
