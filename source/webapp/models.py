@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from accounts.models import Group
+from accounts.models import StudyGroup
 
 
 class News(models.Model):
@@ -84,7 +84,7 @@ class Schedule(models.Model):
                                    verbose_name='Аудитория')
     discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='schedule_discipline',
                                    verbose_name='Предмет')
-    group = models.ForeignKey(Group, related_name='schedule_group', on_delete=models.CASCADE, verbose_name='Группа')
+    group = models.ForeignKey(StudyGroup, related_name='schedule_group', on_delete=models.CASCADE, verbose_name='Группа')
 
     def __str__(self):
         return '%s, %s, %s, %s, %s, %s' % (

@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
 from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
-from accounts.models import Passport, Profile, Role, Status, Family, Group
+from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
@@ -76,11 +76,13 @@ def register_view(request, *args, **kwargs):
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
+            roles = form.cleaned_data['role']
             profile.save()
-            role = form.cleaned_data['role']
-            profile.save()
-            profile.role.set(role)
-            login(request, user)
+            profile.role.set(roles)
+            for role in roles:
+                if role.name == "Учебная часть":
+                    user.is_staff = True
+                    user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()

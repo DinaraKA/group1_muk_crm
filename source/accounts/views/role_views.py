@@ -12,7 +12,7 @@ class RoleIndexView(PermissionRequiredMixin, ListView):
     model = Role
     context_object_name = 'roles'
     page_kwarg = 'page'
-    permission_required = "webapp.view_role"
+    permission_required = "accounts.view_role"
     permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -24,7 +24,7 @@ class RoleCreateView(PermissionRequiredMixin, CreateView):
     model = Role
     template_name = 'add.html'
     fields = ['name']
-    permission_required = "webapp.add_role"
+    permission_required = "accounts.add_role"
     permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
@@ -46,7 +46,7 @@ class RoleUpdateView(PermissionRequiredMixin, UpdateView):
     model = Role
     template_name = 'change.html'
     fields = ['name']
-    permission_required = "webapp.change_role"
+    permission_required = "accounts.change_role"
     permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
@@ -72,5 +72,5 @@ class RoleDeleteView(PermissionRequiredMixin, DeleteView):
     model = Role
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:roles_list')
-    permission_required = "webapp.delete_role"
+    permission_required = "accounts.delete_role"
     permission_denied_message = "Доступ запрещен"

@@ -1613,10 +1613,10 @@
   "pk": 1,
   "fields": {
     "name": "Python",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teacher": [
       "admin"
     ],
     "started_at": "2020-01-23",
@@ -1656,10 +1656,10 @@
   "pk": 2,
   "fields": {
     "name": "Java",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teacher": [
       "teacher-1"
     ],
     "started_at": "2020-01-23",
@@ -1690,10 +1690,10 @@
   "pk": 3,
   "fields": {
     "name": "C++",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teacher": [
       "student-1"
     ],
     "started_at": "2020-01-24",
@@ -1715,10 +1715,10 @@
   "pk": 4,
   "fields": {
     "name": "Ruby",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teacher": [
       "student-1"
     ],
     "started_at": "2020-01-23",

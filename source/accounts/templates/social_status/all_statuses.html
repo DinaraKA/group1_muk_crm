@@ -1,19 +1,87 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+    <hr/>
+    <table class="table">
+        <h1>Социальные статусы:</h1>
+        {% if perms.webapp.add_socialstatus %}
+            <a href="{% url 'accounts:add_social_status' %}" class="btn btn-outline-primary  ml-5 mt-3">Создать
+                группу</a>
+        {% endif %}
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th class="symbol" scope="col">Редактировать</th>
+            <th class="symbol" scope="col">Удалить</th>
+        </tr>
+        </thead>
+        {% for status in statuses %}
+            <tbody>
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ status.name }}</td>
+                {% if perms.webapp.change_socialstatus %}
+                    <td class="symbol"><a class='update' href="{% url 'accounts:change_social_status' status.pk %}">&#x270E;</a>
+                    </td>
+                {% endif %}
+                {% if perms.webapp.delete_role %}
+                    <td class="symbol"><a class='delete' href="{% url 'accounts:delete_social_status' status.pk %}">&times;</a>
+                    </td>
+                {% endif %}
+            </tr>
+            </tbody>
+        {% endfor %}
         {% if is_paginated %}
             {% include 'partial/pagination.html' %}
         {% endif %}
-        <hr/>
-        <div class="statuses">
-            <h1>Социальные статусы:</h1>
-            <a href="{% url 'accounts:add_social_status'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>
-        </div>
-            {% for status in statuses %}
-                <p>{{ status.name }}</p>
-            {% endfor %}
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
-    </section>
+    </table>
 {% endblock %}
+
+{#            <a href="{% url 'accounts:add_social_status'%}" class="btn btn-outline-primary  ml-5 mt-3">Создать группу</a>#}
+{#        </div>#}
+{#            {% for status in statuses %}#}
+{#                <p>{{ status.name }}</p>#}
+{#            {% endfor %}#}
+{#        {% if is_paginated %}#}
+{#            {% include 'partial/pagination.html' %}#}
+{#        {% endif %}#}
+{#    </section>#}
+{#{% endblock %}#}
+{##}
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#    <form method="POST" action="#">#}
+{#        {% csrf_token %}#}
+{#        <table class="table">#}
+{#            <h1>Роли</h1>#}
+{#            {% if perms.webapp.add_role %}#}
+{#                <a href="{% url 'accounts:role_add' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить роль</a>#}
+{#            {% endif %}#}
+{#            <thead>#}
+{#                <tr>#}
+{#                   <th scope="col">#</th>#}
+{#                   <th scope="col">Название</th>#}
+{#                   <th class="symbol" scope="col">Редактировать</th>#}
+{#                   <th class="symbol" scope="col">Удалить</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            {% for role in roles %}#}
+{#                <tbody>#}
+{#                    <tr>#}
+{#                        <th scope="row">{{ forloop.counter }}</th>#}
+{#                        <td>{{ role.name }}</td>#}
+{#                        {% if perms.webapp.change_role %}#}
+{#                            <td class="symbol"><a class='update' href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>#}
+{#                        {% endif %}#}
+{#                        {% if perms.webapp.delete_role %}#}
+{#                            <td class="symbol"><a class='delete' href="{%  url 'accounts:role_delete' role.pk %}">&times;</a></td>#}
+{#                        {% endif %}#}
+{#                    </tr>#}
+{#                </tbody>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{#    </form>#}
+{#{% endblock %}#}

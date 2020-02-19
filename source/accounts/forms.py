@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from accounts.models import AdminPosition
 from django import forms
-from .models import Profile, Passport, Group, Role, Status, SocialStatus
+from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus
 
 SEX_CHOICES = (
     ('мужской', 'мужской'),
@@ -13,7 +13,7 @@ SEX_CHOICES = (
 
 class UserForm(forms.ModelForm):
     citizenship = forms.CharField(label="Гражданство", initial="Кыргызская Республика")
-    series = forms.CharField(label='Пасспорт серия')
+    series = forms.CharField(label='Пасспорт серия', initial="jjj")
     issued_by = forms.CharField(label='Кем выдан', required=False)
     issued_date = forms.DateField(label='Дата выдачи')
     address = forms.CharField(label='Адрес')
@@ -47,7 +47,7 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError('Отчислен может быть только студент!')
         if status.name == "Уволен":
             for role in roles:
-                if role.name in ["Технический работник", "Административный работник", "Преподаватель"]:
+                if role.name in ["Технический работник", "Административный работник", "Преподаватель", "Учебная часть"]:
                     return status
             raise forms.ValidationError('Уволен может быть только работник или преподаватель!')
         if status.name == "Родитель/ Опекун":
@@ -57,7 +57,7 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError('Статус родитель может иметь только пользователь с ролью родитель/ опекун!')
         if status.name in ["Полная занятость", "Часовая форма работы"]:
             for role in roles:
-                if role.name in ["Технический работник", "Административный работник", "Преподаватель"]:
+                if role.name in ["Технический работник", "Административный работник", "Преподаватель", "Учебная часть"]:
                     return status
             raise forms.ValidationError(
                 'Полную занятость или часовую форму работы может иметь только работник или преподаватель!')
@@ -184,11 +184,11 @@ class AdminPositionForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
-    kurator = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
+    head_teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
 
     class Meta:
-        model = Group
-        fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+        model = StudyGroup
+        fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
 
 
 class FullSearchForm(forms.Form):

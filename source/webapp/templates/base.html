@@ -21,10 +21,9 @@
     <div class="container">
         <ul class="menu">
         {% if request.user.is_staff %}
-            <li><span onclick="openNav()">&#9776; Меню</span></li>
+            <li class="staff-menu"><span onclick="openNav()">&#9776; Меню</span></li>
         {% endif %}
             <li><a href="{% url 'webapp:index' %}">Главная</a></li>
-
 {#            <li><a href="#">Миссия и стратегия</a></li>#}
 {#            <li><a href="#">Специальности</a></li>#}
             <li><a href="{% url 'webapp:news' %}">Новости</a></li>
@@ -35,14 +34,15 @@
 {#            <li><a href="#">Выпускники</a></li>#}
             <li><a href="#">Контакты</a></li>
 {#            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>#}
-            <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
-            <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
+{#            <li><a href="{% url 'webapp:themes' %}">Темы</a></li>#}
+{#            <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>#}
             {% if request.user in family %}{{ yes }}{% endif %}
-
             {% if request.user.is_authenticated %}
+                <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
                 <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
+                <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
             {% endif %}
-            <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
+{#            <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>#}
             {% block menu %}{% endblock %}
             <li class="menu-right">
                 <ul>

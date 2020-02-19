@@ -1,6 +1,6 @@
 from django.test import TestCase
 from webapp.models import Schedule, DAY_CHOICES, Discipline, Auditory, Lesson
-from accounts.models import Group
+from accounts.models import StudyGroup
 from django.contrib.auth.models import User
 
 
