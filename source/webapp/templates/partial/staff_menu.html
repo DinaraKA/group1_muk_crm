@@ -1,13 +1,3 @@
-{#<div class="add_buttons_group">#}
-{#    <div class="btn-group-vertical">#}
-{#        <a class="btn btn-light mr-2" href="{% url 'webapp:news_add' %}">Добавить новость</a>#}
-{#        <a class="btn btn-light mr-2" href="{% url 'webapp:announce_create' %}">Создать объявление</a>#}
-{#        <a class="btn btn-light mr-2" href="{% url '#' %}">Add Swim Suit</a>#}
-{#        <a class="btn btn-light mr-2" href="{% url '#' %}">Add One Piece</a>#}
-{#    </div>#}
-{#</div>#}
-{##}
-
 <style>
 
     .sidenav {
@@ -63,6 +53,7 @@
     <a href="{% url 'accounts:adminpositions' %}">Админ позиции</a>
     <a href="{% url 'accounts:roles_list' %}">Роли</a>
     <a href="{% url 'accounts:statuses' %}">Статусы</a>
+    <a href="{% url 'accounts:all_social_statuses' %}">Соц статусы</a>
     <a href="{% url 'accounts:groups' %}">Группы</a>
 
 
