@@ -65,6 +65,7 @@ class Lesson(models.Model):
     def __str__(self):
         return str(self.index) + " пара"
 
+
 DAY_CHOICES = (
     ('Monday', 'Понедельник'),
     ('Tuesday', "Вторник"),
@@ -73,6 +74,7 @@ DAY_CHOICES = (
     ('Friday', "Пятница"),
     ('Saturday', "Суббота")
 )
+
 class Schedule(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='schedule_lesson', on_delete=models.CASCADE, verbose_name='Пара')
     day = models.CharField(max_length=20, choices=DAY_CHOICES, verbose_name='День недели')
@@ -115,7 +117,6 @@ class Journal(models.Model):
     def __str__(self):
         return self.student.last_name + self.student.first_name
 
-<<<<<<< HEAD
     def avg_grade(self):
         grades = Grade.objects.filter(grade=self.pk)
         count = 0
@@ -127,9 +128,9 @@ class Journal(models.Model):
 
     class Meta:
         ordering = ['date']
-=======
+
 def get_full_name(self):
     return self.first_name + ' ' + self.last_name
 
 User.add_to_class("__str__", get_full_name)
->>>>>>> a6762a7497c1ba4512d890dccc132046ac73617c
+
