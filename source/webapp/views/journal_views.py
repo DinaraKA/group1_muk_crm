@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
-
-from accounts.models import Group
+from accounts.models import StudyGroup
 from webapp.models import Journal, Discipline
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView

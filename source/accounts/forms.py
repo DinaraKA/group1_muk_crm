@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from accounts.models import AdminPosition
 from django import forms
-from .models import Profile, Passport, Group, Role, Status, SocialStatus
+from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus
 
 SEX_CHOICES = (
     ('мужской', 'мужской'),
@@ -184,11 +184,11 @@ class AdminPositionForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
-    kurator = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
+    head_teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
 
     class Meta:
-        model = Group
-        fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+        model = StudyGroup
+        fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
 
 
 class FullSearchForm(forms.Form):

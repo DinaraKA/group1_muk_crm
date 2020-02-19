@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
 from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
-from accounts.models import Passport, Profile, Role, Status, Family, Group
+from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode

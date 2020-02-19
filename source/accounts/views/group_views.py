@@ -1,13 +1,13 @@
 from accounts.forms import GroupForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from accounts.models import Group
+from accounts.models import StudyGroup
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class GroupListView(PermissionRequiredMixin, ListView):
     template_name = 'group/list.html'
-    model = Group
+    model = StudyGroup
     ordering = ["-name"]
     context_object_name = 'group_list'
     paginate_by = 10
@@ -22,15 +22,15 @@ class GroupListView(PermissionRequiredMixin, ListView):
 
 class GroupDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'group/detail.html'
-    model = Group
+    model = StudyGroup
     permission_required = "accounts.view_group"
     permission_denied_message = "Доступ запрещен"
 
 
 class GroupCreateView(PermissionRequiredMixin, CreateView):
-    model = Group
+    model = StudyGroup
     template_name = 'add.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+    fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
     permission_required = "accounts.add_group"
     permission_denied_message = "Доступ запрещен"
     form_class = GroupForm
@@ -40,9 +40,9 @@ class GroupCreateView(PermissionRequiredMixin, CreateView):
 
 
 class GroupUpdateView(PermissionRequiredMixin, UpdateView):
-    model = Group
+    model = StudyGroup
     template_name = 'change.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+    fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
     permission_required = "accounts.change_group"
     permission_denied_message = "Доступ запрещен"
     form_class = GroupForm
@@ -52,7 +52,7 @@ class GroupUpdateView(PermissionRequiredMixin, UpdateView):
 
 
 class GroupDeleteView(PermissionRequiredMixin, DeleteView):
-    model = Group
+    model = StudyGroup
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:groups')
     permission_required = "accounts.delete_group"
