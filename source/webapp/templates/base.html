@@ -17,6 +17,13 @@
 </head>
 <body>
 <div class="main">
+{##}
+{#<div class="sidenav">#}
+{#{% include 'partial/staff_menu.html' %}#}
+{#</div>#}
+<div class="carousel">
+    {% block carousel %} {% endblock %}
+</div>
 <nav class="navbar-my">
     <div class="container">
         <ul class="menu">
@@ -60,12 +67,6 @@
         </ul>
     </div>
 </nav>
-{#<div class="sidenav">#}
-{#{% include 'partial/staff_menu.html' %}#}
-{#</div>#}
-<div class="carousel">
-    {% block carousel %} {% endblock %}
-</div>
 {#<div class="side_nav">#}
 {#{% include 'partial/staff_menu.html' %}#}
 {#</div>#}
