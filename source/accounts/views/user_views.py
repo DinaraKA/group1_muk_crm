@@ -146,12 +146,12 @@ class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView(PermissionRequiredMixin, DetailView):
+class UserDetailView( DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
-    permission_required = "accounts.view_user"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.view_user"
+    # permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

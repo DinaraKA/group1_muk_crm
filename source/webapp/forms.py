@@ -36,3 +36,11 @@ class FullSearchForm(forms.Form):
     start_date = forms.DateField(label='Введите дату начала', required=False, widget=DateJournalInput)
     end_date = forms.DateField(label='Введите дату окончания', required=False, widget=DateJournalInput)
     discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине")
+
+
+class DisciplineForm(forms.ModelForm):
+    teacher = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
+
+    class Meta:
+        model = Discipline
+        fields = ['name', 'teacher']

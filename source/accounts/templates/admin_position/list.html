@@ -6,7 +6,7 @@
         <table class="table">
             <h1>Позиции</h1>
             {% if perms.accounts.add_adminposition %}
-                <a href="{% url 'accounts:add_admin_position' %}" class="btn btn-outline-primary  ml-5 mt-3">Создать</a>
+                <a href="{% url 'accounts:add_admin_position' %}" class="btn btn-success  ml-5 my-3">Создать</a>
             {% endif %}
             <thead>
                 <tr>
@@ -25,7 +25,7 @@
                             <td class="symbol"><a class='update' href="{% url 'accounts:change_admin_position' object.pk %}">&#x270E;</a></td>
                         {% endif %}
                         {% if perms.accounts.delete_adminposition %}
-                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_admin_position' object.pk %}">&times;</a></td>
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_admin_position' object.pk %}" style="color: red">&times;</a></td>
                         {% endif %}
                     </tr>
                 </tbody>
