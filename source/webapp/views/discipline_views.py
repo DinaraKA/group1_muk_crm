@@ -26,14 +26,32 @@ class DisciplineCreateView(CreateView):
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
-        teacher = form.cleaned_data['teacher']
+        teacher_text = form.cleaned_data['teacher']
         if Discipline.objects.filter(name=text.capitalize()):
             messages.error(self.request, 'Объект с таким названием уже существует!')
             return render(self.request, 'add.html', {})
         else:
             discipline = Discipline(name=text.capitalize())
             discipline.save()
-        return self.get_success_url()
+            return self.get_success_url()
+        # # teacher = teacher_text.teacher()
+        # # print(i.last_name, "THIS IS I")
+        # print(Discipline.objects.filter(name='Тест'), 'THIS IS DISCIPLINE FILTER')
+        # obj, boolean = Discipline.objects.get_or_create(name=text)
+        #
+        # if boolean == False:
+        #     messages.error(self.request, 'Объект с таким названием уже существует!')
+        #     return render(self.request, 'add.html', {})
+        # else:
+        #     dis = Discipline.objects.get(name=text)
+        #     for i in teacher_text:
+        #         if i in dis.teacher.all():
+        #             print("false")
+        #         else:
+        #             print("true")
+        #             obj.teacher.add(i)
+        #     obj.save()
+        # return self.get_success_url()
 
     def get_success_url(self):
         return redirect('webapp:disciplines')
@@ -44,22 +62,19 @@ class DisciplineUpdateView(UpdateView):
     template_name = 'change.html'
     fields = ['name', 'teacher']
 
-    def form_valid(self, form):
-        text = form.cleaned_data['name']
-        teacher_text = form.cleaned_data['teacher']
-        teacher = Discipline.objects.filter(teacher=teacher_text)
-        if Discipline.objects.filter(name=text.capitalize()) and teacher_text == teacher:
-            messages.error(self.request, 'Объект с таким названием уже существует!')
-            return render(self.request, 'change.html', {})
-        else:
-            pk = self.kwargs.get('pk')
-            discipline = get_object_or_404(Discipline, id=pk)
-            discipline.name = text.capitalize()
-            discipline.save()
-        return self.get_success_url()
+    # def form_valid(self, form):
+    #     text = form.cleaned_data['name']
+    #     teacher_text = form.cleaned_data['teacher']
+    #     if Discipline.objects.filter(name=text.capitalize()):
+    #         messages.error(self.request, 'Объект с таким названием уже существует!')
+    #         return render(self.request, 'add.html', {})
+    #     else:
+    #         discipline = Discipline(name=text.capitalize())
+    #         discipline.save()
+    #         return self.get_success_url()
 
     def get_success_url(self):
-        return redirect('webapp:disciplines')
+        return reverse('webapp:disciplines')
 
 
 class DisciplineDeleteView(DeleteView):

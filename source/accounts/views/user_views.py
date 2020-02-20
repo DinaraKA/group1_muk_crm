@@ -165,8 +165,8 @@ class UserDetailView(PermissionRequiredMixin, DetailView):
         context.update({
             'role_student': role_student,
             'family':Family.objects.filter(student=user),
-            'groups': Group.objects.filter(students__in=students.values('student')),
-            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'groups': StudyGroup.objects.filter(students__in=students.values('student')),
+            'groups_for_student': StudyGroup.objects.filter(students=self.request.user),
             'students': students,
             'student_user': User.objects.filter(profile__role__name ='Студент'),
             'parent_user': User.objects.filter(profile__role__name ='Родитель')
@@ -236,7 +236,7 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
         if form.is_valid():
             text = form.cleaned_data.get("text")
         query = self.get_query_string()
-        group_list = Group.objects.filter(name__icontains=text)
+        group_list = StudyGroup.objects.filter(name__icontains=text)
         if not group_list.exists():
             group_list = None
         user_list = User.objects.filter(first_name__icontains=text)
