@@ -28,8 +28,8 @@ class ScheduleForm(forms.ModelForm):
 
 
 class FullSearchForm(forms.Form):
-    start_date = forms.DateField(label='введите дату начала', widget=DatePickerInput(format='%d/%m/%Y'))
-    end_date = forms.DateField(label='введите дату окончания', widget=DatePickerInput(format='%d/%m/%Y'))
+    start_date = forms.DateField(label='введите дату начала', widget=DatePickerInput(format='%d/%m/%Y'), required=False)
+    end_date = forms.DateField(label='введите дату окончания', widget=DatePickerInput(format='%d/%m/%Y'), required=False)
     discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине",  widget=forms.Select
                            (attrs={'class':'form-control'}))
 
