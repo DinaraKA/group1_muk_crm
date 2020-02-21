@@ -45,8 +45,8 @@ h3 {
 
 .menu {
     /*display: block;*/
-    /*position: relative;*/
-    /*text-align: center;*/
+    position: relative;
+    text-align: center;
     font-size: 14px;
     line-height: 1;
     padding: 0;
