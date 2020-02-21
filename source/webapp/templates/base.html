@@ -12,6 +12,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     {% block styles %}{% endblock %}
 </head>
@@ -37,9 +38,17 @@
 {#            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>#}
             <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
             <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
-            {% if request.user in family %}{{ yes }}{% endif %}
+            {% for user in request.user.family_user.all %}
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>
+                <div class="dropdown-menu">
+{#                    <a class="dropdown-item" href="{% url 'webapp:personal_grades' request.user.pk %}">{{ user }}</a>#}
+                    <a class="dropdown-item" href="{% url 'webapp:personal_grades' user.student.pk %}">{{ user.student }}</a>
+                </div>
+                </li>
+            {% endfor %}
 
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated%}
                 <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
             {% endif %}
             <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
@@ -79,16 +88,16 @@
 <footer>
     {% block footer %}{% endblock %}
 </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<script type="application/javascript" src="{% static "js/main.js" %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="application/javascript" src="{% static "js/main.js" %}"></script>
 
 
 {% block scripts %}{% endblock %}

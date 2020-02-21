@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'phone_field',
     'behave_django',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +148,3 @@ LOGOUT_REDIRECT_URL = 'webapp:index'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 MEDIA_URL = '/uploads/'
-
