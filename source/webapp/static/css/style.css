@@ -33,11 +33,14 @@ h3 {
 }
 
 .header .navbar-dark .navbar-nav .nav-link{
-	font-size: 13px;
+	font-size: 14px;
 	color: #fff;
 }
 .nav-left{
     padding-top: 5px;
+}
+.nav-item{
+    padding-top: 10px;
 }
 /*.lk-content {*/
     /*margin-top: 80px;*/
@@ -46,7 +49,7 @@ h3 {
 .menu {
     /*display: block;*/
     position: relative;
-    text-align: center;
+    /*text-align: center;*/
     font-size: 14px;
     line-height: 1;
     padding: 0;
@@ -62,8 +65,10 @@ h3 {
 .staff-menu {
     /*!*position: relative;*!*/
     /*line-height: 1.5;*/
-    padding-top: 5px;
+    padding-top: 15px;
+    margin-right: 47px;
     float: left;
+    font-family: Arial, sans-serif;
 
 }
 

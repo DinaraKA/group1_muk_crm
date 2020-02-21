@@ -26,7 +26,7 @@ class ScheduleView(ListView):
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
             'saturdaylessons': Lesson.objects.filter(is_saturday=True),
-            'groups': Group.objects.filter(students=self.request.user),
+            'groups': StudyGroup.objects.filter(students=self.request.user),
             'days': DAY_CHOICES,
             'teacher': Profile.objects.filter(role__name='Преподаватель', user=self.request.user),
             'weekdays': self.get_weekdays(),
