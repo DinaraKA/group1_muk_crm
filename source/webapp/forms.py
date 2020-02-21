@@ -2,7 +2,6 @@ from django import forms
 from .models import Schedule, Lesson, Discipline, Theme
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
-
 from bootstrap_datepicker_plus import DatePickerInput
 
 
