@@ -85,7 +85,7 @@
                 <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
             {% endif %}
             <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
-            {% block menu %}{% endblock %}
+{#            {% block menu %}{% endblock %}#}
             <li class="menu-right">
                 <ul>
                     {% if request.user.is_authenticated %}
