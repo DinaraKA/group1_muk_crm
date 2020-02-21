@@ -5,7 +5,7 @@
         {% csrf_token %}
         <table class="table">
             <h2>Аудитории</h2>
-            <a href="{% url 'webapp:add_auditory' %}" class="btn btn-success  ml-5 mt-3">+ Добавить аудиторию</a>
+            <a href="{% url 'webapp:add_auditory' %}" class="btn btn-success  ml-5 my-3">+ Добавить аудиторию</a>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -23,8 +23,8 @@
                         <td>{{ auditory.name }}</td>
                         <td>{{ auditory.places }}</td>
                         <td>{{ auditory.description }}</td>
-                        <td class="symbol" ><a href="{% url 'webapp:change_auditory' auditory.pk %}" class="update">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_auditory' auditory.pk %}" class="delete">X</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:change_auditory' auditory.pk %}">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_auditory' auditory.pk %}"style="color: red">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

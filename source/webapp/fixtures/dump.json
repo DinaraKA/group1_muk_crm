@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-02-17T09:53:05.388Z",
+    "last_login": "2020-02-17T09:13:00.477Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -20,7 +20,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-    "last_login": "2020-02-17T09:53:56.265Z",
+    "last_login": "2020-02-19T19:09:48.703Z",
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -292,7 +292,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$H7LZL8jQVCF5$ZxToCG6ggi5R4HByoE/PCCaqQ+C1/rD6+Ngavzx140M=",
-    "last_login": "2020-02-17T09:37:10.226Z",
+    "last_login": "2020-02-14T18:27:11.296Z",
     "is_superuser": false,
     "username": "teacher-2",
     "first_name": "\u0424\u0430\u0440\u0438\u0434",
@@ -336,14 +336,6 @@
   "fields": {
     "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
     "expire_date": "2020-02-13T03:11:34.865Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "dyxq7ofwo2gkokpds5w5a7fzu18zvjgp",
-  "fields": {
-    "session_data": "NjI2ZTM2YWQ1MDUxZGMxZmU4MDEzZTQ3YWRlY2E2MDRjMjc1MmY0Mjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYjNlOGViNWE4ZDRjMWNmMzdlNTQ3ZWVjOGNhNDUwYTVkNTIwNzE5In0=",
-    "expire_date": "2020-03-02T09:53:56.291Z"
   }
 },
 {
@@ -569,7 +561,11 @@
   "pk": 1,
   "fields": {
     "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u041a\u044b\u0440\u0433\u044b\u0437\u0441\u0442\u0430\u043d\u0430",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -577,7 +573,11 @@
   "pk": 3,
   "fields": {
     "name": "\u041c\u0438\u0440\u043e\u0432\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -585,7 +585,11 @@
   "pk": 4,
   "fields": {
     "name": "\u041f\u0440\u0430\u0432\u043e",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -593,7 +597,11 @@
   "pk": 5,
   "fields": {
     "name": "\u0410\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -601,7 +609,11 @@
   "pk": 6,
   "fields": {
     "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u0440\u0435\u0432\u043d\u0435\u0433\u043e \u043c\u0438\u0440\u0430",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -609,7 +621,11 @@
   "pk": 7,
   "fields": {
     "name": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -617,7 +633,11 @@
   "pk": 8,
   "fields": {
     "name": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -1613,10 +1633,10 @@
   "pk": 1,
   "fields": {
     "name": "Python",
-    "group_leader": [
+    "starosta": [
       "student-1"
     ],
-    "head_teacher": [
+    "kurator": [
       "admin"
     ],
     "started_at": "2020-01-23",
@@ -1656,10 +1676,10 @@
   "pk": 2,
   "fields": {
     "name": "Java",
-    "group_leader": [
+    "starosta": [
       "student-1"
     ],
-    "head_teacher": [
+    "kurator": [
       "teacher-1"
     ],
     "started_at": "2020-01-23",
@@ -1690,10 +1710,10 @@
   "pk": 3,
   "fields": {
     "name": "C++",
-    "group_leader": [
+    "starosta": [
       "student-1"
     ],
-    "head_teacher": [
+    "kurator": [
       "student-1"
     ],
     "started_at": "2020-01-24",
@@ -1715,10 +1735,10 @@
   "pk": 4,
   "fields": {
     "name": "Ruby",
-    "group_leader": [
+    "starosta": [
       "student-1"
     ],
-    "head_teacher": [
+    "kurator": [
       "student-1"
     ],
     "started_at": "2020-01-23",
@@ -3320,6 +3340,24 @@
     "object_repr": "\u0412\u0438\u043a\u0442\u043e\u0440 \u041d\u0435\u043a\u0438\u0444\u043e\u0440\u043e\u0432",
     "action_flag": 2,
     "change_message": "[{\"changed\": {\"fields\": [\"username\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
+    "action_time": "2020-02-20T18:21:13.693Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "8",
+    "object_repr": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"teacher\"]}}]"
   }
 },
 {

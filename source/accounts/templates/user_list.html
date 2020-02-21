@@ -34,7 +34,7 @@
                     <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>
                 {% endif %}
                 {% if perms.accounts.change_user %}
-                    <a href="{% url 'accounts:user_update' use.pk %}">Edit</a></td>
+                    <a href="{% url 'accounts:user_update' use.pk %}" class="btn btn-primary">Edit</a></td>
                 {% endif %}
                 </tr>
         {% endfor %}

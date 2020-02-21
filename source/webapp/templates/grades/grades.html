@@ -4,8 +4,8 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h1>Дисциплины</h1>
-            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-success  m-4">+ Добавить дисциплину</a>
+            <h2>Дисциплины</h2>
+            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-success  ml-5 my-3">+ Добавить дисциплину</a>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -20,7 +20,7 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ discipline.name }}</td>
                         <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete">X</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete" style="color: red">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
