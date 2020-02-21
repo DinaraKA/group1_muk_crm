@@ -6,11 +6,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
-from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, PasswordChangeForm, UserFamilyForm
-from accounts.models import Passport, Profile, Role, Status, Family, Group
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
+from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
+from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
+
 
 
 def login_view(request, *args, **kwargs):
@@ -74,11 +76,13 @@ def register_view(request, *args, **kwargs):
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
+            roles = form.cleaned_data['role']
             profile.save()
-            role = form.cleaned_data['role']
-            profile.save()
-            profile.role.set(role)
-            login(request, user)
+            profile.role.set(roles)
+            for role in roles:
+                if role.name == "Учебная часть":
+                    user.is_staff = True
+                    user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
@@ -122,7 +126,7 @@ class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
         profile.role.set(roles)
         profile.save()
         user.save()
-        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
+        return self.get_success_url()
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -161,8 +165,8 @@ class UserDetailView( DetailView):
         context.update({
             'role_student': role_student,
             'family':Family.objects.filter(student=user),
-            'groups': Group.objects.filter(students__in=students.values('student')),
-            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'groups': StudyGroup.objects.filter(students__in=students.values('student')),
+            'groups_for_student': StudyGroup.objects.filter(students=self.request.user),
             'students': students,
             'student_user': User.objects.filter(profile__role__name ='Студент'),
             'parent_user': User.objects.filter(profile__role__name ='Родитель')
@@ -227,11 +231,18 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
             queryset = queryset.filter(query).distinct()
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, group_list=None, text=None, user_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
+        if form.is_valid():
+            text = form.cleaned_data.get("text")
         query = self.get_query_string()
+        group_list = StudyGroup.objects.filter(name__icontains=text)
+        if not group_list.exists():
+            group_list = None
+        user_list = User.objects.filter(first_name__icontains=text)
         return super().get_context_data(
-            form=form, query=query, object_list=object_list, **kwargs
+            form=form, query=query, object_list=object_list,
+            group_list=group_list, user_list=user_list
         )
 
     def get_query_string(self):
@@ -240,18 +251,6 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
             if key != 'page':
                 data[key] = self.request.GET.get(key)
         return urlencode(data)
-
-    # def get_user_query(self, form):
-    #     query = Q()
-    #     user = form.cleaned_data.get('user')
-    #     if user:
-    #         user = form.cleaned_data.get('user')
-    #         if user:
-    #             query = query | Q(user__username__iexact=user)
-    #         comment_author = form.cleaned_data.get('comment_author')
-    #         if comment_author:
-    #             query = query | Q(comments__user__username__iexact=user)
-    #     return query
 
     def get_search_query(self, form):
         query = Q()
@@ -262,7 +261,7 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
                 query = query | Q(user__username__icontains=text)
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
-                query = query | Q(user__first_name__icontains=text)
+                query = query | Q(user__first_name__icontains=text) | Q(user__last_name__icontains=text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
@@ -275,20 +274,15 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
             in_social_status = form.cleaned_data.get('in_social_status')
             if in_social_status:
                 query = query | Q(social_status__name__icontains=text)
-            # if in_first_name:
-                # query = query | Q(first_name__icontains=text)
-            # in_tags = form.cleaned_data.get('in_tags')
-            # if in_first_name:
-            #     query = query | Q(first_name__iexact=user)
-            # in_comment_text = form.cleaned_data.get('in_comment_text')
-            # if in_comment_text:
-            #     query = query | Q(comments__text__icontains=user)
-        # if text==None:
-        #     in_username = form.cleaned_data.get('in_username')
-        #     if in_username:
-        #         # query = query | Q(user__username__icontains=text)
-        #         query = query
-        #         print(query)
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
+            #     query = query | Q(Group.objects.filter(name__icontains=text))
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
+            #     group = Group.objects.filter(name__icontains=text)
+            #     # query = query | Q(user__students__name__icontains=text)
+            #     print(query, "IN GROUP")
+
         return query
 
 
@@ -305,10 +299,10 @@ class StudentListView(ListView):
         print(users)
         return users
 
+
 class UserFamilyCreateView(CreateView):
     template_name = 'user_family_create.html'
     form_class = UserFamilyForm
-
 
     def form_valid(self, form):
         self.student_pk = self.kwargs.get('pk')

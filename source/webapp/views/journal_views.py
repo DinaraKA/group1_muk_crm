@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
-
-from accounts.models import Group
+from accounts.models import StudyGroup
 from webapp.models import Journal, Discipline
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -55,7 +54,7 @@ class GradeforStudentCreateView(CreateView):
 class JournalUpdateView(UpdateView):
     model = Journal
     template_name = 'change.html'
-    fields = ['theme']
+    fields = ['discipline', 'date', 'theme']
 
     def get_success_url(self):
         return reverse('webapp:journal')

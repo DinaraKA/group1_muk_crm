@@ -3,7 +3,6 @@ from webapp.models import Grade
 from selenium.webdriver import Chrome
 
 
-
 class GradeModelTest(TestCase):
 
     @classmethod
@@ -34,7 +33,7 @@ class GradeModelTest(TestCase):
         self.assertEquals(expected_object_name, str(grade))
 
 
-class GradeViewTest(TestCase):
+class GradeSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 

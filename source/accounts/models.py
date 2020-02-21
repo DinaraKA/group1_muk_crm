@@ -75,11 +75,11 @@ class Passport(models.Model):
         return self.user.get_full_name() + "'s Passport"
 
 
-class Group(models.Model):
+class StudyGroup(models.Model):
     name = models.CharField(max_length=50, verbose_name='Группа')
-    students = models.ManyToManyField(User)
-    starosta = models.ForeignKey(User, on_delete=models.CASCADE, related_name='starosta', verbose_name='Староста')
-    kurator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kurator', verbose_name='Куратор')
+    students = models.ManyToManyField(User, related_name='students')
+    group_leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='leader', verbose_name='Староста')
+    head_teaher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='headteacher', verbose_name='Куратор')
     started_at = models.DateField(verbose_name='Дата создания')
 
     def __str__(self):
