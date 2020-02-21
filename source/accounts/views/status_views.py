@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from accounts.models import Status
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, get_object_or_404,render
+from django.contrib import messages
 
 
 class StatusListView(PermissionRequiredMixin, ListView):
@@ -24,10 +26,21 @@ class StatusCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'add.html'
     fields = ['name']
     permission_required = "accounts.add_status"
+
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        if Status.objects.filter(name=text.capitalize()):
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'add.html', {})
+        else:
+            admin_position = Status(name=text.capitalize())
+            admin_position.save()
+        return self.get_success_url()
+
     permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
-        return reverse('accounts:statuses')
+        return redirect('accounts:statuses')
 
 
 class StatusUpdateView(PermissionRequiredMixin, UpdateView):
@@ -37,8 +50,20 @@ class StatusUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "accounts.change_status"
     permission_denied_message = "Доступ запрещен"
 
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        if Status.objects.filter(name=text.capitalize()):
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'change.html', {})
+        else:
+            pk = self.kwargs.get('pk')
+            status = get_object_or_404(Status, id=pk)
+            status.name = text.capitalize()
+            status.save()
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('accounts:statuses')
+        return redirect('accounts:statuses')
 
 
 class StatusDeleteView(PermissionRequiredMixin, DeleteView):

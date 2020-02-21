@@ -14,17 +14,50 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/animate.css" %}">
     {% block styles %}{% endblock %}
 </head>
 <body>
-<div class="main">
-<nav class="navbar-my">
-    <div class="container">
-        <ul class="menu">
-        {% if request.user.is_staff %}
-            <li><span onclick="openNav()">&#9776; Меню</span></li>
-        {% endif %}
-            <li><a href="{% url 'webapp:index' %}">Главная</a></li>
+<div class="header">
+    <nav class="navbar-expand-lg navbar-dark navbar-my">
+        <button class="navbar-toggler ml-5" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container collapse navbar-collapse" id="navbarNav">
+            <ul class="menu navbar-nav text-uppercase">
+                {% if request.user.is_staff %}
+                    <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
+                {% endif %}
+                <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">Главная</a></li>
+
+                {#            <li><a href="#">Миссия и стратегия</a></li>#}
+                {#            <li><a href="#">Специальности</a></li>#}
+                <li class="nav-item"><a href="{% url 'webapp:news' %}" class="nav-link">Новости</a></li>
+                <li class="nav-item"><a href="{% url 'webapp:announcements' %}" class="nav-link">Объявление</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'webapp:schedule' %}" class="nav-link">Расписание</a></li>
+                {% endif %}
+                {#            <li><a href="#">Абитуриент</a></li>#}
+                {#            <li><a href="#">Правовая информация</a></li>#}
+                {#            <li><a href="#">Выпускники</a></li>#}
+                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+                <li class="nav-item"><a href="{% url 'webapp:themes' %}" class="nav-link">Темы</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'webapp:journal' %}" class="nav-link">Журнал</a></li>
+                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="menu navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'accounts:user_search' %}" class="nav-link">Поиск</a></li>
+                {% endif %}
+                {% block menu %}{% endblock %}
+                {#                <li class="menu-right ml-auto">#}
+
+
+
 
 {#            <li><a href="#">Миссия и стратегия</a></li>#}
 {#            <li><a href="#">Специальности</a></li>#}
@@ -67,20 +100,35 @@
                 </ul>
             </li>
         </ul>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}"
+                                            class="nav-link">
+                        Привет, {{ request.user }}!
+                    </a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link logout">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'accounts:user_create' %}"
+                                            class="nav-link">Регистрация</a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+    {#<div class="sidenav">#}
+    {#{% include 'partial/staff_menu.html' %}#}
+    {#</div>#}
+    <div class="carousel">
+        {% block carousel %} {% endblock %}
     </div>
-</nav>
-{#<div class="sidenav">#}
-{#{% include 'partial/staff_menu.html' %}#}
-{#</div>#}
-<div class="carousel">
-    {% block carousel %} {% endblock %}
-</div>
-{#<div class="side_nav">#}
-{#{% include 'partial/staff_menu.html' %}#}
-{#</div>#}
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
+    {#<div class="side_nav">#}
+    {#{% include 'partial/staff_menu.html' %}#}
+    {#</div>#}
+    <div class="container">
+        {% block content %}{% endblock %}
+
+    </div>
 </div>
 {% include 'partial/staff_menu.html' %}
 
@@ -88,16 +136,18 @@
 <footer>
     {% block footer %}{% endblock %}
 </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    <script type="application/javascript" src="{% static "js/main.js" %}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script type="application/javascript" src="{% static "js/main.js" %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script>new WOW().init();</script>
 
 
 {% block scripts %}{% endblock %}

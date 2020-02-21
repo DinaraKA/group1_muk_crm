@@ -36,3 +36,10 @@ class FullSearchForm(forms.Form):
 
 
 
+class DisciplineForm(forms.ModelForm):
+    teacher = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
+
+    class Meta:
+        model = Discipline
+        fields = ['name', 'teacher']
+

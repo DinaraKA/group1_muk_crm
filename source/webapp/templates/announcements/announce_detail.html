@@ -13,7 +13,7 @@
             <p align="justify">{{announcement.text}}</p>
                 <hr>
                 <a href="{% url 'webapp:announce_change' announcement.pk %}" class="btn btn-primary">Редактировать</a>
-                <a href="{% url 'webapp:announce_delete' announcement.pk %}" class="btn btn-primary">Удалить</a>
+                <a href="{% url 'webapp:announce_delete' announcement.pk %}" class="btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>

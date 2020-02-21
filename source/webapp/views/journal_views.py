@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
-
-from accounts.models import Group
-from webapp.models import Journal, Discipline
+from accounts.models import StudyGroup
+from webapp.models import Journal, Discipline, StudyGroup
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -19,7 +18,7 @@ class JournalIndexView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context.update({
-            'groups': Group.objects.all(),
+            'groups': StudyGroup.objects.all(),
             'disciplines': Discipline.objects.all()
         })
         return context
@@ -55,7 +54,7 @@ class GradeforStudentCreateView(CreateView):
 class JournalUpdateView(UpdateView):
     model = Journal
     template_name = 'change.html'
-    fields = ['theme']
+    fields = ['discipline', 'date', 'theme']
 
     def get_success_url(self):
         return reverse('webapp:journal')

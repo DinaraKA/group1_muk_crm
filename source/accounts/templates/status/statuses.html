@@ -6,7 +6,7 @@
         <table class="table">
             <h1>Статусы преподавателей, студентов и персонала</h1>
         {% if perms.accounts.add_status %}
-            <a href="{% url 'accounts:add_status' %}" class="btn btn-outline-primary  ml-5 mt-3">Добавить статус</a>
+            <a href="{% url 'accounts:add_status' %}" class="btn btn-success  ml-5 my-3">Добавить статус</a>
         {% endif %}
             <thead>
                 <tr>
@@ -25,7 +25,7 @@
                             <td class="symbol"><a class='update' href="{% url 'accounts:change_status' status.pk %}">&#x270E;</a></td>
                         {% endif %}
                         {% if perms.accounts.delete_status %}
-                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}">&times;</a></td>
+                            <td class="symbol"><a class='delete' href="{%  url 'accounts:delete_status' status.pk %}" style="color: red">&times;</a></td>
                         {% endif %}
                     </tr>
                 </tbody>

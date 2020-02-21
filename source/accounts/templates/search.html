@@ -18,14 +18,19 @@
         <p><input type="submit" value="Search" class="btn btn-primary"></p>
     </div>
         </div>
+    </div>
     </form>
 
     <h3>Results</h3>
+    {% if group_list != None %}
+        {% include 'group/list.html' %}
+    {% else %}
     {% if user %}
         {% if is_paginated %}
         {% endif %}
         {% include 'partial/user_list.html' %}
-    {% else %}
-        <p class="text-center">No results available. Try again later or with other search params.</p>
+{#        {% include 'group/list.html' %}#}
     {% endif %}
+    {% endif %}
+        <p class="text-center">No results available. Try again later or with other search params.</p>
 {% endblock %}

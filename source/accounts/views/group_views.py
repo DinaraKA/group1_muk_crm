@@ -1,15 +1,17 @@
 from accounts.forms import GroupForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from accounts.models import Group
+from accounts.models import StudyGroup
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib import messages
+from django.shortcuts import render
+from django.shortcuts import redirect, get_object_or_404
 
 class GroupListView(PermissionRequiredMixin, ListView):
     template_name = 'group/list.html'
-    model = Group
+    model = StudyGroup
     ordering = ["-name"]
-    context_object_name = 'groups'
+    context_object_name = 'group_list'
     paginate_by = 10
     paginate_orphans = 2
     permission_required = "accounts.view_group"
@@ -22,37 +24,54 @@ class GroupListView(PermissionRequiredMixin, ListView):
 
 class GroupDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'group/detail.html'
-    model = Group
+    model = StudyGroup
     permission_required = "accounts.view_group"
     permission_denied_message = "Доступ запрещен"
 
 
 class GroupCreateView(PermissionRequiredMixin, CreateView):
-    model = Group
+    model = StudyGroup
     template_name = 'add.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+    # fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
     permission_required = "accounts.add_group"
     permission_denied_message = "Доступ запрещен"
     form_class = GroupForm
 
+    def form_valid(self, form):
+        text = form.cleaned_data['name']
+        if StudyGroup.objects.filter(name=text.capitalize()):
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'add.html', {})
+        else:
+            group = StudyGroup(name=text.capitalize(),
+                               group_leader=form.cleaned_data['group_leader'],
+                               head_teaher=form.cleaned_data['head_teacher'],
+                               started_at=form.cleaned_data['started_at'])
+            students = form.cleaned_data['students']
+            print(students)
+            group.save()
+            group.students.set(students)
+            # group.head_teaher.set(form.cleaned_data['head_teacher'])
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('accounts:groups')
+        return redirect('accounts:groups')
 
 
 class GroupUpdateView(PermissionRequiredMixin, UpdateView):
-    model = Group
+    model = StudyGroup
     template_name = 'change.html'
-    fields = ['name', 'students', 'starosta', 'kurator', 'started_at']
+    fields = ['name', 'students', 'group_leader', 'head_teaher', 'started_at']
     permission_required = "accounts.change_group"
     permission_denied_message = "Доступ запрещен"
-    form_class = GroupForm
+    # form_class = GroupForm
 
     def get_success_url(self):
         return reverse('accounts:groups')
 
 
 class GroupDeleteView(PermissionRequiredMixin, DeleteView):
-    model = Group
+    model = StudyGroup
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:groups')
     permission_required = "accounts.delete_group"

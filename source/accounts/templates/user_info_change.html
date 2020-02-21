@@ -10,7 +10,8 @@
 {% block content %}
     <h1 class="text-center">Личный кабинет</h1>
     <form action="{% url "accounts:user_update" user_obj.pk %}" method="post" enctype="multipart/form-data">
-        {% include 'partial/form.html' with button_text='Сохранить'%}
+        {% include 'partial/form.html'%}
+        <p class="text-center"><input type="submit" value="Сохранить" class="btn btn-success"></p>
 {#        <input type="submit" value="Сохранить" class="btn btn-primary">#}
     </form>
 {% endblock %}
