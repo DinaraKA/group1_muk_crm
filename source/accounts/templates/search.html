@@ -23,7 +23,7 @@
 
     <h3>Results</h3>
     {% if group_list != None %}
-        {% include 'group/list.html' %}
+        {% include 'partial/group_list.html' %}
     {% else %}
     {% if user %}
         {% if is_paginated %}
@@ -32,5 +32,5 @@
 {#        {% include 'group/list.html' %}#}
     {% endif %}
     {% endif %}
-        <p class="text-center">No results available. Try again later or with other search params.</p>
+{#        <p class="text-center">No results available. Try again later or with other search params.</p>#}
 {% endblock %}
