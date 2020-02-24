@@ -164,7 +164,7 @@ class UserDetailView( DetailView):
         role_student = User.objects.filter(profile__role__name__icontains='Студент')
         context.update({
             'role_student': role_student,
-            'family':Family.objects.filter(student=user),
+            'family': Family.objects.filter(student=user),
             'groups': StudyGroup.objects.filter(students__in=students.values('student')),
             'groups_for_student': StudyGroup.objects.filter(students=self.request.user),
             'students': students,
