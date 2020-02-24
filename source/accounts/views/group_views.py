@@ -25,6 +25,7 @@ class GroupListView(PermissionRequiredMixin, ListView):
 class GroupDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'group/detail.html'
     model = StudyGroup
+    context_object_name = 'group'
     permission_required = "accounts.view_group"
     permission_denied_message = "Доступ запрещен"
 
