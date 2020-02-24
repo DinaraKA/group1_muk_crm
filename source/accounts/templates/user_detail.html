@@ -110,7 +110,7 @@
                     <td>{{ parent.family_user.email }}</td>
                     <td>{{ parent.family_user.profile.phone_number }}</td>
                     <td><a href="{% url 'accounts:user_detail' parent.family_user.pk %}">&#8594;</a></td>
-                    <td><a href="{% url 'accounts:family_delete' parent.pk %}">x</a></td>
+                    <td><a href="{% url 'accounts:family_delete' parent.pk %}" style="color: red">x</a></td>
                 </tr>
                 </tbody>
             {% endfor %}

@@ -2,8 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, UserFamilyCreateView, UserFamilyCreate2View, FamilyDeleteView
-    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View
+    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View, FamilyDeleteView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
