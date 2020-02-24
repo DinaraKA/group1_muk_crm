@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, UserFamilyCreateView, UserFamilyCreate2View
+    UserSearchView, SearchResultsView, UserDeleteView, UserFamilyCreateView, UserFamilyCreate2View, FamilyDeleteView
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
@@ -25,6 +25,7 @@ urlpatterns = [
     path('user/search/results/', SearchResultsView.as_view(), name='search_results'),
     path('user/family/add/<int:pk>/', UserFamilyCreateView.as_view(), name='user_family_create'),
     path('user/family/add2/<int:pk>', UserFamilyCreate2View.as_view(), name='user_family_create2'),
+    path('user/family/delete/<int:pk>/', FamilyDeleteView.as_view(), name='family_delete'),
     path('adminpositions/', AdminPositionIndexView.as_view(), name='adminpositions'),
     path('adminposition/add/<int:pk>/', AdminPositionCreateView.as_view(), name='add_admin_position'),
     path('adminposition/change/<int:pk>/', AdminPositionUpdateView.as_view(), name='change_admin_position'),
