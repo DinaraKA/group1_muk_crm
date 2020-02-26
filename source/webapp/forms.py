@@ -16,6 +16,16 @@ class ScheduleForm(forms.ModelForm):
     lesson = forms.ModelChoiceField(queryset=Lesson.objects.filter(is_saturday=False), label='Пара')
     teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
 
+    def clean(self):
+        super().clean()
+        day = self.cleaned_data["day"]
+        lesson = self.cleaned_data["lesson"]
+        lessons = Lesson.objects.filter(is_saturday=True)
+        if day == 'Saturday':
+            if lesson not in lessons:
+                raise forms.ValidationError('В субботу нет' + " " + str(lesson.index) + 'й' + " " + "пары" )
+
+
     class Meta:
         model = Schedule
         fields = ['day', 'lesson', 'discipline', 'group', 'teacher', 'auditoriya']

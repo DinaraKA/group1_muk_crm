@@ -236,6 +236,10 @@ h3 {
     background: lightgray;
     width: 10%;
 }
+.schedule{
+    word-wrap: break-word;
+    table-layout: fixed;
+}
 .label-form{
     display: inline-flex;
 }
@@ -245,4 +249,7 @@ h3 {
 	width: 100px;
 	height: 100px;
 	float: left;
+}
+.form-error{
+    color: red;
 }
