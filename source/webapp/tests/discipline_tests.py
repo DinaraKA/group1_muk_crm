@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.urls import reverse, reverse_lazy
+
 from webapp.models import Discipline
 from selenium.webdriver import Chrome
 
@@ -27,6 +29,55 @@ class DisciplineModelTest(TestCase):
         discipline = Discipline.objects.get(id=1)
         expected_object_name = '%s' % discipline.name
         self.assertEquals(expected_object_name, str(discipline))
+
+
+class DisciplineViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        Discipline.objects.create(
+            name='Test'
+        )
+
+    def test_discipline_list(self):
+        response = self.client.get(reverse('webapp:disciplines'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Test')
+
+    def test_created_discipline(self):
+        response = self.client.post(reverse('webapp:add_auditory'), {
+            'name': 'Other test',
+            'places': 35,
+            'description': 'New Test Description.'
+        })
+        self.assertEqual(Discipline.objects.get(pk=2).name, 'Other test')
+        self.assertEqual(response.status_code, 302)
+
+    def test_updated_discipline(self):
+        discipline = Discipline.objects.get(id=1)
+        response = self.client.post(
+            reverse('webapp:change_discipline', kwargs={'pk': discipline.pk}),
+            {
+                'name': 'New Test',
+            })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Discipline.objects.get().name, 'New Test')
+
+    def test_deleted_discipline(self):
+        discipline = Discipline.objects.get(id=1)
+        response = self.client.delete(
+            reverse_lazy('webapp:delete_discipline', kwargs={'pk': discipline.pk}),
+            {
+                'name': 'Test'
+            })
+
+        self.assertEqual(response.status_code, 302)
+        response = self.client.get(reverse_lazy('webapp:delete_discipline', kwargs={'pk': discipline.pk}),
+                                   {'name': 'Test'})
+        self.assertEqual(response.status_code, 404)
+
+        self.assertFalse(Discipline.objects.filter(pk=discipline.pk).exists())
 
 
 class DisciplineSeleniumViewTest(TestCase):

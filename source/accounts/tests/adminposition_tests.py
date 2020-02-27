@@ -41,7 +41,7 @@ class AdminPositionFormTest(TestCase):
         self.assertTrue(form.fields['name'].label is None or form.fields['name'].label == 'name')
 
     def test_form_valid(self):
-        form_data = {'name': 'Test'}
+        form_data = {'name': 'FormTest'}
         form = AdminPositionForm(data=form_data)
         self.assertFalse(form.is_valid())
 
@@ -103,16 +103,25 @@ class AdminPositionSeleniumViewTest(TestCase):
 
     def test_list_position(self):
         self.driver.get('http://localhost:8000/accounts/adminpositions/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         assert self.driver.current_url == 'http://localhost:8000/accounts/adminpositions/'
 
     def test_created_position(self):
         self.driver.get('http://localhost:8000/accounts/adminposition/add/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_name('name').send_keys('Test')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/accounts/adminpositions/'
 
     def test_updated_position(self):
         self.driver.get('http://127.0.0.1:8000/accounts/adminpositions/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('NewTest')
@@ -121,6 +130,9 @@ class AdminPositionSeleniumViewTest(TestCase):
 
     def test_deleted_position(self):
         self.driver.get('http://127.0.0.1:8000/accounts/adminpositions/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/adminpositions/'

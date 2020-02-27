@@ -11,7 +11,7 @@ class ScheduleModelTest(TestCase):
         User.objects.create(username='Test')
         Auditory.objects.create(name='555')
         Discipline.objects.create(name='Английский язык')
-        Group.objects.create(name="test", starosta_id=1, kurator_id=1, started_at='2020-01-20')
+        StudyGroup.objects.create(name="test", group_leader_id=1, head_teaher_id=1, started_at='2020-01-20')
         Schedule.objects.create(lesson_id=1, day=DAY_CHOICES[0], teacher_id=1, auditoriya_id=1, discipline_id=1,
                                 group_id=1)
 

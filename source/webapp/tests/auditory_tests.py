@@ -66,7 +66,7 @@ class AuditoryViewTest(TestCase):
         Auditory.objects.create(
             name='Test',
             places=33,
-            description='Test Description.'
+            description='Test description.'
         )
 
     def test_auditory_list(self):
@@ -78,36 +78,36 @@ class AuditoryViewTest(TestCase):
 
     def test_created_position(self):
         response = self.client.post(reverse('webapp:add_auditory'), {
-            'name': 'Other Test',
+            'name': 'Create test',
             'places': 35,
-            'description': 'New Test Description.'
+            'description': 'Create test description.'
         })
-        self.assertEqual(Auditory.objects.get(pk=2).name, 'Other Test')
+        self.assertEqual(Auditory.objects.get(pk=2).name, 'Create test')
         self.assertEqual(response.status_code, 302)
 
-    def test_updated_post(self):
+    def test_updated_position(self):
         auditory = Auditory.objects.get(id=1)
         response = self.client.post(
             reverse('webapp:change_auditory', kwargs={'pk': auditory.pk}),
             {
-                'name': 'New Test',
-                'places': 35,
-                'description': 'New Test Description.'
+                'name': 'Update test',
+                'places': 30,
+                'description': 'Update test description.'
             })
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(Auditory.objects.get().name, 'New Test')
-        self.assertEqual(Auditory.objects.get().places, 35)
-        self.assertEqual(Auditory.objects.get().description, 'New Test Description.')
+        self.assertEqual(Auditory.objects.get().name, 'Update test')
+        self.assertEqual(Auditory.objects.get().places, 30)
+        self.assertEqual(Auditory.objects.get().description, 'Update test description.')
 
     def test_deleted_post(self):
         auditory = Auditory.objects.get(id=1)
         response = self.client.delete(
             reverse_lazy('webapp:delete_auditory', kwargs={'pk': auditory.pk}),
             {
-                'name': 'New Test',
-                'places': 35,
-                'description': 'New Test Description.'
+                'name': 'Test',
+                'places': 33,
+                'description': 'Test description.'
             })
 
         self.assertEqual(response.status_code, 302)
@@ -126,16 +126,20 @@ class AuditorySeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_auditory(self):
-        self.driver.get('http://localhost:8000/accounts/adminpositions/')
-        assert self.driver.current_url == 'http://localhost:8000/accounts/adminpositions/'
+        self.driver.get('http://localhost:8000/auditories/')
+        assert self.driver.current_url == 'http://localhost:8000/auditories/'
 
     def test_created_auditory(self):
         self.driver.get('http://localhost:8000/auditories/add/')
         self.driver.find_element_by_name('name').send_keys('Test')
         self.driver.find_element_by_name('places').send_keys(35)
         self.driver.find_element_by_name('description').send_keys('Test description')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/auditories/'
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://localhost:8000/auditories/'
+        except:
+            self.driver.find_element_by_tag_name('h3')
+            assert self.driver.current_url == 'http://localhost:8000/auditories/add/'
 
     def test_updated_auditory(self):
         self.driver.get('http://127.0.0.1:8000/auditories/')
@@ -143,9 +147,9 @@ class AuditorySeleniumViewTest(TestCase):
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('places').clear()
         self.driver.find_element_by_name('description').clear()
-        self.driver.find_element_by_name('name').send_keys('Test')
+        self.driver.find_element_by_name('name').send_keys('Update test')
         self.driver.find_element_by_name('places').send_keys(35)
-        self.driver.find_element_by_name('description').send_keys('Test description')
+        self.driver.find_element_by_name('description').send_keys('Update test description')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
 
@@ -174,10 +178,12 @@ class AuditoryUrlTest(TestCase):
         url = reverse('webapp:add_auditory')
         self.assertEquals(resolve(url).func.view_class, AuditoryCreateView)
 
-    # def test_update_url_is_resolved(self):
-    #     url = reverse('webapp:change_auditory')
-    #     self.assertEquals(resolve(url).func.view_class, AuditoryUpdateView)
-    #
-    # def test_delete_url_is_resolved(self):
-    #     url = reverse('webapp:delete_auditory')
-    #     self.assertEquals(resolve(url).func.view_class, AuditoryDeleteView)
+    def test_update_url_is_resolved(self):
+        auditory = Auditory.objects.get(id=1)
+        url = reverse('webapp:change_auditory', args=[auditory.pk] )
+        self.assertEquals(resolve(url).func.view_class, AuditoryUpdateView)
+
+    def test_delete_url_is_resolved(self):
+        auditory = Auditory.objects.get(id=1)
+        url = reverse('webapp:delete_auditory', args=[auditory.pk])
+        self.assertEquals(resolve(url).func.view_class, AuditoryDeleteView)
