@@ -52,3 +52,5 @@ class DisciplineForm(forms.ModelForm):
         model = Discipline
         fields = ['name', 'teacher']
 
+
+

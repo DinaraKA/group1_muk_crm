@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="table-responsive-lg">
+        <table class="table table-bordered schedule">
+            <h1>Журнал группы {{ journal.study_group.name }} по дисциплине - {{ journal.discipline.name }}</h1>
+            <h4>Преподаватель: {{ journal.discipline.teacher.get }}</h4>
+            <a href="{% url 'webapp:add_journalnote' journal.pk %}" class="btn btn-success  ml-5 my-3">+ Добавить
+                занятие</a>
+            <thead style="background-color: lightgray">
+            <tr>
+                <th scope="col" class="journal">Студенты</th>
+                {% for journalnote in journalnotes %}
+                    <th scope="col" data-toggle="tooltip" data-placement="top"
+                        title='Запись создал(а)-{{ journalnote.created_by }}
+{{ journalnote.theme }}'>{{ journalnote.date }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in journal.study_group.students.all %}
+                <tr>
+                    <th scope="row">{{ student }}</th>
+
+                    {#                    <td>Mark</td>#}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+{% endblock %}

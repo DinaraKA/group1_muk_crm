@@ -143,3 +143,16 @@ User.add_to_class("__str__", get_full_name)
 class GroupJournal(models.Model):
     study_group = models.ForeignKey(StudyGroup, on_delete=models.CASCADE, related_name='journal_group', verbose_name='Группа' )
     discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, related_name='journal_discipline', verbose_name='Дисциплина')
+
+    def __str__(self):
+        return str(self.study_group) + "-" + str(self.discipline)
+
+
+class JournalNote(models.Model):
+    group_journal = models.ForeignKey(GroupJournal, on_delete=models.CASCADE, related_name='group_journal_note', verbose_name='Журнал группы по дисциплине', default=None )
+    date = models.DateTimeField(verbose_name='Дата')
+    theme = models.CharField(max_length=100, verbose_name='Тема или название занятия')
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='note_created_by', verbose_name='Кем создана')
+
+    def __str__(self):
+        return self.theme

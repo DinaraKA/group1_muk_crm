@@ -253,3 +253,17 @@ h3 {
 .form-error{
     color: red;
 }
+.menu-journal{
+    background-color: rgb(66 66 66);
+
+}
+.menu-journal a:hover{
+    background-color: rgb(66 66 66);
+    transform: none;
+}
+.dropdown-toggle a:focus{
+    border-color: rgb(66 66 66);
+}
+.tooltip:hover{
+    font-size: 14px;
+}
