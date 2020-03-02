@@ -103,9 +103,10 @@ class GroupStudentAdd(UpdateView):
     def form_valid(self, form):
         self.student_pk = self.kwargs['pk']
         text = form.cleaned_data['group_name']
-        user = User.objects.filter(pk=self.kwargs['pk'])
+        # user = User.objects.filter(pk=self.kwargs['pk'])
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
         group_name = get_object_or_404(StudyGroup, name=text)
-        group_name.students.set(user)
+        group_name.students.add(user.pk)
         group_name.save()
         return self.get_success_url()
 
