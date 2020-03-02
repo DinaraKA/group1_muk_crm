@@ -150,7 +150,7 @@ class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView( DetailView):
+class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'

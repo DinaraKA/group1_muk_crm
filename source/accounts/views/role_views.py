@@ -58,8 +58,6 @@ class RoleUpdateView(PermissionRequiredMixin, UpdateView):
         else:
             pk = self.kwargs.get('pk')
             role = get_object_or_404(Role, id=pk)
-            print(role, "ROLE")
-            print(pk, "PK")
             role.name = text.capitalize()
             role.save()
         return self.get_success_url()
