@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="table-responsive-lg">
-        <table class="table table-bordered schedule">
+        <table class="table table-bordered schedule" style="font-size: 13px">
             <h1>Журнал группы {{ journal.study_group.name }} по дисциплине - {{ journal.discipline.name }}</h1>
             <h4>Преподаватель: {{ journal.discipline.teacher.get }}</h4>
             <a href="{% url 'webapp:add_journalnote' journal.pk %}" class="btn btn-success  ml-5 my-3">+ Добавить
                 занятие</a>
-            <thead style="background-color: lightgray">
+            <thead>
             <tr>
-                <th scope="col" class="journal">Студенты</th>
+                <th scope="col" class="schedule-days" style='width: 15%'>Студенты</th>
                 {% for journalnote in journalnotes %}
-                    <th scope="col" data-toggle="tooltip" data-placement="top"
+                    <th scope="col" class="journal-dates" data-toggle="tooltip" data-placement="top"
                         title='Запись создал(а)-{{ journalnote.created_by }}
-{{ journalnote.theme }}'>{{ journalnote.date }}</th>
+{{ journalnote.theme }}'>{{ journalnote.date}}</th>
                 {% endfor %}
             </tr>
             </thead>
@@ -21,7 +21,7 @@
                 <tr>
                     <th scope="row">{{ student }}</th>
 
-                    {#                    <td>Mark</td>#}
+{#                                        <td>Mark</td>#}
                 </tr>
             {% endfor %}
             </tbody>

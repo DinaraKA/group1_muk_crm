@@ -69,14 +69,13 @@ class GroupJournalDeleteView(DeleteView):
 class JournalNoteCreateView(CreateView):
     model = JournalNote
     template_name = 'add.html'
-    fields = ['date', 'theme']
+    fields = ['theme']
 
     def form_valid(self, form):
         self.journal_pk = self.kwargs.get('pk')
         journal = get_object_or_404(GroupJournal, pk=self.journal_pk)
         journalnote = JournalNote(
             group_journal = journal,
-            date=form.cleaned_data['date'],
             theme=form.cleaned_data['theme'],
             created_by=self.request.user
         )

@@ -267,3 +267,6 @@ h3 {
 .tooltip:hover{
     font-size: 14px;
 }
+.journal-dates{
+    background-color: lightgray;
+}

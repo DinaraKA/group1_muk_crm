@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule, Lesson, Discipline, Theme
+from .models import Schedule, Lesson, Discipline, Theme, JournalNote
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
 from bootstrap_datepicker_plus import DatePickerInput
@@ -51,6 +51,5 @@ class DisciplineForm(forms.ModelForm):
     class Meta:
         model = Discipline
         fields = ['name', 'teacher']
-
 
 

@@ -1,6 +1,5 @@
 from django.urls import path
 from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
-from webapp.views.journal_views import GroupJournalUpdateView, GroupJournalDeleteView
 from .views import AnnouncementsView, AnnounceDetailView, AnnouncementCreateView, AnnouncementUpdateView, AnnouncementDeleteView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView
@@ -10,7 +9,7 @@ from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDel
 from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
 from .views import PersonalGradesDetailView
 from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
-from .views import GroupJournalDetailView, GroupJournalListView, GroupJournalCreateView, JournalNoteCreateView
+from .views import GroupJournalDetailView, GroupJournalListView, GroupJournalCreateView, JournalNoteCreateView, GroupJournalUpdateView, GroupJournalDeleteView
 
 app_name = 'webapp'
 

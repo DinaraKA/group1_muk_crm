@@ -41,7 +41,6 @@
                 {#            <li><a href="#">Правовая информация</a></li>#}
                 {#            <li><a href="#">Выпускники</a></li>#}
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
-                <li class="nav-item"><a href="{% url 'webapp:themes' %}" class="nav-link">Темы</a></li>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
                     </li>
