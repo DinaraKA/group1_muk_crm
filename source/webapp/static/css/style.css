@@ -236,6 +236,10 @@ h3 {
     background: lightgray;
     width: 10%;
 }
+.schedule{
+    word-wrap: break-word;
+    table-layout: fixed;
+}
 .label-form{
     display: inline-flex;
 }
@@ -245,4 +249,24 @@ h3 {
 	width: 100px;
 	height: 100px;
 	float: left;
+}
+.form-error{
+    color: red;
+}
+.menu-journal{
+    background-color: rgb(66 66 66);
+
+}
+.menu-journal a:hover{
+    background-color: rgb(66 66 66);
+    transform: none;
+}
+.dropdown-toggle a:focus{
+    border-color: rgb(66 66 66);
+}
+.tooltip:hover{
+    font-size: 14px;
+}
+.journal-dates{
+    background-color: lightgray;
 }

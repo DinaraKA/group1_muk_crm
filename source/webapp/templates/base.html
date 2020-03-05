@@ -41,18 +41,17 @@
                 {#            <li><a href="#">Правовая информация</a></li>#}
                 {#            <li><a href="#">Выпускники</a></li>#}
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
-                <li class="nav-item"><a href="{% url 'webapp:themes' %}" class="nav-link">Темы</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:journal' %}" class="nav-link">Журнал</a></li>
                     <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
                     </li>
                 {% endif %}
+                {% block menu %}{% endblock %}
             </ul>
             <ul class="menu navbar-nav ml-auto">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'accounts:user_search' %}" class="nav-link">Поиск</a></li>
                 {% endif %}
-                {% block menu %}{% endblock %}
+
                 {#                <li class="menu-right ml-auto">#}
 
 
@@ -99,6 +98,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="application/javascript" src="{% static "js/main.js" %}"></script>
 <script src="{% static 'js/wow.min.js' %}"></script>
 <script>new WOW().init();</script>

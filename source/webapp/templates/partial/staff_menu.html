@@ -51,16 +51,15 @@
     <a href="{% url 'accounts:user_create' %}">Регистрация</a>
     <a href="{% url 'accounts:user_list' %}">Пользователи</a>
     <a href="{% url 'accounts:adminpositions' %}">Админ позиции</a>
-    <a href="{% url 'accounts:roles_list' %}">Роли</a>
-    <a href="{% url 'accounts:statuses' %}">Статусы</a>
-    <a href="{% url 'accounts:all_social_statuses' %}">Соц статусы</a>
+    <a href="{% url 'webapp:auditories' %}">Аудитории</a>
     <a href="{% url 'accounts:groups' %}">Группы</a>
-    <a href="{% url 'webapp:grades' %}">Дисциплины</a>
-
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <a href="{% url 'webapp:disciplines' %}">Дисциплины</a>
+    <a href="{% url 'webapp:groupjournals' %}">Журналы</a>
+    <a href="{% url 'webapp:grades' %}">Оценки</a>
+    <a href="{% url 'webapp:lessons' %}">Пары</a>
+    <a href="{% url 'accounts:roles_list' %}">Роли</a>
+    <a href="{% url 'accounts:all_social_statuses' %}">Соц статусы</a>
+    <a href="{% url 'accounts:statuses' %}">Статусы</a>
 </div>
 
 {#<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>#}
