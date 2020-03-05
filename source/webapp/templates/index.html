@@ -75,15 +75,15 @@
 
             <div class="news">
                 {% for news in news_list %}
-                    <div class="row wow zoomIn">
+                    <div class="row">
                         <a class="col-4" href="#">
-                            <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
+                            <img src="{{ news.photo.url }}" class="img-thumbnail wow zoomIn" alt="{{ news.title }}">
                         </a>
                         <div class="news_body col-8">
-                            <a class="title" href="{% url 'webapp:news_detail' news.pk %}"
+                            <a class="title wow zoomIn" href="{% url 'webapp:news_detail' news.pk %}" data-wow-delay="0.2s"
                                style="display: block">{{ news.title }}</a>
                             <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
-                            <p class="news_index"> {{ news.text }}
+                            <p class="news_index wow zoomIn" data-wow-delay="0.4s"> {{ news.text }}
                                 {#                            <br>#}
                                 {#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
                             </p>
@@ -102,17 +102,17 @@
             <h4>Объявления</h4>
             <div class="news">
                 {% for announcement in announcements %}
-                    <div class="row wow zoomIn">
+                    <div class="row">
                         <a class="col-4" href="#">
-                            <img src="{{ announcement.photo.url }}" class="img-thumbnail"
+                            <img src="{{ announcement.photo.url }}" class="img-thumbnail wow zoomIn"
                                  alt="{{ announcement.title }}">
                         </a>
                         <div class="news_body col-8">
-                            <a class="title" href="{% url 'webapp:announce_detail' announcement.pk %}"
+                            <a class="title wow zoomIn" href="{% url 'webapp:announce_detail' announcement.pk %}" data-wow-delay="0.2s"
                                style="display: block">{{ announcement.title }}</a>
                             <time><i class="fa fa-calendar-alt" aria-hidden="true">{{ announcement.created_at }}</i>
                             </time>
-                            <p class="news_index"> {{ announcement.text }}</p>
+                            <p class="news_index wow zoomIn" data-wow-delay="0.4s"> {{ announcement.text }}</p>
                             <a href="{% url 'webapp:announce_detail' announcement.pk %}" style="color: red">читать
                                 полностью</a>
                         </div>
