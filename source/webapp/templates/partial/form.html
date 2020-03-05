@@ -5,11 +5,11 @@
 {% endfor %}
 {% for field in form %}
     <div class="row mt-5">
-        <p class="col-2"><label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label></p>
+        <p class="col-3"><label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label></p>
         {% if field.errors %}
-            <p class="col-10 d-flex">{{ field| add_class:'field-error form-control' }}</p>
+            <p class="col-9 d-flex">{{ field| add_class:'field-error form-control' }}</p>
         {% else %}
-            <p class="col-10 d-flex">{{ field | add_class:'form-control'}}</p>
+            <p class="col-9 d-flex">{{ field | add_class:'form-control'}}</p>
         {% endif %}
         {% for error in field.errors %}
             <div class="empty col-2 d-flex"></div>
@@ -17,4 +17,4 @@
         {% endfor %}
     </div>
 {% endfor %}
-<p class="text-center"><input type="submit" value="{{ button_text }}" class="btn btn-primary"></p>
+{#<p class="text-center"><input type="submit" value="{{ button_text }}" class="btn btn-primary"></p>#}

@@ -375,4 +375,21 @@ class UserFamilyCreate2View(CreateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
 
 
+class FamilyDeleteView(DeleteView):
+    model = Family
+    template_name = 'delete.html'
+
+
+    def delete(self, request, *args, **kwargs):
+        family = self.object = self.get_object()
+        parent = Family.objects.filter(family_user=family.family_user)
+        family.delete()
+        if parent:
+            pass
+        else:
+            family.family_user.delete()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('accounts:user_detail', kwargs={"pk": self.object.student.pk})
 

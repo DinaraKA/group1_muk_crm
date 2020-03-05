@@ -791,132 +791,6 @@
   }
 },
 {
-  "model": "webapp.schedule",
-  "pk": 1,
-  "fields": {
-    "lesson": 1,
-    "day": "Monday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 5,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 2,
-  "fields": {
-    "lesson": 2,
-    "day": "Tuesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 2,
-    "discipline": 1,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 3,
-  "fields": {
-    "lesson": 6,
-    "day": "Wednesday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 2,
-    "discipline": 5,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 4,
-  "fields": {
-    "lesson": 3,
-    "day": "Tuesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 3,
-    "discipline": 3,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 5,
-  "fields": {
-    "lesson": 1,
-    "day": "Thursday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 3,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 6,
-  "fields": {
-    "lesson": 5,
-    "day": "Saturday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 4,
-    "discipline": 5,
-    "group": 3
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 7,
-  "fields": {
-    "lesson": 3,
-    "day": "Friday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 4,
-    "discipline": 5,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 8,
-  "fields": {
-    "lesson": 8,
-    "day": "Wednesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 3,
-    "discipline": 6,
-    "group": 3
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 9,
-  "fields": {
-    "lesson": 8,
-    "day": "Monday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 3,
-    "discipline": 6,
-    "group": 4
-  }
-},
-{
   "model": "webapp.theme",
   "pk": 1,
   "fields": {
@@ -1629,14 +1503,14 @@
   }
 },
 {
-  "model": "accounts.group",
+  "model": "accounts.studygroup",
   "pk": 1,
   "fields": {
     "name": "Python",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teaher": [
       "admin"
     ],
     "started_at": "2020-01-23",
@@ -1672,14 +1546,14 @@
   }
 },
 {
-  "model": "accounts.group",
+  "model": "accounts.studygroup",
   "pk": 2,
   "fields": {
     "name": "Java",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teaher": [
       "teacher-1"
     ],
     "started_at": "2020-01-23",
@@ -1706,14 +1580,14 @@
   }
 },
 {
-  "model": "accounts.group",
+  "model": "accounts.studygroup",
   "pk": 3,
   "fields": {
     "name": "C++",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teaher": [
       "student-1"
     ],
     "started_at": "2020-01-24",
@@ -1731,14 +1605,14 @@
   }
 },
 {
-  "model": "accounts.group",
+  "model": "accounts.studygroup",
   "pk": 4,
   "fields": {
     "name": "Ruby",
-    "starosta": [
+    "group_leader": [
       "student-1"
     ],
-    "kurator": [
+    "head_teaher": [
       "student-1"
     ],
     "started_at": "2020-01-23",
@@ -2038,7 +1912,7 @@
     ],
     "content_type": [
       "accounts",
-      "group"
+      "studygroup"
     ],
     "object_id": "1",
     "object_repr": "\u041f\u0435\u0440\u0432\u0430\u044f \u0413\u0440\u0443\u043f\u043f\u0430",
@@ -2056,7 +1930,7 @@
     ],
     "content_type": [
       "accounts",
-      "group"
+      "studygroup"
     ],
     "object_id": "2",
     "object_repr": "\u0412\u0442\u043e\u0440\u0430\u044f \u0413\u0440\u0443\u043f\u043f\u0430",
@@ -2074,7 +1948,7 @@
     ],
     "content_type": [
       "accounts",
-      "group"
+      "studygroup"
     ],
     "object_id": "3",
     "object_repr": "\u0422\u0440\u0435\u0442\u044c\u044f \u0413\u0440\u0443\u043f\u043f\u0430",

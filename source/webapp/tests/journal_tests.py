@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from selenium.webdriver import Chrome
 from webapp.models import Journal, Discipline, Grade, Theme
-from webapp.views import JournalIndexView, JournalCreateView
+from webapp.views import JournalIndexView, GroupJournalCreateView
 
 
 class JournalModelTest(TestCase):
@@ -138,4 +138,4 @@ class JournalUrlTest(TestCase):
 
     def test_create_url_is_resolved(self):
         url = reverse('webapp:add_journal')
-        self.assertEquals(resolve(url).func.view_class, JournalCreateView)
+        self.assertEquals(resolve(url).func.view_class, GroupJournalCreateView)

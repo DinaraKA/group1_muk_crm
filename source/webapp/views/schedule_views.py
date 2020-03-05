@@ -1,9 +1,10 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
-from accounts.models import StudyGroup, Profile, Family
+from accounts.models import Profile, Family, StudyGroup
 
 
 class ScheduleView(ListView):
@@ -40,7 +41,6 @@ class ScheduleView(ListView):
         difference = []
         lesson = len(Lesson.objects.filter(is_saturday=False))
         saturdaylesson = len(Lesson.objects.filter(is_saturday=True))
-        # difference.append((lesson - saturdaylesson) * " ")
         for item in range(lesson - saturdaylesson):
             difference.append(" ")
         return difference
@@ -83,33 +83,27 @@ class ScheduleView(ListView):
         return Schedule.objects.all()
 
 
-class ScheduleAddView(PermissionRequiredMixin, CreateView):
+class ScheduleAddView(CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
-    permission_required = "webapp.add_schedule"
-    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleUpdateView(PermissionRequiredMixin, UpdateView):
+class ScheduleUpdateView(UpdateView):
     model = Schedule
     template_name = 'change.html'
     form_class = ScheduleForm
-    permission_required = "webapp.change_schedule"
-    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleDeleteView(PermissionRequiredMixin, DeleteView):
+class ScheduleDeleteView(DeleteView):
     model = Schedule
     template_name = 'delete.html'
-    permission_required = "webapp.delete_schedule"
-    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
