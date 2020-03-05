@@ -56,7 +56,6 @@
                 {#                <li class="menu-right ml-auto">#}
 
 
-
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}"
                                             class="nav-link">
@@ -69,7 +68,6 @@
                                             class="nav-link">Регистрация</a></li>
                     <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                 {% endif %}
-
             </ul>
         </div>
     </nav>
