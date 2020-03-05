@@ -166,7 +166,6 @@ class UserDetailView(DetailView):
             'role_student': role_student,
             'family': Family.objects.filter(student=user),
             'groups': StudyGroup.objects.filter(students__in=students.values('student')),
-            'groups_for_student': StudyGroup.objects.filter(students=self.request.user),
             'students': students,
             'student_user': User.objects.filter(profile__role__name ='Студент'),
             'parent_user': User.objects.filter(profile__role__name ='Родитель')
