@@ -19,8 +19,8 @@
                     {% if user_obj.profile.patronymic %}
                         <p><b>Отчество:</b> {{ user_obj.profile.patronymic }}</p>
                     {% endif %}
-                {% for gr in group %}
-                <p><b>Группа:</b> {{ gr.name }}</p>
+                {% for gr in groups %}
+                <p><b>Группа:</b> {{ gr.name }}!!!</p>
                 {% endfor %}
                     {% if user_obj.email %}
                     <p><b>Почта:</b> {{ user_obj.email }}</p>
@@ -38,13 +38,18 @@
                     {% endif %}
                     {% if user_obj.profile.status %}
                         <p><b>Статус:</b> {{ user_obj.profile.status }}</p>
-                    {% endif %}
+                        {% endif %}
                     {% if user_obj.profile.social_status %}
                         <p><b>Социальный статус:</b> {{ user_obj.profile.social_status }}</p>
                     {% endif %}
                     {% if user_obj.profile.admin_position %}
                         <p><b>Должность:</b> {{ user_obj.profile.admin_position }}</p>
                     {% endif %}
+                        <p><b>Группа:</b>
+                        {% for gr in user_obj.students.all %}
+                        <a href="{% url 'accounts:detail_group' gr.pk %}">{{ gr.name }} </a>,
+                        {% endfor %}
+                        </p>
                 </div>
             </div>
             <div class="col col-12 col-sm-10 col-md-8 col-lg-4" style="width: 25%">
@@ -67,6 +72,8 @@
         </div>
     </div>
     <div class="row" style="justify-content: center">
+    <a href="{% url 'accounts:group_student_add' user_obj.pk %}" class="btn btn-info  ml-5 mt-3" style="width: 15%"><i
+                class="fa fa-users mx-1"></i>Добавить в группу</a>
         <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3" style="width: 15%"><i
                 class="fas fa-pencil-alt mx-2"></i>Редактировать</a>
         <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3"
@@ -140,6 +147,5 @@
                 </tbody>
             {% endfor %}
         {% endif %}
-{#            {% endif %}#}
     </table>
 {% endblock %}

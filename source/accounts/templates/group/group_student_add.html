@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Добавить{% endblock %}
+{% block content %}
+    <h1 class="text-center">Добавить {{ user.first }} {{ user.last_name }} в группу</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% include 'partial/form.html'%}
+{#                 {% csrf_token %}#}
+{#          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>#}
+{#            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">#}
+{#            <option selected>В группу:</option>#}
+{#                {% for group in groups %}#}
+{#            <option value="{{ group }}">{{ group }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+        <p class="text-center"><input type="submit" value="Добавить" class="btn btn-success"></p>
+    </form>
+    {% for message in messages %}
+<h3 class="text-center" style="color: red">
+    {{ message }}
+</h3>
+    {% endfor %}
+{% endblock %}
