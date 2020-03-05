@@ -157,3 +157,16 @@ class JournalNote(models.Model):
 
     def __str__(self):
         return self.theme
+
+
+class JournalGrade(models.Model):
+    journal_note = models.ForeignKey(JournalNote, on_delete=models.PROTECT, related_name='journalnote_grade', verbose_name='Оценка за занятие')
+    grade = models.ForeignKey(Grade, on_delete=models.PROTECT, related_name='note_grade', verbose_name='Оценка')
+    student = models.ForeignKey(User, on_delete=models.PROTECT, related_name='student_grade', verbose_name='Оценка студенту')
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='grade_created_by',
+                                   verbose_name='Кем поставлена')
+    date = models.DateField(auto_now_add=True, verbose_name='Дата')
+    description = models.CharField(max_length=50, verbose_name='Описание', null=True, blank=True)
+
+    def __str__(self):
+        return  str(self.grade)
