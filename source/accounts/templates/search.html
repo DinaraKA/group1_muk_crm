@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{{ form.media.css }}
+<link rel="stylesheet" type="text/css" href="/media/ajax_search/css/ajax_search.css" />
 
 {% block content %}
-    <form method="post" action="{% url "accounts:user_search" %}">
+
+<form method="post" action="{% url "accounts:user_search" %}">
     <div class="form-group">
         {% csrf_token %}
         {% for error in form.non_field_errors %}
@@ -10,18 +13,20 @@
         {% for field in form %}
             <div class="form-group">
             <label for="{{ field.id_for_label }}"></label>
-                <div class="form-group" id="{{ field.label }}" aria-describedby="{{ field.label }}">{{ field.label }}: {{ field }}
-            {% for error in field.errors %}
+            <div class="form-group" id="{{ field.label }}" aria-describedby="{{ field.label }}">{{ field.label }}: {{ field }}</div>
+             {% if field.label == "По фамилии, имени" %}
+                 <input type="text" style="display: none; width: 260px;" id="search_name">
+                <div id="search_results"></div>
+            {% endif %}
+        {% for error in field.errors %}
                 <p class="form-error">{{ error }}</p>
-            {% endfor %}
         {% endfor %}
-        <p><input type="submit" value="Search" class="btn btn-primary"></p>
+        {% endfor %}
+             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>    Поиск</button>
+            </div>
     </div>
-        </div>
-    </div>
-    </form>
-
-    <h3>Results</h3>
+</form>
+    <h3>Результаты</h3>
     {% if group_list != None %}
         {% include 'group/list.html' %}
     {% else %}
@@ -29,8 +34,39 @@
         {% if is_paginated %}
         {% endif %}
         {% include 'partial/user_list.html' %}
-{#        {% include 'group/list.html' %}#}
+
     {% endif %}
     {% endif %}
         <p class="text-center">No results available. Try again later or with other search params.</p>
+    {{ form.media.js }}
+{% endblock %}
+
+{% block scripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/media/ajax_search/js/ajax_search.js" type="text/javascript"></script>
+    <script>
+        $('#search_name').keyup(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/accounts/user/ajax/search/',
+                data: {
+                    q: $('input[id=search_name]').val()
+                },
+                success: searchSuccess});
+            function searchSuccess(data, textStatus, jqXHR)
+                {
+                    $('#search_results').html(data)
+                }
+        });
+         $("#id_in_first_name").click(function(){
+            let search = $("#id_in_first_name:checkbox:checked").length > 0;
+            if(search == true){
+                console.log($('#search_name'))
+                $('#search_name').show()}
+            else{
+                $('#search_name').hide()}
+         });
+         $('#id_text').val('').change();
+         $('#id_in_first_name').removeAttr("checked")
+    </script>
 {% endblock %}

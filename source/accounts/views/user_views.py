@@ -1,17 +1,23 @@
+import json
+
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.core import serializers
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
+from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView, TemplateView
+from django.views.generic.base import View
+
 from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
 from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
 from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
+from ajax_search.forms import SearchForm
 
 
 
@@ -150,7 +156,7 @@ class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView( DetailView):
+class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
@@ -207,14 +213,31 @@ class UserSearchView(FormView):
     template_name = 'search.html'
     form_class = FullSearchForm
 
+
     def form_valid(self, form):
         query = urlencode(form.cleaned_data)
         url = reverse('accounts:search_results') + '?' + query
         return redirect(url)
 
+class SearchUser(TemplateView):
+    template_name = "user_search.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        result_list = []
+        q = self.request.GET.get('q', None)
+        if q:
+            result_list = [user for user in User.objects.filter(
+                Q(first_name__icontains=q) | Q(last_name__icontains=q))]
+            context = {
+                "result": result_list,
+                "query": q,
+            }
+        return context
+
 
 class SearchResultsView(PermissionRequiredMixin, ListView):
-    # model = User
     model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'
@@ -261,7 +284,11 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
                 query = query | Q(user__username__icontains=text)
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
-                query = query | Q(user__first_name__icontains=text) | Q(user__last_name__icontains=text)
+                if "-" in text:
+                    first_name, last_name = text.split('-')
+                    query = query | Q(user__first_name__icontains=first_name) | Q(user__last_name__icontains=last_name)
+                else:
+                    query = query | Q(user__first_name__icontains=text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
@@ -282,7 +309,7 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
             #     group = Group.objects.filter(name__icontains=text)
             #     # query = query | Q(user__students__name__icontains=text)
             #     print(query, "IN GROUP")
-
+        print(query)
         return query
 
 
@@ -346,4 +373,6 @@ class UserFamilyCreate2View(CreateView):
 
     def get_success_url(self):
         return reverse('accounts:user_detail', kwargs={"pk": self.student_pk})
+
+
 

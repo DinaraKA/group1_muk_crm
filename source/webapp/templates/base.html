@@ -12,7 +12,6 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/animate.css" %}">
     {% block styles %}{% endblock %}
@@ -58,48 +57,6 @@
 
 
 
-
-{#            <li><a href="#">Миссия и стратегия</a></li>#}
-{#            <li><a href="#">Специальности</a></li>#}
-            <li><a href="{% url 'webapp:news' %}">Новости</a></li>
-            <li><a href="{% url 'webapp:announcements' %}">Объявление</a></li>
-            <li><a href="{% url 'webapp:schedule' %}">Расписание</a></li>
-{#            <li><a href="#">Абитуриент</a></li>#}
-{#            <li><a href="#">Правовая информация</a></li>#}
-{#            <li><a href="#">Выпускники</a></li>#}
-            <li><a href="#">Контакты</a></li>
-{#            <li><a href="{% url 'accounts:groups' %}">Группы</a></li>#}
-            <li><a href="{% url 'webapp:themes' %}">Темы</a></li>
-            <li><a href="{% url 'webapp:journal' %}">Журнал</a></li>
-            {% for user in request.user.family_user.all %}
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>
-                <div class="dropdown-menu">
-{#                    <a class="dropdown-item" href="{% url 'webapp:personal_grades' request.user.pk %}">{{ user }}</a>#}
-                    <a class="dropdown-item" href="{% url 'webapp:personal_grades' user.student.pk %}">{{ user.student }}</a>
-                </div>
-                </li>
-            {% endfor %}
-
-            {% if request.user.is_authenticated%}
-                <li><a href="{% url 'webapp:personal_grades' request.user.pk %}">Дневник</a></li>
-            {% endif %}
-            <li><a href="{% url 'accounts:user_search' %}">Поиск</a></li>
-{#            {% block menu %}{% endblock %}#}
-            <li class="menu-right">
-                <ul>
-                    {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}" class="nav-link">
-                            Привет, {{ request.user }}!
-                        </a></li>
-                        <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link logout">Выход</a></li>
-                    {% else %}
-                        <li class="nav-item"><a href="{% url 'accounts:user_create' %}" class="nav-link">Регистрация</a></li>
-                        <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-        </ul>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}"
                                             class="nav-link">
@@ -127,7 +84,6 @@
     {#</div>#}
     <div class="container">
         {% block content %}{% endblock %}
-
     </div>
 </div>
 {% include 'partial/staff_menu.html' %}
@@ -153,5 +109,4 @@
 {% block scripts %}{% endblock %}
 </body>
 </html>
-
 

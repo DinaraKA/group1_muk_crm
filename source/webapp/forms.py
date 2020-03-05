@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule, Lesson, Discipline, Theme
+from .models import Schedule, Lesson, Discipline, Theme, Journal
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
 from bootstrap_datepicker_plus import DatePickerInput
@@ -32,7 +32,6 @@ class FullSearchForm(forms.Form):
     end_date = forms.DateField(label='введите дату окончания', widget=DatePickerInput(format='%d/%m/%Y'), required=False)
     discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине",  widget=forms.Select
                            (attrs={'class':'form-control'}))
-
 
 
 class DisciplineForm(forms.ModelForm):
