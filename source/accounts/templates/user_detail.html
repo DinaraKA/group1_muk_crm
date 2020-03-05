@@ -105,6 +105,8 @@
                 <th scope="col">ФИО</th>
                 <th scope="col">Почта</th>
                 <th scope="col">Контакты</th>
+                <th scope="col">Подробнее</th>
+                <th scope="col">Удалить</th>
             </tr>
             </thead>
             {% for parent in family %}
@@ -114,6 +116,8 @@
                     <td>{{ parent }}</td>
                     <td>{{ parent.family_user.email }}</td>
                     <td>{{ parent.family_user.profile.phone_number }}</td>
+                    <td><a href="{% url 'accounts:user_detail' parent.family_user.pk %}">&#8594;</a></td>
+                    <td><a href="{% url 'accounts:family_delete' parent.pk %}" style="color: red">x</a></td>
                 </tr>
                 </tbody>
             {% endfor %}
@@ -125,6 +129,7 @@
                 <th scope="col">Студенты</th>
                 <th scope="col">ФИО</th>
                 <th scope="col">Группа</th>
+                <th scope="col">Подробнее</th>
             </tr>
             </thead>
             {% for student in students %}
@@ -132,9 +137,12 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ student.student }}</td>
+                    <td>
                     {% for group in groups %}
-                        <td>{{ group.name }}</td>
+                        <p>{{ group.name }}<a href="{% url 'accounts:detail_group' group.pk %}">...</a></p>
                     {% endfor %}
+                    </td>
+                    <td><a href="{% url 'accounts:user_detail' student.student.pk %}">...</a></td>
                 </tr>
                 </tbody>
             {% endfor %}

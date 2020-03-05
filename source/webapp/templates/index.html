@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
-{#{% block menu %}#}
-{#{% endblock %}#}
+{% block menu %}
+    {% if request.user.is_authenticated %}
+        {#        <li class="nav-item"><a href="#" class="nav-link">Журнал</a></li>#}
+        <li class="nav-item dropdown nav-link">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">Журнал</a>
+            <div class="dropdown-menu menu-journal">
+                {% for group in groups %}
+                    {#                    <div class="btn-group dropright">#}
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">{{ group.name }}</a>
+                    <div class="dropdown-menu menu-journal">
+                    {% for discipline in disciplines %}
+                        <a class="dropdown-item" href="#">{{ discipline.name }}</a>
+                    {% endfor %}
+                    </div>
+                    {#                    <a class="dropdown-item" href="#">{{ group.name }}</a>#}
+                {% endfor %}
+                </div>
+        </li>
+    {% endif %}
+{% endblock %}
 {% block carousel %}
     <div class="carousel">
         <div id="main-carousel" class="carousel slide" data-ride="carousel">
@@ -10,25 +30,25 @@
                 <li data-target="#main-carousel" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active text-uppercase" style="height: 500px">
-                    <img src="https://mukr.iuk.kg/wp-content/uploads/2019/04/IUK_University.jpg" class="d-block w-100"
-                         alt="">
+                <div class="carousel-item active">
+                    <img src="https://mukr.iuk.kg/wp-content/uploads/2019/04/IUK_University.jpg"
+                         class="d-flex w-100" alt="">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>Кыргыз Республикасынын эл аралык университетинин политехникалык колледжи</h3>
                         <h3>Политехнический колледж Международного университета Кыргызской Республики</h3>
                     </div>
                 </div>
-                <div class="carousel-item" style="height: 500px">
+                <div class="carousel-item">
                     <img src="http://www.iuk.kg/Files/uploads/other/_home_iuk_centr-kampus-2019-1.jpg"
-                         class="d-block w-100 h-100" alt="">
+                         class="d-flex w-100" alt="">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>Кыргыз Республикасынын эл аралык университетинин политехникалык колледжи</h3>
                         <h3>Политехнический колледж Международного университета Кыргызской Республики</h3>
                     </div>
                 </div>
-                <div class="carousel-item" style="height: 500px">
-                    <img src="http://muk.iuk.kg/Files/uploads/other/_page_muk_socgumest.png" class="d-block w-100"
-                         alt="">
+                <div class="carousel-item">
+                    <img src="http://muk.iuk.kg/Files/uploads/other/_page_muk_socgumest.png"
+                         class="d-flex w-100" alt="">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>Кыргыз Республикасынын эл аралык университетинин политехникалык колледжи</h3>
                         <h3>Политехнический колледж Международного университета Кыргызской Республики</h3>
@@ -45,7 +65,7 @@
     </div>
 {% endblock %}
 {% block content %}
-    <div class="main-text py-5">
+    <div class="main-text py-5 col-12">
         <p>Сохраняя вековую традицию, подготовить конкурентоспособных специалистов, соответствующих международным
             стандартам качества, востребованных на рынке труда и отвечающих потребностям общества.</p>
     </div>
@@ -55,15 +75,15 @@
 
             <div class="news">
                 {% for news in news_list %}
-                    <div class="row wow zoomIn">
+                    <div class="row">
                         <a class="col-4" href="#">
-                            <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
+                            <img src="{{ news.photo.url }}" class="img-thumbnail wow zoomIn" alt="{{ news.title }}">
                         </a>
                         <div class="news_body col-8">
-                            <a class="title" href="{% url 'webapp:news_detail' news.pk %}"
+                            <a class="title wow zoomIn" href="{% url 'webapp:news_detail' news.pk %}" data-wow-delay="0.2s"
                                style="display: block">{{ news.title }}</a>
                             <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
-                            <p class="news_index"> {{ news.text }}
+                            <p class="news_index wow zoomIn" data-wow-delay="0.4s"> {{ news.text }}
                                 {#                            <br>#}
                                 {#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
                             </p>
@@ -82,17 +102,17 @@
             <h4>Объявления</h4>
             <div class="news">
                 {% for announcement in announcements %}
-                    <div class="row wow zoomIn">
+                    <div class="row">
                         <a class="col-4" href="#">
-                            <img src="{{ announcement.photo.url }}" class="img-thumbnail"
+                            <img src="{{ announcement.photo.url }}" class="img-thumbnail wow zoomIn"
                                  alt="{{ announcement.title }}">
                         </a>
                         <div class="news_body col-8">
-                            <a class="title" href="{% url 'webapp:announce_detail' announcement.pk %}"
+                            <a class="title wow zoomIn" href="{% url 'webapp:announce_detail' announcement.pk %}" data-wow-delay="0.2s"
                                style="display: block">{{ announcement.title }}</a>
                             <time><i class="fa fa-calendar-alt" aria-hidden="true">{{ announcement.created_at }}</i>
                             </time>
-                            <p class="news_index"> {{ announcement.text }}</p>
+                            <p class="news_index wow zoomIn" data-wow-delay="0.4s"> {{ announcement.text }}</p>
                             <a href="{% url 'webapp:announce_detail' announcement.pk %}" style="color: red">читать
                                 полностью</a>
                         </div>
