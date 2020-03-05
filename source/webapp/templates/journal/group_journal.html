@@ -8,8 +8,8 @@
 
                 <form action="{% url 'webapp:add_journalnote' journal.pk %}" method="POST" id="add_lesson">
                     <div class="col-9">{% include 'partial/form.html' %}</div>
-                    <div class="col-3"><a class="text-center"><input type="submit" value="+ Добавить занятие"
-                                                                     class="btn btn-success ml-5 my-5"></a></div>
+                    <div class="col-3"><a class="text-center hiddenbutton"><input type="submit" value="+ Добавить занятие"
+                                                                     class="btn btn-success ml-5 my-5 hiddenbutton"></a></div>
                 </form>
             </div>
             <thead>

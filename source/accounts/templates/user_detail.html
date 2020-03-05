@@ -72,18 +72,18 @@
         </div>
     </div>
     <div class="row" style="justify-content: center">
-    <a href="{% url 'accounts:group_student_add' user_obj.pk %}" class="btn btn-info  ml-5 mt-3" style="width: 15%"><i
+    <a href="{% url 'accounts:group_student_add' user_obj.pk %}" class="btn btn-info  ml-5 mt-3 hiddenbutton" style="width: 15%"><i
                 class="fa fa-users mx-1"></i>Добавить в группу</a>
-        <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3" style="width: 15%"><i
+        <a href="{% url 'accounts:user_update' user_obj.pk %}" class="btn btn-primary  ml-5 mt-3 hiddenbutton" style="width: 15%"><i
                 class="fas fa-pencil-alt mx-2"></i>Редактировать</a>
-        <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3"
+        <a href="{% url 'accounts:password_change' user_obj.pk %}" class="btn btn-secondary  ml-5 mt-3 hiddenbutton"
            style="width: 15%"><i class="fas fa-key mx-2"></i>Изменить
             пароль</a>
-        <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-danger  ml-5 mt-3" style="width: 15%"><i
+        <a href="{% url 'accounts:user_delete' user_obj.pk %}" class="btn btn-danger  ml-5 mt-3 hiddenbutton" style="width: 15%"><i
                 class="far fa-trash-alt mx-2"></i>Удалить</a>
         {% if user_obj in student_user %}
             <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle ml-5 mt-3" type="button" id="dropdownMenuButton"
+                <button class="btn btn-success dropdown-toggle ml-5 mt-3 hiddenbutton" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     + Добавить родителя
                 </button>

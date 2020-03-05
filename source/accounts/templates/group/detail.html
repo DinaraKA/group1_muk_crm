@@ -3,8 +3,8 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'accounts:change_group' object.pk %}">Обновить</a></li>
-    <li><a href="{% url 'accounts:delete_group' object.pk %}">Удалить</a></li>
+    <li><a href="{% url 'accounts:change_group' object.pk %}" class="hiddenbutton">Обновить</a></li>
+    <li><a href="{% url 'accounts:delete_group' object.pk %}" class="hiddenbutton">Удалить</a></li>
 {% endblock %}
 
 {% block content %}

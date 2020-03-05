@@ -5,14 +5,14 @@
         {% csrf_token %}
         <table class="table">
             <h2>Дисциплины</h2>
-            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-success  m-4">+ Добавить дисциплину</a>
+            <a href="{% url 'webapp:add_discipline' %}" class="btn btn-success  m-4 hiddenbutton">+ Добавить дисциплину</a>
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
                     <th scope="col">Преподаватель</th>
-                    <th class="symbol" scope="col">Редактировать</th>
-                    <th class="symbol" scope="col">Удалить</th>
+                    <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                    <th class="symbol hiddenbutton" scope="col">Удалить</th>
                 </tr>
             </thead>
             {% for discipline in disciplines %}
@@ -23,8 +23,8 @@
                         {% for teacher in discipline.teacher.all %}
                             <td>{{ teacher}}</td>
                         {% endfor %}
-                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete" style="color: red">x</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update" class="hiddenbutton">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete" style="color: red" class="hiddenbutton">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}
