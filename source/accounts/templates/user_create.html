@@ -4,6 +4,5 @@
         <form action="{% url 'accounts:user_create' %}" method="post" enctype="multipart/form-data">
             {% include "partial/form.html" %}
             <p class="text-center"><input type="submit" value="Зарегистрировать" class="btn btn-success"></p>
-            {% include "partial/form.html" %}
         </form>
 {% endblock %}
