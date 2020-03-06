@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for student in journal.study_group.students.all %}
+            {% for student in journal.study_group.students.all|dictsort:'last_name' %}
                 <tr>
                     <th scope="row">{{ student }}</th>
                     {% for journalnote in journalnotes %}
@@ -31,6 +31,9 @@
                             {#                        {{ object }}#}
                             {#                        {% if not object %}#}
                             <!-- Button trigger modal -->
+{#                            {% if journalnote.pk == obj %}#}
+{#                                #}
+{#                            {% endif %}#}
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal" href="{% url 'webapp:add_student_grade'  student.pk %}"
                                     value="{{ journalnote.pk }}" style="background: transparent">+

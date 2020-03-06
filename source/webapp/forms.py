@@ -1,15 +1,9 @@
 from django import forms
-from .models import Schedule, Lesson, Discipline, Theme, JournalNote, JournalGrade
+from .models import Schedule, Lesson, Discipline, JournalNote, JournalGrade
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
 from bootstrap_datepicker_plus import DatePickerInput
 
-
-
-class ThemeForm(forms.ModelForm):
-    class Meta:
-        model = Theme
-        fields = ['name']
 
 
 class ScheduleForm(forms.ModelForm):
@@ -52,10 +46,12 @@ class DisciplineForm(forms.ModelForm):
         model = Discipline
         fields = ['name', 'teacher']
 
+
 class JournalNoteForm(forms.ModelForm):
     class Meta:
         model= JournalNote
         fields = ['theme']
+
 
 class GradeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

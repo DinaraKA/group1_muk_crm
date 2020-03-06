@@ -41,10 +41,10 @@
                 {#            <li><a href="#">Правовая информация</a></li>#}
                 {#            <li><a href="#">Выпускники</a></li>#}
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
-                    </li>
-                {% endif %}
+{#                {% if request.user.is_authenticated %}#}
+{#                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
                 {% block menu %}{% endblock %}
             </ul>
             <ul class="menu navbar-nav ml-auto">

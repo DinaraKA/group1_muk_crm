@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from accounts.models import StudyGroup
 from webapp.forms import JournalNoteForm, GradeForm
-from webapp.models import Journal, Discipline, StudyGroup, GroupJournal, JournalNote, JournalGrade, Grade
+from webapp.models import Discipline, StudyGroup, GroupJournal, JournalNote, JournalGrade, Grade
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
@@ -30,9 +30,16 @@ class GroupJournalDetailView(DetailView):
         context['grade_form'] = GradeForm()
         groupjournal = GroupJournal.objects.get(pk=self.kwargs['pk'])
         journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
+        # for object in journalnotes:
+        #     obj = object.pk
+        #     print(object)
+        #     journalgrade = JournalGrade.objects.filter(journal_note=obj)
+        #
+        #     print(journalgrade)
         context.update({
             'journalnotes': journalnotes,
-            'grades': Grade.objects.all()
+            # 'grade': journalgrade
+            # 'obj': obj
         })
         return context
 

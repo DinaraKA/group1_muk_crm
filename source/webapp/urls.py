@@ -7,8 +7,6 @@ from .views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteV
 from .views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
 from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
-from .views import PersonalGradesDetailView
-from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
 from .views import GroupJournalDetailView, GroupJournalListView, GroupJournalCreateView, JournalNoteCreateView, GroupJournalUpdateView, GroupJournalDeleteView, JournalGradeCreateView
 
 app_name = 'webapp'
@@ -44,11 +42,7 @@ urlpatterns = [
     path('lessons/add/', LessonCreateView.as_view(), name='lesson_create'),
     path('lessons/update/<int:pk>/', LessonUpdateView.as_view(), name='lesson_update'),
     path('lessons/delete/<int:pk>/', LessonDeleteView.as_view(), name='lesson_delete'),
-    path('personalgrades/<int:pk>/', PersonalGradesDetailView.as_view(), name='personal_grades'),
-    path('themes/', ThemeListView.as_view(), name='themes'),
-    path('theme/add/', ThemeCreateView.as_view(), name='add_theme'),
-    path('theme/change/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
-    path('theme/delete/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
+    # path('personalgrades/<int:pk>/', PersonalGradesDetailView.as_view(), name='personal_grades'),
     path('journals/', GroupJournalListView.as_view(), name='groupjournals'),
     path('journal/<int:pk>/', GroupJournalDetailView.as_view(), name='groupjournal'),
     path('journal/add/', GroupJournalCreateView.as_view(), name='add_groupjournal'),
