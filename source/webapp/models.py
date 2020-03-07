@@ -150,5 +150,3 @@ class JournalGrade(models.Model):
     def __str__(self):
         return  str(self.grade)
 
-    class Meta:
-        unique_together = ['journal_note', 'student']

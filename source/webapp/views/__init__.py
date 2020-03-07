@@ -5,5 +5,5 @@ from webapp.views.auditory_views import AuditoryListView, AuditoryCreateView, Au
 from webapp.views.grade_views import GradeListView, GradeCreateView, GradeUpdateView, GradeDeleteView
 from webapp.views.discipline_views import DisciplineListView, DisciplineCreateView, DisciplineUpdateView, DisciplineDeleteView
 from webapp.views.lesson_views import LessonListView, LessonCreateView, LessonUpdateView, LessonDeleteView
-from webapp.views.journal_views import GroupJournalDetailView, GroupJournalCreateView, GroupJournalListView, GroupJournalDeleteView, GroupJournalUpdateView, JournalNoteCreateView, JournalGradeCreateView
+from webapp.views.journal_views import GroupJournalDetailView, GroupJournalCreateView, GroupJournalListView, GroupJournalDeleteView, GroupJournalUpdateView, JournalNoteCreateView, JournalGradeCreateView, JournalSelectView
 from webapp.views.schedule_views import ScheduleDeleteView, ScheduleUpdateView, ScheduleAddView, ScheduleView

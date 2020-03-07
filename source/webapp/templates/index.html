@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
-{% block menu %}
-    {% if request.user.is_authenticated %}
+{#{% block menu %}#}
+{#    {% if request.user.is_authenticated %}#}
         {#        <li class="nav-item"><a href="#" class="nav-link">Журнал</a></li>#}
-        <li class="nav-item dropdown nav-link">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-               aria-expanded="false">Журнал</a>
-            <div class="dropdown-menu menu-journal">
-                {% for group in groups %}
+{#        <li class="nav-item dropdown nav-link">#}
+{#            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"#}
+{#               aria-expanded="false">Журнал</a>#}
+{#            <div class="dropdown-menu menu-journal">#}
+{#                {% for group in groups %}#}
                     {#                    <div class="btn-group dropright">#}
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">{{ group.name }}</a>
-                    <div class="dropdown-menu menu-journal">
-                    {% for discipline in disciplines %}
-                        <a class="dropdown-item" href="#">{{ discipline.name }}</a>
-                    {% endfor %}
-                    </div>
+{#                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                       aria-haspopup="true" aria-expanded="false">{{ group.name }}</a>#}
+{#                    <div class="dropdown-menu menu-journal">#}
+{#                    {% for discipline in disciplines %}#}
+{#                        <a class="dropdown-item" href="#">{{ discipline.name }}</a>#}
+{#                    {% endfor %}#}
+{#                    </div>#}
                     {#                    <a class="dropdown-item" href="#">{{ group.name }}</a>#}
-                {% endfor %}
-                </div>
-        </li>
-    {% endif %}
-{% endblock %}
+{#                {% endfor %}#}
+{#                </div>#}
+{#        </li>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
 {% block carousel %}
     <div class="carousel">
         <div id="main-carousel" class="carousel slide" data-ride="carousel">
