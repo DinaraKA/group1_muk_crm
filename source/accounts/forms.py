@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
+from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
 from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus
@@ -193,8 +193,8 @@ class GroupForm(forms.ModelForm):
 
 class FullSearchForm(forms.Form):
     text = forms.CharField(max_length=100, required=False, label='Поиск')
+    in_first_name = forms.BooleanField(initial=False, required=False, label='По фамилии, имени')
     in_username = forms.BooleanField(initial=False, required=False, label='По Username')
-    in_first_name = forms.BooleanField(initial=True, required=False, label='По имени')
     in_role = forms.BooleanField(initial=False, required=False, label='По роли')
     in_status = forms.BooleanField(initial=False, required=False, label='По статусу')
     in_admin_position = forms.BooleanField(initial=False, required=False, label='По должности')
@@ -246,4 +246,12 @@ class UserFamilyForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'password', 'password_confirm', 'email', 'phone_number']
+
+
+class StudentAddStudyGroupForm(forms.ModelForm):
+    group_name = forms.ModelChoiceField(label='Группа', queryset=StudyGroup.objects.all())
+
+    class Meta:
+        model = StudyGroup
+        fields = ['group_name']
 

@@ -5,15 +5,15 @@
         {% csrf_token %}
         <table class="table">
             <h2>Аудитории</h2>
-            <a href="{% url 'webapp:add_auditory' %}" class="btn btn-success  ml-5 my-3">+ Добавить аудиторию</a>
+            <a href="{% url 'webapp:add_auditory' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Добавить аудиторию</a>
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
                     <th scope="col">Вместимость</th>
                     <th scope="col">Описание</th>
-                    <th class="symbol" scope="col">Редактировать</th>
-                    <th class="symbol" scope="col">Удалить</th>
+                    <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                    <th class="symbol hiddenbutton" scope="col">Удалить</th>
                 </tr>
             </thead>
             {% for auditory in auditories %}
@@ -23,8 +23,8 @@
                         <td>{{ auditory.name }}</td>
                         <td>{{ auditory.places }}</td>
                         <td>{{ auditory.description }}</td>
-                        <td class="symbol"><a href="{% url 'webapp:change_auditory' auditory.pk %}">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_auditory' auditory.pk %}"style="color: red">x</a></td>
+                        <td class="symbol hiddenbutton"><a href="{% url 'webapp:change_auditory' auditory.pk %}">&#x270E;</a></td>
+                        <td class="symbol hiddenbutton"><a href="{%  url 'webapp:delete_auditory' auditory.pk %}"style="color: red">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

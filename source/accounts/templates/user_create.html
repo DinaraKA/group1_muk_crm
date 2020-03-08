@@ -3,6 +3,6 @@
         <h1 class="text-center">Регистрация</h1>
         <form action="{% url 'accounts:user_create' %}" method="post" enctype="multipart/form-data">
             {% include "partial/form.html" %}
-            <p class="text-center"><input type="submit" value="Зарегистрироваться" class="btn btn-success"></p>
+            <p class="text-center"><input type="submit" value="Зарегистрировать" class="btn btn-success"></p>
         </form>
 {% endblock %}

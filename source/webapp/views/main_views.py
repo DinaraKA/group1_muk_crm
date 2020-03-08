@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
-
-from webapp.models import News, Announcements
+from accounts.models import StudyGroup
+from webapp.models import News, Announcements, Discipline
 
 
 class IndexView(ListView):
@@ -12,7 +12,9 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context.update({
-            'announcements': Announcements.objects.order_by('-created_at')[0:2]
+            'announcements': Announcements.objects.order_by('-created_at')[0:2],
+            'groups': StudyGroup.objects.all().order_by('name'),
+            'disciplines': Discipline.objects.all()
         })
         return context
 

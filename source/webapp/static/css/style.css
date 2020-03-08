@@ -48,11 +48,11 @@ h3 {
 
 .menu {
     /*display: block;*/
-    position: relative;
-    text-align: center;
+    /*position: relative;*/
+    /*text-align: center;*/
     font-size: 14px;
     line-height: 1;
-    padding: 0;
+    padding:  10px 30px;
     margin: 0;
     color: white;
 }
@@ -66,7 +66,7 @@ h3 {
     /*!*position: relative;*!*/
     /*line-height: 1.5;*/
     padding-top: 15px;
-    margin-right: 7px;
+    margin-right: 47px;
     float: left;
     font-family: Arial, sans-serif;
 
@@ -237,6 +237,10 @@ h3 {
     background: lightgray;
     width: 10%;
 }
+.schedule{
+    word-wrap: break-word;
+    table-layout: fixed;
+}
 .label-form{
     display: inline-flex;
 }
@@ -247,3 +251,32 @@ h3 {
 	height: 100px;
 	float: left;
 }
+.user_text{
+    cursor: pointer;
+    width: 260px;
+}
+.user_text:hover{
+    background: blue;
+    color: white;
+}
+.form-error{
+    color: red;
+}
+.menu-journal{
+    background-color: rgb(66 66 66);
+
+}
+.menu-journal a:hover{
+    background-color: rgb(66 66 66);
+    transform: none;
+}
+.dropdown-toggle a:focus{
+    border-color: rgb(66 66 66);
+}
+.tooltip:hover{
+    font-size: 14px;
+}
+.journal-dates{
+    background-color: lightgray;
+}
+

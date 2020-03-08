@@ -1,9 +1,10 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
-from accounts.models import StudyGroup, Profile, Family
+from accounts.models import Profile, Family, StudyGroup
 
 
 class ScheduleView(ListView):
@@ -40,7 +41,6 @@ class ScheduleView(ListView):
         difference = []
         lesson = len(Lesson.objects.filter(is_saturday=False))
         saturdaylesson = len(Lesson.objects.filter(is_saturday=True))
-        # difference.append((lesson - saturdaylesson) * " ")
         for item in range(lesson - saturdaylesson):
             difference.append(" ")
         return difference

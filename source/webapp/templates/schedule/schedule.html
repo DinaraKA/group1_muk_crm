@@ -1,65 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
-    <table class="table table-bordered schedule">
-        <h1>Расписание</h1>
-        <!-- Button trigger modal -->
-{#        <button type="button"class="btn btn-primary" data-toggle="modal"#}
-{#                data-target="#exampleModal">#}
-{#            Добавить в расписание#}
-{#        </button>#}
-        <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3">+ Добавить в расписание</a>
-        {% if teacher %}
-            <h4>Преподаватель: {{ teacher.get }}</h4>
-        {% endif %}
-        {% for group in groups %}
-            <h4>Группа - {{ group.name }}</h4>
-        {% endfor %}
-        {% for group in groups_for_parent %}
-            <h4>Группа - {{ group.name }}</h4>
-        {% endfor %}
-        <thead>
-        <tr>
-            <th scope="col" class="schedule-days"></th>
-            {% for lesson in lessons %}
-                <th scope="col" class="schedule-block">
-                    <p>{{ lesson.index }} пара</p>
-                    <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
-                </th>
+    <div class="table-responsive-lg">
+        <table class="table table-bordered schedule">
+            <h1>Расписание</h1>
+            <!-- Button trigger modal -->
+            {#        <button type="button"class="btn btn-primary" data-toggle="modal"#}
+            {#                data-target="#exampleModal">#}
+            {#            Добавить в расписание#}
+            {#        </button>#}
+            <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton" >+ Добавить в расписание</a>
+            {% if teacher %}
+                <h4>Преподаватель: {{ teacher.get }}</h4>
+            {% endif %}
+            {% for group in groups %}
+                <h4>Группа - {{ group.name }}</h4>
             {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for day, event in weekdays.items %}
+            {% for group in groups_for_parent %}
+                <h4>Группа - {{ group.name }}</h4>
+            {% endfor %}
+            <thead>
             <tr>
-                <th scope="row" class="schedule-days">{{ day }}</th>
-                {% for items in event %}
-                    <td>
-                        {% for item in items %}
-                            {% if perms.webapp.change_schedule %}
-                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                            {% endif %}
+                <th scope="col" class="schedule-days"></th>
+                {% for lesson in lessons %}
+                    <th scope="col" class="schedule-block">
+                        <p>{{ lesson.index }} пара</p>
+                        <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for day, event in weekdays.items %}
+                <tr>
+                    <th scope="row" class="schedule-days">{{ day }}</th>
+                    {% for items in event %}
+                        <td>
+                            {% for item in items %}
+                                {% if perms.webapp.change_schedule %}
+                                    <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
+                                {% endif %}
                             {% if request.user == item.teacher or perms.webapp.delete_schedule %}
                                 <h5>Группа:{{ item.group }}</h5>
                                 <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
                             {% elif item.group in groups %}
                                 <h5>Группа:{{ item.group }}</h5>
                                 <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                 <p class="my-0">{{ item.discipline }}</p>
                                 <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
                                 <hr style="border-color: rgb(66 66 66)">
                             {% endif %}
                             </a>
-                            {% if request.user.is_superuser %}
-                                <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                    <h5>Группа:{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher.get_full_name }}</p>
-                                    <p class="my-0">{{ item.discipline }}</p>
-                                    <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
-                                    <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger" style="margin: auto;"><i class="far fa-trash-alt mx-2"></i></a>
-                                    <hr style="border-color: rgb(66 66 66)">
-                                </a>
+                                {% if request.user.is_superuser %}
+                                    <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
+                                        <h5>Группа:{{ item.group }}</h5>
+                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                        <p class="my-0">{{ item.discipline }}</p>
+                                        <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
+                                        <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger hiddenbutton"
+                                           style="margin: auto;"><i class="far fa-trash-alt mx-2"></i></a>
+                                        <hr style="border-color: rgb(66 66 66)">
+                                    </a>
                                 {% elif request.user == item.teacher %}
                                     <h5>Группа:{{ item.group }}</h5>
                                     <p class="my-0">{{ item.discipline }}</p>
@@ -70,86 +72,87 @@
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                 {% elif request.user == family_users %}
-                                    {% if item.group in groups_for_parent  %}
+                                    {% if item.group in groups_for_parent %}
                                         <h5>Группа:{{ item.group }}</h5>
                                         <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                         <p class="my-0">{{ item.discipline }}</p>
                                         <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                     {% endif %}
                                 {% endif %}
-                        {% endfor %}
-                    </td>
-                {% endfor %}
-            </tr>
-            {% if day == 'Пятница' %}
-                <tr>
-                    <th scope="col" class="schedule-days"></th>
-                    {% for lesson in saturdaylessons %}
-                        <th scope="col" class="schedule-block">
-                            <p>{{ lesson.index }} пара</p>
-                            <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
-                        </th>
+                            {% endfor %}
+                        </td>
                     {% endfor %}
-                    {% if saturdaylessons|length != lessons|length%}
-                        {% for item in difference %}
-                            <th scope="col" class="schedule-block"></th>
-                        {% endfor %}
-                    {% endif %}
                 </tr>
-            {% endif %}
-        {% endfor %}
+                {% if day == 'Пятница' %}
+                    <tr>
+                        <th scope="col" class="schedule-days"></th>
+                        {% for lesson in saturdaylessons %}
+                            <th scope="col" class="schedule-block">
+                                <p>{{ lesson.index }} пара</p>
+                                <p>{{ lesson.start_time|time:"H:i" }}-{{ lesson.end_time|time:"H:i" }}</p>
+                            </th>
+                        {% endfor %}
+                        {% if saturdaylessons|length != lessons|length %}
+                            {% for item in difference %}
+                                <th scope="col" class="schedule-block"></th>
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
 
-        {#старая версия только для Понедельника#}
-        {#        <tr>#}
-        {#            <th scope="row" class="schedule-days">Понедельник</th>#}
-        {#            {% for schedule in monday%}#}
-        {#                <td>#}
-        {#                    {% if schedule %}#}
-        {#                        {% for item in schedule %}#}
-        {#                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
-        {#                                {% if request.user == item.teacher %}#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                {% elif item.group in groups %}#}
-        {#                                    <h5>Группа:{{ item.group }}</h5>#}
-        {#                                    {% if self.request.user in groups %}#}
-        {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
-        {#                                    {% endif %}#}
-        {#                                    <p class="my-0">{{ item.discipline }}</p>#}
-        {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
-        {#                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
-        {#                                    <hr style="border-color: rgb(66 66 66)">#}
-        {#                                {% endif %}#}
-        {#                            </a>#}
-        {#                        {% endfor %}#}
-        {#                    {% endif %}#}
-        {#                </td>#}
-        {#            {% endfor %}#}
-        {#        </tr>#}
-        </tbody>
-    </table>
+            {#старая версия только для Понедельника#}
+            {#        <tr>#}
+            {#            <th scope="row" class="schedule-days">Понедельник</th>#}
+            {#            {% for schedule in monday%}#}
+            {#                <td>#}
+            {#                    {% if schedule %}#}
+            {#                        {% for item in schedule %}#}
+            {#                            <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">#}
+            {#                                {% if request.user == item.teacher %}#}
+            {#                                    <h5>Группа:{{ item.group }}</h5>#}
+            {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
+            {#                                {% elif item.group in groups %}#}
+            {#                                    <h5>Группа:{{ item.group }}</h5>#}
+            {#                                    {% if self.request.user in groups %}#}
+            {#                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>#}
+            {#                                    {% endif %}#}
+            {#                                    <p class="my-0">{{ item.discipline }}</p>#}
+            {#                                    <p class="my-0">{{ item.auditoriya }}</p>#}
+            {#                                    <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>#}
+            {#                                    <hr style="border-color: rgb(66 66 66)">#}
+            {#                                {% endif %}#}
+            {#                            </a>#}
+            {#                        {% endfor %}#}
+            {#                    {% endif %}#}
+            {#                </td>#}
+            {#            {% endfor %}#}
+            {#        </tr>#}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Modal -->
 
-{#        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
-{#            <div class="modal-dialog" role="document">#}
-{#                <div class="modal-content">#}
-{#                    <div class="modal-header">#}
-{#                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
-{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                            <span aria-hidden="true">&times;</span>#}
-{#                        </button>#}
-{#                    </div>#}
-{#                    <div class="modal-body">#}
-{#                        <form action="{% url 'webapp:schedule_add' %}">#}
-{#                            {% include 'partial/form.html' with button_text='Создать' %}#}
-{#                        </form>#}
-{#                    </div>#}
-{#                    <div class="modal-footer">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+    {#        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+    {#            <div class="modal-dialog" role="document">#}
+    {#                <div class="modal-content">#}
+    {#                    <div class="modal-header">#}
+    {#                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
+    {#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+    {#                            <span aria-hidden="true">&times;</span>#}
+    {#                        </button>#}
+    {#                    </div>#}
+    {#                    <div class="modal-body">#}
+    {#                        <form action="{% url 'webapp:schedule_add' %}">#}
+    {#                            {% include 'partial/form.html' with button_text='Создать' %}#}
+    {#                        </form>#}
+    {#                    </div>#}
+    {#                    <div class="modal-footer">#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
 
 {% endblock %}
 
