@@ -43,8 +43,8 @@ class DisciplineViewTest(TestCase):
 
     def test_created_discipline(self):
         self.driver.get('http://localhost:8000/disciplines/add/')
-        self.driver.find_element_by_name('name').send_keys('CreateTest ')
-        self.driver.find_element_by_name('teacher').send_keys('Айдай Исаева', 'Мария Ложкина')
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
+        self.driver.find_element_by_name('teacher').send_keys('Айдай Исаева')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
             assert self.driver.current_url == 'http://localhost:8000/disciplines/'

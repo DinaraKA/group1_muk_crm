@@ -1,4 +1,4 @@
-from behave import given, when, then, step
+from behave import given, then
 
 
 @given('Я открыл страницу "Роли"')

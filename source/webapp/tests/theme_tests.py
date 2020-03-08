@@ -49,7 +49,7 @@ class ThemeViewTest(TestCase):
     def test_created_theme(self):
         self.driver.get('http://localhost:8000/themes/')
         self.driver.find_element_by_class_name('btn.btn-success').click()
-        self.driver.find_element_by_name('name').send_keys('Test')
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/themes/'
 
@@ -58,7 +58,7 @@ class ThemeViewTest(TestCase):
         self.driver.find_element_by_class_name('update').click()
         print(self.driver.current_url)
         self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('NewTest')
+        self.driver.find_element_by_name('name').send_keys('UpdateTest')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/themes/'
 

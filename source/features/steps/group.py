@@ -1,4 +1,4 @@
-from behave import given, when, then, step
+from behave import given, then
 
 
 @given('Я открыл страницу "Группы"')
@@ -14,10 +14,3 @@ def should_be_at_list_page(context):
 @given('Я перехожу на страницу создания Группы')
 def should_be_at_main(context):
     context.browser.get('http://localhost:8000/accounts/group/add/')
-
-
-@step('Я делаю выбор "{text}" "{choice}"')
-def enter_text(context, text, choice):
-    context.browser.find_element_by_name(choice).click()
-    context.browser.find_element_by_name(choice).send_keys(text)
-

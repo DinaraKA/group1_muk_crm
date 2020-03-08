@@ -57,7 +57,7 @@ class AuditoryModelTest(TestCase):
         self.assertEquals(field_label, True)
 
 
-class AuditorySeleniumViewTest(TestCase):
+class AuditoryViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -70,9 +70,9 @@ class AuditorySeleniumViewTest(TestCase):
 
     def test_created_auditory(self):
         self.driver.get('http://localhost:8000/auditories/add/')
-        self.driver.find_element_by_name('name').send_keys('Test')
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
         self.driver.find_element_by_name('places').send_keys(35)
-        self.driver.find_element_by_name('description').send_keys('Test description')
+        self.driver.find_element_by_name('description').send_keys('CreateTest')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
             assert self.driver.current_url == 'http://localhost:8000/auditories/'

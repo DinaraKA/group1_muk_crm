@@ -49,7 +49,7 @@ class NewsModelTest(TestCase):
         self.assertEqual(str(news.text), news.text)
 
 
-class NewsSeleniumViewTest(TestCase):
+class NewsViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -63,7 +63,7 @@ class NewsSeleniumViewTest(TestCase):
     def test_created_news(self):
         self.driver.get('http://localhost:8000/news/add/')
         self.driver.find_element_by_name('title').send_keys('Create test')
-        self.driver.find_element_by_name('text').send_keys('Text test')
+        self.driver.find_element_by_name('text').send_keys('СreateTest')
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
         self.driver.find_element_by_class_name('btn-success').click()
         assert self.driver.current_url == 'http://localhost:8000/news/all/'
