@@ -9,8 +9,7 @@ from .views import LessonListView, LessonCreateView, LessonUpdateView, LessonDel
 from .views import ScheduleAddView, ScheduleView, ScheduleUpdateView, ScheduleDeleteView
 from .views import PersonalGradesDetailView
 from .views import ThemeListView, ThemeCreateView, ThemeUpdateView, ThemeDeleteView
-from .views import JournalIndexView, JournalCreateView, JournalUpdateView, JournalDeleteView
-from .views.journal_views import GradeforStudentCreateView
+from .views import GroupJournalDetailView, GroupJournalListView, GroupJournalCreateView, JournalNoteCreateView, GroupJournalUpdateView, GroupJournalDeleteView, JournalGradeCreateView
 
 app_name = 'webapp'
 
@@ -50,11 +49,13 @@ urlpatterns = [
     path('theme/add/', ThemeCreateView.as_view(), name='add_theme'),
     path('theme/change/<int:pk>/', ThemeUpdateView.as_view(), name='change_theme'),
     path('theme/delete/<int:pk>/', ThemeDeleteView.as_view(), name='delete_theme'),
-    path('journal/', JournalIndexView.as_view(), name='journal'),
-    path('journal/add/', JournalCreateView.as_view(), name='add_journal'),
-    path('journal/update/<int:pk>/', JournalUpdateView.as_view(), name='change_journal'),
-    path('journal/delete/<int:pk>/', JournalDeleteView.as_view(), name='delete_journal'),
-    path('journal_user/<int:pk>/add-grade/', GradeforStudentCreateView.as_view(), name='grade_student_add'),
+    path('journals/', GroupJournalListView.as_view(), name='groupjournals'),
+    path('journal/<int:pk>/', GroupJournalDetailView.as_view(), name='groupjournal'),
+    path('journal/add/', GroupJournalCreateView.as_view(), name='add_groupjournal'),
+    path('journal/update/<int:pk>/', GroupJournalUpdateView.as_view(), name='change_groupjournal'),
+    path('journal/delete/<int:pk>/', GroupJournalDeleteView.as_view(), name='delete_groupjournal'),
+    path('journalnote/add/<int:pk>/', JournalNoteCreateView.as_view(), name='add_journalnote'),
+    path('journalgrade/add/student/<int:pk>/', JournalGradeCreateView.as_view(), name='add_student_grade'),
     path('schedule/',  ScheduleView.as_view(), name='schedule'),
     path('schedule/add/', ScheduleAddView.as_view(), name='schedule_add'),
     path('schedule/update/<int:pk>/', ScheduleUpdateView.as_view(), name='schedule_update'),

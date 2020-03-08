@@ -3,7 +3,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-02-17T09:13:00.477Z",
+    "last_login": "2020-03-05T08:09:36.252Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -20,7 +20,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-    "last_login": "2020-02-19T19:09:48.703Z",
+    "last_login": "2020-03-05T08:09:00.523Z",
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -388,10 +388,26 @@
 },
 {
   "model": "sessions.session",
+  "pk": "oxhfo8tmpf8m20skqrropclqr20351j9",
+  "fields": {
+    "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
+    "expire_date": "2020-03-19T08:09:36.259Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "vmu2c1vzkca0ebe1k2xushsnkkzdwm5q",
   "fields": {
     "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
     "expire_date": "2020-02-02T20:29:27.744Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wcd8q9ld0l04deic8vhxieh2equz7rfz",
+  "fields": {
+    "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
+    "expire_date": "2020-03-16T17:05:09.026Z"
   }
 },
 {
@@ -835,6 +851,494 @@
     "discipline": 4,
     "theme": 3,
     "grade": 5
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 1,
+  "fields": {
+    "study_group": 1,
+    "discipline": 1
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 2,
+  "fields": {
+    "study_group": 1,
+    "discipline": 3
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 3,
+  "fields": {
+    "study_group": 1,
+    "discipline": 6
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 4,
+  "fields": {
+    "study_group": 1,
+    "discipline": 4
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 5,
+  "fields": {
+    "study_group": 2,
+    "discipline": 5
+  }
+},
+{
+  "model": "webapp.groupjournal",
+  "pk": 6,
+  "fields": {
+    "study_group": 3,
+    "discipline": 8
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 1,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-02",
+    "theme": "test1",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 2,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-02",
+    "theme": "test2",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 3,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test3",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 4,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test4",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 5,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test5",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 6,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test6",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 7,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test7",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 8,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test8",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 9,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test9",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 10,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-03",
+    "theme": "test10",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 11,
+  "fields": {
+    "group_journal": 1,
+    "date": "2020-03-03",
+    "theme": "test10",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 12,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-05",
+    "theme": "Test20",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 13,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-05",
+    "theme": "test30",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalnote",
+  "pk": 14,
+  "fields": {
+    "group_journal": 4,
+    "date": "2020-03-05",
+    "theme": "test55",
+    "created_by": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 1,
+  "fields": {
+    "journal_note": 1,
+    "grade": 5,
+    "student": [
+      "parent-3"
+    ],
+    "created_by": [
+      "teacher-1"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 4,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 5,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 6,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 7,
+  "fields": {
+    "journal_note": 1,
+    "grade": 5,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 8,
+  "fields": {
+    "journal_note": 1,
+    "grade": 3,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 9,
+  "fields": {
+    "journal_note": 1,
+    "grade": 5,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 10,
+  "fields": {
+    "journal_note": 1,
+    "grade": 2,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 11,
+  "fields": {
+    "journal_note": 1,
+    "grade": 2,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 12,
+  "fields": {
+    "journal_note": 1,
+    "grade": 5,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 13,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-03",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 14,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-04",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 15,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-04",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 16,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-04",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 17,
+  "fields": {
+    "journal_note": 1,
+    "grade": 5,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-04",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 18,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-05",
+    "description": null
+  }
+},
+{
+  "model": "webapp.journalgrade",
+  "pk": 19,
+  "fields": {
+    "journal_note": 1,
+    "grade": 7,
+    "student": [
+      "student-3"
+    ],
+    "created_by": [
+      "admin"
+    ],
+    "date": "2020-03-05",
+    "description": null
   }
 },
 {
@@ -3220,24 +3724,6 @@
   "model": "admin.logentry",
   "pk": 117,
   "fields": {
-    "action_time": "2020-02-20T18:21:13.693Z",
-    "user": [
-      "admin"
-    ],
-    "content_type": [
-      "webapp",
-      "discipline"
-    ],
-    "object_id": "8",
-    "object_repr": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"teacher\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 117,
-  "fields": {
     "action_time": "2020-02-17T09:31:02.701Z",
     "user": [
       "admin"
@@ -3320,6 +3806,132 @@
     ],
     "object_id": "2",
     "object_repr": "\u0422\u044e\u043b\u0435\u043c\u0431\u0430\u0435\u0432\u0430\u0410\u0439\u0436\u0430\u043d",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 122,
+  "fields": {
+    "action_time": "2020-03-02T17:30:53.623Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "8",
+    "object_repr": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 123,
+  "fields": {
+    "action_time": "2020-03-02T17:31:01.074Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "7",
+    "object_repr": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 124,
+  "fields": {
+    "action_time": "2020-03-02T17:31:12.928Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "6",
+    "object_repr": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u0440\u0435\u0432\u043d\u0435\u0433\u043e \u043c\u0438\u0440\u0430",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 125,
+  "fields": {
+    "action_time": "2020-03-02T17:31:19.553Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "5",
+    "object_repr": "\u0410\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 126,
+  "fields": {
+    "action_time": "2020-03-02T17:31:24.679Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "4",
+    "object_repr": "\u041f\u0440\u0430\u0432\u043e",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 127,
+  "fields": {
+    "action_time": "2020-03-02T17:31:29.973Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "3",
+    "object_repr": "\u041c\u0438\u0440\u043e\u0432\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 128,
+  "fields": {
+    "action_time": "2020-03-03T06:15:55.792Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "journalgrade"
+    ],
+    "object_id": "1",
+    "object_repr": "\u042d\u0440\u0437\u0430\u0442 \u0416\u043e\u043e\u0434\u0430\u0440\u0431\u0435\u043a\u043e\u04325",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }

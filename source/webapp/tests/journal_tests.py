@@ -2,9 +2,10 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-
+from django.urls import reverse, resolve
 from selenium.webdriver import Chrome
 from webapp.models import Journal, Discipline, Grade, Theme
+from webapp.views import JournalIndexView, GroupJournalCreateView
 
 
 class JournalModelTest(TestCase):
@@ -94,10 +95,10 @@ class JournalSeleniumViewTest(TestCase):
         self.driver.get('http://localhost:8000/journal/')
         self.driver.find_element_by_id('add_grade').click()
         self.driver.find_element_by_name('discipline').click()
-        self.driver.find_element_by_name('discipline').send_keys('Create Test')
+        self.driver.find_element_by_name('discipline').send_keys('Русский Язык')
         self.driver.find_element_by_name('date').send_keys('2020-06-06')
         self.driver.find_element_by_name('theme').click()
-        self.driver.find_element_by_name('theme').send_keys('Create Test')
+        self.driver.find_element_by_name('theme').send_keys('Test')
         self.driver.find_element_by_name('grade').click()
         self.driver.find_element_by_name('grade').send_keys('5')
         self.driver.find_element_by_class_name('btn-primary').click()
@@ -119,3 +120,22 @@ class JournalSeleniumViewTest(TestCase):
         self.driver.get('http://127.0.0.1:8000/journal/delete/1/')
         self.driver.find_element_by_class_name('btn-danger').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/journal/'
+
+
+class JournalUrlTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create(first_name='Emir', last_name='Karamoldoev', username='karamoldoevee', password='aw12345678')
+        Discipline.objects.create(name='Право')
+        Theme.objects.create(name='Test')
+        Grade.objects.create(value=5, description='Test')
+        Journal.objects.create(discipline_id=1, date='2020-01-20', student_id=1, theme_id=1, grade_id=1)
+
+    def test_list_url_is_resolved(self):
+        url = reverse('webapp:journal')
+        self.assertEquals(resolve(url).func.view_class, JournalIndexView)
+
+    def test_create_url_is_resolved(self):
+        url = reverse('webapp:add_journal')
+        self.assertEquals(resolve(url).func.view_class, GroupJournalCreateView)

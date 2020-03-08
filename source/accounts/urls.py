@@ -2,14 +2,15 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View
+    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View, SearchUser, FamilyDeleteView
+
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
     AdminPositionDeleteView
 from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateView, RoleDeleteView
 from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
-    GroupDeleteView
+    GroupDeleteView, GroupStudentAdd
 
 app_name = 'accounts'
 
@@ -23,10 +24,12 @@ urlpatterns = [
     path('user/password_change/<int:pk>/', UserPasswordChangeView.as_view(), name='password_change'),
     path('user/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('user/search/', UserSearchView.as_view(), name='user_search'),
+    path('user/ajax/search/', SearchUser.as_view(), name='user_search_ajax'),
     path('user/search/results/', SearchResultsView.as_view(), name='search_results'),
     path('user/student/<str:status>/', StudentListView.as_view(), name='student_list'),
     path('user/family/add/<int:pk>/', UserFamilyCreateView.as_view(), name='user_family_create'),
     path('user/family/add2/<int:pk>', UserFamilyCreate2View.as_view(), name='user_family_create2'),
+    path('user/family/delete/<int:pk>/', FamilyDeleteView.as_view(), name='family_delete'),
     path('adminpositions/', AdminPositionIndexView.as_view(), name='adminpositions'),
     path('adminposition/add/', AdminPositionCreateView.as_view(), name='add_admin_position'),
     path('adminposition/change/<int:pk>/', AdminPositionUpdateView.as_view(), name='change_admin_position'),
@@ -48,5 +51,6 @@ urlpatterns = [
     path('group/add/', GroupCreateView.as_view(), name='add_group'),
     path('group/change/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
     path('group/delete/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
+    path('group/student_add/<int:pk>/', GroupStudentAdd.as_view(), name='group_student_add'),
 ]
 

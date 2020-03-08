@@ -25,8 +25,9 @@ SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
+#
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +44,9 @@ INSTALLED_APPS = [
     'accounts',
     'phone_field',
     'behave_django',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
+    'ajax_search',
 ]
 
 MIDDLEWARE = [
@@ -117,13 +121,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATE_INPUT_FORMATS= [
+    '%d/%m/%Y'
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
@@ -147,3 +155,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 MEDIA_URL = '/uploads/'
 
+
+# AJAX_SEARCH_HELPER = 'app.views.search_helper'
+
+# SEARCH_RESULT_TEMPLATE = 'user_search.html'

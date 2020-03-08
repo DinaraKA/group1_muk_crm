@@ -12,8 +12,8 @@
             <img src="{{ announcement.photo.url }}" class="card-img-top mb-5" alt="{{ announcement.title }}">
             <p align="justify">{{announcement.text}}</p>
                 <hr>
-                <a href="{% url 'webapp:announce_change' announcement.pk %}" class="btn btn-primary">Редактировать</a>
-                <a href="{% url 'webapp:announce_delete' announcement.pk %}" class="btn btn-danger">Удалить</a>
+                <a href="{% url 'webapp:announce_change' announcement.pk %}" class="btn btn-primary hiddenbutton">Редактировать</a>
+                <a href="{% url 'webapp:announce_delete' announcement.pk %}" class="btn btn-danger hiddenbutton">Удалить</a>
             </div>
         </div>
     </div>
