@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
 from webapp.models import Schedule, Lesson,  DAY_CHOICES
-from accounts.models import Group, Profile, Family
+from accounts.models import StudyGroup, Profile, Family
 
 
 class ScheduleView(ListView):
@@ -25,13 +26,13 @@ class ScheduleView(ListView):
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
             'saturdaylessons': Lesson.objects.filter(is_saturday=True),
-            'groups': Group.objects.filter(students=self.request.user),
+            'groups': StudyGroup.objects.filter(students=self.request.user),
             'days': DAY_CHOICES,
             'teacher': Profile.objects.filter(role__name='Преподаватель', user=self.request.user),
             'weekdays': self.get_weekdays(),
             'difference': self.get_len(),
             'family_users': Family.objects.filter(family_user=self.request.user),
-            'groups_for_parent': Group.objects.filter(students__in=student),
+            'groups_for_parent': StudyGroup.objects.filter(students__in=student),
         })
         return context
 
@@ -82,27 +83,33 @@ class ScheduleView(ListView):
         return Schedule.objects.all()
 
 
-class ScheduleAddView(CreateView):
+class ScheduleAddView(PermissionRequiredMixin, CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
+    permission_required = "webapp.add_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleUpdateView(UpdateView):
+class ScheduleUpdateView(PermissionRequiredMixin, UpdateView):
     model = Schedule
     template_name = 'change.html'
     form_class = ScheduleForm
+    permission_required = "webapp.change_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleDeleteView(DeleteView):
+class ScheduleDeleteView(PermissionRequiredMixin, DeleteView):
     model = Schedule
     template_name = 'delete.html'
+    permission_required = "webapp.delete_schedule"
+    permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('webapp:schedule')

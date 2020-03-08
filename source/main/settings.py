@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'accounts',
     'phone_field',
     'behave_django'
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -93,9 +95,9 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': DB_NAME,
 #         'USER': DB_USER,
-#         'PASSWORD': DP_PASSWORD,
-#         'HOST': DP_HOST,
-#         'PORT': DP_PORT,
+#         'PASSWORD': DB_PASSWORD,
+#         'HOST': DB_HOST,
+#         'PORT': DB_PORT,
 #     }
 # }
 DATABASES = {
@@ -109,16 +111,8 @@ DATABASES = {
         # "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': "govno",
-#         'USER': "loh",
-#         'PASSWORD': "pidr",
-#         'HOST': "db",
-#         'PORT': "5333",
-#     }
-# }
+
+
 
 
 # Password validation

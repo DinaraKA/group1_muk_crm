@@ -1,9 +1,9 @@
 from django import forms
-from .models import Schedule, Lesson, Discipline
-from django.forms import DateInput
+from .models import Schedule, Lesson, Discipline, Theme
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
-from .models import Schedule, Lesson, Theme
+from bootstrap_datepicker_plus import DatePickerInput
+
 
 
 class ThemeForm(forms.ModelForm):
@@ -27,12 +27,18 @@ class ScheduleForm(forms.ModelForm):
         }
 
 
-
-class DateJournalInput(DateInput):
-    input_type = 'date'
-
-
 class FullSearchForm(forms.Form):
-    start_date = forms.DateField(label='Введите дату начала', required=False, widget=DateJournalInput)
-    end_date = forms.DateField(label='Введите дату окончания', required=False, widget=DateJournalInput)
-    discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине")
+    start_date = forms.DateField(label='введите дату начала', widget=DatePickerInput(format='%d/%m/%Y'))
+    end_date = forms.DateField(label='введите дату окончания', widget=DatePickerInput(format='%d/%m/%Y'))
+    discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине",  widget=forms.Select
+                           (attrs={'class':'form-control'}))
+
+
+
+class DisciplineForm(forms.ModelForm):
+    teacher = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
+
+    class Meta:
+        model = Discipline
+        fields = ['name', 'teacher']
+

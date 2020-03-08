@@ -1,22 +1,4 @@
-{#<hr/>#}
-{#{% for list in object_list %}#}
-{#    Имя: <h2>{{ list.user.first_name }}</h2>#}
-{#    <p>{{ list.last_name }}#}
-{#        ({{ article.category|default_if_none:'Без категории' }})#}
-{#        {{  }}#}
-{#        Registered {{ list.user.date_joined|date:'d.m.Y H:i:s' }}</p>#}
-{#    {% include 'partial/tag_bar.html' with object=article %}#}
-{#    <p>#}
-{#        <a href="{% url 'accounts:user_detail' list.user.pk %}">Detail...</a>#}
-{#        <a href="{% url 'accounts:user_update' list.user.pk %}">Edit</a>#}
-{#        <a href="{% url "accounts:user_delete" list.user.pk %}">Delete</a>#}
-{#    </p>#}
-{#    <hr/>#}
 
-{#{% extends 'base.html' %}#}
-{#{% block menu %}#}
-{##}
-{#{% endblock %}#}
 {% block content %}
 {#    <hr/>#}
     {#    {% if is_paginated %}#}
@@ -29,17 +11,24 @@
       <th scope="col">Имя</th>
       <th scope="col">Фамилия</th>
       <th scope="col">Роль</th>
+        <th scope="col">Группа</th>
       <th scope="col">Details</th>
+
+
     </tr>
   </thead>
   <tbody>
       {% for list in object_list %}
     <tr data-href="{% url 'accounts:user_detail' list.user.pk %}">
-
       <th scope="row">{{ list.id }}</th>
         <td data-href="{% url 'accounts:user_detail' list.user.pk %}">{{ list.user.first_name }}</td>
       <td>{{ list.user.last_name }}</td>
       <td>{{ list.user.profile.status}}</td>
+        <td>
+        {% for gr in list.user.students.all %}
+            <a href="{% url 'accounts:detail_group' gr.pk %}">{{ gr.name }} </a>,
+    {% endfor %}
+    </td>
         <td><a href="{% url 'accounts:user_detail' list.user.pk %}"> Details...</a>
         <a href="{% url 'accounts:user_update' list.user.pk %}">Edit</a></td>
     </tr>

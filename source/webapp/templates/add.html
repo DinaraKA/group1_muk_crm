@@ -6,4 +6,9 @@
         {% include 'partial/form.html'%}
         <p class="text-center"><input type="submit" value="Создать" class="btn btn-success"></p>
     </form>
+    {% for message in messages %}
+<h3 class="text-center" style="color: red">
+    {{ message }}
+</h3>
+    {% endfor %}
 {% endblock %}

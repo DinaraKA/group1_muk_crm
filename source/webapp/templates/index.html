@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block menu %}
-{% endblock %}
+{#{% block menu %}#}
+{#{% endblock %}#}
 {% block carousel %}
     <div class="carousel">
         <div id="main-carousel" class="carousel slide" data-ride="carousel">
@@ -10,7 +10,7 @@
                 <li data-target="#main-carousel" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active text-uppercase">
+                <div class="carousel-item active text-uppercase" style="height: 500px">
                     <img src="https://mukr.iuk.kg/wp-content/uploads/2019/04/IUK_University.jpg" class="d-block w-100"
                          alt="">
                     <div class="carousel-caption d-none d-md-block">
@@ -18,15 +18,15 @@
                         <h3>Политехнический колледж Международного университета Кыргызской Республики</h3>
                     </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" style="height: 500px">
                     <img src="http://www.iuk.kg/Files/uploads/other/_home_iuk_centr-kampus-2019-1.jpg"
-                         class="d-block w-100" alt="">
+                         class="d-block w-100 h-100" alt="">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>Кыргыз Республикасынын эл аралык университетинин политехникалык колледжи</h3>
                         <h3>Политехнический колледж Международного университета Кыргызской Республики</h3>
                     </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" style="height: 500px">
                     <img src="http://muk.iuk.kg/Files/uploads/other/_page_muk_socgumest.png" class="d-block w-100"
                          alt="">
                     <div class="carousel-caption d-none d-md-block">
@@ -44,108 +44,33 @@
         </div>
     </div>
 {% endblock %}
-
 {% block content %}
-    <div class="main-text">
+    <div class="main-text py-5">
         <p>Сохраняя вековую традицию, подготовить конкурентоспособных специалистов, соответствующих международным
             стандартам качества, востребованных на рынке труда и отвечающих потребностям общества.</p>
     </div>
-    <div class="card-deck">
-        <div class="card">
-            <div class="card-header" style="background: none; border: none">
-                <div class=" row header-inner">
-                    <div class="col-3" style="text-align: end">
-                        <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
-                    </div>
-                    <div class="col-9" style="text-align: center; padding-top: 7px">
-                        <b>Политехнический колледж Международного университета Кыргызской Республики</b>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center">
-                <b>Отделение связи</b>
-                <a href="{% url 'webapp:department1' %}">
-                    <img class="card-img" src="https://www.pc.edu.kg/images/1.jpg" alt="image">
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Телефонный разговор находится на полпути между исскуством и жизнью</p>
-            </div>
-            <div class="card-footer">
-                <a href="{% url 'webapp:department1' %}" class="btn">Смотреть</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" style="background: none; border: none">
-                <div class=" row header-inner">
-                    <div class="col-3" style="text-align: end">
-                        <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
-                    </div>
-                    <div class="col-9" style="text-align: center; padding-top: 7px">
-                        <b>Политехнический колледж Международного университета Кыргызской Республики</b>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center">
-                <b>Энергоотделение</b>
-                <a href="{% url 'webapp:department2' %}">
-                    <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image">
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Мы сделаем электричество таким дешевым, что жечь свечи будут только богачи</p>
-            </div>
-            <div class="card-footer">
-                <a href="{% url 'webapp:department2' %}" class="btn">Смотреть</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" style="background: none; border: none">
-                <div class=" row header-inner">
-                    <div class="col-3" style="text-align: end">
-                        <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
-                    </div>
-                    <div class="col-9" style="text-align: center; padding-top: 7px">
-                        <b>Политехнический колледж Международного университета Кыргызской Республики</b>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center">
-                <b>Компьютерные сети и программирование</b>
-                <a href="{% url 'webapp:department3' %}">
-                    <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image">
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Большинство хороших программистов делают свою работу потому что получают
-                    удовольствие от программирования</p>
-            </div>
-            <div class="card-footer">
-                <a href="{% url 'webapp:department3' %}" class="btn">Смотреть</a>
-            </div>
-        </div>
-    </div>
     <div class="content_inner row">
-        <div class="content_item">
+        <div class="content_item col-12 col-md-6" style="margin-top: 0">
             <h4>Новости</h4>
 
             <div class="news">
-                {%  for news in news_list %}
-                <div class="row">
-                    <a class="col-4" href="#">
-                      <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
-                    </a>
-                    <div class="news_body col-8">
-                        <a class="title" href="{% url 'webapp:news_detail' news.pk %}" style="display: block">{{ news.title }}</a>
-                        <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
-                        <p class="news_index"> {{ news.text }}
-{#                            <br>#}
-{#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
-                        </p>
-                        <a href="{%  url 'webapp:news_detail' news.pk %}" style="color: red">читать полностью</a>
-{#                        <br>#}
+                {% for news in news_list %}
+                    <div class="row wow zoomIn">
+                        <a class="col-4" href="#">
+                            <img src="{{ news.photo.url }}" class="img-thumbnail" alt="{{ news.title }}">
+                        </a>
+                        <div class="news_body col-8">
+                            <a class="title" href="{% url 'webapp:news_detail' news.pk %}"
+                               style="display: block">{{ news.title }}</a>
+                            <time><i class="fa fa-calendar-alt" aria-hidden="true"> {{ news.created_at }}</i></time>
+                            <p class="news_index"> {{ news.text }}
+                                {#                            <br>#}
+                                {#                            <a href="{%  url 'webapp:news_detail' news.pk %}">читать полностью</a>#}
+                            </p>
+                            <a href="{% url 'webapp:news_detail' news.pk %}" style="color: red">читать полностью</a>
+                            {#                        <br>#}
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
 
                 <div class="right"><a href="{% url 'webapp:news' %}"> Смотреть все новости... </a></div>
@@ -153,19 +78,23 @@
 
 
         </div>
-        <div class="content_item">
+        <div class="content_item col-12 col-md-6" style="margin-top: 0">
             <h4>Объявления</h4>
             <div class="news">
-                {%  for announcement in announcements %}
-                    <div class="row">
+                {% for announcement in announcements %}
+                    <div class="row wow zoomIn">
                         <a class="col-4" href="#">
-                            <img src="{{ announcement.photo.url }}" class="img-thumbnail" alt="{{ announcement.title }}">
+                            <img src="{{ announcement.photo.url }}" class="img-thumbnail"
+                                 alt="{{ announcement.title }}">
                         </a>
                         <div class="news_body col-8">
-                            <a class="title" href="{% url 'webapp:announce_detail' announcement.pk %}" style="display: block">{{ announcement.title }}</a>
-                            <time><i class="fa fa-calendar-alt" aria-hidden="true">{{ announcement.created_at }}</i></time>
+                            <a class="title" href="{% url 'webapp:announce_detail' announcement.pk %}"
+                               style="display: block">{{ announcement.title }}</a>
+                            <time><i class="fa fa-calendar-alt" aria-hidden="true">{{ announcement.created_at }}</i>
+                            </time>
                             <p class="news_index"> {{ announcement.text }}</p>
-                            <a href="{%  url 'webapp:announce_detail' announcement.pk %}" style="color: red">читать полностью</a>
+                            <a href="{% url 'webapp:announce_detail' announcement.pk %}" style="color: red">читать
+                                полностью</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -173,20 +102,111 @@
             </div>
         </div>
     </div>
+    <div class="card-deck justify-content-center" style="padding-bottom: 30px">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4 mb-5">
+            <div class="card wow fadeInLeft h-100" data-wow-offset="300" style="border-radius: 10px">
+                <div class="card-header" style="background: none; border: none">
+                    <div class=" row header-inner">
+                        <div class="col-3" style="text-align: end">
+                            <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
+                        </div>
+                        <div class="col-9" style="text-align: center; padding-top: 7px">
+                            <b>Политехнический колледж Международного университета Кыргызской Республики</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <b>Отделение связи</b>
+                    <a href="{% url 'webapp:department1' %}">
+                        <img class="card-img" src="https://www.pc.edu.kg/images/1.jpg" alt="image">
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <p class="card-text" style="font-size: 16px">Телефонный разговор находится на полпути между
+                        исскуством и жизнью</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'webapp:department1' %}" class="btn">Смотреть</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4 mb-5">
+            <div class="card wow fadeInLeft h-100" data-wow-delay="0.5s" data-wow-offset="300"
+                 style="border-radius: 10px">
+                <div class="card-header" style="background: none; border: none">
+                    <div class=" row header-inner">
+                        <div class="col-3" style="text-align: end">
+                            <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label"
+                                 style="border-radius: 0">
+                        </div>
+                        <div class="col-9" style="text-align: center; padding-top: 7px">
+                            <b>Политехнический колледж Международного университета Кыргызской Республики</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <b>Энергоотделение</b>
+                    <a href="{% url 'webapp:department2' %}">
+                        <img class="card-img" src="https://www.pc.edu.kg/images/energo.png" alt="image"
+                             style="border-radius: 0">
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <p class="card-text" style="font-size: 16px">Мы сделаем электричество таким дешевым, что жечь свечи
+                        будут только богачи</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'webapp:department2' %}" class="btn">Смотреть</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4 mb-5">
+            <div class="card wow fadeInLeft h-100" data-wow-delay="1s" data-wow-offset="300"
+                 style="border-radius: 10px">
+                <div class="card-header" style="background: none; border: none">
+                    <div class=" row header-inner">
+                        <div class="col-3" style="text-align: end">
+                            <img class="label-img" src="{{ 'static/css/label.jpg' }}" alt="label">
+                        </div>
+                        <div class="col-9" style="text-align: center; padding-top: 7px">
+                            <b>Политехнический колледж Международного университета Кыргызской Республики</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <b>Компьютерные сети и программирование</b>
+                    <a href="{% url 'webapp:department3' %}">
+                        <img class="card-img" src="https://www.pc.edu.kg/images/KS.png" alt="image"
+                             style="border-radius: 0">
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <p class="card-text" style="font-size: 16px">Большинство хороших программистов делают свою работу
+                        потому
+                        что получают
+                        удовольствие от программирования</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'webapp:department3' %}" class="btn">Смотреть</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block footer %}
-    <div class="address_wrap row">
-        <div class="col-sm-4">
+    <div class="address_wrap row justify-content-center">
+        <div class="col-sm-8 col-lg-4 mb-5 wow bounceIn">
             <p>Кыргызская Республика, 720007,<br>г. Бишкек, ул. Л. Толстого, 17А/1</p>
             <p>ОКПО 29763954<br>ИНН 02612201610272</p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-8 col-lg-4 mb-5 wow bounceIn">
             <p>Кыргыз Республикасы, 720007,<br>Бишкек шаары, Л.Толстой көчөсү, 17А/1</p>
             <p>Тел.: +996 (312) 64-23-37, 64-11-56<br>Факс: +996 (312) 64-23-28</p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-8 col-lg-4 mb-5 wow bounceIn">
             <p>The Kyrgyz Republic, 720007,<br>Bishkek, 17A/1, St. Tolstoy</p>
             <p>E-mail: consortium.iuk@gmail.com<br>Web-сайт: www.iuk.kg</p>
         </div>
     </div>
 {% endblock %}
+

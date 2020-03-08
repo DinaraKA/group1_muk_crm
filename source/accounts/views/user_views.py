@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -5,11 +6,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView
-from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, PasswordChangeForm, UserFamilyForm
-from accounts.models import Passport, Profile, Role, Status, Family, Group
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
+from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
+from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
+
 
 
 def login_view(request, *args, **kwargs):
@@ -73,22 +76,26 @@ def register_view(request, *args, **kwargs):
             )
             user.set_password(form.cleaned_data['password'])
             passport.save()
+            roles = form.cleaned_data['role']
             profile.save()
-            role = form.cleaned_data['role']
-            profile.save()
-            profile.role.set(role)
-            login(request, user)
+            profile.role.set(roles)
+            for role in roles:
+                if role.name == "Учебная часть":
+                    user.is_staff = True
+                    user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
         form = UserCreationForm()
     return render(request, 'user_create.html', context={'form': form})
 
 
-class UserPersonalInfoChangeView(UpdateView):
+class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_info_change.html'
     form_class = UserChangeForm
     context_object_name = 'user_obj'
+    permission_required = "accounts.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         pk = self.kwargs.get('pk')
@@ -119,7 +126,7 @@ class UserPersonalInfoChangeView(UpdateView):
         profile.role.set(roles)
         profile.save()
         user.save()
-        return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
+        return self.get_success_url()
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -128,11 +135,13 @@ class UserPersonalInfoChangeView(UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
+    permission_required = "accounts.change_user"
+    permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -141,10 +150,12 @@ class UserPasswordChangeView(UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView(DetailView):
+class UserDetailView( DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
+    # permission_required = "accounts.view_user"
+    # permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -154,8 +165,8 @@ class UserDetailView(DetailView):
         context.update({
             'role_student': role_student,
             'family':Family.objects.filter(student=user),
-            'groups': Group.objects.filter(students__in=students.values('student')),
-            'groups_for_student': Group.objects.filter(students=self.request.user),
+            'groups': StudyGroup.objects.filter(students__in=students.values('student')),
+            'groups_for_student': StudyGroup.objects.filter(students=self.request.user),
             'students': students,
             'student_user': User.objects.filter(profile__role__name ='Студент'),
             'parent_user': User.objects.filter(profile__role__name ='Родитель')
@@ -163,21 +174,21 @@ class UserDetailView(DetailView):
         return context
 
 
-class UserListView(ListView):
+class UserListView(PermissionRequiredMixin, ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = "accounts.view_user"
+    permission_denied_message = "Доступ запрещен"
 
 
-class UserDeleteView(DeleteView):
+class UserDeleteView(PermissionRequiredMixin, DeleteView):
     model = User
     template_name = 'user_delete.html'
     success_url = reverse_lazy('webapp:index')
     context_object_name = 'user'
-    # permission_required = 'accounts.user_delete'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = 'accounts.delete_user'
+    permission_denied_message = '403 Доступ запрещён!'
 
     def delete(self, request, *args, **kwargs):
         user = self.object = self.get_object()
@@ -202,13 +213,15 @@ class UserSearchView(FormView):
         return redirect(url)
 
 
-class SearchResultsView(ListView):
+class SearchResultsView(PermissionRequiredMixin, ListView):
     # model = User
     model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'
     paginate_by = 5
     paginate_orphans = 2
+    permission_required = "webapp.view_profile"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -218,11 +231,18 @@ class SearchResultsView(ListView):
             queryset = queryset.filter(query).distinct()
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, group_list=None, text=None, user_list=None, **kwargs):
         form = FullSearchForm(data=self.request.GET)
+        if form.is_valid():
+            text = form.cleaned_data.get("text")
         query = self.get_query_string()
+        group_list = StudyGroup.objects.filter(name__icontains=text)
+        if not group_list.exists():
+            group_list = None
+        user_list = User.objects.filter(first_name__icontains=text)
         return super().get_context_data(
-            form=form, query=query, object_list=object_list, **kwargs
+            form=form, query=query, object_list=object_list,
+            group_list=group_list, user_list=user_list
         )
 
     def get_query_string(self):
@@ -231,18 +251,6 @@ class SearchResultsView(ListView):
             if key != 'page':
                 data[key] = self.request.GET.get(key)
         return urlencode(data)
-
-    # def get_user_query(self, form):
-    #     query = Q()
-    #     user = form.cleaned_data.get('user')
-    #     if user:
-    #         user = form.cleaned_data.get('user')
-    #         if user:
-    #             query = query | Q(user__username__iexact=user)
-    #         comment_author = form.cleaned_data.get('comment_author')
-    #         if comment_author:
-    #             query = query | Q(comments__user__username__iexact=user)
-    #     return query
 
     def get_search_query(self, form):
         query = Q()
@@ -253,7 +261,7 @@ class SearchResultsView(ListView):
                 query = query | Q(user__username__icontains=text)
             in_first_name = form.cleaned_data.get('in_first_name')
             if in_first_name:
-                query = query | Q(user__first_name__icontains=text)
+                query = query | Q(user__first_name__icontains=text) | Q(user__last_name__icontains=text)
             in_status = form.cleaned_data.get('in_status')
             if in_status:
                 query = query | Q(status__name__icontains=text)
@@ -266,21 +274,14 @@ class SearchResultsView(ListView):
             in_social_status = form.cleaned_data.get('in_social_status')
             if in_social_status:
                 query = query | Q(social_status__name__icontains=text)
-            # if in_first_name:
-                # query = query | Q(first_name__icontains=text)
-            # in_tags = form.cleaned_data.get('in_tags')
-            # if in_first_name:
-            #     query = query | Q(first_name__iexact=user)
-            # in_comment_text = form.cleaned_data.get('in_comment_text')
-            # if in_comment_text:
-            #     query = query | Q(comments__text__icontains=user)
-        # if text==None:
-        #     in_username = form.cleaned_data.get('in_username')
-        #     if in_username:
-        #         # query = query | Q(user__username__icontains=text)
-        #         query = query
-        #         print(query)
-
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
+            #     query = query | Q(Group.objects.filter(name__icontains=text))
+            # in_group = form.cleaned_data.get('in_group')
+            # if in_group:
+            #     group = Group.objects.filter(name__icontains=text)
+            #     # query = query | Q(user__students__name__icontains=text)
+            #     print(query, "IN GROUP")
 
         return query
 
@@ -289,18 +290,19 @@ class StudentListView(ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
-    # permission_required = 'webapp.user_list'
-    # permission_denied_message = '403 Доступ запрещён!'
+    permission_required = "webapp.view_user"
+    permission_denied_message = "Доступ запрещен"
 
     def get_queryset(self):
         status = self.kwargs.get('status')
         users = User.objects.filter(profile__status__name__contains=status)
         print(users)
         return users
+
+
 class UserFamilyCreateView(CreateView):
     template_name = 'user_family_create.html'
     form_class = UserFamilyForm
-
 
     def form_valid(self, form):
         self.student_pk = self.kwargs.get('pk')

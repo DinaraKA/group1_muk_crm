@@ -1,377 +1,9 @@
 [
 {
-  "model": "auth.group",
-  "fields": {
-    "name": "principal_staff",
-    "permissions": [
-      [
-        "add_adminposition",
-        "accounts",
-        "adminposition"
-      ],
-      [
-        "change_adminposition",
-        "accounts",
-        "adminposition"
-      ],
-      [
-        "delete_adminposition",
-        "accounts",
-        "adminposition"
-      ],
-      [
-        "view_adminposition",
-        "accounts",
-        "adminposition"
-      ],
-      [
-        "add_family",
-        "accounts",
-        "family"
-      ],
-      [
-        "change_family",
-        "accounts",
-        "family"
-      ],
-      [
-        "delete_family",
-        "accounts",
-        "family"
-      ],
-      [
-        "view_family",
-        "accounts",
-        "family"
-      ],
-      [
-        "add_passport",
-        "accounts",
-        "passport"
-      ],
-      [
-        "change_passport",
-        "accounts",
-        "passport"
-      ],
-      [
-        "delete_passport",
-        "accounts",
-        "passport"
-      ],
-      [
-        "view_passport",
-        "accounts",
-        "passport"
-      ],
-      [
-        "add_profile",
-        "accounts",
-        "profile"
-      ],
-      [
-        "change_profile",
-        "accounts",
-        "profile"
-      ],
-      [
-        "delete_profile",
-        "accounts",
-        "profile"
-      ],
-      [
-        "view_profile",
-        "accounts",
-        "profile"
-      ],
-      [
-        "add_role",
-        "accounts",
-        "role"
-      ],
-      [
-        "change_role",
-        "accounts",
-        "role"
-      ],
-      [
-        "delete_role",
-        "accounts",
-        "role"
-      ],
-      [
-        "view_role",
-        "accounts",
-        "role"
-      ],
-      [
-        "add_socialstatus",
-        "accounts",
-        "socialstatus"
-      ],
-      [
-        "change_socialstatus",
-        "accounts",
-        "socialstatus"
-      ],
-      [
-        "delete_socialstatus",
-        "accounts",
-        "socialstatus"
-      ],
-      [
-        "view_socialstatus",
-        "accounts",
-        "socialstatus"
-      ],
-      [
-        "add_status",
-        "accounts",
-        "status"
-      ],
-      [
-        "change_status",
-        "accounts",
-        "status"
-      ],
-      [
-        "delete_status",
-        "accounts",
-        "status"
-      ],
-      [
-        "view_status",
-        "accounts",
-        "status"
-      ],
-      [
-        "add_group",
-        "accounts",
-        "studygroup"
-      ],
-      [
-        "change_group",
-        "accounts",
-        "studygroup"
-      ],
-      [
-        "delete_group",
-        "accounts",
-        "studygroup"
-      ],
-      [
-        "view_group",
-        "accounts",
-        "studygroup"
-      ],
-      [
-        "add_user",
-        "auth",
-        "user"
-      ],
-      [
-        "change_user",
-        "auth",
-        "user"
-      ],
-      [
-        "delete_user",
-        "auth",
-        "user"
-      ],
-      [
-        "view_user",
-        "auth",
-        "user"
-      ],
-      [
-        "add_announcements",
-        "webapp",
-        "announcements"
-      ],
-      [
-        "change_announcements",
-        "webapp",
-        "announcements"
-      ],
-      [
-        "delete_announcements",
-        "webapp",
-        "announcements"
-      ],
-      [
-        "view_announcements",
-        "webapp",
-        "announcements"
-      ],
-      [
-        "add_auditory",
-        "webapp",
-        "auditory"
-      ],
-      [
-        "change_auditory",
-        "webapp",
-        "auditory"
-      ],
-      [
-        "delete_auditory",
-        "webapp",
-        "auditory"
-      ],
-      [
-        "view_auditory",
-        "webapp",
-        "auditory"
-      ],
-      [
-        "add_discipline",
-        "webapp",
-        "discipline"
-      ],
-      [
-        "change_discipline",
-        "webapp",
-        "discipline"
-      ],
-      [
-        "delete_discipline",
-        "webapp",
-        "discipline"
-      ],
-      [
-        "view_discipline",
-        "webapp",
-        "discipline"
-      ],
-      [
-        "add_grade",
-        "webapp",
-        "grade"
-      ],
-      [
-        "change_grade",
-        "webapp",
-        "grade"
-      ],
-      [
-        "delete_grade",
-        "webapp",
-        "grade"
-      ],
-      [
-        "view_grade",
-        "webapp",
-        "grade"
-      ],
-      [
-        "add_journal",
-        "webapp",
-        "journal"
-      ],
-      [
-        "change_journal",
-        "webapp",
-        "journal"
-      ],
-      [
-        "delete_journal",
-        "webapp",
-        "journal"
-      ],
-      [
-        "view_journal",
-        "webapp",
-        "journal"
-      ],
-      [
-        "add_lesson",
-        "webapp",
-        "lesson"
-      ],
-      [
-        "change_lesson",
-        "webapp",
-        "lesson"
-      ],
-      [
-        "delete_lesson",
-        "webapp",
-        "lesson"
-      ],
-      [
-        "view_lesson",
-        "webapp",
-        "lesson"
-      ],
-      [
-        "add_news",
-        "webapp",
-        "news"
-      ],
-      [
-        "change_news",
-        "webapp",
-        "news"
-      ],
-      [
-        "delete_news",
-        "webapp",
-        "news"
-      ],
-      [
-        "view_news",
-        "webapp",
-        "news"
-      ],
-      [
-        "add_schedule",
-        "webapp",
-        "schedule"
-      ],
-      [
-        "change_schedule",
-        "webapp",
-        "schedule"
-      ],
-      [
-        "delete_schedule",
-        "webapp",
-        "schedule"
-      ],
-      [
-        "view_schedule",
-        "webapp",
-        "schedule"
-      ],
-      [
-        "add_theme",
-        "webapp",
-        "theme"
-      ],
-      [
-        "change_theme",
-        "webapp",
-        "theme"
-      ],
-      [
-        "delete_theme",
-        "webapp",
-        "theme"
-      ],
-      [
-        "view_theme",
-        "webapp",
-        "theme"
-      ]
-    ]
-  }
-},
-{
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-02-13T04:30:35.458Z",
+    "last_login": "2020-02-17T09:13:00.477Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -388,7 +20,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-    "last_login": "2020-02-13T04:17:16.428Z",
+    "last_login": "2020-02-19T19:09:48.703Z",
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -691,256 +323,6 @@
   }
 },
 {
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$b2mJ9N4qsaLA$y9K1ShhYngH3R+9lY2JgQmCt7//8XeHwWupQ2cTqMNI=",
-    "last_login": "2020-02-19T08:43:10.335Z",
-    "is_superuser": false,
-    "username": "echeb",
-    "first_name": "\u0423\u0447\u0435\u0431\u043d\u0430\u044f",
-    "last_name": "\u0427\u0430\u0441\u0442\u044c",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T08:43:10.001Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$92zwUv35pkLS$D4E+DIPUjDM6/7QlHOv2GlNAiYRIl/QM6U3z/Sgqp7Y=",
-    "last_login": "2020-02-19T10:07:16.783Z",
-    "is_superuser": false,
-    "username": "ddd",
-    "first_name": "ff",
-    "last_name": "ff",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T08:47:56Z",
-    "groups": [
-      [
-        "principal_staff"
-      ]
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$AMtACGphplVW$OdJOvXIc2NcFnrSfsE8YYd2ZZsmtKzzaRLOlG3fTRjw=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "uuus",
-    "first_name": "ff",
-    "last_name": "ff",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T08:59:52.377Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$P5PNuX4UVcHr$/TQ43b/BTCwPOmO1lV4kBYmFrmLDHIKC+aJ9qdhGtUM=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "fffsss",
-    "first_name": "f",
-    "last_name": "f",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:01:59.699Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$IGXW9YiRwXQP$oYWx5ckeyTo8wfQBrZwGaTRwllLzyrRqrBhzarE/LaM=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "ggg",
-    "first_name": "gggs",
-    "last_name": "gg",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:03:33.116Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$L8P36QMd1jJg$exnJmfsJMRlZlW3xzFkcFCrqqUOaC6K/C9Jq/XEMjKE=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "qq",
-    "first_name": "gtrh",
-    "last_name": "fdf",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:05:12.217Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$na4kAtE4lRqI$pRnXsQlD2er3PP1FKL5zrtv6wq0PLkhq7r6C94qWOks=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "itre",
-    "first_name": "ffffff",
-    "last_name": "ssfdsf",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:07:05.510Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$42R6qpJMGTFL$zsnVbc7fZ+eAZmPhUtzblNLTiBwvRK8bbhByRFe2Ofo=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "sssss",
-    "first_name": "KG Evgenia",
-    "last_name": "Generalova",
-    "email": "tyza@mail.ru",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:15:28.838Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$66Xl03Bhl619$SAae+7Bqnlvq+ZwvRaP5E98inx9PU/mCWdxHmqnJESY=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "sssssss",
-    "first_name": "KG Evgenia",
-    "last_name": "Generalova",
-    "email": "tyza@mail.ru",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:16:47.764Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$Ra9quh0OY5Ls$qR0XYcx6Tf1slyhSfV1IxgmK60Opk7Hb2gL2pPD4bMI=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "sssssssf",
-    "first_name": "KG Evgenia",
-    "last_name": "Generalova",
-    "email": "tyza@mail.ru",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:17:56.787Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$tDuIKpdCja6E$9gN+trwx3GjMm5V6oSVQwSyuCSsmM5nzxRt5zdADehM=",
-    "last_login": "2020-02-19T09:54:30.916Z",
-    "is_superuser": false,
-    "username": "admin3",
-    "first_name": "Generalova",
-    "last_name": "Generalova",
-    "email": "tyza@mail.ru",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2020-02-19T09:40:20.234Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$6aCMdDWmDUHB$Ib1sNeemB93fg+dMAVVyEkhQ6yzxoiDuUk6PGlaOkY8=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "staff",
-    "first_name": "fweewfr",
-    "last_name": "ffff",
-    "email": "tyzo4ka@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T10:35:15.277Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$ik3YHAPKjBBV$/AMPrpY21MoW0ExU4vCZlOSo6I20AZ/ucfpCl8MfXu4=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "stafff",
-    "first_name": "fweewfr",
-    "last_name": "ffff",
-    "email": "tyzo4ka@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T10:38:21.576Z",
-    "groups": [
-      [
-        "principal_staff"
-      ]
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "fields": {
-    "password": "pbkdf2_sha256$150000$zU3zOr8ncoDr$6J6sHZJXpaB5OXesy5RJ9jSlywtWKiuRP/41OkGoOcY=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "staff2",
-    "first_name": "fweewfr",
-    "last_name": "ffff",
-    "email": "tyzo4ka@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-02-19T10:40:52.722Z",
-    "groups": [
-      [
-        "principal_staff"
-      ]
-    ],
-    "user_permissions": []
-  }
-},
-{
   "model": "sessions.session",
   "pk": "1oad3tqn0n00rwneadp7xrtep0ifd2wt",
   "fields": {
@@ -954,30 +336,6 @@
   "fields": {
     "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
     "expire_date": "2020-02-13T03:11:34.865Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "8gu1rn9tc32b26xe2azo75d3d3trqs7c",
-  "fields": {
-    "session_data": "NjI2ZTM2YWQ1MDUxZGMxZmU4MDEzZTQ3YWRlY2E2MDRjMjc1MmY0Mjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYjNlOGViNWE4ZDRjMWNmMzdlNTQ3ZWVjOGNhNDUwYTVkNTIwNzE5In0=",
-    "expire_date": "2020-03-06T08:25:20.193Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "98vyrk75cm4yf0bsuw5vf4rgaq1uvm2p",
-  "fields": {
-    "session_data": "NjI2ZTM2YWQ1MDUxZGMxZmU4MDEzZTQ3YWRlY2E2MDRjMjc1MmY0Mjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYjNlOGViNWE4ZDRjMWNmMzdlNTQ3ZWVjOGNhNDUwYTVkNTIwNzE5In0=",
-    "expire_date": "2020-03-06T06:18:25.920Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "dyxq7ofwo2gkokpds5w5a7fzu18zvjgp",
-  "fields": {
-    "session_data": "NjI2ZTM2YWQ1MDUxZGMxZmU4MDEzZTQ3YWRlY2E2MDRjMjc1MmY0Mjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYjNlOGViNWE4ZDRjMWNmMzdlNTQ3ZWVjOGNhNDUwYTVkNTIwNzE5In0=",
-    "expire_date": "2020-03-02T09:53:56.291Z"
   }
 },
 {
@@ -1195,7 +553,11 @@
   "pk": 1,
   "fields": {
     "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u041a\u044b\u0440\u0433\u044b\u0437\u0441\u0442\u0430\u043d\u0430",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -1203,7 +565,11 @@
   "pk": 3,
   "fields": {
     "name": "\u041c\u0438\u0440\u043e\u0432\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -1211,7 +577,11 @@
   "pk": 4,
   "fields": {
     "name": "\u041f\u0440\u0430\u0432\u043e",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -1219,7 +589,11 @@
   "pk": 5,
   "fields": {
     "name": "\u0410\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -1227,7 +601,11 @@
   "pk": 6,
   "fields": {
     "name": "\u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u0440\u0435\u0432\u043d\u0435\u0433\u043e \u043c\u0438\u0440\u0430",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-1"
+      ]
+    ]
   }
 },
 {
@@ -1235,7 +613,11 @@
   "pk": 7,
   "fields": {
     "name": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -1243,7 +625,11 @@
   "pk": 8,
   "fields": {
     "name": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
-    "teacher": []
+    "teacher": [
+      [
+        "teacher-2"
+      ]
+    ]
   }
 },
 {
@@ -1523,6 +909,53 @@
   }
 },
 {
+  "model": "webapp.theme",
+  "pk": 1,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 1"
+  }
+},
+{
+  "model": "webapp.theme",
+  "pk": 2,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 2"
+  }
+},
+{
+  "model": "webapp.theme",
+  "pk": 3,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 3"
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 1,
+  "fields": {
+    "date": "2020-02-02",
+    "student": [
+      "student-1"
+    ],
+    "discipline": 5,
+    "theme": 1,
+    "grade": 4
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 2,
+  "fields": {
+    "date": "2020-02-04",
+    "student": [
+      "student-1"
+    ],
+    "discipline": 4,
+    "theme": 3,
+    "grade": 5
+  }
+},
+{
   "model": "accounts.role",
   "pk": 1,
   "fields": {
@@ -1555,13 +988,6 @@
   "pk": 6,
   "fields": {
     "name": "\u0410\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0439 \u0440\u0430\u0431\u043e\u0442\u043d\u0438\u043a"
-  }
-},
-{
-  "model": "accounts.role",
-  "pk": 7,
-  "fields": {
-    "name": "\u0423\u0447\u0435\u0431\u043d\u0430\u044f \u0447\u0430\u0441\u0442\u044c"
   }
 },
 {
@@ -1943,279 +1369,6 @@
   }
 },
 {
-  "model": "accounts.profile",
-  "pk": 34,
-  "fields": {
-    "user": [
-      "echeb"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 35,
-  "fields": {
-    "user": [
-      "ddd"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 36,
-  "fields": {
-    "user": [
-      "uuus"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 37,
-  "fields": {
-    "user": [
-      "fffsss"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 38,
-  "fields": {
-    "user": [
-      "ggg"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 39,
-  "fields": {
-    "user": [
-      "qq"
-    ],
-    "patronymic": "",
-    "phone_number": "(240) 367-4432",
-    "photo": "",
-    "address_fact": "467 Carson Dr",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 40,
-  "fields": {
-    "user": [
-      "itre"
-    ],
-    "patronymic": "",
-    "phone_number": null,
-    "photo": "",
-    "address_fact": "Logvinenko 55, kv 41",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      6,
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 41,
-  "fields": {
-    "user": [
-      "sssss"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 42,
-  "fields": {
-    "user": [
-      "sssssss"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 43,
-  "fields": {
-    "user": [
-      "sssssssf"
-    ],
-    "patronymic": "",
-    "phone_number": "(571) 294-3347",
-    "photo": "",
-    "address_fact": "5083 N Dupont Hwy",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 44,
-  "fields": {
-    "user": [
-      "admin3"
-    ],
-    "patronymic": "",
-    "phone_number": "555444855",
-    "photo": "",
-    "address_fact": "g Sovmina 2, kv 4",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 45,
-  "fields": {
-    "user": [
-      "staff"
-    ],
-    "patronymic": "\u0410\u043b\u0438\u0431\u0435\u043a\u043e\u0432\u043d\u0430",
-    "phone_number": "(240) 367-4432",
-    "photo": "",
-    "address_fact": "467 Carson Dr",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 46,
-  "fields": {
-    "user": [
-      "stafff"
-    ],
-    "patronymic": "\u0410\u043b\u0438\u0431\u0435\u043a\u043e\u0432\u043d\u0430",
-    "phone_number": "(240) 367-4432",
-    "photo": "",
-    "address_fact": "467 Carson Dr",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
-  "model": "accounts.profile",
-  "pk": 47,
-  "fields": {
-    "user": [
-      "staff2"
-    ],
-    "patronymic": "\u0410\u043b\u0438\u0431\u0435\u043a\u043e\u0432\u043d\u0430",
-    "phone_number": "(240) 367-4432",
-    "photo": "",
-    "address_fact": "467 Carson Dr",
-    "status": 4,
-    "admin_position": null,
-    "social_status": null,
-    "role": [
-      7
-    ]
-  }
-},
-{
   "model": "accounts.passport",
   "pk": 3,
   "fields": {
@@ -2468,259 +1621,7 @@
   }
 },
 {
-  "model": "accounts.passport",
-  "pk": 17,
-  "fields": {
-    "user": [
-      "echeb"
-    ],
-    "citizenship": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
-    "series": "AN123782443",
-    "issued_by": "",
-    "issued_date": "2020-02-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 18,
-  "fields": {
-    "user": [
-      "ddd"
-    ],
-    "citizenship": "fff",
-    "series": "AN04557772",
-    "issued_by": "",
-    "issued_date": "2020-01-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 19,
-  "fields": {
-    "user": [
-      "uuus"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-19",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 20,
-  "fields": {
-    "user": [
-      "fffsss"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "",
-    "issued_date": "2020-01-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "434344343044",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 21,
-  "fields": {
-    "user": [
-      "ggg"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "",
-    "issued_date": "2020-01-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 22,
-  "fields": {
-    "user": [
-      "qq"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007772",
-    "issued_by": "",
-    "issued_date": "2020-01-09",
-    "address": "467 Carson Dr",
-    "inn": "",
-    "nationality": "DE",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2010-02-26"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 23,
-  "fields": {
-    "user": [
-      "itre"
-    ],
-    "citizenship": "Russia",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-19",
-    "address": "Logvinenko 55, kv 41",
-    "inn": "434344343044",
-    "nationality": "Chui",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2019-10-03"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 24,
-  "fields": {
-    "user": [
-      "sssss"
-    ],
-    "citizenship": "United States",
-    "series": "AN000777",
-    "issued_by": "",
-    "issued_date": "2020-02-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2019-10-03"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 25,
-  "fields": {
-    "user": [
-      "sssssss"
-    ],
-    "citizenship": "United States",
-    "series": "AN000777",
-    "issued_by": "",
-    "issued_date": "2020-02-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2019-10-03"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 26,
-  "fields": {
-    "user": [
-      "sssssssf"
-    ],
-    "citizenship": "United States",
-    "series": "AN000777",
-    "issued_by": "",
-    "issued_date": "2020-02-09",
-    "address": "5083 N Dupont Hwy",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2019-10-03"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 27,
-  "fields": {
-    "user": [
-      "admin3"
-    ],
-    "citizenship": "Kyrgyzstan",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-09",
-    "address": "g Sovmina 2, kv 4, K-Akieva 9, 55",
-    "inn": "",
-    "nationality": "Chui",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2099-10-03"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 28,
-  "fields": {
-    "user": [
-      "staff"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-09",
-    "address": "467 Carson Dr, Suite KG-1327",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2001-07-13"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 29,
-  "fields": {
-    "user": [
-      "stafff"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-09",
-    "address": "467 Carson Dr, Suite KG-1327",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2001-07-13"
-  }
-},
-{
-  "model": "accounts.passport",
-  "pk": 30,
-  "fields": {
-    "user": [
-      "staff2"
-    ],
-    "citizenship": "United States",
-    "series": "AN0007572",
-    "issued_by": "MKK 50-00",
-    "issued_date": "2020-02-09",
-    "address": "467 Carson Dr, Suite KG-1327",
-    "inn": "",
-    "nationality": "Delaware",
-    "sex": "\u043c\u0443\u0436\u0441\u043a\u043e\u0439",
-    "birth_date": "2001-07-13"
-  }
-},
-{
-  "model": "accounts.studygroup",
+  "model": "accounts.group",
   "pk": 1,
   "fields": {
     "name": "Python",
@@ -4437,6 +3338,24 @@
   "model": "admin.logentry",
   "pk": 117,
   "fields": {
+    "action_time": "2020-02-20T18:21:13.693Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "webapp",
+      "discipline"
+    ],
+    "object_id": "8",
+    "object_repr": "\u041a\u044b\u0440\u0433\u044b\u0437\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"teacher\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
     "action_time": "2020-02-17T09:31:02.701Z",
     "user": [
       "admin"
@@ -4521,42 +3440,6 @@
     "object_repr": "\u0422\u044e\u043b\u0435\u043c\u0431\u0430\u0435\u0432\u0430\u0410\u0439\u0436\u0430\u043d",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 122,
-  "fields": {
-    "action_time": "2020-02-19T10:03:14.005Z",
-    "user": [
-      "admin"
-    ],
-    "content_type": [
-      "auth",
-      "group"
-    ],
-    "object_id": "1",
-    "object_repr": "principal_staff",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 123,
-  "fields": {
-    "action_time": "2020-02-19T10:03:43.568Z",
-    "user": [
-      "admin"
-    ],
-    "content_type": [
-      "auth",
-      "user"
-    ],
-    "object_id": "21",
-    "object_repr": "ff ff",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"groups\"]}}]"
   }
 }
 ]

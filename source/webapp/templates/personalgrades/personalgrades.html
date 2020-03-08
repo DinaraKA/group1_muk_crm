@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
+
     {% regroup profiles by date|date:"d.m.Y"  as profile_list %}
     <div class="container">
         <h2 class="text-center mt-5 mb-5" style="color: darkslategray; font-weight: bold; font-size: 30px;">Успеваемость студента: {{ student.first_name}}  {{ student.last_name}} </h2>
  {% include 'partial/simple_search.html' %}
+
     {% for profile in profile_list%}
         <table class="table table-bordered mb-5 pb-4" style="font-size: 18px;">
             <thead class="thead-light" style="font-size: 18px; font-weight: bolder">
@@ -29,5 +31,6 @@
         </table>
     {%  endfor %}
 </div>
+
 {% endblock %}
 

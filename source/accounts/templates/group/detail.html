@@ -11,8 +11,8 @@
     <h1>{{ group.name }}</h1>
     <p>создана {{ group.started_at|date:'d.m.Y' }}</p>
     <hr>
-    <div class="pre" style="margin-top: 20px">Староста: {{ group.starosta }}</div>
-    <div class="pre" style="margin-top: 5px">Куратор: {{ group.kurator }}</div>
+    <div class="pre" style="margin-top: 20px">Староста: {{ group.leader }}</div>
+    <div class="pre" style="margin-top: 5px">Куратор: {{ group.headteaher }}</div>
     <hr>
     <div class="pre" style="margin-top: 5px"> Студенты:</div>
     {% for student in group.students.all %}
