@@ -46,8 +46,8 @@ class GradeSeleniumViewTest(TestCase):
 
     def test_created_grade(self):
         self.driver.get('http://localhost:8000/grades/add/')
-        self.driver.find_element_by_name('value').send_keys('30000')
-        self.driver.find_element_by_name('description').send_keys('New grade 3000')
+        self.driver.find_element_by_name('value').send_keys('2')
+        self.driver.find_element_by_name('description').send_keys('Test description')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://localhost:8000/grades/'
 
@@ -55,9 +55,9 @@ class GradeSeleniumViewTest(TestCase):
         self.driver.get('http://127.0.0.1:8000/grades/')
         self.driver.find_element_by_id('update').click()
         self.driver.find_element_by_name('value').clear()
-        self.driver.find_element_by_name('value').send_keys('10')
+        self.driver.find_element_by_name('value').send_keys('5')
         self.driver.find_element_by_name('description').clear()
-        self.driver.find_element_by_name('description').send_keys('New grade 10 update')
+        self.driver.find_element_by_name('description').send_keys('Test update description')
         self.driver.find_element_by_class_name('btn-primary').click()
         assert self.driver.current_url == 'http://127.0.0.1:8000/grades/'
 

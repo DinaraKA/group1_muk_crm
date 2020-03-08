@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from webapp.models import Announcements
 from selenium.webdriver import Chrome
 
@@ -61,8 +62,12 @@ class AnnouncementsSeleniumViewTest(TestCase):
         self.driver.find_element_by_name('title').send_keys('Test')
         self.driver.find_element_by_name('text').send_keys('Test Text')
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/announcements/'
+        try:
+            self.driver.find_element_by_class_name('btn.btn-primary').click()
+            assert self.driver.current_url == 'http://localhost:8000/announcements/'
+        except:
+            self.driver.find_element_by_tag_name('h3')
+            assert self.driver.current_url == 'http://localhost:8000/announcements/add/'
 
     def test_updated_position(self):
         self.driver.get('http://127.0.0.1:8000/announcements/4/')
