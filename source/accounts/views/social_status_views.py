@@ -53,8 +53,6 @@ class SocialStatusUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "accounts.change_socialstatus"
     permission_denied_message = "Доступ запрещен"
 
-
-
     def get_success_url(self):
         return reverse('accounts:all_social_statuses')
 

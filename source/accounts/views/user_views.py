@@ -214,7 +214,6 @@ class UserSearchView(FormView):
 
 
 class SearchResultsView(PermissionRequiredMixin, ListView):
-    # model = User
     model = Profile
     template_name = 'search.html'
     context_object_name = 'object_list'

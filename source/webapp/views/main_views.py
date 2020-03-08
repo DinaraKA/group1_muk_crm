@@ -23,8 +23,10 @@ class IndexView(ListView):
 class Department1View(TemplateView):
     template_name = 'departments/department1.html'
 
+
 class Department2View(TemplateView):
     template_name = 'departments/department2.html'
+
 
 class Department3View(TemplateView):
     template_name = 'departments/department3.html'

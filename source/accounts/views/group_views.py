@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 
+
 class GroupListView(PermissionRequiredMixin, ListView):
     template_name = 'group/list.html'
     model = StudyGroup
