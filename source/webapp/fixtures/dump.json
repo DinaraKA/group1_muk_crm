@@ -348,6 +348,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "ffcmbe1midkp1wy77bklnrthh7nyz3df",
+  "fields": {
+    "session_data": "ODdiNDM5OWI2ZWZlZDZjYzIxODc3MTkzNDk2MGJmYjk4YjAwZjk3Mjp7Il9hdXRoX3VzZXJfaWQiOiI1NiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiYjUyZWM3NTkxNzQ1ZGM1ZGYzMmVkYjNiMjY2OTM1NzkxOTc3ZjkxNSJ9",
+    "expire_date": "2020-02-28T18:27:11.300Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "h7amnalnq8cxyba49lb5543iiahkviej",
   "fields": {
     "session_data": "NjI2ZTM2YWQ1MDUxZGMxZmU4MDEzZTQ3YWRlY2E2MDRjMjc1MmY0Mjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYjNlOGViNWE4ZDRjMWNmMzdlNTQ3ZWVjOGNhNDUwYTVkNTIwNzE5In0=",
@@ -780,132 +788,6 @@
     "is_saturday": true,
     "start_time": "16:30:00",
     "end_time": "17:50:00"
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 1,
-  "fields": {
-    "lesson": 1,
-    "day": "Monday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 5,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 2,
-  "fields": {
-    "lesson": 2,
-    "day": "Tuesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 2,
-    "discipline": 1,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 3,
-  "fields": {
-    "lesson": 6,
-    "day": "Wednesday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 2,
-    "discipline": 5,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 4,
-  "fields": {
-    "lesson": 3,
-    "day": "Tuesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 3,
-    "discipline": 3,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 5,
-  "fields": {
-    "lesson": 1,
-    "day": "Thursday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 3,
-    "discipline": 1,
-    "group": 1
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 6,
-  "fields": {
-    "lesson": 5,
-    "day": "Saturday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 4,
-    "discipline": 5,
-    "group": 3
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 7,
-  "fields": {
-    "lesson": 3,
-    "day": "Friday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 4,
-    "discipline": 5,
-    "group": 2
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 8,
-  "fields": {
-    "lesson": 8,
-    "day": "Wednesday",
-    "teacher": [
-      "teacher-1"
-    ],
-    "auditoriya": 3,
-    "discipline": 6,
-    "group": 3
-  }
-},
-{
-  "model": "webapp.schedule",
-  "pk": 9,
-  "fields": {
-    "lesson": 8,
-    "day": "Monday",
-    "teacher": [
-      "teacher-2"
-    ],
-    "auditoriya": 3,
-    "discipline": 6,
-    "group": 4
   }
 },
 {
@@ -1621,7 +1503,7 @@
   }
 },
 {
-  "model": "accounts.group",
+  "model": "accounts.studygroup",
   "pk": 1,
   "fields": {
     "name": "Python",
