@@ -29,32 +29,25 @@
                     <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
                 {% endif %}
                 <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">Главная</a></li>
-
-                {#            <li><a href="#">Миссия и стратегия</a></li>#}
-                {#            <li><a href="#">Специальности</a></li>#}
                 <li class="nav-item"><a href="{% url 'webapp:news' %}" class="nav-link">Новости</a></li>
                 <li class="nav-item"><a href="{% url 'webapp:announcements' %}" class="nav-link">Объявление</a></li>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'webapp:schedule' %}" class="nav-link">Расписание</a></li>
                 {% endif %}
-                {#            <li><a href="#">Абитуриент</a></li>#}
-                {#            <li><a href="#">Правовая информация</a></li>#}
-                {#            <li><a href="#">Выпускники</a></li>#}
-                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
-                    </li>
+                    <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>
                 {% endif %}
+                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+{#                {% if request.user.is_authenticated %}#}
+{#                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
                 {% block menu %}{% endblock %}
             </ul>
             <ul class="menu navbar-nav ml-auto">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'accounts:user_search' %}" class="nav-link">Поиск</a></li>
                 {% endif %}
-
-                {#                <li class="menu-right ml-auto">#}
-
-
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'accounts:user_detail' request.user.pk %}"
                                             class="nav-link">
@@ -67,6 +60,7 @@
                                             class="nav-link">Регистрация</a></li>
                     <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                 {% endif %}
+
             </ul>
         </div>
     </nav>

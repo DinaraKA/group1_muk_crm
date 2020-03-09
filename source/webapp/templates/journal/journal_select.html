@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Выбрать журнал{% endblock %}
+{% block content %}
+    <h1>Выбрать {{ title }}</h1>
+    <form method="POST" action="{% url 'webapp:journal_select' %}">
+        {% include 'partial/form.html' %}
+        <p class="text-center"><input type="submit" value="Выбрать" class="btn btn-primary"></p>
+    </form>
+    {% for message in messages %}
+        <h3 class="text-center" style="color: red">
+            {{ message }}
+        </h3>
+    {% endfor %}
+{% endblock %}
