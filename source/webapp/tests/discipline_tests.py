@@ -42,15 +42,15 @@ class DisciplineViewTest(TestCase):
         assert self.driver.current_url == 'http://localhost:8000/disciplines/'
 
     def test_created_discipline(self):
-        self.driver.get('http://localhost:8000/disciplines/add/')
+        self.driver.get('http://localhost:8000/disciplines/')
+        self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         self.driver.find_element_by_name('teacher').send_keys('Айдай Исаева')
         try:
-            self.driver.find_element_by_class_name('btn-primary').click()
+            self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/disciplines/'
         except:
-            self.driver.find_element_by_tag_name('h3')
-            assert self.driver.current_url == 'http://localhost:8000/disciplines/add/'
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_disciplines(self):
         self.driver.get('http://127.0.0.1:8000/disciplines/')
@@ -62,8 +62,7 @@ class DisciplineViewTest(TestCase):
             self.driver.find_element_by_class_name('btn-primary').click()
             assert self.driver.current_url == 'http://127.0.0.1:8000/disciplines/'
         except:
-            self.driver.find_element_by_tag_name('h3')
-            assert self.driver.current_url == 'http://localhost:8000/disciplines/change/'
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_disciplines(self):
         self.driver.get('http://127.0.0.1:8000/disciplines/')

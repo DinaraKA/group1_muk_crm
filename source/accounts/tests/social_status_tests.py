@@ -8,7 +8,7 @@ class SocialStatusModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        SocialStatus.objects.create(name='Инвалид')
+        SocialStatus.objects.create(name='ModelTest')
 
     def test_name_label(self):
         social_status = SocialStatus.objects.get(id=1)
@@ -26,7 +26,7 @@ class SocialStatusModelTest(TestCase):
         self.assertEquals(expected_object_name, str(social_status))
 
 
-class SocialStatusSeleniumViewTest(TestCase):
+class SocialStatusViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -45,13 +45,12 @@ class SocialStatusSeleniumViewTest(TestCase):
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        self.driver.find_element_by_name('name').send_keys('Create test')
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
         try:
-            self.driver.find_element_by_class_name('btn-primary').click()
+            self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/'
         except:
-            self.driver.find_element_by_tag_name('h3')
-            assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/add/'
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_social_status(self):
         self.driver.get('http://127.0.0.1:8000/accounts/social_statuses/')
@@ -60,9 +59,12 @@ class SocialStatusSeleniumViewTest(TestCase):
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('Update test')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/social_statuses/'
+        self.driver.find_element_by_name('name').send_keys('UpdateTest')
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/social_statuses/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_social_status(self):
         self.driver.get('http://127.0.0.1:8000/accounts/social_statuses/')

@@ -69,16 +69,16 @@ class AuditoryViewTest(TestCase):
         assert self.driver.current_url == 'http://localhost:8000/auditories/'
 
     def test_created_auditory(self):
-        self.driver.get('http://localhost:8000/auditories/add/')
+        self.driver.get('http://localhost:8000/auditories/')
+        self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         self.driver.find_element_by_name('places').send_keys(35)
         self.driver.find_element_by_name('description').send_keys('CreateTest')
         try:
-            self.driver.find_element_by_class_name('btn-primary').click()
+            self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/auditories/'
         except:
-            self.driver.find_element_by_tag_name('h3')
-            assert self.driver.current_url == 'http://localhost:8000/auditories/add/'
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_auditory(self):
         self.driver.get('http://127.0.0.1:8000/auditories/')
@@ -89,8 +89,11 @@ class AuditoryViewTest(TestCase):
         self.driver.find_element_by_name('name').send_keys('Update test')
         self.driver.find_element_by_name('places').send_keys(35)
         self.driver.find_element_by_name('description').send_keys('Update test description')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_auditory(self):
         self.driver.get('http://127.0.0.1:8000/auditories/')

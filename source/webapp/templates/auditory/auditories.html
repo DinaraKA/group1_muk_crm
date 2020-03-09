@@ -23,8 +23,8 @@
                         <td>{{ auditory.name }}</td>
                         <td>{{ auditory.places }}</td>
                         <td>{{ auditory.description }}</td>
-                        <td class="symbol hiddenbutton"><a href="{% url 'webapp:change_auditory' auditory.pk %}">&#x270E;</a></td>
-                        <td class="symbol hiddenbutton"><a href="{%  url 'webapp:delete_auditory' auditory.pk %}"style="color: red">x</a></td>
+                        <td class="symbol hiddenbutton"><a class="update" href="{% url 'webapp:change_auditory' auditory.pk %}">&#x270E;</a></td>
+                        <td class="symbol hiddenbutton"><a class="delete" href="{%  url 'webapp:delete_auditory' auditory.pk %}"style="color: red">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

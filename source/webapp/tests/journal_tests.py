@@ -2,10 +2,9 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse, resolve
+
 from selenium.webdriver import Chrome
 from webapp.models import Journal, Discipline, Grade, Theme
-from webapp.views import GroupJournalListView, GroupJournalCreateView
 
 
 class JournalModelTest(TestCase):
