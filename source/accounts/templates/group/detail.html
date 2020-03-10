@@ -2,11 +2,6 @@
 
 {% block title %}{{ object.name }}{% endblock %}
 
-{% block menu %}
-    <li><a href="{% url 'accounts:change_group' object.pk %}">Обновить</a></li>
-    <li><a href="{% url 'accounts:delete_group' object.pk %}">Удалить</a></li>
-{% endblock %}
-
 {% block content %}
     <h1>{{ group.name }}</h1>
     <p>создана {{ group.started_at|date:'d.m.Y' }}</p>

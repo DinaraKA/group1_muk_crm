@@ -31,16 +31,8 @@ class GroupJournalDetailView(DetailView):
         context['grade_form'] = GradeForm()
         groupjournal = GroupJournal.objects.get(pk=self.kwargs['pk'])
         journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
-        # for object in journalnotes:
-        #     obj = object.pk
-        #     print(object)
-        #     journalgrade = JournalGrade.objects.filter(journal_note=obj)
-        #
-        #     print(journalgrade)
         context.update({
             'journalnotes': journalnotes,
-            # 'grade': journalgrade
-            # 'obj': obj
         })
         return context
 
@@ -52,14 +44,6 @@ class GroupJournalCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('webapp:groupjournals')
-
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data()
-    #     context.update({
-    #         'groups': StudyGroup.objects.all(),
-    #         'disciplines': Discipline.objects.all()
-    #     })
-    #     return context
 
 
 class GroupJournalUpdateView(UpdateView):

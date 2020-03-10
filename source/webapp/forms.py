@@ -67,6 +67,9 @@ class GradeForm(forms.ModelForm):
 
 
 class JournalSelectForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['discipline'] =
 
     class Meta:
         model = GroupJournal

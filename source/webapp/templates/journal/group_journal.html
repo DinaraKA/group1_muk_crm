@@ -5,7 +5,6 @@
             <h1>Журнал группы {{ journal.study_group.name }} по дисциплине - {{ journal.discipline.name }}</h1>
             <h4>Преподаватель: {{ journal.discipline.teacher.get }}</h4>
             <div class="row">
-
                 <form action="{% url 'webapp:add_journalnote' journal.pk %}" method="POST" id="add_lesson">
                     <div class="col-9">{% include 'partial/form.html' %}</div>
                     <div class="col-3"><a class="text-center"><input type="submit" value="+ Добавить занятие"
