@@ -17,7 +17,8 @@
             <th scope="col">Фамилия</th>
             <th scope="col">Роль</th>
             <th scope='col'>Группа </th>
-            <th scope="col">Details</th>
+            <th scope="col">Подробнее</th>
+            <th scope="col">Редактировать</th>
         </tr>
         </thead>
         <tbody>
@@ -37,10 +38,13 @@
                     {% endfor %}
                 </td>
                 {% if perms.accounts.view_user %}
-                    <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>
+                    <td class="symbol"><a class='detail hiddenbutton' href="{% url 'accounts:user_detail' use.pk %}"
+                                          style="color: gray">&#8594;</a></td>
+{#                    <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>#}
                 {% endif %}
                 {% if perms.accounts.change_user %}
-                    <a href="{% url 'accounts:user_update' use.pk %}" class="btn btn-primary hiddenbutton">Edit</a></td>
+                    <td class="symbol"><a class='update hiddenbutton' href="{% url 'accounts:user_update' use.pk %}">&#x270E;</a></td>
+{#                    <a href="{% url 'accounts:user_update' use.pk %}" class="btn btn-primary hiddenbutton">Edit</a></td>#}
                 {% endif %}
                 </tr>
         {% endfor %}
