@@ -185,6 +185,7 @@ class UserListView(PermissionRequiredMixin, ListView):
     context_object_name = 'user'
     permission_required = "accounts.view_user"
     permission_denied_message = "Доступ запрещен"
+    ordering = ["last_name"]
 
 
 class UserDeleteView(PermissionRequiredMixin, DeleteView):

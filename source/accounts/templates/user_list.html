@@ -22,7 +22,7 @@
             {% if perms.accounts.view_user %}
                 <tr data-href="{% url 'accounts:user_detail' use.pk %}">
             {% endif %}
-                <th scope="row">{{ forloop.counter }}</th>
+                <th scope="row">{{ forloop.counter0 }}</th>
                 {% if perms.accounts.view_user %}
                     <td data-href="{% url 'accounts:user_detail' use.pk %}">{{ use.first_name }}</td>
                 {% endif %}
