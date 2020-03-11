@@ -110,9 +110,6 @@ class UserForm(forms.ModelForm):
 class UserCreationForm(UserForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
-    username = forms.CharField(label='Имя пользователя', required=True)
-    first_name = forms.CharField(label='Имя', required=True)
-    last_name = forms.CharField(label='Фамилия', required=True)
     email = forms.EmailField(label='Email', required=True)
 
     def clean_password_confirm(self):

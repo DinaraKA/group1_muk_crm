@@ -129,7 +129,8 @@ DATE_INPUT_FORMATS= [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -139,6 +140,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Пример вывода: 16 сентября 2012
+DATE_FORMAT = 'd E Y'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
