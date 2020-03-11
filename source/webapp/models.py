@@ -104,15 +104,6 @@ class Schedule(models.Model):
             return super(Schedule, self).unique_error_message(model_class, unique_check)
 
 
-    # def avg_grade(self):
-    #     grades = Grade.objects.filter(grade=self.pk)
-    #     count = 0
-    #     for grade in grades:
-    #         count += grade.grade
-    #     avg = count / len(grades)
-    #     avg = round(avg, 1)
-    #     return avg
-
 
 def get_full_name(self):
     return self.last_name + ' ' + self.first_name
@@ -150,3 +141,17 @@ class JournalGrade(models.Model):
     def __str__(self):
         return  str(self.grade)
 
+    # def avg_grade(self, group):
+    #     grades = Grade.objects.filter(note_grade__journal_note__group_journal_id=group)
+    #     # grades = JournalGrade.objects.filter(student=student)
+    #     print(grades)
+    #     count = 0
+    #     absent = 0
+    #     for grade in grades:
+    #         print(grade.value,'test')
+    #         if grade.value == 'нб':
+    #             absent += 1
+    #         count += int(grade.value)
+    #         avg = count / len(grades)
+    #         avg_grade = round(avg, 1)
+    #     return avg_grade, absent

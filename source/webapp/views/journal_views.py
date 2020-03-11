@@ -1,3 +1,5 @@
+from django.template.defaulttags import register
+
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
@@ -26,11 +28,55 @@ class GroupJournalDetailView(DetailView):
     context_object_name = 'journal'
 
     def get_context_data(self, **kwargs):
+
         context = super().get_context_data(**kwargs)
+        print(context,'ok')
         context['form'] = JournalNoteForm()
         context['grade_form'] = GradeForm()
         groupjournal = GroupJournal.objects.get(pk=self.kwargs['pk'])
-        journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
+        self.journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
+        ds = groupjournal.discipline
+        print(ds,'to')
+        students = groupjournal.study_group.students.all().order_by('last_name')
+        studentsgr = []
+
+        for st in students:
+            one_student_grades = st.student_grade.filter(journal_note__group_journal__discipline=ds)
+            sum = 0
+            count = 0
+            abs = 0
+            for grade in one_student_grades:
+                print(grade.grade.value, 'u')
+                if grade.grade.value != 'нб':
+                    sum += int(grade.grade.value)
+                    count += 1
+                else:
+                    abs +=1
+            if count != 0:
+                avg=sum/count
+            else:
+                avg = 0
+                    # print(sum,'d', count)
+            studentsgr.append({
+                st.id: {
+                    'avg': avg,
+                    'abs': abs
+                }
+            })
+
+            # return sum
+            print('next_student')
+        print(studentsgr)
+        # test = JournalGrade.avg_grade(self, student=27)
+        # context['avg'] = self.group_st(groupjournal)
+        # test = self.avg_grade()
+        # print(test)
+
+        # for obj in self.journalnotes:
+        #     # test=[]
+        #     # test.append(obj.journalnote_grade.values('grade'))
+        #     print(obj.journalnote_grade.val)
+
         # for object in journalnotes:
         #     obj = object.pk
         #     print(object)
@@ -38,12 +84,65 @@ class GroupJournalDetailView(DetailView):
         #
         #     print(journalgrade)
         context.update({
-            'journalnotes': journalnotes,
+            'journalnotes': self.journalnotes,
+            'avg': studentsgr
             # 'grade': journalgrade
             # 'obj': obj
         })
         return context
 
+    # def avg_grade(self, student, discipline):
+    #     # grades = Grade.objects.filter(note_grade__journal_note__group_journal=group)
+    #     grades = JournalGrade.objects.filter(student=27, journal_note__group_journal__discipline=discipline)
+    #     print(grades)
+    #     count = 0
+    #     if grades:
+    #         for grade in grades.values_list('grade__value', flat=None):
+    #             print(grade)
+    #             count += int(grade)
+    #             print(count,'t')
+    #         return count
+    #         avg = count / len(grades)
+    #         avg_grade = round(avg, 1)
+    #     return avg_grade
+    #
+    # def group_st(self, obj):
+    #     st = obj.study_group.students.all()
+    #     print(st, 'yes')
+    #     for student in st:
+    #         print(student.pk,'s')
+    #         return self.avg_grade(student=student.pk, discipline=obj.discipline)
+
+
+
+    # def avg_grade(self):
+    #     for student in self.groupjournal.study_group.students.all():
+    #
+    #         self.grades = JournalGrade.objects.filter(student_id=student, journal_note__group_journal=self.groupjournal)
+    #         # print(self.grades)
+    #         # return self.grades
+    #     # for obj in self.journalnotes:
+    #     #     # test=[]
+    #     #     # test.append(obj.journalnote_grade.values('grade'))
+    #     #     print(obj.journalnote_grade.values_list('grade'))
+    #     # # grades = JournalGrade.objects.filter(student_id=)
+    # # def avg_grade(self):
+    #     count = 0
+    #     grades = Grade.objects.filter(value=)
+    #     for grade in grades:
+    #         print('yes')
+    #         print(grade)
+    #         # test = Grade.objects.get(value=grade)
+    #         # print(test.value)
+    #         count += int(grade)
+    #         # print(count)
+    #         avg = count / len(grades)
+    #         avg_grade = round(avg, 1)
+    #         # print(avg_grade)
+    #         return avg_grade
+# @register.filter(name='lookup')
+# def lookup(value, arg):
+#     return value[arg]
 
 class GroupJournalCreateView(CreateView):
     model = GroupJournal
@@ -106,76 +205,23 @@ class JournalGradeCreateView(CreateView):
         self.journal_note_pk = self.request.POST.get("student_" + str(self.student_pk), None)
         self.journal_note_obj = JournalNote.objects.get(id=self.journal_note_pk)
         form = self.form_class(self.request.POST)
-
-        # grade_obj = Grade.objects.get(form.save(commit=False))
-        # obj_grade, created = JournalGrade.objects.get_or_create(journal_note=self.journal_note_obj, student=self.student_obj, **kwargs)
-        # print('no')
-        # print(obj_grade)
-        # if created != True:
-        #     if form.is_valid():
-        #         print('yes')
-        #         obj = form.save(commit=False)
-        #         obj.student_id = self.student_pk
-        #         obj.journal_note_id = self.journal_note_pk
-        #         obj.created_by = self.request.user
-        #         obj.save()
-        #         return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
-        # else:
-        #     print('yes')
-        #     form_grade = self.request.POST.get('grade', None)
-        #     grade = Grade.objects.get(value=form_grade)
-        #     obj_grade.grade = grade
-        #     obj_grade.save()
-        #     return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
-        try:
-            obj_grade, _ = JournalGrade.objects.get_or_create(journal_note_id=self.journal_note_pk, student_id=self.student_pk)
-            if obj_grade:
-                form_grade = self.request.POST.get('grade', None)
-                grade = Grade.objects.get(value=form_grade)
-                obj_grade.grade = grade
-                obj_grade.save()
-                return redirect('webapp:groupjournal',pk=self.journal_note_obj.group_journal_id)
-        except:
+        obj_grade = JournalGrade.objects.filter(journal_note_id=self.journal_note_pk,
+                                                student_id=self.student_pk).first()
+        if obj_grade != None:
+            form_grade = self.request.POST.get('grade', None)
+            grade = Grade.objects.get(pk=form_grade)
+            obj_grade.grade = grade
+            obj_grade.save()
+            return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
+        else:
             if form.is_valid():
                 obj = form.save(commit=False)
                 obj.student_id = self.student_pk
                 obj.journal_note_id = self.journal_note_pk
                 obj.created_by = self.request.user
                 obj.save()
-                return redirect('webapp:groupjournal',pk=self.journal_note_obj.group_journal_id)
-        # else:
-        #     print('yes')
-        #     form_grade = self.request.POST.get('grade', None)
-        #     grade = Grade.objects.get(value=form_grade)
-        #     obj_grade.grade = grade
-        #     obj_grade.save()
-        #     return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
+                return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
 
-    # def form_valid(self, form):
-    #     # self.journalnote_pk = self.kwargs.get('pk')
-    #     self.student_pk = self.kwargs.get('pk')
-    #     # self.journal_pk = self.kwargs.get('pk')
-    #     # print(self.journal_pk)
-    #     print(self.student_pk)
-    #     # journalnote = get_object_or_404(JournalNote, pk=self.journalnote_pk)
-    #     journalnote = JournalGrade.objects.filter(student=self.student_pk)
-    #     print(journalnote)
-    #     student = get_object_or_404(User, pk= self.student_pk)
-    #     journalgrade = JournalGrade(
-    #         journal_note = journalnote,
-    #         grade=form.cleaned_data['grade'],
-    #         created_by=self.request.user,
-    #         description=form.cleaned_data['description'],
-    #         student= student
-    #     )
-    #     journalgrade.save()
-    #     # return redirect('webapp:groupjournal', pk=self.journal_pk)
-    #     return HttpResponseRedirect(self.get_success_url())
-
-# class JournalSelectView(TemplateView):
-#     template_name = 'journal/journal_select.html'
-#     form_class = JournalSelectForm
-#
 
 class JournalSelectView(FormView):
     template_name = 'journal/journal_select.html'
@@ -185,4 +231,4 @@ class JournalSelectView(FormView):
         group = form.cleaned_data.get('study_group')
         discipline = form.cleaned_data.get('discipline')
         journal_obj = GroupJournal.objects.get(study_group=group, discipline=discipline)
-        return redirect('webapp:groupjournal',pk=journal_obj.id)
+        return redirect('webapp:groupjournal', pk=journal_obj.id)
