@@ -8,7 +8,7 @@
             {#                data-target="#exampleModal">#}
             {#            Добавить в расписание#}
             {#        </button>#}
-            <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3">+ Добавить в расписание</a>
+            <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton" >+ Добавить в расписание</a>
             {% if teacher %}
                 <h4>Преподаватель: {{ teacher.get }}</h4>
             {% endif %}
@@ -42,13 +42,13 @@
                             {% if request.user == item.teacher or perms.webapp.delete_schedule %}
                                 <h5>Группа:{{ item.group }}</h5>
                                 <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
                             {% elif item.group in groups %}
                                 <h5>Группа:{{ item.group }}</h5>
                                 <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                 <p class="my-0">{{ item.discipline }}</p>
                                 <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}">Очистить</a>
+                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
                                 <hr style="border-color: rgb(66 66 66)">
                             {% endif %}
                             </a>
@@ -58,7 +58,7 @@
                                         <p class="my-0">{{ item.teacher.get_full_name }}</p>
                                         <p class="my-0">{{ item.discipline }}</p>
                                         <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
-                                        <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger"
+                                        <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger hiddenbutton"
                                            style="margin: auto;"><i class="far fa-trash-alt mx-2"></i></a>
                                         <hr style="border-color: rgb(66 66 66)">
                                     </a>

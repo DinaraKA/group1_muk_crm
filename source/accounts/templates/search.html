@@ -28,7 +28,7 @@
 </form>
     <h3>Результаты</h3>
     {% if group_list != None %}
-        {% include 'group/list.html' %}
+        {% include 'partial/group_list.html' %}
     {% else %}
     {% if user %}
         {% if is_paginated %}

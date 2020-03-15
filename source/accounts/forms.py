@@ -246,3 +246,11 @@ class UserFamilyForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'password', 'password_confirm', 'email', 'phone_number']
 
+
+class StudentAddStudyGroupForm(forms.ModelForm):
+    group_name = forms.ModelChoiceField(label='Группа', queryset=StudyGroup.objects.all())
+
+    class Meta:
+        model = StudyGroup
+        fields = ['group_name']
+

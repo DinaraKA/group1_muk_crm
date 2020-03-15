@@ -5,14 +5,14 @@
         <table class="table">
             <h1>Роли</h1>
             {% if perms.webapp.add_role %}
-                <a href="{% url 'accounts:role_add' %}" class="btn btn-success  ml-5 my-3">Добавить роль</a>
+                <a href="{% url 'accounts:role_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">Добавить роль</a>
             {% endif %}
             <thead>
                 <tr>
                    <th scope="col">#</th>
                    <th scope="col">Название</th>
-                   <th class="symbol" scope="col">Редактировать</th>
-                   <th class="symbol" scope="col">Удалить</th>
+                   <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                   <th class="symbol hiddenbutton" scope="col">Удалить</th>
                 </tr>
             </thead>
             {% for role in roles %}
@@ -21,10 +21,10 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ role.name }}</td>
                         {% if perms.webapp.change_role %}
-                            <td class="symbol"><a class='update' href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
+                            <td class="symbol"><a class='update hiddenbutton' href="{% url 'accounts:role_change' role.pk %}">&#x270E;</a></td>
                         {% endif %}
                         {% if perms.webapp.delete_role %}
-                            <td class="symbol"><a class='delete' href="{%  url 'accounts:role_delete' role.pk %}" style="color: red">&times;</a></td>
+                            <td class="symbol"><a class='delete hiddenbutton' href="{%  url 'accounts:role_delete' role.pk %}" style="color: red">&times;</a></td>
                         {% endif %}
                     </tr>
                 </tbody>

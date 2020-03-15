@@ -10,7 +10,7 @@ from accounts.views.admin_position_views import AdminPositionIndexView, AdminPos
     AdminPositionDeleteView
 from accounts.views.role_views import RoleIndexView, RoleCreateView, RoleUpdateView, RoleDeleteView
 from accounts.views.group_views import GroupListView, GroupDetailView, GroupCreateView, GroupUpdateView, \
-    GroupDeleteView
+    GroupDeleteView, GroupStudentAdd
 
 app_name = 'accounts'
 
@@ -51,5 +51,6 @@ urlpatterns = [
     path('group/add/', GroupCreateView.as_view(), name='add_group'),
     path('group/change/<int:pk>/', GroupUpdateView.as_view(), name='change_group'),
     path('group/delete/<int:pk>/', GroupDeleteView.as_view(), name='delete_group'),
+    path('group/student_add/<int:pk>/', GroupStudentAdd.as_view(), name='group_student_add'),
 ]
 
