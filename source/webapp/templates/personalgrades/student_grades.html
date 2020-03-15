@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="table-responsive-lg">
+    <table cellpadding="7" cellspacing="0" rules="all" style="font-size: 13px; border: 1px solid #333; empty-cells: show; border-collapse: separate; border-spacing: 2px;">
+        <h1 class="text-center" style="margin-top: 50px; margin-bottom: 50px; font-weight: bold">Дневник студента {{ student.first_name}}  {{ student.last_name}} группы {{ group }}</h1>
+        <thead>
+        <tr>
+            <th scope="col" style="width: 1%"></th>
+            <th scope="col" class="schedule-days" style='width: 10%; text-align: center; font-size: large; border-bottom: #222222'>Дисциплины</th>
+            <th colspan="20" class="schedule-days" style='width: 20%; text-align: center; border-bottom: #222222;'>Оценки</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for discipline in disciplines %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <th scope="row" style="text-align: center; font-size: larger; font-weight: bold">{{ discipline.discipline }}</th>
+                {% for grade in grades %}
+                    {% if grade.journal_note.group_journal.discipline_id == discipline.discipline_id %}
+                        <td style="border: 1px solid #222222"
+                            class="journal-dates" data-toggle="tooltip" data-placement="top" title='Оценка за- {{ discipline.discipline.name }} {{ grade.journal_note.theme }}'>{{ grade }}</td>
+                    {% else %}
+                        <td>--</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

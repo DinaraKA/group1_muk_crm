@@ -42,8 +42,17 @@
                 {#            <li><a href="#">Выпускники</a></li>#}
                 <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>
+
+                        <div class="dropdown-menu p-0">
+                        {% for user in request.user.family_user.all %}
+                            <a class="dropdown-item" style="background: darkslategrey" href="{% url 'webapp:personal_grades' user.student.pk %}">{{ user.student }}</a>
+                        {% endfor %}
+                 {% endif %}
+
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a></li>
                 {% endif %}
                 {% block menu %}{% endblock %}
             </ul>
