@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% counter %}
 {% block content %}
     <div class="table-responsive-lg">
         <table class="table table-bordered schedule" style="font-size: 13px">
@@ -20,8 +19,8 @@
                         title='Запись создал(а)-{{ journalnote.created_by }}
 {{ journalnote.theme }}'>{{ journalnote.date }}</th>
                 {% endfor %}
-                <th scope="col" class="schedule-days" style='width: 7%'><b>Средняя оценка</b></th>
-                <th scope="col" class="schedule-days" style='width: 7%'><b>Пропуски</b></th>
+                <th scope="col" class="schedule-days avg" style='width: 9%'><b>Ср. оценка</b></th>
+                <th scope="col" class="schedule-days abs" style='width: 7%'><b>Пропуски</b></th>
             </tr>
             </thead>
             <tbody>
@@ -76,13 +75,8 @@
                             </div>
                         </td>
                     {% endfor %}
-{#                    {% for key, value in avg.items %}#}
-{#                        {{ avg.values}}#}
-                    {{ forloop.counter }}
-                {{ index }}
-                        <td>{% for key, value in avg.0.items %}{{ value.avg }}{% endfor %}</td>
-{#                        <td>{{ avg| }}</td>#}
-{#                    {% endfor %}#}
+                    <td class="avg">{% for d in student_grades %}{% for k, v in d.items %}{% if k == student.pk %}{{ v.avg }}{% endif %}{% endfor %}{% endfor %}</td>
+                    <td class="abs">{% for d in student_grades %}{% for k, v in d.items %}{% if k == student.pk %}{{ v.abs }}{% endif %}{% endfor %}{% endfor %}</td>
                 </tr>
             {% endfor %}
             </tbody>

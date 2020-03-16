@@ -28,121 +28,40 @@ class GroupJournalDetailView(DetailView):
     context_object_name = 'journal'
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
-        print(context,'ok')
         context['form'] = JournalNoteForm()
         context['grade_form'] = GradeForm()
         groupjournal = GroupJournal.objects.get(pk=self.kwargs['pk'])
-        self.journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
-        ds = groupjournal.discipline
-        print(ds,'to')
+        journalnotes = JournalNote.objects.filter(group_journal=groupjournal).order_by('date')
         students = groupjournal.study_group.students.all().order_by('last_name')
-        studentsgr = []
-
-        for st in students:
-            one_student_grades = st.student_grade.filter(journal_note__group_journal__discipline=ds)
+        student_values = []
+        for student in students:
+            one_student_grades = student.student_grade.filter(journal_note__group_journal__discipline=groupjournal.discipline)
             sum = 0
             count = 0
             abs = 0
             for grade in one_student_grades:
-                print(grade.grade.value, 'u')
                 if grade.grade.value != 'нб':
                     sum += int(grade.grade.value)
                     count += 1
                 else:
                     abs +=1
             if count != 0:
-                avg=sum/count
+                avg=round(sum/count,2)
             else:
                 avg = 0
-                    # print(sum,'d', count)
-            studentsgr.append({
-                st.id: {
+            student_values.append({
+                student.id: {
                     'avg': avg,
                     'abs': abs
                 }
             })
-
-            # return sum
-            print('next_student')
-        print(studentsgr)
-        # test = JournalGrade.avg_grade(self, student=27)
-        # context['avg'] = self.group_st(groupjournal)
-        # test = self.avg_grade()
-        # print(test)
-
-        # for obj in self.journalnotes:
-        #     # test=[]
-        #     # test.append(obj.journalnote_grade.values('grade'))
-        #     print(obj.journalnote_grade.val)
-
-        # for object in journalnotes:
-        #     obj = object.pk
-        #     print(object)
-        #     journalgrade = JournalGrade.objects.filter(journal_note=obj)
-        #
-        #     print(journalgrade)
         context.update({
-            'journalnotes': self.journalnotes,
-            'avg': studentsgr
-            # 'grade': journalgrade
-            # 'obj': obj
+            'journalnotes': journalnotes,
+            'student_grades': student_values
         })
         return context
 
-    # def avg_grade(self, student, discipline):
-    #     # grades = Grade.objects.filter(note_grade__journal_note__group_journal=group)
-    #     grades = JournalGrade.objects.filter(student=27, journal_note__group_journal__discipline=discipline)
-    #     print(grades)
-    #     count = 0
-    #     if grades:
-    #         for grade in grades.values_list('grade__value', flat=None):
-    #             print(grade)
-    #             count += int(grade)
-    #             print(count,'t')
-    #         return count
-    #         avg = count / len(grades)
-    #         avg_grade = round(avg, 1)
-    #     return avg_grade
-    #
-    # def group_st(self, obj):
-    #     st = obj.study_group.students.all()
-    #     print(st, 'yes')
-    #     for student in st:
-    #         print(student.pk,'s')
-    #         return self.avg_grade(student=student.pk, discipline=obj.discipline)
-
-
-
-    # def avg_grade(self):
-    #     for student in self.groupjournal.study_group.students.all():
-    #
-    #         self.grades = JournalGrade.objects.filter(student_id=student, journal_note__group_journal=self.groupjournal)
-    #         # print(self.grades)
-    #         # return self.grades
-    #     # for obj in self.journalnotes:
-    #     #     # test=[]
-    #     #     # test.append(obj.journalnote_grade.values('grade'))
-    #     #     print(obj.journalnote_grade.values_list('grade'))
-    #     # # grades = JournalGrade.objects.filter(student_id=)
-    # # def avg_grade(self):
-    #     count = 0
-    #     grades = Grade.objects.filter(value=)
-    #     for grade in grades:
-    #         print('yes')
-    #         print(grade)
-    #         # test = Grade.objects.get(value=grade)
-    #         # print(test.value)
-    #         count += int(grade)
-    #         # print(count)
-    #         avg = count / len(grades)
-    #         avg_grade = round(avg, 1)
-    #         # print(avg_grade)
-    #         return avg_grade
-# @register.filter(name='lookup')
-# def lookup(value, arg):
-#     return value[arg]
 
 class GroupJournalCreateView(CreateView):
     model = GroupJournal
@@ -151,14 +70,6 @@ class GroupJournalCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('webapp:groupjournals')
-
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data()
-    #     context.update({
-    #         'groups': StudyGroup.objects.all(),
-    #         'disciplines': Discipline.objects.all()
-    #     })
-    #     return context
 
 
 class GroupJournalUpdateView(UpdateView):
@@ -190,7 +101,6 @@ class JournalNoteCreateView(CreateView):
         )
         journalnote.save()
         return redirect('webapp:groupjournal', pk=self.journal_pk)
-        # return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('webapp:groupjournal', kwargs={"pk": self.journal_pk})

@@ -270,3 +270,9 @@ h3 {
 .journal-dates{
     background-color: lightgray;
 }
+.avg{
+    background-color: lightgreen;
+}
+.abs{
+    background-color: lightcoral;
+}
