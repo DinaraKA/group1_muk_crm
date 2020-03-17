@@ -4,7 +4,7 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Журналы групп по дисциплинам</h2>
+            <h1>Журналы групп по дисциплинам</h1>
             <a href="{% url 'webapp:add_groupjournal' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Создать журнал</a>
             <thead>
                 <tr>

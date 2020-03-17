@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
+# from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
 from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus

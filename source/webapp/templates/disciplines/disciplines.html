@@ -4,7 +4,7 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Дисциплины</h2>
+            <h1>Дисциплины</h1>
             <a href="{% url 'webapp:add_discipline' %}" class="btn btn-success  m-4 hiddenbutton">+ Добавить дисциплину</a>
             <thead>
                 <tr>
