@@ -46,7 +46,7 @@ class GradeViewTest(TestCase):
 
     def test_created_grade(self):
         self.driver.get('http://localhost:8000/grades/')
-        self.driver.find_element_by_class_name('btn-success')
+        self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('value').send_keys('2')
         self.driver.find_element_by_name('description').send_keys('СreateTest')
         try:

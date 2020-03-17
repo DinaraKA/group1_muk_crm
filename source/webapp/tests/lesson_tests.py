@@ -1,12 +1,8 @@
 from datetime import datetime
 
-from selenium.webdriver import Chrome
-
 from django.test import TestCase
-from django.urls import reverse, resolve
 
 from webapp.models import Lesson
-from webapp.views import LessonListView, LessonCreateView
 
 
 class LessonModelTest(TestCase):
@@ -43,70 +39,3 @@ class LessonModelTest(TestCase):
         self.assertEquals(field_label, 'Время начала')
         field_label = lesson._meta.get_field('end_time').verbose_name
         self.assertEquals(field_label, 'Время окончания')
-
-
-class LessonViewTest(TestCase):
-    def setUp(self):
-        self.driver = Chrome()
-
-    def tearDown(self):
-        self.driver.close()
-
-    def test_list_lesson(self):
-        self.driver.get('http://localhost:8000/lessons/all/')
-        assert self.driver.current_url == 'http://localhost:8000/lessons/all/'
-
-    def test_created_lesson(self):
-        self.driver.get('http://localhost:8000/lessons/all/')
-        self.driver.find_element_by_class_name('btn-success').click()
-        self.driver.find_element_by_name('index').send_keys(1)
-        self.driver.find_element_by_name('is_saturday').send_keys(False)
-        self.driver.find_element_by_name('start_time').send_keys('12:12:00')
-        self.driver.find_element_by_name('end_time').send_keys('14:14:00')
-        try:
-            self.driver.find_element_by_class_name('btn-success').click()
-            assert self.driver.current_url == 'http://localhost:8000/lessons/all/'
-        except:
-            assert self.driver.find_element_by_tag_name('h3')
-
-    def test_updated_lesson(self):
-        self.driver.get('http://localhost:8000/lessons/all/')
-        self.driver.find_element_by_class_name('update').click()
-        self.driver.find_element_by_name('index').clear()
-        self.driver.find_element_by_name('is_saturday').click()
-        self.driver.find_element_by_name('start_time').clear()
-        self.driver.find_element_by_name('end_time').clear()
-        self.driver.find_element_by_name('index').send_keys(2)
-        self.driver.find_element_by_name('is_saturday').send_keys(True)
-        self.driver.find_element_by_name('start_time').send_keys('13:13:00')
-        self.driver.find_element_by_name('end_time').send_keys('15:15:00')
-        try:
-            self.driver.find_element_by_class_name('btn-primary').click()
-            assert self.driver.current_url == 'http://127.0.0.1:8000/lessons/all/'
-        except:
-            assert self.driver.find_element_by_tag_name('h3')
-
-    def test_deleted_lesson(self):
-        self.driver.get('http://127.0.0.1:8000/lessons/delete/1')
-        self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/lessons/all/'
-
-
-class LessonUrlTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        Lesson.objects.create(
-            index=1,
-            is_saturday=False,
-            start_time='12:12:00',
-            end_time='14:14:00'
-        )
-
-    def test_list_url_is_resolved(self):
-        url = reverse('webapp:lessons')
-        self.assertEquals(resolve(url).func.view_class, LessonListView)
-
-    def test_create_url_is_resolved(self):
-        url = reverse('webapp:lesson_create')
-        self.assertEquals(resolve(url).func.view_class, LessonCreateView)

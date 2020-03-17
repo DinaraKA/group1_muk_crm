@@ -3,7 +3,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from selenium.webdriver import Chrome
 from webapp.models import Journal, Discipline, Grade, Theme
 
 
@@ -77,45 +76,3 @@ class JournalModelTest(TestCase):
         journal = Journal.objects.get(id=1)
         discipline_field = journal._meta.get_field('grade').verbose_name
         self.assertEquals(discipline_field, 'Оценка')
-
-
-class JournalSeleniumViewTest(TestCase):
-    def setUp(self):
-        self.driver = Chrome()
-
-    def tearDown(self):
-        self.driver.close()
-
-    def test_list_journal(self):
-        self.driver.get('http://localhost:8000/journal/')
-        assert self.driver.current_url == 'http://localhost:8000/journal/'
-
-    def test_created_journal(self):
-        self.driver.get('http://localhost:8000/journal/')
-        self.driver.find_element_by_id('add_grade').click()
-        self.driver.find_element_by_name('discipline').click()
-        self.driver.find_element_by_name('discipline').send_keys('Русский Язык')
-        self.driver.find_element_by_name('date').send_keys('2020-06-06')
-        self.driver.find_element_by_name('theme').click()
-        self.driver.find_element_by_name('theme').send_keys('Test')
-        self.driver.find_element_by_name('grade').click()
-        self.driver.find_element_by_name('grade').send_keys('5')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        print(self.driver.current_url)
-        assert self.driver.current_url == 'http://localhost:8000/journal/'
-
-    def test_updated_journal(self):
-        self.driver.get('http://127.0.0.1:8000/journal/')
-        self.driver.find_element_by_class_name('update').click()
-        self.driver.find_element_by_name('discipline').click()
-        self.driver.find_element_by_name('discipline').send_keys('Право')
-        self.driver.find_element_by_name('date').send_keys('2020-05-05')
-        self.driver.find_element_by_name('theme').click()
-        self.driver.find_element_by_name('theme').send_keys('Test')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/journal/'
-
-    def test_deleted_journal(self):
-        self.driver.get('http://127.0.0.1:8000/journal/delete/1/')
-        self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/journal/'

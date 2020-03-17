@@ -48,10 +48,10 @@ class StatusViewTest(TestCase):
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        self.driver.find_element_by_class_name('btn-outline-primary').click()
+        self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         try:
-            self.driver.find_element_by_class_name('btn-primary').click()
+            self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/accounts/statuses/'
         except:
             assert self.driver.find_element_by_tag_name('h3')

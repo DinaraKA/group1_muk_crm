@@ -57,8 +57,8 @@ class NewsViewTest(TestCase):
         self.driver.close()
 
     def test_list_news(self):
-        self.driver.get('http://localhost:8000/news/all')
-        assert self.driver.current_url == 'http://localhost:8000/news/all'
+        self.driver.get('http://localhost:8000/news/all/')
+        assert self.driver.current_url == 'http://localhost:8000/news/all/'
 
     def test_detail_news(self):
         self.driver.get('http://localhost:8000/news/all/')

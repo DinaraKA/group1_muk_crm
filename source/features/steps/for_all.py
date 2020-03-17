@@ -11,6 +11,7 @@ def enter_text(context, text, choice):
 def enter_text(context, text, field):
     context.browser.find_element_by_name(field).send_keys(text)
 
+
 @step('Я ввожу фото "{photo}" в поле "{field}"')
 def enter_text(context, photo, field):
     context.browser.find_element_by_xpath(field).send_keys(photo)
@@ -23,15 +24,30 @@ def submit_form(context):
 
 @then('Я нажимаю на кнопку "Обновить"')
 def click_on_update(context):
+    context.browser.find_element_by_class_name('btn-primary').click()
+
+
+@then('Я нажимаю на кнопку "Обновить-2"')
+def click_on_update(context):
     context.browser.find_element_by_class_name('update').click()
 
 
-@step('Я очищаю поле "{name}"')
-def clear_text_field(context, name):
-    context.browser.find_element_by_name('name').clear()
+@then('Я нажимаю на кнопку "Создать"')
+def click_on_update(context):
+    context.browser.find_element_by_class_name('btn-success').click()
+
+
+@step('Я очищаю поле "{field}"')
+def clear_text_field(context, field):
+    context.browser.find_element_by_name(field).clear()
 
 
 @then('Я нажимаю на кнопку "Удалить"')
+def click_on_update(context):
+    context.browser.find_element_by_class_name('btn-danger').click()
+
+
+@then('Я нажимаю на кнопку "Удалить-2"')
 def click_on_update(context):
     context.browser.find_element_by_class_name('delete').click()
 
@@ -45,3 +61,8 @@ def submit_form(context):
 def see_error_with_text(context, text):
     error = context.browser.find_element_by_tag_name('h3')
     assert error.text == text
+
+
+@then('Я перехожу на страницу Детального просмотра')
+def see_error_with_text(context):
+    context.browser.find_element_by_class_name('link').click()
