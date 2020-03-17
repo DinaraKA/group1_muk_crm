@@ -26,7 +26,7 @@
         </button>
         <div class="container collapse navbar-collapse" id="navbarNav">
             <ul class="menu navbar-nav text-uppercase">
-                {% if request.user|has_group:'principal_staff' %}
+                {% if request.user|has_group:'principal_staff' or request.user.is_staff %}
 {#                {% if request.user.is_staff %}#}
                     <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
                 {% endif %}
