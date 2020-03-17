@@ -21,16 +21,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = True
+# DEBUG = int(os.environ.get("DEBUG", default=0))
 
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -91,27 +91,27 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': DB_NAME,
-#         'USER': DB_USER,
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': DB_HOST,
-#         'PORT': DB_PORT,
-#     }
-# }
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql'),
-        "NAME": os.environ.get("SQL_DATABASE", DB_NAME),
-        "USER": os.environ.get("SQL_USER", DB_USER),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", DB_PASSWORD),
-        "HOST": os.environ.get("SQL_HOST", DB_HOST),
-        "PORT": os.environ.get("SQL_PORT", DB_PORT),
-        # "PORT": os.environ.get("SQL_PORT", "5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql'),
+#         "NAME": os.environ.get("SQL_DATABASE", DB_NAME),
+#         "USER": os.environ.get("SQL_USER", DB_USER),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD", DB_PASSWORD),
+#         "HOST": os.environ.get("SQL_HOST", DB_HOST),
+#         "PORT": os.environ.get("SQL_PORT", DB_PORT),
+#         # "PORT": os.environ.get("SQL_PORT", "5432"),
+#     }
+# }
 
 
 

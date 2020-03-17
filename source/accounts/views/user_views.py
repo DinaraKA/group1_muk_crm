@@ -1,7 +1,6 @@
 import json
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.models import User
-from django.core import serializers
+from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -17,6 +16,21 @@ from django.utils.http import urlencode
 from django.db.models import Q
 from ajax_search.forms import SearchForm
 
+# from django import template
+# register = template.Library()
+#
+#
+# # @register.filter(name='is_group')
+# # def is_group(user, group_name):
+# #     try:
+# #         group = Group.objects.get(name=group_name)
+# #         return group in user.groups.all()
+# #     except Group.DoesNotExist:
+# #         return False
+#
+# @register.filter
+# def has_group(user, group_name):
+#     return user.groups.filter(name=group_name).exists()
 
 
 def login_view(request, *args, **kwargs):
@@ -85,7 +99,10 @@ def register_view(request, *args, **kwargs):
             profile.role.set(roles)
             for role in roles:
                 if role.name == "Учебная часть":
-                    user.is_staff = True
+                    # user.is_staff = True
+                    group = Group.objects.get(name='principal_staff')
+                    user.groups.add(group)
+
                     user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
