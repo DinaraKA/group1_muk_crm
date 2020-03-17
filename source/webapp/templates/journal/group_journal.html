@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="table-responsive-lg">
+    <div class="table-container">
         <table class="table table-bordered schedule" style="font-size: 13px">
             <h1>Журнал группы {{ journal.study_group.name }} по дисциплине - {{ journal.discipline.name }}</h1>
             <h4>Преподаватель: {{ journal.discipline.teacher.get }}</h4>
             <div class="row">
-
                 <form action="{% url 'webapp:add_journalnote' journal.pk %}" method="POST" id="add_lesson">
                     <div class="col-9">{% include 'partial/form.html' %}</div>
-                    <div class="col-3"><a class="text-center hiddenbutton"><input type="submit" value="+ Добавить занятие"
-                                                                     class="btn btn-success ml-5 my-5 hiddenbutton"></a></div>
+                    <div class="col-lg-3 col-sm-9"><a class="text-center hiddenbutton"><input type="submit" value="+ Добавить занятие"
+                                                                     class="btn btn-success ml-5 my-5"></a></div>
                 </form>
             </div>
             <thead>
@@ -20,23 +19,28 @@
                         title='Запись создал(а)-{{ journalnote.created_by }}
 {{ journalnote.theme }}'>{{ journalnote.date }}</th>
                 {% endfor %}
+                <th scope="col" class="schedule-days avg" style='width: 9%'><b>Ср. оценка</b></th>
+                <th scope="col" class="schedule-days abs" style='width: 7%'><b>Пропуски</b></th>
             </tr>
             </thead>
             <tbody>
-            {% for student in journal.study_group.students.all %}
+            {% for student in journal.study_group.students.all|dictsort:'last_name' %}
                 <tr>
                     <th scope="row">{{ student }}</th>
                     {% for journalnote in journalnotes %}
-                        <td style="text-align: center">
-                            {#                        {{ object }}#}
-                            {#                        {% if not object %}#}
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-toggle="modal"
-                                    data-target="#exampleModal" href="{% url 'webapp:add_student_grade'  student.pk %}"
-                                    value="{{ journalnote.pk }}" style="background: transparent">+
-                            </button>
+                        <td style="text-align: left; width: 10px">
+                            <a type="button" class="btn btn-success" data-toggle="modal"
+                               data-target="#student_{{ student.pk }}_journal_{{ journalnote.pk }}">
+                                {% for grade in journalnote.journalnote_grade.all %}
+                                    {% if grade.student.pk == student.pk %}
+                                        <p data-toggle="tooltip" data-placement="top"
+                        title='Описание:{{ grade.description }}'>{{ grade }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </a>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="student_{{ student.pk }}_journal_{{ journalnote.pk }}"
+                                 tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -47,16 +51,21 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form id="gradeform" action="{% url 'webapp:add_student_grade' student.pk %}" method="post">
+                                        <h4 class="px-3">Студент: {{ student }}</h4>
+                                        <form id="gradeform" action="{% url 'webapp:add_student_grade' student.pk %}"
+                                              method="post">
                                             {% csrf_token %}
                                             <div class="modal-body">
                                                 {% for field in grade_form %}
                                                     <div class="row mt-5">
-                                                        <p class="col-3"><label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label></p>
+                                                        <p class="col-3"><label
+                                                                for="{{ field.id_for_label }}">{{ field.label }}
+                                                            {% if field.field.required %}*{% endif %}</label></p>
                                                         <p class="col-9 d-flex">{{ field }}</p>
                                                     </div>
                                                 {% endfor %}
-                                                <input type="hidden" name="journal_note_pk" value="{{ journalnote.pk }}">
+                                                <input type="hidden" name="student_{{ student.pk }}"
+                                                       value="{{ journalnote.pk }}">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-success">Сохранить</button>
@@ -67,20 +76,11 @@
                             </div>
                         </td>
                     {% endfor %}
+                    <td class="avg">{% for item in student_grades %}{% for key, value in item.items %}{% if key == student.pk %}{{ value.avg }}{% endif %}{% endfor %}{% endfor %}</td>
+                    <td class="abs">{% for item in student_grades %}{% for key, value in item.items %}{% if key == student.pk %}{{ value.abs }}{% endif %}{% endfor %}{% endfor %}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-    {% block scripts %}
-        {#    <script>#}
-        {#        $("#id_grade").change(function(){#}
-        {#            console.log($('#id_grade option:selected').length)#}
-        {#console.log($(this).children(":selected").length)#}
-        {#        })#}
-        {##}
-        {##}
-        {#    </script>#}
-    {% endblock %}
-
 {% endblock %}

@@ -29,7 +29,7 @@ h3 {
     /*left: 0;*/
     /*font-size: 0;*/
     /*box-sizing: border-box;*/
-    padding: 20px 5px;
+    padding: 0 5px;
 }
 
 .header .navbar-dark .navbar-nav .nav-link{
@@ -66,13 +66,8 @@ h3 {
     /*!*position: relative;*!*/
     /*line-height: 1.5;*/
     padding-top: 15px;
-<<<<<<< HEAD
-    margin-right: 7px;
-=======
     margin-right: 47px;
->>>>>>> development
     float: left;
-    font-family: Arial, sans-serif;
 
 }
 
@@ -241,10 +236,10 @@ h3 {
     background: lightgray;
     width: 10%;
 }
-.schedule{
-    word-wrap: break-word;
-    table-layout: fixed;
-}
+/*.schedule{*/
+    /*word-wrap: break-word;*/
+    /*table-layout: fixed;*/
+/*}*/
 .label-form{
     display: inline-flex;
 }
@@ -283,4 +278,15 @@ h3 {
 .journal-dates{
     background-color: lightgray;
 }
-
+.avg{
+    background-color: lightgreen;
+}
+.abs{
+    background-color: lightcoral;
+}
+.table-container {
+  width: 100%;
+  overflow-y: auto;
+  /*_overflow: auto;*/
+  margin: 0 0 1em;
+}

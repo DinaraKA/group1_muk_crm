@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Protected Error{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container" style="justify-content: center; display: flex; flex-direction: column">
+            <h3>Вы не можете удалить данную модель</h3>
+            <button class="btn btn-primary" onclick="goBack()" style="width: 70px; margin: auto">Назад</button>
+            <script>
+                function goBack() {
+                window.history.back();
+                }
+            </script>
+        </div>
+    </div>
+{% endblock %}

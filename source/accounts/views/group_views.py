@@ -1,6 +1,8 @@
+from django.db.models import ProtectedError
+
 from accounts.forms import GroupForm, StudentAddStudyGroupForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from accounts.models import StudyGroup, User
+from accounts.models import StudyGroup, User, Profile, AdminPosition
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
@@ -31,42 +33,56 @@ class GroupDetailView(PermissionRequiredMixin, DetailView):
     permission_denied_message = "Доступ запрещен"
 
 
-class GroupCreateView(PermissionRequiredMixin, CreateView):
+class GroupCreateView(CreateView):
     model = StudyGroup
     template_name = 'add.html'
-    # fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
-    permission_required = "accounts.add_group"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.add_group"
+    # permission_denied_message = "Доступ запрещен"
     form_class = GroupForm
+    context_object_name = 'group'
 
     def form_valid(self, form):
-        text = form.cleaned_data['name']
-        if StudyGroup.objects.filter(name=text.capitalize()):
+        self.text = form.cleaned_data['name']
+        if StudyGroup.objects.filter(name=self.text.capitalize()):
             messages.error(self.request, 'Объект с таким названием уже существует!')
             return render(self.request, 'add.html', {})
         else:
-            group = StudyGroup(name=text.capitalize(),
-                               group_leader=form.cleaned_data['group_leader'],
-                               head_teaher=form.cleaned_data['head_teacher'],
-                               started_at=form.cleaned_data['started_at'])
-            students = form.cleaned_data['students']
-            print(students)
-            group.save()
-            group.students.set(students)
-            # group.head_teaher.set(form.cleaned_data['head_teacher'])
+            self.create_group(form)
         return self.get_success_url()
+
+    def create_group(self, form):
+        group = StudyGroup(name=self.text.capitalize(),
+                           group_leader=form.cleaned_data['group_leader'],
+                           head_teaher=form.cleaned_data['head_teacher'],
+                           started_at=form.cleaned_data['started_at'])
+        students = form.cleaned_data['students']
+        group.save()
+        self.set_position_head_teacher(group)
+        self.set_position_group_leader(group)
+        group.students.set(students)
+        return group
+
+    def set_position_head_teacher(self, obj):
+        profile_tc = Profile.objects.get(user=User.objects.get(id=obj.head_teaher.pk))
+        profile_tc.admin_position = AdminPosition.objects.get(name='Куратор')
+        return profile_tc.save()
+
+    def set_position_group_leader(self, obj):
+        profile_st = Profile.objects.get(user=User.objects.get(id=obj.group_leader.pk))
+        profile_st.admin_position = AdminPosition.objects.get(name='Староста')
+        return profile_st.save()
 
     def get_success_url(self):
         return redirect('accounts:groups')
 
 
-class GroupUpdateView(PermissionRequiredMixin, UpdateView):
+
+class GroupUpdateView(UpdateView):
     model = StudyGroup
     template_name = 'change.html'
-    fields = ['name', 'students', 'group_leader', 'head_teaher', 'started_at']
-    permission_required = "accounts.change_group"
-    permission_denied_message = "Доступ запрещен"
-    # form_class = GroupForm
+    form_class = GroupForm
+    # permission_required = "accounts.change_group"
+    # permission_denied_message = "Доступ запрещен"
 
     def get_success_url(self):
         return reverse('accounts:groups')
@@ -78,6 +94,12 @@ class GroupDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('accounts:groups')
     permission_required = "accounts.delete_group"
     permission_denied_message = "Доступ запрещен"
+
+    def get(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except ProtectedError:
+            return render(request, 'error.html')
 
 
 class GroupStudentAdd(UpdateView):

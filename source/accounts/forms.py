@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
+# from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
 from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus
@@ -185,6 +185,8 @@ class AdminPositionForm(forms.ModelForm):
 
 class GroupForm(forms.ModelForm):
     head_teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
+    students = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name='Студент'), label='Студенты')
+    group_leader = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Студент'), label='Староста')
 
     class Meta:
         model = StudyGroup
