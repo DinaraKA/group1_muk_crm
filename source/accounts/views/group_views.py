@@ -1,12 +1,12 @@
 from accounts.forms import GroupForm, StudentAddStudyGroupForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from accounts.models import StudyGroup, User
+from accounts.models import StudyGroup, User, Profile, AdminPosition
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+
 
 class GroupListView(PermissionRequiredMixin, ListView):
     template_name = 'group/list.html'
@@ -34,10 +34,10 @@ class GroupDetailView(PermissionRequiredMixin, DetailView):
 class GroupCreateView(PermissionRequiredMixin, CreateView):
     model = StudyGroup
     template_name = 'add.html'
-    # fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
+    fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
     permission_required = "accounts.add_group"
     permission_denied_message = "Доступ запрещен"
-    form_class = GroupForm
+    # form_class = GroupForm
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -53,7 +53,6 @@ class GroupCreateView(PermissionRequiredMixin, CreateView):
             print(students)
             group.save()
             group.students.set(students)
-            # group.head_teaher.set(form.cleaned_data['head_teacher'])
         return self.get_success_url()
 
     def get_success_url(self):
@@ -66,10 +65,37 @@ class GroupUpdateView(PermissionRequiredMixin, UpdateView):
     fields = ['name', 'students', 'group_leader', 'head_teaher', 'started_at']
     permission_required = "accounts.change_group"
     permission_denied_message = "Доступ запрещен"
-    # form_class = GroupForm
+
+    def form_valid(self, form):
+        self.text = form.cleaned_data['name']
+        self.update_group(form)
+        return self.get_success_url()
+
+    def update_group(self, form):
+        print(self.kwargs)
+        group = StudyGroup.objects.get(pk=self.kwargs.get('pk'))
+        students = form.cleaned_data['students']
+        group.group_leader = form.cleaned_data['group_leader']
+        group.head_teaher = form.cleaned_data['head_teaher']
+        group.started_at = form.cleaned_data['started_at']
+        self.set_position_head_teacher(group)
+        self.set_position_group_leader(group)
+        group.save()
+        group.students.set(students)
+        return group
+
+    def set_position_head_teacher(self, obj):
+        profile_tc = Profile.objects.get(user=User.objects.get(id=obj.head_teaher.pk))
+        profile_tc.admin_position = AdminPosition.objects.get(name='Куратор')
+        return profile_tc.save()
+
+    def set_position_group_leader(self, obj):
+        profile_st = Profile.objects.get(user=User.objects.get(id=obj.group_leader.pk))
+        profile_st.admin_position = AdminPosition.objects.get(name='Староста')
+        return profile_st.save()
 
     def get_success_url(self):
-        return reverse('accounts:groups')
+        return redirect('accounts:groups')
 
 
 class GroupDeleteView(PermissionRequiredMixin, DeleteView):
@@ -112,6 +138,5 @@ class GroupStudentAdd(UpdateView):
 
     def get_success_url(self):
         return redirect('accounts:user_detail', pk=self.student_pk)
-        # return redirect('accounts:groups')
 
 

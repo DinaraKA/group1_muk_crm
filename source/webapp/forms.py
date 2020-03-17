@@ -5,7 +5,6 @@ from django.core.exceptions import NON_FIELD_ERRORS
 from bootstrap_datepicker_plus import DatePickerInput
 
 
-
 class ThemeForm(forms.ModelForm):
     class Meta:
         model = Theme
@@ -38,7 +37,7 @@ class ScheduleForm(forms.ModelForm):
 
 
 class FullSearchForm(forms.Form):
-    start_date = forms.DateField(label='введите дату начала', widget=DatePickerInput(format='%d/%m/%Y'), required=False)
+    start_date = forms.DateField(label='введите дату начала', widget=DatePickerInput(format='%d/%m/%Y', options={"format": "DD/MM/YYYY", "locale": "ru"}), required=False)
     end_date = forms.DateField(label='введите дату окончания', widget=DatePickerInput(format='%d/%m/%Y'), required=False)
     discipline = forms.ModelChoiceField(required=False, queryset=Discipline.objects.all(), label="По дисциплине",  widget=forms.Select
                            (attrs={'class':'form-control'}))
