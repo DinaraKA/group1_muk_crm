@@ -68,7 +68,7 @@ class AuditoryViewTest(TestCase):
         self.driver.get('http://localhost:8000/auditories/')
         assert self.driver.current_url == 'http://localhost:8000/auditories/'
 
-    def test_created_auditory(self):
+o    def test_created_auditory(self):
         self.driver.get('http://localhost:8000/auditories/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
@@ -99,4 +99,4 @@ class AuditoryViewTest(TestCase):
         self.driver.get('http://127.0.0.1:8000/auditories/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
+        assert self.driver.current_url == 'http://localhost:8000/auditories/'

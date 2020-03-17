@@ -13,7 +13,7 @@ class StatusModelTest(TestCase):
     def test_verbose_name(self):
         status = Status.objects.get(id=1)
         field_label = status._meta.get_field('name').verbose_name
-        self.assertEquals(field_label, 'Статус')
+        self.assertEquals(field_label, 'Название')
 
     def test_max_length(self):
         status = Status.objects.get(id=1)

@@ -13,7 +13,7 @@ class SocialStatusModelTest(TestCase):
     def test_name_label(self):
         social_status = SocialStatus.objects.get(id=1)
         field_label = social_status._meta.get_field('name').verbose_name
-        self.assertEquals(field_label, 'Социальный статус')
+        self.assertEquals(field_label, 'Название')
 
     def test_name_max_length(self):
         social_status = SocialStatus.objects.get(id=1)

@@ -13,7 +13,7 @@ class RoleModelTest(TestCase):
     def test_verbose_name(self):
         role = Role.objects.get(id=1)
         field_label = role._meta.get_field('name').verbose_name
-        self.assertEquals(field_label, 'Роль')
+        self.assertEquals(field_label, 'Название')
 
     def test_max_length(self):
         role = Role.objects.get(id=1)

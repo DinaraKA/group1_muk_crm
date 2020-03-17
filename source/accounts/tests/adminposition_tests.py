@@ -17,7 +17,7 @@ class AdminPositionModelTest(TestCase):
     def test_verbose_name(self):
         position = AdminPosition.objects.get(id=1)
         field_label = position._meta.get_field('name').verbose_name
-        self.assertEquals(field_label, 'Должность')
+        self.assertEquals(field_label, 'Название')
 
     def test_verbose_name_plural(self):
         self.assertEqual(str(AdminPosition._meta.verbose_name_plural), "Должности")

@@ -50,7 +50,7 @@ class GradeViewTest(TestCase):
         self.driver.find_element_by_name('value').send_keys('2')
         self.driver.find_element_by_name('description').send_keys('СreateTest')
         try:
-            self.driver.find_element_by_class_name('btn-primary').click()
+            self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/grades/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
