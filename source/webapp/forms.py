@@ -18,7 +18,9 @@ class ScheduleForm(forms.ModelForm):
         lesson = self.cleaned_data["lesson"]
         lessons = Lesson.objects.filter(is_saturday=True)
         if day == 'Saturday':
-            if lesson not in lessons:
+            print(day)
+            if not lesson in lessons:
+                print(lesson)
                 raise forms.ValidationError('В субботу нет' + " " + str(lesson.index) + 'й' + " " + "пары" )
 
 
