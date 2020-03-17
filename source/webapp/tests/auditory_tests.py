@@ -68,7 +68,7 @@ class AuditoryViewTest(TestCase):
         self.driver.get('http://localhost:8000/auditories/')
         assert self.driver.current_url == 'http://localhost:8000/auditories/'
 
-o    def test_created_auditory(self):
+    def test_created_auditory(self):
         self.driver.get('http://localhost:8000/auditories/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
