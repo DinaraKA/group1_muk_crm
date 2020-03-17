@@ -40,23 +40,31 @@
                     <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>
 {#                {% elif request.user.profile.role.get == 'Преподаватель' %}#}
 {#                    <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>#}
-{#                {% endif %}#}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>
-
-                        <div class="dropdown-menu p-0">
-                        {% for user in request.user.family_user.all %}
-                            <a class="dropdown-item" style="background: darkslategrey" href="{% url 'webapp:personal_grades' user.student.pk %}">{{ user.student }}</a>
-                        {% endfor %}
-                 {% endif %}
-
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a></li>
                 {% endif %}
+
+
+{#            # Кнопка не работает. надо проверить#}
+
+
+{#                {% if request.user.is_authenticated and request.user.profile.role.get == 'Родитель'%}#}
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>#}
+{##}
+{#                        <div class="dropdown-menu p-0">#}
+{#                        {% for user in request.user.family_user.all %}#}
+{#                            <a class="dropdown-item" style="background: darkslategrey" href="{% url 'webapp:personal_grades' user.student.pk %}">{{ user.student }}</a>#}
+{#                        {% endfor %}#}
+{#                 {% endif %}#}
+
+
+
+{#                {% if request.user.is_authenticated%}#}
+{#                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a></li>#}
+{#                {% endif %}#}
                 {% block menu %}{% endblock %}
             </ul>
             <ul class="menu navbar-nav ml-auto">
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated%}
                     <li class="nav-item"><a href="{% url 'accounts:user_search' %}" class="nav-link">Поиск</a></li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
@@ -74,15 +82,9 @@
             </ul>
         </div>
     </nav>
-    {#<div class="sidenav">#}
-    {#{% include 'partial/staff_menu.html' %}#}
-    {#</div>#}
     <div class="carousel">
         {% block carousel %} {% endblock %}
     </div>
-    {#<div class="side_nav">#}
-    {#{% include 'partial/staff_menu.html' %}#}
-    {#</div>#}
     <div class="container">
         {% block content %}{% endblock %}
     </div>
