@@ -3,34 +3,34 @@ from django.db.models import ProtectedError
 from accounts.forms import GroupForm, StudentAddStudyGroupForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from accounts.models import StudyGroup, User, Profile, AdminPosition
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 
 
-class GroupListView(PermissionRequiredMixin, ListView):
+class GroupListView(ListView):
     template_name = 'group/list.html'
     model = StudyGroup
     ordering = ["-name"]
     context_object_name = 'group_list'
     paginate_by = 10
     paginate_orphans = 2
-    permission_required = "accounts.view_group"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.view_group"
+    # permission_denied_message = "Доступ запрещен"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class GroupDetailView(PermissionRequiredMixin, DetailView):
+class GroupDetailView(DetailView):
     template_name = 'group/detail.html'
     model = StudyGroup
     context_object_name = 'group'
-    permission_required = "accounts.view_group"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.view_group"
+    # permission_denied_message = "Доступ запрещен"
 
 
 class GroupCreateView(CreateView):
@@ -94,7 +94,7 @@ class GroupUpdateView(UpdateView):
         group = StudyGroup.objects.get(pk=self.kwargs.get('pk'))
         students = form.cleaned_data['students']
         group.group_leader = form.cleaned_data['group_leader']
-        group.head_teaher = form.cleaned_data['head_teaher']
+        group.head_teacher = form.cleaned_data['head_teacher']
         group.started_at = form.cleaned_data['started_at']
         self.set_position_head_teacher(group)
         self.set_position_group_leader(group)
@@ -116,12 +116,12 @@ class GroupUpdateView(UpdateView):
         return redirect('accounts:groups')
 
 
-class GroupDeleteView(PermissionRequiredMixin, DeleteView):
+class GroupDeleteView(DeleteView):
     model = StudyGroup
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:groups')
-    permission_required = "accounts.delete_group"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.delete_group"
+    # permission_denied_message = "Доступ запрещен"
 
     def get(self, request, *args, **kwargs):
         try:
@@ -153,7 +153,6 @@ class GroupStudentAdd(UpdateView):
     def form_valid(self, form):
         self.student_pk = self.kwargs['pk']
         text = form.cleaned_data['group_name']
-        # user = User.objects.filter(pk=self.kwargs['pk'])
         user = get_object_or_404(User, pk=self.kwargs['pk'])
         group_name = get_object_or_404(StudyGroup, name=text)
         group_name.students.add(user.pk)

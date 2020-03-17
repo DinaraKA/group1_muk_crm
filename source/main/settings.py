@@ -158,7 +158,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 MEDIA_URL = '/uploads/'
 
-
-# AJAX_SEARCH_HELPER = 'app.views.search_helper'
-
-# SEARCH_RESULT_TEMPLATE = 'user_search.html'

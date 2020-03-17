@@ -5,7 +5,8 @@
     <form method="POST"  class="text-center">
         {% csrf_token %}
         <div class="confirm d-flex justify-content-center">
-            <p><input type="submit" value="Да" class="btn btn-danger mt-5"></p>
+            <p><input type="submit" value="Да" class="btn btn-danger mt-5 mr-2" width="50px"></p>
+            <p><a href="{% url 'webapp:index' %}" class="btn btn-primary mt-5" style="width: 50px">Нет</a></p>
         </div>
     </form>
 {% endblock %}
