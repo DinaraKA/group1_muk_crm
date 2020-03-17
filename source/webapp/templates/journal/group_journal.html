@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="table-responsive-lg">
+    <div class="table-container">
         <table class="table table-bordered schedule" style="font-size: 13px">
             <h1>Журнал группы {{ journal.study_group.name }} по дисциплине - {{ journal.discipline.name }}</h1>
             <h4>Преподаватель: {{ journal.discipline.teacher.get }}</h4>
             <div class="row">
                 <form action="{% url 'webapp:add_journalnote' journal.pk %}" method="POST" id="add_lesson">
                     <div class="col-9">{% include 'partial/form.html' %}</div>
-                    <div class="col-3"><a class="text-center"><input type="submit" value="+ Добавить занятие"
+                    <div class="col-lg-3 col-sm-9"><a class="text-center"><input type="submit" value="+ Добавить занятие"
                                                                      class="btn btn-success ml-5 my-5"></a></div>
                 </form>
             </div>
             <thead>
             <tr>
-                <th scope="col" class="schedule-days" style='width: 15%'>Студенты</th>
+                <th scope="col" class="schedule-days fixed-left" style='width: 15%'>Студенты</th>
                 {% for journalnote in journalnotes %}
                     <th scope="col" class="journal-dates" data-toggle="tooltip" data-placement="top"
                         title='Запись создал(а)-{{ journalnote.created_by }}
@@ -33,7 +33,8 @@
                                data-target="#student_{{ student.pk }}_journal_{{ journalnote.pk }}">
                                 {% for grade in journalnote.journalnote_grade.all %}
                                     {% if grade.student.pk == student.pk %}
-                                        {{ grade }}
+                                        <p data-toggle="tooltip" data-placement="top"
+                        title='Описание:{{ grade.description }}'>{{ grade }}</p>
                                     {% endif %}
                                 {% endfor %}
                             </a>
@@ -75,8 +76,8 @@
                             </div>
                         </td>
                     {% endfor %}
-                    <td class="avg">{% for d in student_grades %}{% for k, v in d.items %}{% if k == student.pk %}{{ v.avg }}{% endif %}{% endfor %}{% endfor %}</td>
-                    <td class="abs">{% for d in student_grades %}{% for k, v in d.items %}{% if k == student.pk %}{{ v.abs }}{% endif %}{% endfor %}{% endfor %}</td>
+                    <td class="avg">{% for item in student_grades %}{% for key, value in item.items %}{% if key == student.pk %}{{ value.avg }}{% endif %}{% endfor %}{% endfor %}</td>
+                    <td class="abs">{% for item in student_grades %}{% for key, value in item.items %}{% if key == student.pk %}{{ value.abs }}{% endif %}{% endfor %}{% endfor %}</td>
                 </tr>
             {% endfor %}
             </tbody>

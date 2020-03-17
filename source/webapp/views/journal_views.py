@@ -1,14 +1,8 @@
-from django.template.defaulttags import register
-
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
-from accounts.models import StudyGroup
 from webapp.forms import JournalNoteForm, GradeForm, JournalSelectForm
-from webapp.models import Discipline, StudyGroup, GroupJournal, JournalNote, JournalGrade, Grade
+from webapp.models import GroupJournal, JournalNote, JournalGrade, Grade
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, View, TemplateView, FormView
-from django.utils.http import urlencode
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, FormView
 
 
 class GroupJournalListView(ListView):

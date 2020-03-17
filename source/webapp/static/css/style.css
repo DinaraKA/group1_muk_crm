@@ -236,10 +236,10 @@ h3 {
     background: lightgray;
     width: 10%;
 }
-.schedule{
-    word-wrap: break-word;
-    table-layout: fixed;
-}
+/*.schedule{*/
+    /*word-wrap: break-word;*/
+    /*table-layout: fixed;*/
+/*}*/
 .label-form{
     display: inline-flex;
 }
@@ -275,4 +275,10 @@ h3 {
 }
 .abs{
     background-color: lightcoral;
+}
+.table-container {
+  width: 100%;
+  overflow-y: auto;
+  /*_overflow: auto;*/
+  margin: 0 0 1em;
 }
