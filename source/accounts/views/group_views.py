@@ -83,9 +83,6 @@ class GroupUpdateView(UpdateView):
     form_class = GroupForm
     # permission_required = "accounts.change_group"
     # permission_denied_message = "Доступ запрещен"
-    fields = ['name', 'students', 'group_leader', 'head_teaher', 'started_at']
-    permission_required = "accounts.change_group"
-    permission_denied_message = "Доступ запрещен"
 
     def form_valid(self, form):
         self.text = form.cleaned_data['name']
