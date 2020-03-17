@@ -4,7 +4,7 @@
     <form method="POST" action="#">
         {% csrf_token %}
         <table class="table">
-            <h2>Журналы групп по дисциплинам</h2>
+            <h1>Журналы групп по дисциплинам</h1>
             <a href="{% url 'webapp:add_groupjournal' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Создать журнал</a>
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
                         <td>{{ groupjournal.discipline.name }}</td>
                         <td class="symbol"><a href="{% url 'webapp:groupjournal' groupjournal.pk %}" style="color: gray" class="hiddenbutton">&#8594;</a></td>
                         <td class="symbol"><a href="{% url 'webapp:change_groupjournal' groupjournal.pk %}" class="hiddenbutton">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_groupjournal' groupjournal.pk %}"style="color: red" class="hiddenbutton">x</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:delete_groupjournal' groupjournal.pk %}"style="color: red" class="hiddenbutton">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="table-responsive-lg">
+    <div class="table-container">
         <table class="table table-bordered schedule">
             <h1>Расписание</h1>
             <!-- Button trigger modal -->
@@ -8,7 +8,9 @@
             {#                data-target="#exampleModal">#}
             {#            Добавить в расписание#}
             {#        </button>#}
-            <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton" >+ Добавить в расписание</a>
+            {% if perms.webapp.add_schedule %}
+                <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Добавить в расписание</a>
+            {% endif %}
             {% if teacher %}
                 <h4>Преподаватель: {{ teacher.get }}</h4>
             {% endif %}
@@ -36,45 +38,41 @@
                     {% for items in event %}
                         <td>
                             {% for item in items %}
-                                {% if perms.webapp.change_schedule %}
-                                    <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                {% endif %}
-                            {% if request.user == item.teacher or perms.webapp.delete_schedule %}
-                                <h5>Группа:{{ item.group }}</h5>
-                                <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
-                            {% elif item.group in groups %}
-                                <h5>Группа:{{ item.group }}</h5>
-                                <p class="my-0">{{ item.teacher.get_full_name }}</p>
-                                <p class="my-0">{{ item.discipline }}</p>
-                                <p class="my-0">{{ item.auditoriya }}</p>
-                                <a href="{% url 'webapp:schedule_delete' item.pk %}" class="hiddenbutton">Очистить</a>
-                                <hr style="border-color: rgb(66 66 66)">
-                            {% endif %}
-                            </a>
                                 {% if request.user.is_superuser %}
-                                    <a class="schedule-link" href="{% url 'webapp:schedule_update' item.pk %}">
-                                        <h5>Группа:{{ item.group }}</h5>
-                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    <div data-toggle="tooltip" data-placement="top"
+                        title="{{ item.teacher.get_full_name }}/Ауд-{{ item.auditoriya }}">
+                                        <h5>Гр:{{ item.group }}</h5>
+                                        <p class="my-0">{{ item.teacher.first_name.0 }}.{{ item.teacher.last_name }}</p>
+                                        <p class="my-0">{{ item.discipline }}</p>
+                                        <p class="my-0">Ауд-{{ item.auditoriya.name }}</p>
+                                        <div class="row justify-content-center">
+                                        {% if perms.webapp.change_schedule %}
+                                            <a href="{% url 'webapp:schedule_update' item.pk %}" class="btn btn-primary hiddenbutton"
+                                           style="margin: 0;background: transparent; color: blue; border: none">&#x270E;</a>
+                                        {% endif %}
+                                        {% if perms.webapp.delete_schedule %}
+                                            <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger hiddenbutton"
+                                           style="margin: 0;background: transparent; color: red; border: none"><i class="far fa-trash-alt mx-2"></i></a>
+                                        {% endif %}
+                                        </div>
+                                        <hr style="border-color: rgb(66 66 66)">
+                                    </div>
+                                {% elif request.user == item.teacher %}
+                                    <div data-toggle="tooltip" data-placement="top"
+                        title="Ауд-{{ item.auditoriya }}">
+                                        <h5>Гр:{{ item.group }}</h5>
                                         <p class="my-0">{{ item.discipline }}</p>
                                         <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
-                                        <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger hiddenbutton"
-                                           style="margin: auto;"><i class="far fa-trash-alt mx-2"></i></a>
-                                        <hr style="border-color: rgb(66 66 66)">
-                                    </a>
-                                {% elif request.user == item.teacher %}
-                                    <h5>Группа:{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.discipline }}</p>
-                                    <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
+                                    </div>
                                 {% elif item.group in groups %}
-                                    <h5>Группа:{{ item.group }}</h5>
-                                    <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                    <h5>Гр:{{ item.group }}</h5>
+                                    <p class="my-0">{{ item.teacher.first_name.0 }}.{{ item.teacher.last_name }}</p>
                                     <p class="my-0">{{ item.discipline }}</p>
                                     <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                 {% elif request.user == family_users %}
                                     {% if item.group in groups_for_parent %}
-                                        <h5>Группа:{{ item.group }}</h5>
-                                        <p class="my-0">{{ item.teacher.get_full_name }}</p>
+                                        <h5>Гр:{{ item.group }}</h5>
+                                        <p class="my-0">{{ item.teacher.first_name.0 }}.{{ item.teacher.last_name }}</p>
                                         <p class="my-0">{{ item.discipline }}</p>
                                         <p class="my-0">Ауд.-{{ item.auditoriya.name }}</p>
                                     {% endif %}

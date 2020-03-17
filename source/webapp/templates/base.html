@@ -14,6 +14,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/animate.css" %}">
+    <link rel="stylesheet" href="{% static "js/bootstrap.min.js" %}">
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -29,22 +30,23 @@
                     <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
                 {% endif %}
                 <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">Главная</a></li>
-
-                {#            <li><a href="#">Миссия и стратегия</a></li>#}
-                {#            <li><a href="#">Специальности</a></li>#}
                 <li class="nav-item"><a href="{% url 'webapp:news' %}" class="nav-link">Новости</a></li>
                 <li class="nav-item"><a href="{% url 'webapp:announcements' %}" class="nav-link">Объявление</a></li>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'webapp:schedule' %}" class="nav-link">Расписание</a></li>
                 {% endif %}
-                {#            <li><a href="#">Абитуриент</a></li>#}
-                {#            <li><a href="#">Правовая информация</a></li>#}
-                {#            <li><a href="#">Выпускники</a></li>#}
-                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>
-                    </li>
+{#                {% if request.user.profile.admin_position.name.is_exact == 'Cтароста' %}#}
+                    <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>
+{#                {% elif request.user.profile.role.get == 'Преподаватель' %}#}
+{#                    <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>#}
+{#                {% endif %}#}
                 {% endif %}
+                <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+                {#                {% if request.user.is_authenticated %}#}
+                {#                    <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a>#}
+                {#                    </li>#}
+                {#                {% endif %}#}
                 {% block menu %}{% endblock %}
             </ul>
             <ul class="menu navbar-nav ml-auto">
@@ -63,6 +65,7 @@
                                             class="nav-link">Регистрация</a></li>
                     <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                 {% endif %}
+
             </ul>
         </div>
     </nav>
@@ -88,14 +91,16 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"#}
+{#        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"#}
+{#        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"#}
+{#        crossorigin="anonymous"></script>#}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="application/javascript" src="{% static "js/main.js" %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/wow.min.js' %}"></script>
 <script>new WOW().init();</script>
 

@@ -141,13 +141,13 @@ class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
+class UserPasswordChangeView(UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
-    permission_required = "accounts.change_user"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.change_user"
+    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
