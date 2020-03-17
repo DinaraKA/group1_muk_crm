@@ -74,7 +74,6 @@ class NewsViewTest(TestCase):
         self.driver.find_element_by_class_name('btn-success').click()
         assert self.driver.current_url == 'http://localhost:8000/news/all/'
 
-
     def test_updated_news(self):
         self.driver.get('http://localhost:8000/news/all/')
         self.driver.find_element_by_class_name('link').click()

@@ -99,4 +99,5 @@ class AuditoryViewTest(TestCase):
         self.driver.get('http://127.0.0.1:8000/auditories/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://localhost:8000/auditories/'
+        print(self.driver.current_url)
+        assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'

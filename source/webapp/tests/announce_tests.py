@@ -46,7 +46,7 @@ class AnnouncementModelTest(TestCase):
         self.assertEquals(announcement.title, str(announcement.title))
 
 
-class AnnouncementsSeleniumViewTest(TestCase):
+class AnnouncementViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -91,8 +91,8 @@ class AnnouncementsSeleniumViewTest(TestCase):
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_announcement(self):
-        self.driver.get('http://127.0.0.1:8000/announcements/')
+        self.driver.get('http://localhost:8000/announcements/')
         self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/announcements/'
+        assert self.driver.current_url == 'http://localhost:8000/announcements/'

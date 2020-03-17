@@ -11,7 +11,7 @@ class LoginTest(TestCase):
 
     def test_create_user(self):
         self.driver.get('http://127.0.0.1:8000/accounts/user/create/')
-        self.driver.find_element_by_name('username').send_keys('student51')
+        self.driver.find_element_by_name('username').send_keys('TestCreate')
         self.driver.find_element_by_name('password').send_keys('test')
         self.driver.find_element_by_name('password_confirm').send_keys('test')
         self.driver.find_element_by_name('first_name').send_keys('Иван')
@@ -38,6 +38,7 @@ class LoginTest(TestCase):
         self.driver.find_element_by_name('admin_position').click()
         self.driver.find_element_by_name('admin_position').send_keys('CreateTest')
         self.driver.find_element_by_class_name('btn-success').click()
+        print(self.driver.current_url)
         assert self.driver.current_url == 'http://localhost:8000/'
 
     def test_login_error(self):
