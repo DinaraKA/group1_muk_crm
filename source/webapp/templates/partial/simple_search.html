@@ -12,14 +12,14 @@
         {% endfor %}
         {{ form.date }}
         {% for field in form %}
-             <div class=" w-25 mt-3">
-            <p class="ml-4" style="width: content-box; font-size: 18px;"><label for="{{ field.id_for_label }}">{{field.label}}</label>: {{field}}</p>
+             <div class="w-25 mt-3">
+            <p style="width: content-box; display: inline; font-size: 18px;"><label for="{{ field.id_for_label }}">{{field.label}}</label>: {{field}}</p>
              </div>
             {% for error in field.errors %}
                 <p class="form-error">{{ error }}</p>
             {% endfor %}
         {% endfor %}
-        <p class="text-left ml-4"><input type="submit" value="Найти" class="btn btn-outline-dark font-weight-bolder" style="width: 125px; margin-bottom: 25px;"></p>
+        <button type="submit" class="btn btn-primary text-left mt-5"><i class="fas fa-search"></i>    Поиск</button>
     </form>
 {% endblock %}
 {%  block scripts %}{% endblock %}

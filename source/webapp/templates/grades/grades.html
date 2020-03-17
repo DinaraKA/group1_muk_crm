@@ -11,8 +11,8 @@
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
                     <th scope="col">Описание</th>
-                    <th class="symbol" scope="col">Редактировать</th>
-                    <th class="symbol" scope="col">Удалить</th>
+                    <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                    <th class="symbol hiddenbutton" scope="col">Удалить</th>
                 </tr>
             </thead>
             {% for grade in grades %}
@@ -21,8 +21,8 @@
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ grade.value }}</td>
                         <td>{{ grade.description }}</td>
-                        <td class="symbol"><a href="{% url 'webapp:change_grade' grade.pk %}" id="update">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_grade' grade.pk %}" id="delete" style="color: red">x</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:change_grade' grade.pk %}" id="update" class="hiddenbutton">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_grade' grade.pk %}" id="delete" style="color: red" class="hiddenbutton">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

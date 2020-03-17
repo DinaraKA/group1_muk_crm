@@ -7,13 +7,13 @@
             <div class="row">
                 <form action="{% url 'webapp:add_journalnote' journal.pk %}" method="POST" id="add_lesson">
                     <div class="col-9">{% include 'partial/form.html' %}</div>
-                    <div class="col-lg-3 col-sm-9"><a class="text-center"><input type="submit" value="+ Добавить занятие"
+                    <div class="col-lg-3 col-sm-9"><a class="text-center hiddenbutton"><input type="submit" value="+ Добавить занятие"
                                                                      class="btn btn-success ml-5 my-5"></a></div>
                 </form>
             </div>
             <thead>
             <tr>
-                <th scope="col" class="schedule-days fixed-left" style='width: 15%'>Студенты</th>
+                <th scope="col" class="schedule-days" style='width: 15%'>Студенты</th>
                 {% for journalnote in journalnotes %}
                     <th scope="col" class="journal-dates" data-toggle="tooltip" data-placement="top"
                         title='Запись создал(а)-{{ journalnote.created_by }}

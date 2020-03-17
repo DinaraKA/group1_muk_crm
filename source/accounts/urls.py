@@ -2,7 +2,8 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from accounts.views.status_views import StatusListView, StatusCreateView, StatusUpdateView, StatusDeleteView
 from accounts.views.user_views import register_view, UserPersonalInfoChangeView, UserPasswordChangeView, UserDetailView, \
-    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View, FamilyDeleteView
+    UserSearchView, SearchResultsView, UserDeleteView, StudentListView, UserListView, UserFamilyCreateView, UserFamilyCreate2View, SearchUser, FamilyDeleteView
+
 from accounts.views.social_status_views import SocialStatusListView, SocialStatusCreateView, SocialStatusUpdateView, \
     SocialStatusDeleteView
 from accounts.views.admin_position_views import AdminPositionIndexView, AdminPositionCreateView, AdminPositionUpdateView, \
@@ -23,6 +24,7 @@ urlpatterns = [
     path('user/password_change/<int:pk>/', UserPasswordChangeView.as_view(), name='password_change'),
     path('user/delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('user/search/', UserSearchView.as_view(), name='user_search'),
+    path('user/ajax/search/', SearchUser.as_view(), name='user_search_ajax'),
     path('user/search/results/', SearchResultsView.as_view(), name='search_results'),
     path('user/student/<str:status>/', StudentListView.as_view(), name='student_list'),
     path('user/family/add/<int:pk>/', UserFamilyCreateView.as_view(), name='user_family_create'),

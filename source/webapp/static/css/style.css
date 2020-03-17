@@ -250,6 +250,14 @@ h3 {
 	height: 100px;
 	float: left;
 }
+.user_text{
+    cursor: pointer;
+    width: 260px;
+}
+.user_text:hover{
+    background: blue;
+    color: white;
+}
 .form-error{
     color: red;
 }

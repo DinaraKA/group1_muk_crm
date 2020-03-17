@@ -103,9 +103,16 @@
 <script src="{% static 'js/wow.min.js' %}"></script>
 <script>new WOW().init();</script>
 
-
+<script type="application/javascript">
+    var  agent = window.navigator.userAgent;
+    if (agent.includes("Mobile")) {
+        $('.hiddenbutton').hide();
+    }
+    else if(agent.includes("Android")){
+        $('.hiddenbutton').hide();
+    }
+</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
-
 

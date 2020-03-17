@@ -6,15 +6,15 @@
         <table class="table">
             <h1>Группы</h1>
             {% if perms.accounts.add_group %}
-                <a href="{% url 'accounts:add_group' %}" class="btn btn-success  ml-5 my-3">+ Создать группу</a>
+                <a href="{% url 'accounts:add_group' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Создать группу</a>
             {% endif %}
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
                 <th class="symbol" scope="col">Подробнее</th>
-                <th class="symbol" scope="col">Редактировать</th>
-                <th class="symbol" scope="col">Удалить</th>
+                <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                <th class="symbol hiddenbutton" scope="col">Удалить</th>
             </tr>
             </thead>
             {% for object in group_list %}
@@ -23,15 +23,15 @@
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ object.name }}</td>
                     {% if perms.accounts.view_group %}
-                        <td class="symbol"><a class='detail' href="{% url 'accounts:detail_group' object.pk %}"
+                        <td class="symbol"><a class='detail hiddenbutton' href="{% url 'accounts:detail_group' object.pk %}"
                                               style="color: gray">&#8594;</a></td>
                     {% endif %}
                     {% if perms.accounts.change_group %}
-                        <td class="symbol"><a class='update'
+                        <td class="symbol"><a class='update hiddenbutton'
                                               href="{% url 'accounts:change_group' object.pk %}">&#x270E;</a></td>
                     {% endif %}
                     {% if perms.accounts.delete_group %}
-                        <td class="symbol"><a class='delete' href="{% url 'accounts:delete_group' object.pk %}"
+                        <td class="symbol"><a class='delete hiddenbutton' href="{% url 'accounts:delete_group' object.pk %}"
                                               style="color: red">&times;</a></td>
                     {% endif %}
                 </tr>

@@ -1,0 +1,14 @@
+<div class='user-container'>
+{% for obj in result %}
+   <p class="user_text">{{ obj.first_name }}-{{ obj.last_name }}</p>
+{% endfor %}
+</div>
+
+{% block scripts %}
+    <script>
+        $(".user_text").click(function(){
+            let user_info = $(this).context.innerText;
+            $('#id_text').val(user_info);
+        })
+    </script>
+{% endblock %}

@@ -16,6 +16,7 @@
             <th scope="col">Имя</th>
             <th scope="col">Фамилия</th>
             <th scope="col">Роль</th>
+            <th scope='col'>Группа </th>
             <th scope="col">Details</th>
         </tr>
         </thead>
@@ -30,50 +31,55 @@
                 {% endif %}
                 <td>{{ use.last_name }}</td>
                 <td>{{ use.profile.status }}</td>
+                <td>
+                    {% for gr in use.students.all %}
+                        <a href="{% url 'accounts:detail_group' gr.pk %}">{{ gr.name }} </a>,
+                    {% endfor %}
+                </td>
                 {% if perms.accounts.view_user %}
                     <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>
                 {% endif %}
                 {% if perms.accounts.change_user %}
-                    <a href="{% url 'accounts:user_update' use.pk %}" class="btn btn-primary">Edit</a></td>
+                    <a href="{% url 'accounts:user_update' use.pk %}" class="btn btn-primary hiddenbutton">Edit</a></td>
                 {% endif %}
                 </tr>
         {% endfor %}
         </tbody>
     </table>
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Имя</th>
-      <th scope="col">Фамилия</th>
-      <th scope="col">Форма обучения</th>
-        <th scope="col">Группа</th>
-
-      <th scope="col">Details</th>
-    </tr>
-  </thead>
-  <tbody>
-      {% for use in user %}
-          {% if use.last_name %}
-    <tr data-href="{% url 'accounts:user_detail' use.pk %}">
-
-      <th scope="row">{{ forloop.counter }}</th>
-        <td data-href="{% url 'accounts:user_detail' use.pk %}">{{ use.first_name }}</td>
-      <td>{{ use.last_name }}</td>
-      <td>{{ use.profile.status}}</td>
+{#  <thead class="thead-light">#}
+{#    <tr>#}
+{#      <th scope="col">#</th>#}
+{#      <th scope="col">Имя</th>#}
+{#      <th scope="col">Фамилия</th>#}
+{#      <th scope="col">Форма обучения</th>#}
+{#        <th scope="col">Группа</th>#}
+{##}
+{#      <th scope="col">Details</th>#}
+{#    </tr>#}
+{#  </thead>#}
+{#  <tbody>#}
+{#      {% for use in user %}#}
+{#          {% if use.last_name %}#}
+{#    <tr data-href="{% url 'accounts:user_detail' use.pk %}">#}
+{##}
+{#      <th scope="row">{{ forloop.counter }}</th>#}
+{#        <td data-href="{% url 'accounts:user_detail' use.pk %}">{{ use.first_name }}</td>#}
+{#      <td>{{ use.last_name }}</td>#}
+{#      <td>{{ use.profile.status}}</td>#}
 {#    <td>{{ use.students.all}}!!!</td>#}
-
-    <td>
-        {% for gr in use.students.all %}
-            <a href="{% url 'accounts:detail_group' gr.pk %}">{{ gr.name }} </a>,
-    {% endfor %}
-    </td>
-        <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>
-        <a href="{% url 'accounts:user_update' use.pk %}">Edit</a></td>
-    </tr>
-          {% endif %}
-      {% endfor %}
-
-  </tbody>
-</table>
+{##}
+{#    <td>#}
+{#        {% for gr in use.students.all %}#}
+{#            <a href="{% url 'accounts:detail_group' gr.pk %}">{{ gr.name }} </a>,#}
+{#    {% endfor %}#}
+{#    </td>#}
+{#        <td><a href="{% url 'accounts:user_detail' use.pk %}"> Details...</a>#}
+{#        <a href="{% url 'accounts:user_update' use.pk %}">Edit</a></td>#}
+{#    </tr>#}
+{#          {% endif %}#}
+{#      {% endfor %}#}
+{##}
+{#  </tbody>#}
+{#</table>#}
 {#  {% endfor %}#}
 {% endblock %}

@@ -9,7 +9,7 @@
             {#            Добавить в расписание#}
             {#        </button>#}
             {% if perms.webapp.add_schedule %}
-                <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3">+ Добавить в расписание</a>
+                <a href="{% url 'webapp:schedule_add' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Добавить в расписание</a>
             {% endif %}
             {% if teacher %}
                 <h4>Преподаватель: {{ teacher.get }}</h4>
@@ -47,11 +47,11 @@
                                         <p class="my-0">Ауд-{{ item.auditoriya.name }}</p>
                                         <div class="row justify-content-center">
                                         {% if perms.webapp.change_schedule %}
-                                            <a href="{% url 'webapp:schedule_update' item.pk %}" class="btn btn-primary"
+                                            <a href="{% url 'webapp:schedule_update' item.pk %}" class="btn btn-primary hiddenbutton"
                                            style="margin: 0;background: transparent; color: blue; border: none">&#x270E;</a>
                                         {% endif %}
                                         {% if perms.webapp.delete_schedule %}
-                                            <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger"
+                                            <a href="{% url 'webapp:schedule_delete' item.pk %}" class="btn btn-danger hiddenbutton"
                                            style="margin: 0;background: transparent; color: red; border: none"><i class="far fa-trash-alt mx-2"></i></a>
                                         {% endif %}
                                         </div>

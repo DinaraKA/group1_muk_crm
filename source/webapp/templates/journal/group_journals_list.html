@@ -1,32 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <table class="table">
-        <h1>Журналы групп по дисциплинам</h1>
-        <a href="{% url 'webapp:add_groupjournal' %}" class="btn btn-success  ml-5 my-3">+ Создать журнал</a>
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Группа</th>
-            <th scope="col">Дисциплина</th>
-            <th class="symbol" scope="col">Подробнее</th>
-            <th class="symbol" scope="col">Редактировать</th>
-            <th class="symbol" scope="col">Удалить</th>
-        </tr>
-        </thead>
-        {% for groupjournal in groupjournals %}
-            <tbody>
-            <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ groupjournal.study_group.name }}</td>
-                <td>{{ groupjournal.discipline.name }}</td>
-                <td class="symbol"><a href="{% url 'webapp:groupjournal' groupjournal.pk %}"
-                                      style="color: gray">&#8594;</a></td>
-                <td class="symbol"><a href="{% url 'webapp:change_groupjournal' groupjournal.pk %}">&#x270E;</a></td>
-                <td class="symbol"><a href="{% url 'webapp:delete_groupjournal' groupjournal.pk %}"
-                                      style="color: red">x</a></td>
-            </tr>
-            </tbody>
-        {% endfor %}
-    </table>
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <table class="table">
+            <h2>Журналы групп по дисциплинам</h2>
+            <a href="{% url 'webapp:add_groupjournal' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Создать журнал</a>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Группа</th>
+                    <th scope="col">Дисциплина</th>
+                    <th class="symbol" scope="col">Подробнее</th>
+                    <th class="symbol hiddenbutton" scope="col">Редактировать</th>
+                    <th class="symbol hiddenbutton" scope="col">Удалить</th>
+                </tr>
+            </thead>
+            {% for groupjournal in groupjournals %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ groupjournal.study_group.name }}</td>
+                        <td>{{ groupjournal.discipline.name }}</td>
+                        <td class="symbol"><a href="{% url 'webapp:groupjournal' groupjournal.pk %}" style="color: gray" class="hiddenbutton">&#8594;</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:change_groupjournal' groupjournal.pk %}" class="hiddenbutton">&#x270E;</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:delete_groupjournal' groupjournal.pk %}"style="color: red" class="hiddenbutton">x</a></td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </form>
 {% endblock %}

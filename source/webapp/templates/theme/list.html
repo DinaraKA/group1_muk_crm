@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <h1 style="padding-top: 20px">Темы</h1>
-        <a href="{% url 'webapp:add_theme'%}" class="btn btn-success  ml-5 mt-3">+ Добавить тему</a>
+        <a href="{% url 'webapp:add_theme'%}" class="btn btn-success  ml-5 mt-3 hiddenbutton">+ Добавить тему</a>
     {% for object in object_list %}
     <div class="object">
         <div class="row my-5">
@@ -12,11 +12,11 @@
                 <h5>{{ object.pk }}.{{ object.name }}</h5>
             </div>
             <div class="right col-4 d-flex justify-content-end">
-                <p class="mr-5"><a href="{% url 'accounts:change_group' object.pk %}" class="update">Редактироать</a></p>
-                <p class="mr-3"><a href="{% url 'accounts:delete_group' object.pk %}" class="delete">Удалить</a></p>
+                <p class="mr-5"><a href="{% url 'accounts:change_group' object.pk %}" class="update hiddenbutton">Редактироать</a></p>
+                <p class="mr-3"><a href="{% url 'accounts:delete_group' object.pk %}" class="delete hiddenbutton">Удалить</a></p>
             </div>
             <div>
-                <p class="mr-3"><a href="{% url 'accounts:detail_group' object.pk %}" class="delete">Подробнее</a></p>
+                <p class="mr-3"><a href="{% url 'accounts:detail_group' object.pk %}" class="delete hiddenbutton">Подробнее</a></p>
             </div>
         </div>
     </div>
