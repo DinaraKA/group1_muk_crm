@@ -388,14 +388,6 @@
 },
 {
   "model": "sessions.session",
-  "pk": "oxhfo8tmpf8m20skqrropclqr20351j9",
-  "fields": {
-    "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
-    "expire_date": "2020-03-19T08:09:36.259Z"
-  }
-},
-{
-  "model": "sessions.session",
   "pk": "vmu2c1vzkca0ebe1k2xushsnkkzdwm5q",
   "fields": {
     "session_data": "NGNlZTE1YTdlYWRmOGM0NGFmYTRkZTA2MzFlMzQxYzY3OGE2ZTBlMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1MzRjOTM5NmJmZmVmNGE2OWY0ZDYwMGYwMjk0MmNiYWQwMmY1MjllIn0=",
@@ -807,6 +799,218 @@
   }
 },
 {
+
+  "model": "webapp.schedule",
+  "pk": 1,
+  "fields": {
+    "lesson": 1,
+    "day": "Monday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 5,
+    "discipline": 1,
+    "group": 1
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 2,
+  "fields": {
+    "lesson": 2,
+    "day": "Tuesday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 2,
+    "discipline": 1,
+    "group": 2
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 3,
+  "fields": {
+    "lesson": 6,
+    "day": "Wednesday",
+    "teacher": [
+      "teacher-2"
+    ],
+    "auditoriya": 2,
+    "discipline": 5,
+    "group": 2
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 4,
+  "fields": {
+    "lesson": 3,
+    "day": "Tuesday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 3,
+    "discipline": 3,
+    "group": 1
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 5,
+  "fields": {
+    "lesson": 1,
+    "day": "Thursday",
+    "teacher": [
+      "teacher-2"
+    ],
+    "auditoriya": 3,
+    "discipline": 1,
+    "group": 1
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 6,
+  "fields": {
+    "lesson": 5,
+    "day": "Saturday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 4,
+    "discipline": 5,
+    "group": 3
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 7,
+  "fields": {
+    "lesson": 3,
+    "day": "Friday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 4,
+    "discipline": 5,
+    "group": 2
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 8,
+  "fields": {
+    "lesson": 8,
+    "day": "Wednesday",
+    "teacher": [
+      "teacher-1"
+    ],
+    "auditoriya": 3,
+    "discipline": 6,
+    "group": 3
+  }
+},
+{
+  "model": "webapp.schedule",
+  "pk": 9,
+  "fields": {
+    "lesson": 8,
+    "day": "Monday",
+    "teacher": [
+      "teacher-2"
+    ],
+    "auditoriya": 3,
+    "discipline": 6,
+    "group": 4
+  }
+},
+{
+  "model": "webapp.theme",
+  "pk": 1,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 1"
+  }
+},
+{
+  "model": "webapp.theme",
+  "pk": 2,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 2"
+  }
+},
+{
+  "model": "webapp.theme",
+  "pk": 3,
+  "fields": {
+    "name": "\u0422\u0435\u043c\u0430 3"
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 1,
+  "fields": {
+    "date": "2020-02-02",
+    "student": [
+      "student-1"
+    ],
+    "discipline": 5,
+    "theme": 1,
+    "grade": 4
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 2,
+  "fields": {
+    "date": "2020-02-04",
+    "student": [
+      "student-1"
+    ],
+    "discipline": 4,
+    "theme": 3,
+    "grade": 5
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 3,
+  "fields": {
+    "date": "2020-02-19",
+    "student": [
+      "teacher-2"
+    ],
+    "discipline": 4,
+    "theme": 3,
+    "grade": 5
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 4,
+  "fields": {
+    "date": "2020-02-03",
+    "student": [
+      "teacher-2"
+    ],
+    "discipline": 3,
+    "theme": 1,
+    "grade": 4
+  }
+},
+{
+  "model": "webapp.journal",
+  "pk": 5,
+  "fields": {
+    "date": "2020-02-09",
+    "student": [
+      "student-11"
+    ],
+    "discipline": 5,
+    "theme": 1,
+    "grade": 5
+  }
+}
   "model": "webapp.theme",
   "pk": 1,
   "fields": {
@@ -3937,3 +4141,4 @@
   }
 }
 ]
+
