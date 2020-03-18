@@ -1,5 +1,5 @@
 import json
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User, Group
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
@@ -154,12 +154,19 @@ class UserPasswordChangeView(UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserDetailView(DetailView):
+class UserDetailView(UserPassesTestMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
     # permission_required = "accounts.view_user"
     # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user_requesting = self.request.user
+        print(user_requesting.username)
+        user_detail = User.objects.get(pk=self.kwargs['pk'])
+        # print(user_detail)
+        return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -177,13 +184,20 @@ class UserDetailView(DetailView):
         return context
 
 
-class UserListView(PermissionRequiredMixin, ListView):
+class UserListView(UserPassesTestMixin, ListView):
     model = User
     template_name = 'user_list.html'
     context_object_name = 'user'
     permission_required = "accounts.view_user"
-    permission_denied_message = "Доступ запрещен"
-    ordering = ["last_name"]
+    # permission_denied_message = "Доступ запрещен"
+    # ordering = ["last_name"]
+
+    def test_func(self):
+        user_requesting = self.request.user
+        print(user_requesting.username)
+        user_detail = User.objects.get(pk=self.kwargs['pk'])
+        # print(user_detail)
+        return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff')
 
 
 class UserDeleteView(PermissionRequiredMixin, DeleteView):
