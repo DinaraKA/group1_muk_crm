@@ -29,7 +29,6 @@
         <div class="container collapse navbar-collapse" id="navbarNav">
             <ul class="menu navbar-nav text-uppercase">
                 {% if request.user|has_group:'principal_staff' or request.user.is_staff %}
-{#                {% if request.user.is_staff %}#}
                     <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
                 {% endif %}
                 <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">Главная</a></li>
@@ -38,15 +37,10 @@
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'webapp:schedule' %}" class="nav-link">Расписание</a></li>
                 {% endif %}
-                {% if request.user.is_authenticated and request.user.profile.role.get == 'Преподаватель'%}
-{#                    {% if request.user.profile.admin_position.name.is_exact == 'Cтароста' %}#}
-                    <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>
-                {% elif  request.user.is_authenticated and request.user.profile.admin_position.name.is_exact == 'Cтароста'%}
+                {% if request.user|has_group:'principal_staff' or request.user|has_group:'teachers' or request.user|has_group:'group_leaders' or request.user.is_staff %}
                     <li class="nav-item"><a href="{% url 'webapp:journal_select' %}" class="nav-link">Журнал</a></li>
                 {% endif %}
-{#                {% endif %}#}
-
-                {% if request.user.is_authenticated%}
+                {% if request.user|has_group:'parents' %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Табель детей</a>
 
@@ -57,7 +51,7 @@
                         </div>
                     </li>
                 {% endif %}
-                {% if role == role %}
+                {% if request.user|has_group:'students' %}
                     <li class="nav-item"><a href="{% url 'webapp:personal_grades' request.user.pk %}" class="nav-link">Дневник</a></li>
                 {% endif %}
                 {% block menu %}{% endblock %}

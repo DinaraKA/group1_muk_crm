@@ -35,6 +35,7 @@ class ScheduleView(ListView):
             'family_users': Family.objects.filter(family_user=self.request.user),
             'groups_for_parent': StudyGroup.objects.filter(students__in=student),
         })
+        print(Family.objects.filter(family_user=self.request.user))
         return context
 
     def get_len(self):

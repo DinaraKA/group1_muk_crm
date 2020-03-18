@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, PermissionRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from webapp.forms import JournalNoteForm, GradeForm, JournalSelectForm
 from webapp.models import GroupJournal, JournalNote, JournalGrade, Grade
@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, FormView
 
 
-class GroupJournalListView(ListView):
+class GroupJournalListView(UserPassesTestMixin, ListView):
     model = GroupJournal
     template_name = 'journal/group_journals_list.html'
     context_object_name = 'groupjournals'
@@ -15,6 +15,10 @@ class GroupJournalListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
 
 class GroupJournalDetailView(UserPassesTestMixin, DetailView):
@@ -57,32 +61,52 @@ class GroupJournalDetailView(UserPassesTestMixin, DetailView):
         })
         return context
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(name='group_leaders') or user.groups.filter(name='principal_staff')
 
-class GroupJournalCreateView(CreateView):
+
+class GroupJournalCreateView(UserPassesTestMixin, CreateView):
     model = GroupJournal
     template_name = 'add.html'
     fields = ['study_group', 'discipline']
+    permission_required = "webapp.add_group_journal"
+    permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('webapp:groupjournals')
 
 
-class GroupJournalUpdateView(UpdateView):
+class GroupJournalUpdateView(UserPassesTestMixin, UpdateView):
     model = GroupJournal
     template_name = 'change.html'
     fields = ['study_group', 'discipline']
 
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
+
     def get_success_url(self):
         return reverse('webapp:groupjournals')
 
 
-class GroupJournalDeleteView(DeleteView):
+class GroupJournalDeleteView(UserPassesTestMixin, DeleteView):
     model = GroupJournal
     template_name = 'delete.html'
     success_url = reverse_lazy('webapp:groupjournals')
 
 
-class JournalNoteCreateView(CreateView):
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
+
+
+class JournalNoteCreateView(UserPassesTestMixin, CreateView):
     template_name = 'add.html'
     form_class = JournalNoteForm
 
@@ -97,11 +121,15 @@ class JournalNoteCreateView(CreateView):
         journalnote.save()
         return redirect('webapp:groupjournal', pk=self.journal_pk)
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(name='principal_staff')
+
     def get_success_url(self):
         return reverse('webapp:groupjournal', kwargs={"pk": self.journal_pk})
 
 
-class JournalGradeCreateView(CreateView):
+class JournalGradeCreateView(UserPassesTestMixin, CreateView):
     model = JournalGrade
     form_class = GradeForm
 
@@ -126,6 +154,10 @@ class JournalGradeCreateView(CreateView):
                 obj.created_by = self.request.user
                 obj.save()
                 return redirect('webapp:groupjournal', pk=self.journal_note_obj.group_journal_id)
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(name='principal_staff')
 
 
 class JournalSelectView(FormView):
