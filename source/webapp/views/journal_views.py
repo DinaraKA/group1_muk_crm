@@ -1,8 +1,9 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from webapp.forms import JournalNoteForm, GradeForm, JournalSelectForm
 from webapp.models import GroupJournal, JournalNote, JournalGrade, Grade
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, FormView
+from django.contrib import messages
 
 
 class GroupJournalListView(ListView):
@@ -62,8 +63,19 @@ class GroupJournalCreateView(CreateView):
     template_name = 'add.html'
     fields = ['study_group', 'discipline']
 
+    def form_valid(self, form):
+        text = form.cleaned_data['discipline']
+        group = form.cleaned_data['study_group']
+        if GroupJournal.objects.filter(discipline=text, study_group=group):
+            messages.error(self.request, 'Объект с таким названием уже существует!')
+            return render(self.request, 'add.html', {})
+        else:
+            discipline = GroupJournal(study_group=group, discipline=text)
+            discipline.save()
+        return self.get_success_url()
+
     def get_success_url(self):
-        return reverse('webapp:groupjournals')
+        return redirect('webapp:groupjournals')
 
 
 class GroupJournalUpdateView(UpdateView):
