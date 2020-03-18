@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 {% block title %}Пользователь{% endblock %}
 {% block content %}
     <div class="lk-content">
@@ -71,6 +72,7 @@
             </div>
         </div>
     </div>
+    {% if request.user|has_group:'principal_staff' or request.user.is_staff %}
     <div class="row" style="justify-content: center">
     <a href="{% url 'accounts:group_student_add' user_obj.pk %}" class="btn btn-info  ml-5 mt-3 hiddenbutton" style="width: 15%"><i
                 class="fa fa-users mx-1"></i>Добавить в группу</a>
@@ -96,6 +98,7 @@
             </div>
         {% endif %}
     </div>
+    {% endif %}
     <table class="table my-5">
         {% if user_obj in student_user %}
             {#            {% if family %}#}

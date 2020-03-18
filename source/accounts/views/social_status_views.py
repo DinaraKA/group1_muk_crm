@@ -2,11 +2,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from accounts.models import SocialStatus
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
-from django.utils.http import urlencode
+from django.shortcuts import render
 from django.contrib import messages
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 
 
 class SocialStatusListView(PermissionRequiredMixin, ListView):
@@ -18,6 +16,10 @@ class SocialStatusListView(PermissionRequiredMixin, ListView):
     paginate_orphans = 2
     permission_required = "accounts.view_socialstatus"
     permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
@@ -53,7 +55,9 @@ class SocialStatusUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "accounts.change_socialstatus"
     permission_denied_message = "Доступ запрещен"
 
-
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('accounts:all_social_statuses')

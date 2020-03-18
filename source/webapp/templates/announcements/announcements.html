@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-
+{% load auth_extras %}
 {% block content %}
     <h1>Объявления</h1>
+    {% if request.user|has_group:'principal_staff' or request.user.is_staff %}
         <a href="{% url 'webapp:announce_create' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Добавить объявление</a>
+    {% endif %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}

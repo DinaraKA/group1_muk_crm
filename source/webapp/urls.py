@@ -1,5 +1,6 @@
 from django.urls import path
-from webapp.views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
+from .views import AuditoryListView, AuditoryCreateView, AuditoryUpdateView, AuditoryDeleteView
+from .views.personalgrades_views import PersonalGradesDetailView
 from .views import AnnouncementsView, AnnounceDetailView, AnnouncementCreateView, AnnouncementUpdateView, AnnouncementDeleteView
 from .views import IndexView, Department1View, Department2View, Department3View
 from .views import NewsDetailView, NewsView, NewsAddView, NewsEditView, NewsDeleteView
@@ -42,7 +43,7 @@ urlpatterns = [
     path('lessons/add/', LessonCreateView.as_view(), name='lesson_create'),
     path('lessons/update/<int:pk>/', LessonUpdateView.as_view(), name='lesson_update'),
     path('lessons/delete/<int:pk>/', LessonDeleteView.as_view(), name='lesson_delete'),
-    # path('personalgrades/<int:pk>/', PersonalGradesDetailView.as_view(), name='personal_grades'),
+    path('personalgrades/<int:pk>/', PersonalGradesDetailView.as_view(), name='personal_grades'),
     path('journals/', GroupJournalListView.as_view(), name='groupjournals'),
     path('journal/<int:pk>/', GroupJournalDetailView.as_view(), name='groupjournal'),
     path('journal/add/', GroupJournalCreateView.as_view(), name='add_groupjournal'),

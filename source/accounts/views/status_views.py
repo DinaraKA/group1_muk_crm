@@ -1,31 +1,36 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from accounts.models import Status
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404,render
 from django.contrib import messages
 
 
-class StatusListView(PermissionRequiredMixin, ListView):
+class StatusListView(UserPassesTestMixin, ListView):
     template_name = 'status/statuses.html'
     model = Status
     ordering = ["-name"]
     context_object_name = 'statuses'
     paginate_by = 20
     paginate_orphans = 2
-    permission_required = "accounts.view_status"
-    permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class StatusCreateView(PermissionRequiredMixin, CreateView):
+class StatusCreateView(UserPassesTestMixin, CreateView):
     model = Status
     template_name = 'add.html'
     fields = ['name']
-    permission_required = "accounts.add_status"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -43,12 +48,14 @@ class StatusCreateView(PermissionRequiredMixin, CreateView):
         return redirect('accounts:statuses')
 
 
-class StatusUpdateView(PermissionRequiredMixin, UpdateView):
+class StatusUpdateView(UserPassesTestMixin, UpdateView):
     model = Status
     template_name = 'change.html'
     fields = ['name']
-    permission_required = "accounts.change_status"
-    permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -66,9 +73,11 @@ class StatusUpdateView(PermissionRequiredMixin, UpdateView):
         return redirect('accounts:statuses')
 
 
-class StatusDeleteView(PermissionRequiredMixin, DeleteView):
+class StatusDeleteView(UserPassesTestMixin, DeleteView):
     model = Status
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:statuses')
-    permission_required = "accounts.delete_status"
-    permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
