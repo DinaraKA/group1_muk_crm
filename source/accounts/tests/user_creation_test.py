@@ -11,7 +11,7 @@ class LoginTest(TestCase):
 
     def test_create_user(self):
         self.driver.get('http://127.0.0.1:8000/accounts/user/create/')
-        self.driver.find_element_by_name('username').send_keys('TestCreate')
+        self.driver.find_element_by_name('username').send_keys('TestCreate20')
         self.driver.find_element_by_name('password').send_keys('test')
         self.driver.find_element_by_name('password_confirm').send_keys('test')
         self.driver.find_element_by_name('first_name').send_keys('Иван')
@@ -41,11 +41,3 @@ class LoginTest(TestCase):
         print(self.driver.current_url)
         assert self.driver.current_url == 'http://localhost:8000/'
 
-    def test_login_error(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/login/')
-        self.driver.find_element_by_name('username').send_keys('adminanet')
-        self.driver.find_element_by_name('password').send_keys('adminanet')
-        self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        assert self.driver.current_url.split('?')[0] == 'http://127.0.0.1:8000/accounts/login/'
-        error = self.driver.find_element_by_css_selector('.text-danger')
-        assert error.text == "Неверное имя пользователя или пароль."

@@ -45,7 +45,7 @@ class DisciplineViewTest(TestCase):
         self.driver.get('http://localhost:8000/disciplines/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
-        self.driver.find_element_by_name('teacher').send_keys('Айдай Исаева')
+        self.driver.find_element_by_name('teacher').send_keys('Халиков Фарид')
         try:
             self.driver.find_element_by_class_name('btn-success').click()
             assert self.driver.current_url == 'http://localhost:8000/disciplines/'
@@ -57,7 +57,7 @@ class DisciplineViewTest(TestCase):
         self.driver.find_element_by_id('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('UpdateTest')
-        self.driver.find_element_by_name('teacher').send_keys('Айдай Исаева', 'Мария Ложкина')
+        self.driver.find_element_by_name('teacher').send_keys('Жумалиева Айсалкын')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
             assert self.driver.current_url == 'http://127.0.0.1:8000/disciplines/'

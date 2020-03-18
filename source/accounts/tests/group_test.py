@@ -65,16 +65,17 @@ class GroupViewTest(TestCase):
         assert self.driver.current_url == 'http://localhost:8000/accounts/groups/'
 
     def test_created_group(self):
-        self.driver.get('http://localhost:8000/accounts/group/add/')
+        self.driver.get('http://localhost:8000/accounts/groups/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
-        self.driver.find_element_by_name('students').send_keys('Тушаев Бакыт')
+        self.driver.find_element_by_name('students').send_keys('Тюлембаева Айжан')
         self.driver.find_element_by_name('group_leader').click()
-        self.driver.find_element_by_name('group_leader').send_keys('Исаева Айдай')
-        self.driver.find_element_by_name('head_teaher').click()
-        self.driver.find_element_by_name('head_teaher').send_keys('Фарид Халиков')
+        self.driver.find_element_by_name('group_leader').send_keys('Тюлембаева Айжан')
+        self.driver.find_element_by_name('head_teacher').click()
+        self.driver.find_element_by_name('head_teacher').send_keys('Жумалиева Айсалкын')
         self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
         try:
             self.driver.find_element_by_class_name('btn-success').click()
@@ -90,11 +91,11 @@ class GroupViewTest(TestCase):
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('UpdateTest')
-        self.driver.find_element_by_name('students').send_keys('Айдай Исаева')
+        self.driver.find_element_by_name('students').send_keys('Исаева Айдай')
         self.driver.find_element_by_name('group_leader').click()
-        self.driver.find_element_by_name('group_leader').send_keys('Марина Ложкина')
-        self.driver.find_element_by_name('head_teaher').click()
-        self.driver.find_element_by_name('head_teaher').send_keys('Фарид Халиков')
+        self.driver.find_element_by_name('group_leader').send_keys('Исаева Айдай')
+        self.driver.find_element_by_name('head_teacher').click()
+        self.driver.find_element_by_name('head_teacher').send_keys('Фарид Халиков')
         self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
