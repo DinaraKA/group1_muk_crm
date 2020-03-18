@@ -36,11 +36,14 @@ class DisciplineCreateView(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         text = form.cleaned_data['name']
         teacher_text = form.cleaned_data['teacher']
+        print(teacher_text)
         if Discipline.objects.filter(name=text.capitalize()):
             messages.error(self.request, 'Объект с таким названием уже существует!')
             return render(self.request, 'add.html', {})
         else:
             discipline = Discipline(name=text.capitalize())
+            discipline.save()
+            discipline.teacher.set(teacher_text)
             discipline.save()
             return self.get_success_url()
 
