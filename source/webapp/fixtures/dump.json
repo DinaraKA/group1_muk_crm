@@ -531,7 +531,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$7jRY5WrAQShM$z6TlHkZAf2Zeu7324VGhoOLLREBAYYd4syVEvmYyxgk=",
-    "last_login": "2020-03-18T11:22:17.219Z",
+    "last_login": "2020-03-18T12:06:24.202Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -548,7 +548,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$150000$eesaeDTnqwCi$Cy5LNtDyodHzbwR7qAx3dGh/KutXwgk8fenfrnIWULo=",
-    "last_login": "2020-03-18T07:15:58.351Z",
+    "last_login": "2020-03-18T12:06:53.120Z",
     "is_superuser": false,
     "username": "student-1",
     "first_name": "\u0410\u0439\u0436\u0430\u043d",
@@ -556,8 +556,12 @@
     "email": "aujan@mail.ru",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2020-01-24T04:56:38.850Z",
-    "groups": [],
+    "date_joined": "2020-01-24T04:56:38Z",
+    "groups": [
+      [
+        "students"
+      ]
+    ],
     "user_permissions": []
   }
 },
@@ -929,14 +933,6 @@
 },
 {
   "model": "sessions.session",
-  "pk": "jsmbisn3r8dtqi01meqvv9jz8ql3d87s",
-  "fields": {
-    "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
-    "expire_date": "2020-04-01T11:22:17.226Z"
-  }
-},
-{
-  "model": "sessions.session",
   "pk": "k22qk2icnujdid5e17zlyohxhc0elozt",
   "fields": {
     "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
@@ -981,6 +977,14 @@
   "fields": {
     "session_data": "MDg5YTg5NGE4ZjNjOTc4NmU4ZTc4OWE4MmI3MThlZTkxZWM5MGQ4Yjp7Il9hdXRoX3VzZXJfaWQiOiIyMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTM0YzkzOTZiZmZlZjRhNjlmNGQ2MDBmMDI5NDJjYmFkMDJmNTI5ZSJ9",
     "expire_date": "2020-03-31T09:38:16.642Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "t9uz8q4yq4gkzomfnfp5hamel5femqvr",
+  "fields": {
+    "session_data": "NGQ2ZWZlNDEyM2U5OTA1ZWY5NTRiOTI0ZTdlODY1MTBhZjVjZjRiNTp7Il9hdXRoX3VzZXJfaWQiOiIyMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiM2IzZThlYjVhOGQ0YzFjZjM3ZTU0N2VlYzhjYTQ1MGE1ZDUyMDcxOSJ9",
+    "expire_date": "2020-04-01T12:06:53.123Z"
   }
 },
 {
@@ -7819,6 +7823,24 @@
     ],
     "object_id": "38",
     "object_repr": "\u0416\u043e\u043e\u0434\u0430\u0440\u0431\u0435\u043a\u043e\u0432 \u042d\u0440\u0437\u0430\u0442",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"groups\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 258,
+  "fields": {
+    "action_time": "2020-03-18T12:06:37.945Z",
+    "user": [
+      "admin"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "object_id": "21",
+    "object_repr": "\u0422\u044e\u043b\u0435\u043c\u0431\u0430\u0435\u0432\u0430 \u0410\u0439\u0436\u0430\u043d",
     "action_flag": 2,
     "change_message": "[{\"changed\": {\"fields\": [\"groups\"]}}]"
   }
