@@ -80,10 +80,11 @@ def register_view(request, *args, **kwargs):
             profile.role.set(roles)
             for role in roles:
                 if role.name == "Учебная часть":
-                    # user.is_staff = True
                     group = Group.objects.get(name='principal_staff')
                     user.groups.add(group)
-
+                elif role.name == "Преподаватель":
+                    group = Group.objects.get(name='teachers')
+                    user.groups.add(group)
                     user.save()
             return HttpResponseRedirect(reverse('accounts:user_detail', kwargs={"pk": user.pk}))
     else:
@@ -122,7 +123,6 @@ class UserPersonalInfoChangeView(UserPassesTestMixin, UpdateView):
         profile.phone_number = form.cleaned_data['phone_number']
         profile.address_fact = form.cleaned_data['address_fact']
         profile.photo = form.cleaned_data['photo']
-        # roles = Role.objects.filter(pk=role.pk)
         profile.status = form.cleaned_data['status']
         profile.admin_position = form.cleaned_data['admin_position']
         profile.social_status = form.cleaned_data['social_status']
