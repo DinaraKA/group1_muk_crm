@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect, get_object_or_404
 from webapp.forms import JournalNoteForm, GradeForm, JournalSelectForm
 from webapp.models import GroupJournal, JournalNote, JournalGrade, Grade
@@ -16,7 +17,7 @@ class GroupJournalListView(ListView):
         return context
 
 
-class GroupJournalDetailView(DetailView):
+class GroupJournalDetailView(UserPassesTestMixin, DetailView):
     template_name = 'journal/group_journal.html'
     model = GroupJournal
     context_object_name = 'journal'
