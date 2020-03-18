@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from accounts.models import Status
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404,render
 from django.contrib import messages
@@ -13,8 +13,6 @@ class StatusListView(UserPassesTestMixin, ListView):
     context_object_name = 'statuses'
     paginate_by = 20
     paginate_orphans = 2
-    # permission_required = "accounts.view_status"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user
@@ -29,7 +27,6 @@ class StatusCreateView(UserPassesTestMixin, CreateView):
     model = Status
     template_name = 'add.html'
     fields = ['name']
-    # permission_required = "accounts.add_status"
 
     def test_func(self):
         user = self.request.user
@@ -55,8 +52,6 @@ class StatusUpdateView(UserPassesTestMixin, UpdateView):
     model = Status
     template_name = 'change.html'
     fields = ['name']
-    # permission_required = "accounts.change_status"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user
@@ -82,8 +77,6 @@ class StatusDeleteView(UserPassesTestMixin, DeleteView):
     model = Status
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:statuses')
-    # permission_required = "accounts.delete_status"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user
