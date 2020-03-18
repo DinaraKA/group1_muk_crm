@@ -1,6 +1,7 @@
 import json
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
+from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -15,6 +16,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
 from ajax_search.forms import SearchForm
+
 
 
 def login_view(request, *args, **kwargs):
@@ -140,13 +142,13 @@ class UserPersonalInfoChangeView(PermissionRequiredMixin, UpdateView):
         return reverse('accounts:user_detail', kwargs={"pk": self.object.pk})
 
 
-class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
+class UserPasswordChangeView(UpdateView):
     model = User
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
-    permission_required = "accounts.change_user"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.change_user"
+    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
@@ -184,6 +186,7 @@ class UserListView(PermissionRequiredMixin, ListView):
     context_object_name = 'user'
     permission_required = "accounts.view_user"
     permission_denied_message = "Доступ запрещен"
+    ordering = ["last_name"]
 
 
 class UserDeleteView(PermissionRequiredMixin, DeleteView):
@@ -210,6 +213,7 @@ class UserDeleteView(PermissionRequiredMixin, DeleteView):
 class UserSearchView(FormView):
     template_name = 'search.html'
     form_class = FullSearchForm
+
 
     def form_valid(self, form):
         query = urlencode(form.cleaned_data)
@@ -306,7 +310,7 @@ class SearchResultsView(PermissionRequiredMixin, ListView):
             #     group = Group.objects.filter(name__icontains=text)
             #     # query = query | Q(user__students__name__icontains=text)
             #     print(query, "IN GROUP")
-
+        print(query)
         return query
 
 

@@ -8,11 +8,9 @@ from django.shortcuts import render
 
 
 class AdminPositionIndexView(PermissionRequiredMixin, ListView):
-    template_name = 'admin_position/list.html'
+    template_name = 'admin_position/admin_positions.html'
     model = AdminPosition
     context_object_name = 'adminpositions'
-    paginate_by = 6
-    paginate_orphans = 0
     page_kwarg = 'page'
     permission_required = "accounts.view_adminposition"
     permission_denied_message = "Доступ запрещен"

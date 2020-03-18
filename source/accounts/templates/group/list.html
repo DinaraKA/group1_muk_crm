@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
@@ -7,7 +6,7 @@
         <table class="table">
             <h1>Группы</h1>
             {% if perms.accounts.add_group %}
-                <a href="{% url 'accounts:add_group' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">Создать группу</a>
+                <a href="{% url 'accounts:add_group' %}" class="btn btn-success  ml-5 my-3 hiddenbutton">+ Создать группу</a>
             {% endif %}
             <thead>
             <tr>

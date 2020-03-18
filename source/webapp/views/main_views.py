@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
+
 from accounts.models import StudyGroup
 from webapp.models import News, Announcements, Discipline
 
@@ -25,10 +26,8 @@ class IndexView(ListView):
 class Department1View(TemplateView):
     template_name = 'departments/department1.html'
 
-
 class Department2View(TemplateView):
     template_name = 'departments/department2.html'
-
 
 class Department3View(TemplateView):
     template_name = 'departments/department3.html'

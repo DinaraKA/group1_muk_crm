@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
+# from django_select2.forms import ModelSelect2Widget, Select2MultipleWidget
 from accounts.models import AdminPosition
 from django import forms
 from .models import Profile, Passport, StudyGroup, Role, Status, SocialStatus
@@ -110,6 +110,7 @@ class UserForm(forms.ModelForm):
 class UserCreationForm(UserForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    email = forms.EmailField(label='Email', required=True)
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
@@ -185,11 +186,12 @@ class AdminPositionForm(forms.ModelForm):
 
 class GroupForm(forms.ModelForm):
     head_teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Преподаватель'), label='Куратор')
+    students = forms.ModelMultipleChoiceField(queryset=User.objects.filter(profile__role__name='Студент'), label='Студенты')
+    group_leader = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name='Студент'), label='Староста')
 
     class Meta:
         model = StudyGroup
         fields = ['name', 'students', 'group_leader', 'head_teacher', 'started_at']
-
 
 class FullSearchForm(forms.Form):
     text = forms.CharField(max_length=100, required=False, label='Поиск')
