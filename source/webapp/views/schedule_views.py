@@ -1,5 +1,4 @@
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from webapp.forms import ScheduleForm
@@ -14,15 +13,6 @@ class ScheduleView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ScheduleView, self).get_context_data(**kwargs)
-        # context['weekdays'] = weekdays
-        # context["monday"] = self.day_array('Monday')
-        # context['tuesday'] = self.day_array('Tuesday')
-        # context['wednesday'] = self.day_array('Wednesday')
-        # context['thursday'] = self.day_array('Thursday')
-        # context['friday'] = self.day_array('Friday')
-        # context['saturday'] = self.day_array('Saturday')
-        # context['groups'] = Group.objects.filter(students=self.request.user)
-        # context['days'] = DAY_CHOICES
         student = Family.objects.filter(family_user=self.request.user).values('student')
         context.update({
             'lessons': Lesson.objects.filter(is_saturday=False),
@@ -45,19 +35,6 @@ class ScheduleView(ListView):
         for item in range(lesson - saturdaylesson):
             difference.append(" ")
         return difference
-
-    # def day_array(self, day):
-    #     day_array = ["","","","","","","",""]
-    #     schedule_day = Schedule.objects.filter(day=day)
-    #     i = 0
-    #     while i < 9:
-    #         try:
-    #             index = int(schedule_day[i].lesson.name) - 1
-    #             day_array[index] = (schedule_day[i])
-    #         except:
-    #             pass
-    #         i += 1
-    #     return day_array
 
     def day_array(self, day):
         day_array = [[],[],[],[],[],[],[],[]]
@@ -84,27 +61,39 @@ class ScheduleView(ListView):
         return Schedule.objects.all()
 
 
-class ScheduleAddView(CreateView):
+class ScheduleAddView(UserPassesTestMixin, CreateView):
     model = Schedule
     template_name = 'add.html'
     form_class = ScheduleForm
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
+
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleUpdateView(UpdateView):
+class ScheduleUpdateView(UserPassesTestMixin, UpdateView):
     model = Schedule
     template_name = 'change.html'
     form_class = ScheduleForm
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
+
     def get_success_url(self):
         return reverse('webapp:schedule')
 
 
-class ScheduleDeleteView(DeleteView):
+class ScheduleDeleteView(UserPassesTestMixin, DeleteView):
     model = Schedule
     template_name = 'delete.html'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('webapp:schedule')

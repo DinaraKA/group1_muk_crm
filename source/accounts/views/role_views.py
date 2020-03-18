@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from accounts.models import Role
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
@@ -12,8 +12,6 @@ class RoleIndexView(UserPassesTestMixin, ListView):
     model = Role
     context_object_name = 'roles'
     page_kwarg = 'page'
-    # permission_required = "accounts.view_role"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user
@@ -28,8 +26,6 @@ class RoleCreateView(UserPassesTestMixin, CreateView):
     model = Role
     template_name = 'add.html'
     fields = ['name']
-    # permission_required = "accounts.add_role"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user
@@ -54,8 +50,6 @@ class RoleUpdateView(UserPassesTestMixin, UpdateView):
     model = Role
     template_name = 'change.html'
     fields = ['name']
-    # permission_required = "accounts.change_role"
-    # permission_denied_message = "Доступ запрещен"
 
     def test_func(self):
         user = self.request.user

@@ -1,7 +1,6 @@
 from django.db.models import ProtectedError
-
 from accounts.forms import GroupForm, StudentAddStudyGroupForm
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from accounts.models import StudyGroup, User, Profile, AdminPosition
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -10,36 +9,45 @@ from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 
 
-class GroupListView(ListView):
+class GroupListView(UserPassesTestMixin, ListView):
     template_name = 'group/list.html'
     model = StudyGroup
     ordering = ["-name"]
     context_object_name = 'group_list'
     paginate_by = 10
     paginate_orphans = 2
-    # permission_required = "accounts.view_group"
-    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(
+            name='group_leaders') or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class GroupDetailView(DetailView):
+class GroupDetailView(UserPassesTestMixin, DetailView):
     template_name = 'group/detail.html'
     model = StudyGroup
     context_object_name = 'group'
-    # permission_required = "accounts.view_group"
-    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(
+            name='group_leaders') or user.groups.filter(name='principal_staff')
 
 
-class GroupCreateView(CreateView):
+class GroupCreateView(UserPassesTestMixin, CreateView):
     model = StudyGroup
     template_name = 'add.html'
-    # permission_required = "accounts.add_group"
-    # permission_denied_message = "Доступ запрещен"
     form_class = GroupForm
     context_object_name = 'group'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(
+            name='group_leaders') or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         self.text = form.cleaned_data['name']
@@ -76,13 +84,15 @@ class GroupCreateView(CreateView):
         return redirect('accounts:groups')
 
 
-
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(UserPassesTestMixin, UpdateView):
     model = StudyGroup
     template_name = 'change.html'
     form_class = GroupForm
-    # permission_required = "accounts.change_group"
-    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(
+            name='group_leaders') or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         self.text = form.cleaned_data['name']
@@ -90,7 +100,6 @@ class GroupUpdateView(UpdateView):
         return self.get_success_url()
 
     def update_group(self, form):
-        print(self.kwargs)
         group = StudyGroup.objects.get(pk=self.kwargs.get('pk'))
         students = form.cleaned_data['students']
         group.group_leader = form.cleaned_data['group_leader']
@@ -116,12 +125,10 @@ class GroupUpdateView(UpdateView):
         return redirect('accounts:groups')
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(UserPassesTestMixin, DeleteView):
     model = StudyGroup
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:groups')
-    # permission_required = "accounts.delete_group"
-    # permission_denied_message = "Доступ запрещен"
 
     def get(self, request, *args, **kwargs):
         try:
@@ -130,12 +137,15 @@ class GroupDeleteView(DeleteView):
             return render(request, 'error.html')
 
 
-class GroupStudentAdd(UpdateView):
+class GroupStudentAdd(UserPassesTestMixin, UpdateView):
     model = StudyGroup
     template_name = 'group/group_student_add.html'
     form_class = StudentAddStudyGroupForm
-    permission_required = "accounts.change_group"
-    permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='teachers') or user.groups.filter(
+            name='group_leaders') or user.groups.filter(name='principal_staff')
 
     def get_object(self, queryset=None):
         return get_object_or_404(User, pk=self.kwargs.get('pk'))
