@@ -65,23 +65,35 @@ class AuditoryViewTest(TestCase):
         self.driver.close()
 
     def test_list_auditory(self):
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.get('http://localhost:8000/auditories/')
         assert self.driver.current_url == 'http://localhost:8000/auditories/'
 
     def test_created_auditory(self):
-        self.driver.get('http://localhost:8000/auditories/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/auditories/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         self.driver.find_element_by_name('places').send_keys(35)
         self.driver.find_element_by_name('description').send_keys('CreateTest')
         try:
             self.driver.find_element_by_class_name('btn-success').click()
-            assert self.driver.current_url == 'http://localhost:8000/auditories/'
+            assert self.driver.current_url == 'http://134.122.82.126/auditories/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_auditory(self):
-        self.driver.get('http://127.0.0.1:8000/auditories/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/auditories/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('places').clear()
@@ -91,13 +103,16 @@ class AuditoryViewTest(TestCase):
         self.driver.find_element_by_name('description').send_keys('Update test description')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
-            assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
+            assert self.driver.current_url == 'http://134.122.82.126/auditories/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_auditory(self):
-        self.driver.get('http://127.0.0.1:8000/auditories/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/auditories/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        print(self.driver.current_url)
-        assert self.driver.current_url == 'http://127.0.0.1:8000/auditories/'
+        assert self.driver.current_url == 'http://134.122.82.126/auditories/'

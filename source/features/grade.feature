@@ -9,6 +9,9 @@ Feature: Оценка
 
   Scenario: Создание
     Given Я перехожу на страницу создания Оценки
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     When Я ввожу текст "2" в поле "value"
     And Я ввожу текст "NewCreate" в поле "description"
     Then Я нажимаю на кнопку "Создать"
@@ -16,6 +19,9 @@ Feature: Оценка
 
   Scenario: Обновление
     Given Я открыл страницу "Оценка"
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     Then Я нажимаю на кнопку "Обновить-2"
     When Я очищаю поле "value"
     And Я ввожу текст "3" в поле "value"
@@ -26,6 +32,9 @@ Feature: Оценка
 
     Scenario: Удаление
     Given Я открыл страницу "Оценка"
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     Then Я нажимаю на кнопку "Удалить-2"
     When Я нажимаю на кнопку "Да"
     Then Я должен быть на странице "Оценка"

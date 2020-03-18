@@ -10,7 +10,7 @@ class LoginTest(TestCase):
         self.driver.close()
 
     def test_create_user(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/user/create/')
+        self.driver.get('http://localhost:8000/accounts/user/create/')
         self.driver.find_element_by_name('username').send_keys('TestCreate20')
         self.driver.find_element_by_name('password').send_keys('test')
         self.driver.find_element_by_name('password_confirm').send_keys('test')

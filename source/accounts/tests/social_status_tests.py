@@ -34,26 +34,38 @@ class SocialStatusViewTest(TestCase):
         self.driver.close()
 
     def test_list_social_status(self):
-        self.driver.get('http://localhost:8000/accounts/social_statuses/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/'
+        self.driver.get('http://134.122.82.126/accounts/social_statuses/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/social_statuses/'
 
     def test_created_social_status(self):
-        self.driver.get('http://localhost:8000/accounts/social_statuses/add/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/social_statuses/add/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         try:
             self.driver.find_element_by_class_name('btn-success').click()
-            assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/'
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/social_statuses/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_social_status(self):
-        self.driver.get('http://localhost:8000/accounts/social_statuses/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/social_statuses/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
@@ -62,15 +74,19 @@ class SocialStatusViewTest(TestCase):
         self.driver.find_element_by_name('name').send_keys('UpdateTest')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
-            assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/'
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/social_statuses/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_social_status(self):
-        self.driver.get('http://localhost:8000/accounts/social_statuses/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/social_statuses/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/social_statuses/'
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/social_statuses/'

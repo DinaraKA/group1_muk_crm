@@ -9,6 +9,9 @@ Feature: Аудитория
 
   Scenario: Создание
     Given Я перехожу на страницу создания Аудитории
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     When Я ввожу текст "NewCreate" в поле "name"
     And Я ввожу текст "35" в поле "places"
     And Я ввожу текст "CreateTest" в поле "description"
@@ -17,6 +20,9 @@ Feature: Аудитория
 
   Scenario: Обновление
     Given Я открыл страницу "Аудитория"
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     Then Я нажимаю на кнопку "Обновить-2"
     When Я очищаю поле "name"
     And Я ввожу текст "NewUpdate" в поле "name"
@@ -29,6 +35,9 @@ Feature: Аудитория
 
   Scenario: Удаление
     Given Я открыл страницу "Аудитория"
+    When Я ввожу текст "admin" в поле "username"
+    And Я ввожу текст "admin" в поле "password"
+    And Я отправляю форму
     Then Я нажимаю на кнопку "Удалить-2"
     When Я нажимаю на кнопку "Да"
     Then Я должен быть на странице "Аудитория"

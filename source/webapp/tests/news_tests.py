@@ -57,25 +57,33 @@ class NewsViewTest(TestCase):
         self.driver.close()
 
     def test_list_news(self):
-        self.driver.get('http://localhost:8000/news/all/')
-        assert self.driver.current_url == 'http://localhost:8000/news/all/'
+        self.driver.get('http://134.122.82.126/news/all/')
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
 
     def test_detail_news(self):
-        self.driver.get('http://localhost:8000/news/all/')
+        self.driver.get('http://134.122.82.126/news/all/')
         self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('title')
 
     def test_created_news(self):
-        self.driver.get('http://localhost:8000/news/all/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('title').send_keys('CreateTest')
         self.driver.find_element_by_name('text').send_keys('СreateTest')
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
         self.driver.find_element_by_class_name('btn-success').click()
-        assert self.driver.current_url == 'http://localhost:8000/news/all/'
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
 
     def test_updated_news(self):
-        self.driver.get('http://localhost:8000/news/all/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
         self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-primary').click()
         self.driver.find_element_by_name('title').clear()
@@ -84,11 +92,15 @@ class NewsViewTest(TestCase):
         self.driver.find_element_by_name('text').send_keys('UpdateTest')
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
         self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/news/all/'
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
 
     def test_deleted_news(self):
-        self.driver.get('http://localhost:8000/news/all/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
         self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://localhost:8000/news/all/'
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'

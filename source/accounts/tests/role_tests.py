@@ -37,44 +37,48 @@ class RoleViewTest(TestCase):
         self.driver.close()
 
     def test_list_roles(self):
-        self.driver.get('http://localhost:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126accounts/login/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
+        self.driver.get('http://134.122.82.126/accounts/roles/')
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
 
     def test_created_role(self):
-        self.driver.get('http://localhost:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126accounts/login/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
         self.driver.find_element_by_class_name('btn-success').click()
         self.driver.find_element_by_name('name').send_keys('CreateTest')
         try:
             self.driver.find_element_by_class_name('btn-success').click()
-            assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_role(self):
-        self.driver.get('http://localhost:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
         self.driver.find_element_by_name('name').send_keys('UpdateTest')
         try:
             self.driver.find_element_by_class_name('btn-primary').click()
-            assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
         except:
             assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_role(self):
-        self.driver.get('http://localhost:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
         self.driver.find_element_by_name('username').send_keys('admin')
         self.driver.find_element_by_name('password').send_keys('admin')
         self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
