@@ -159,7 +159,7 @@ class UserDetailView(UserPassesTestMixin, DetailView):
     def test_func(self):
         user_requesting = self.request.user
         user_detail = User.objects.get(pk=self.kwargs['pk'])
-        return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff')
+        return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff') or user_detail == user_requesting
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
