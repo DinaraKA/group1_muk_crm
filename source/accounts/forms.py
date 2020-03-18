@@ -110,7 +110,6 @@ class UserForm(forms.ModelForm):
 class UserCreationForm(UserForm):
     password = forms.CharField(label="Пароль", strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
-    email = forms.EmailField(label='Email', required=True)
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")

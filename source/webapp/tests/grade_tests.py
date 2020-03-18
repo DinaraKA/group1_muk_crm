@@ -33,7 +33,7 @@ class GradeModelTest(TestCase):
         self.assertEquals(expected_object_name, str(grade))
 
 
-class GradeSeleniumViewTest(TestCase):
+class GradeViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -41,28 +41,47 @@ class GradeSeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_grade(self):
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
         self.driver.get('http://localhost:8000/grades/')
-        assert self.driver.current_url == 'http://localhost:8000/grades/'
+        assert self.driver.current_url == 'http://134.122.82.126/grades/'
 
     def test_created_grade(self):
-        self.driver.get('http://localhost:8000/grades/add/')
-        self.driver.find_element_by_name('value').send_keys('30000')
-        self.driver.find_element_by_name('description').send_keys('New grade 3000')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/grades/'
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/grades/')
+        self.driver.find_element_by_class_name('btn-success').click()
+        self.driver.find_element_by_name('value').send_keys('2')
+        self.driver.find_element_by_name('description').send_keys('СreateTest')
+        try:
+            self.driver.find_element_by_class_name('btn-success').click()
+            assert self.driver.current_url == 'http://134.122.82.126/grades/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_grade(self):
-        self.driver.get('http://127.0.0.1:8000/grades/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/grades/')
         self.driver.find_element_by_id('update').click()
         self.driver.find_element_by_name('value').clear()
-        self.driver.find_element_by_name('value').send_keys('10')
+        self.driver.find_element_by_name('value').send_keys('5')
         self.driver.find_element_by_name('description').clear()
-        self.driver.find_element_by_name('description').send_keys('New grade 10 update')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/grades/'
+        self.driver.find_element_by_name('description').send_keys('UpdateTest')
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://134.122.82.126/grades/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_grade(self):
-        self.driver.get('http://127.0.0.1:8000/grades/')
+        self.driver.get('http://134.122.82.126/grades/')
         self.driver.find_element_by_id('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/grades/'
+        assert self.driver.current_url == 'http://134.122.82.126/grades/'

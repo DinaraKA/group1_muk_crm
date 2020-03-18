@@ -4,32 +4,23 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
-from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class AuditoryListView(UserPassesTestMixin, ListView):
+class AuditoryListView(ListView):
     template_name = 'auditory/auditories.html'
     model = Auditory
     ordering = ["-name"]
     context_object_name = 'auditories'
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class AuditoryCreateView(UserPassesTestMixin, CreateView):
+class AuditoryCreateView(CreateView):
     model = Auditory
     template_name = 'add.html'
     fields = ['name', 'places', 'description']
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -46,25 +37,17 @@ class AuditoryCreateView(UserPassesTestMixin, CreateView):
         return redirect('webapp:auditories')
 
 
-class AuditoryUpdateView(UserPassesTestMixin, UpdateView):
+class AuditoryUpdateView(UpdateView):
     model = Auditory
     template_name = 'change.html'
     fields = ['name', 'places', 'description']
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('webapp:auditories')
 
 
-class AuditoryDeleteView(UserPassesTestMixin, DeleteView):
+class AuditoryDeleteView(DeleteView):
     model = Auditory
     template_name = 'delete.html'
     success_url = reverse_lazy('webapp:auditories')
-
-    def test_func(self):
-        user = self.request.user
-        return user.is_staff or user.groups.filter(name='principal_staff')
 

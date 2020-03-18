@@ -7,6 +7,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 from bootstrap_datepicker_plus import DatePickerInput
 
 
+
 class ScheduleForm(forms.ModelForm):
     lesson = forms.ModelChoiceField(queryset=Lesson.objects.filter(is_saturday=False), label='Пара')
     teacher = forms.ModelChoiceField(queryset=User.objects.filter(profile__role__name__contains='Преподаватель'), label='Преподаватель')
@@ -17,7 +18,9 @@ class ScheduleForm(forms.ModelForm):
         lesson = self.cleaned_data["lesson"]
         lessons = Lesson.objects.filter(is_saturday=True)
         if day == 'Saturday':
-            if lesson not in lessons:
+            print(day)
+            if not lesson in lessons:
+                print(lesson)
                 raise forms.ValidationError('В субботу нет' + " " + str(lesson.index) + 'й' + " " + "пары" )
 
 

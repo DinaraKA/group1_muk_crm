@@ -49,7 +49,7 @@ class NewsModelTest(TestCase):
         self.assertEqual(str(news.text), news.text)
 
 
-class NewsSeleniumViewTest(TestCase):
+class NewsViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -57,39 +57,50 @@ class NewsSeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_news(self):
-        self.driver.get('http://localhost:8000/news/')
-        assert self.driver.current_url == 'http://localhost:8000/news/'
+        self.driver.get('http://134.122.82.126/news/all/')
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
+
+    def test_detail_news(self):
+        self.driver.get('http://134.122.82.126/news/all/')
+        self.driver.find_element_by_class_name('link').click()
+        self.driver.find_element_by_class_name('title')
 
     def test_created_news(self):
-        self.driver.get('http://localhost:8000/news/add/')
-        self.driver.find_element_by_name('title').send_keys('Test news')
-        self.driver.find_element_by_name('text').send_keys('Test news888888')
-        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/aisuluu/projects/group1_muk_crm/source/uploads/news_images/aidin.jpg')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/news/'
-
-    #
-    # def test_news_detail(self):
-    #     news = test_created_news(title='BESIIIT.', text='Ghbdtn', photo='/home/aisuluu/projects/group1_muk_crm/source/uploads/news_images/aidin.jpg')
-    #     url = reverse('webapp:news_detail', args=(news.id,))
-    #     response = self.driver.get(url)
-    #     self.assertContains(response, news.title, news.text, news.photo)
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
+        self.driver.find_element_by_class_name('btn-success').click()
+        self.driver.find_element_by_name('title').send_keys('CreateTest')
+        self.driver.find_element_by_name('text').send_keys('СreateTest')
+        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
+        self.driver.find_element_by_class_name('btn-success').click()
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
 
     def test_updated_news(self):
-        self.driver.get('http://127.0.0.1:8000/news/edit/')
-        self.driver.find_element_by_class_name('update').click()
-        self.driver.find_element_by_name('title').clear()
-        self.driver.find_element_by_name('title').send_keys('News test2')
-        self.driver.find_element_by_name('text').clear()
-        self.driver.find_element_by_name('text').send_keys('it new news')
-        self.driver.find_element_by_name('photo').clear()
-        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/aisuluu/projects/group1_muk_crm/source/uploads/news_images/nadina.jpg')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
+        self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-primary').click()
-        self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/news/'
+        self.driver.find_element_by_name('title').clear()
+        self.driver.find_element_by_name('title').send_keys('UpdateTest')
+        self.driver.find_element_by_name('text').clear()
+        self.driver.find_element_by_name('text').send_keys('UpdateTest')
+        self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
+        self.driver.find_element_by_class_name('btn-primary').click()
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'
 
     def test_deleted_news(self):
-        self.driver.get('http://127.0.0.1:8000/news/')
-        self.driver.find_element_by_class_name('delete').click()
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/news/all/')
+        self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/news/'
+        self.driver.find_element_by_class_name('btn-danger').click()
+        assert self.driver.current_url == 'http://134.122.82.126/news/all/'

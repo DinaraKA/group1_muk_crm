@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse, reverse_lazy
+
 from django.utils.datetime_safe import datetime
-from accounts.forms import GroupForm
 from accounts.models import StudyGroup
 from selenium.webdriver import Chrome
 
@@ -17,15 +16,15 @@ class GroupModelTest(TestCase):
                             username='karamoldoevee2', password='aw12345678')
         user = User.objects.create(first_name='Emir3', last_name='Karamoldoev3',
                                    username='karamoldoevee3', password='aw12345678')
-        StudyGroup.objects.create(name='TestModel', starosta_id=1, kurator_id=2, started_at='2020-06-06')
+        StudyGroup.objects.create(name='TestModel', group_leader_id=1, head_teaher_id=2, started_at='2020-06-06')
 
     def test_object_is_object(self):
         group = \
             StudyGroup.objects.get(id=1)
         date = datetime(2020, 6, 6)
         self.assertEquals(group.name, 'TestModel')
-        self.assertEquals(group.leader.username, 'karamoldoevee')
-        self.assertEquals(group.headteacher.username, 'karamoldoevee2')
+        self.assertEquals(group.group_leader.username, 'karamoldoevee')
+        self.assertEquals(group.head_teaher.username, 'karamoldoevee2')
         self.assertEquals(group.started_at.year, date.year)
         self.assertEquals(group.started_at.month, date.month)
         self.assertEquals(group.started_at.day, date.day)
@@ -34,9 +33,9 @@ class GroupModelTest(TestCase):
         group = StudyGroup.objects.get(id=1)
         field_label = group._meta.get_field('name').verbose_name
         self.assertEquals(field_label, 'Группа')
-        field_label = group._meta.get_field('leader').verbose_name
+        field_label = group._meta.get_field('group_leader').verbose_name
         self.assertEquals(field_label, 'Староста')
-        field_label = group._meta.get_field('headteacher').verbose_name
+        field_label = group._meta.get_field('head_teaher').verbose_name
         self.assertEquals(field_label, 'Куратор')
         field_label = group._meta.get_field('started_at').verbose_name
         self.assertEquals(field_label, 'Дата создания')
@@ -51,26 +50,7 @@ class GroupModelTest(TestCase):
         self.assertEqual(str(group), group.name)
 
 
-class GroupFormTest(TestCase):
-
-    def test_form_valid_data(self):
-        form = GroupForm(data={
-            'name': 'TestModel',
-            'students': None,
-            'team_leader': None,
-            'head_teacher': None,
-            'started_at': '2020-06-06'
-        })
-        print(form.errors)
-        self.assertTrue(form.is_valid())
-
-    def test_form_no_data(self):
-        form = GroupForm(data={})
-        self.assertFalse(form.is_valid())
-        self.assertEquals(len(form.errors), 5)
-
-
-class GroupSeleniumViewTest(TestCase):
+class GroupViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -78,37 +58,39 @@ class GroupSeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_group(self):
-        self.driver.get('http://localhost:8000/accounts/groups/')
-        assert self.driver.current_url == 'http://localhost:8000/accounts/groups/'
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/groups/')
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/groups/'
 
     def test_created_group(self):
-        self.driver.get('http://localhost:8000/accounts/group/add/')
-        self.driver.find_element_by_name('name').send_keys('Mama')
-        self.driver.find_element_by_name('students').send_keys('student-1', 'student-2')
-        self.driver.find_element_by_name('leader').click()
-        self.driver.find_element_by_name('leader').send_keys('student-1')
-        self.driver.find_element_by_name('headteacher').click()
-        self.driver.find_element_by_name('headteacher').send_keys('student-2')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/groups/')
+        self.driver.find_element_by_class_name('btn-success').click()
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
+        self.driver.find_element_by_name('students').send_keys('Тюлембаева Айжан')
+        self.driver.find_element_by_name('group_leader').click()
+        self.driver.find_element_by_name('group_leader').send_keys('Тюлембаева Айжан')
+        self.driver.find_element_by_name('head_teacher').click()
+        self.driver.find_element_by_name('head_teacher').send_keys('Жумалиева Айсалкын')
         self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/groups/'
-
-    def test_updated_group(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/groups/')
-        self.driver.find_element_by_class_name('update').click()
-        self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('Islam_Cool')
-        self.driver.find_element_by_name('students').send_keys('student-3', 'student-4')
-        self.driver.find_element_by_name('leader').click()
-        self.driver.find_element_by_name('leader').send_keys('student-3')
-        self.driver.find_element_by_name('headteacher').click()
-        self.driver.find_element_by_name('headteacher').send_keys('student-4')
-        self.driver.find_element_by_name('started_at').send_keys('2020-06-06')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/groups/'
+        try:
+            self.driver.find_element_by_class_name('btn-success').click()
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/groups/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_group(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/groups/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/groups/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/groups/'
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/groups/'

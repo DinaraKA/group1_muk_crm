@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.urls import reverse, reverse_lazy
 
 from accounts.models import Role
 from selenium.webdriver import Chrome
@@ -14,7 +13,7 @@ class RoleModelTest(TestCase):
     def test_verbose_name(self):
         role = Role.objects.get(id=1)
         field_label = role._meta.get_field('name').verbose_name
-        self.assertEquals(field_label, 'Роль')
+        self.assertEquals(field_label, 'Название')
 
     def test_max_length(self):
         role = Role.objects.get(id=1)
@@ -31,53 +30,6 @@ class RoleModelTest(TestCase):
 
 
 class RoleViewTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        Role.objects.create(
-            name='TestModel',
-        )
-
-    def test_role_list(self):
-        response = self.client.get(reverse('accounts:roles_list'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'TestModel')
-
-    def test_created_role(self):
-        response = self.client.post(reverse('accounts:role_add'), {
-            'name': 'TestModel'
-        })
-        self.assertEqual(Role.objects.get(pk=2).name, 'TestModel')
-        self.assertEqual(response.status_code, 302)
-
-    def test_updated_role(self):
-        role = Role.objects.get(id=1)
-        response = self.client.post(
-            reverse('accounts:role_change', kwargs={'pk': role.pk}),
-            {
-                'name': 'NewTestModel'
-            })
-
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(Role.objects.get().name, 'NewTestModel')
-
-    def test_deleted_role(self):
-        role = Role.objects.get(id=1)
-        response = self.client.delete(
-            reverse_lazy('accounts:role_delete', kwargs={'pk': role.pk}),
-            {
-                'name': 'NewTestModel'
-            })
-
-        self.assertEqual(response.status_code, 302)
-        response = self.client.get(reverse_lazy('accounts:role_delete', kwargs={'pk': role.pk}),
-                                   {'name': 'Test'})
-        self.assertEqual(response.status_code, 404)
-
-        self.assertFalse(Role.objects.filter(pk=role.pk).exists())
-
-
-class RoleSeleniumViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -85,26 +37,48 @@ class RoleSeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_roles(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/roles/')
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
+        self.driver.get('http://134.122.82.126accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
 
     def test_created_role(self):
-        self.driver.get('http://localhost:8000/accounts/roles/')
-        self.driver.find_element_by_class_name('btn-outline-primary').click()
-        self.driver.find_element_by_name('name').send_keys('Преподаватель')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/accounts/roles/'
+        self.driver.get('http://134.122.82.126accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
+        self.driver.find_element_by_class_name('btn-success').click()
+        self.driver.find_element_by_name('name').send_keys('CreateTest')
+        try:
+            self.driver.find_element_by_class_name('btn-success').click()
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_updated_role(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
         self.driver.find_element_by_class_name('update').click()
         self.driver.find_element_by_name('name').clear()
-        self.driver.find_element_by_name('name').send_keys('Сторож')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
+        self.driver.find_element_by_name('name').send_keys('UpdateTest')
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
     def test_deleted_role(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/roles/')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/accounts/roles/')
         self.driver.find_element_by_class_name('delete').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/accounts/roles/'
+        assert self.driver.current_url == 'http://134.122.82.126/accounts/roles/'

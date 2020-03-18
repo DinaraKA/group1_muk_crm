@@ -1,5 +1,4 @@
 from django.test import TestCase
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome
 
 
@@ -11,8 +10,8 @@ class LoginTest(TestCase):
         self.driver.close()
 
     def test_create_user(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/user_create')
-        self.driver.find_element_by_name('username').send_keys('student51')
+        self.driver.get('http://localhost:8000/accounts/user/create/')
+        self.driver.find_element_by_name('username').send_keys('TestCreate20')
         self.driver.find_element_by_name('password').send_keys('test')
         self.driver.find_element_by_name('password_confirm').send_keys('test')
         self.driver.find_element_by_name('first_name').send_keys('Иван')
@@ -31,22 +30,14 @@ class LoginTest(TestCase):
         self.driver.find_element_by_name('patronymic').send_keys('Иванович')
         self.driver.find_element_by_name('phone_number').send_keys('+996700998877')
         self.driver.find_element_by_name('address_fact').send_keys('Марсианин')
-        self.driver.find_element_by_name('role').send_keys('Сторож')
+        self.driver.find_element_by_name('role').send_keys('CreateTest')
         self.driver.find_element_by_name('status').click()
-        self.driver.find_element_by_name('status').send_keys('Полная занятость')
+        self.driver.find_element_by_name('status').send_keys('CreateTest')
         self.driver.find_element_by_name('social_status').click()
-        self.driver.find_element_by_name('social_status').send_keys('Сирота')
+        self.driver.find_element_by_name('social_status').send_keys('CreateTest')
         self.driver.find_element_by_name('admin_position').click()
-        self.driver.find_element_by_name('admin_position').send_keys('Уборщица')
-        assert self.driver.find_element_by_class_name('btn-primary').click()
+        self.driver.find_element_by_name('admin_position').send_keys('CreateTest')
+        self.driver.find_element_by_class_name('btn-success').click()
         print(self.driver.current_url)
-        # assert self.driver.current_url == 'http://localhost:8000/u'
+        assert self.driver.current_url == 'http://localhost:8000/'
 
-    def test_login_error(self):
-        self.driver.get('http://127.0.0.1:8000/accounts/login/')
-        self.driver.find_element_by_name('username').send_keys('adminanet')
-        self.driver.find_element_by_name('password').send_keys('adminanet')
-        self.driver.find_element_by_css_selector('button[type="submit"]').click()
-        assert self.driver.current_url.split('?')[0] == 'http://127.0.0.1:8000/accounts/login/'
-        error = self.driver.find_element_by_css_selector('.text-danger')
-        assert error.text == "Неверное имя пользователя или пароль."

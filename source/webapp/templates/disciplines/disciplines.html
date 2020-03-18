@@ -23,8 +23,8 @@
                         {% for teacher in discipline.teacher.all %}
                             <td>{{ teacher}}</td>
                         {% endfor %}
-                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update" class="hiddenbutton">&#x270E;</a></td>
-                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete" style="color: red" class="hiddenbutton">x</a></td>
+                        <td class="symbol"><a href="{% url 'webapp:change_discipline' discipline.pk %}" id="update" class="update hiddenbutton">&#x270E;</a></td>
+                        <td class="symbol"><a href="{%  url 'webapp:delete_discipline' discipline.pk %}" id="delete" style="color: red" class="delete hiddenbutton">x</a></td>
                     </tr>
                 </tbody>
             {% endfor %}

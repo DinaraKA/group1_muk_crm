@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from webapp.models import Announcements
 from selenium.webdriver import Chrome
 
@@ -45,7 +46,7 @@ class AnnouncementModelTest(TestCase):
         self.assertEquals(announcement.title, str(announcement.title))
 
 
-class AnnouncementsSeleniumViewTest(TestCase):
+class AnnouncementViewTest(TestCase):
     def setUp(self):
         self.driver = Chrome()
 
@@ -53,28 +54,57 @@ class AnnouncementsSeleniumViewTest(TestCase):
         self.driver.close()
 
     def test_list_announcement(self):
-        self.driver.get('http://localhost:8000/announcements/')
+        self.driver.get('http://134.122.82.126/announcements/')
         assert self.driver.current_url == 'http://localhost:8000/announcements/'
+
+    def test_detail_announcement(self):
+        self.driver.get('http://134.122.82.126/announcements/')
+        self.driver.find_element_by_class_name('link').click()
+        assert self.driver.find_element_by_class_name('title')
 
     def test_created_announcement(self):
-        self.driver.get('http://localhost:8000/announcements/add/')
-        self.driver.find_element_by_name('title').send_keys('Test')
-        self.driver.find_element_by_name('text').send_keys('Test Text')
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/announcements/')
+        self.driver.find_element_by_class_name('btn-success').click()
+        self.driver.find_element_by_name('title').send_keys('CreateTest')
+        self.driver.find_element_by_name('text').send_keys('CreateTest')
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
-        self.driver.find_element_by_class_name('btn.btn-primary').click()
-        assert self.driver.current_url == 'http://localhost:8000/announcements/'
+        try:
+            self.driver.find_element_by_class_name('btn-success').click()
+            assert self.driver.current_url == 'http://134.122.82.126/announcements/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
-    def test_updated_position(self):
-        self.driver.get('http://127.0.0.1:8000/announcements/4/')
+    def test_updated_announcement(self):
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126/announcements/')
+        self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-primary').click()
-        self.driver.find_element_by_name('title').send_keys('Test')
-        self.driver.find_element_by_name('text').send_keys('Test Text')
+        self.driver.find_element_by_name('title').clear()
+        self.driver.find_element_by_name('title').send_keys('UpdateTest')
+        self.driver.find_element_by_name('text').clear()
+        self.driver.find_element_by_name('text').send_keys('UpdateTest')
+        self.driver.find_element_by_xpath('//*[@id="id_photo"]').clear()
         self.driver.find_element_by_xpath('//*[@id="id_photo"]').send_keys('/home/karamoldoevee/Downloads/test.png')
-        self.driver.find_element_by_class_name('btn-primary').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/announcements/'
+        try:
+            self.driver.find_element_by_class_name('btn-primary').click()
+            assert self.driver.current_url == 'http://134.122.82.126/announcements/'
+        except:
+            assert self.driver.find_element_by_tag_name('h3')
 
-    def test_deleted_position(self):
-        self.driver.get('http://127.0.0.1:8000/announcements/4/')
+    def test_deleted_announcement(self):
+        self.driver.get('http://134.122.82.126/accounts/login/')
+        self.driver.find_element_by_name('username').send_keys('admin')
+        self.driver.find_element_by_name('password').send_keys('admin')
+        self.driver.find_element_by_css_selector('button[type="submit"]').click()
+        self.driver.get('http://134.122.82.126announcements/')
+        self.driver.find_element_by_class_name('link').click()
         self.driver.find_element_by_class_name('btn-danger').click()
         self.driver.find_element_by_class_name('btn-danger').click()
-        assert self.driver.current_url == 'http://127.0.0.1:8000/announcements/'
+        assert self.driver.current_url == 'http://134.122.82.126/announcements/'
