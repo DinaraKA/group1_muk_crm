@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from accounts.models import SocialStatus
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -9,27 +9,35 @@ from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 
 
-class SocialStatusListView(PermissionRequiredMixin, ListView):
+class SocialStatusListView(UserPassesTestMixin, ListView):
     template_name = 'social_status/all_statuses.html'
     model = SocialStatus
     ordering = ["-name"]
     context_object_name = 'statuses'
     paginate_by = 20
     paginate_orphans = 2
-    permission_required = "accounts.view_socialstatus"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.view_socialstatus"
+    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         return context
 
 
-class SocialStatusCreateView(PermissionRequiredMixin, CreateView):
+class SocialStatusCreateView(UserPassesTestMixin, CreateView):
     model = SocialStatus
     template_name = 'add.html'
     fields = ['name']
-    permission_required = "accounts.add_socialstatus"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.add_socialstatus"
+    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -46,20 +54,28 @@ class SocialStatusCreateView(PermissionRequiredMixin, CreateView):
         return redirect('accounts:all_social_statuses')
 
 
-class SocialStatusUpdateView(PermissionRequiredMixin, UpdateView):
+class SocialStatusUpdateView(UserPassesTestMixin, UpdateView):
     model = SocialStatus
     template_name = 'change.html'
     fields = ['name']
-    permission_required = "accounts.change_socialstatus"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.change_socialstatus"
+    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('accounts:all_social_statuses')
 
 
-class SocialStatusDeleteView(PermissionRequiredMixin, DeleteView):
+class SocialStatusDeleteView(UserPassesTestMixin, DeleteView):
     model = SocialStatus
     template_name = 'delete.html'
     success_url = reverse_lazy('accounts:all_social_statuses')
-    permission_required = "accounts.delete_socialstatus"
-    permission_denied_message = "Доступ запрещен"
+    # permission_required = "accounts.delete_socialstatus"
+    # permission_denied_message = "Доступ запрещен"
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')

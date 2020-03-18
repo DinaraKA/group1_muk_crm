@@ -22,10 +22,14 @@ class AuditoryListView(UserPassesTestMixin, ListView):
         return context
 
 
-class AuditoryCreateView(CreateView):
+class AuditoryCreateView(UserPassesTestMixin, CreateView):
     model = Auditory
     template_name = 'add.html'
     fields = ['name', 'places', 'description']
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def form_valid(self, form):
         text = form.cleaned_data['name']
@@ -42,17 +46,25 @@ class AuditoryCreateView(CreateView):
         return redirect('webapp:auditories')
 
 
-class AuditoryUpdateView(UpdateView):
+class AuditoryUpdateView(UserPassesTestMixin, UpdateView):
     model = Auditory
     template_name = 'change.html'
     fields = ['name', 'places', 'description']
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_success_url(self):
         return reverse('webapp:auditories')
 
 
-class AuditoryDeleteView(DeleteView):
+class AuditoryDeleteView(UserPassesTestMixin, DeleteView):
     model = Auditory
     template_name = 'delete.html'
     success_url = reverse_lazy('webapp:auditories')
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
