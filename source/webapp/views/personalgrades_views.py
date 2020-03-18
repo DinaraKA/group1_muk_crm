@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 
 from accounts.models import Family
 from webapp.forms import FullSearchForm
-from webapp.models import JournalGrade, JournalNote, GroupJournal, Discipline, Journal
+from webapp.models import JournalGrade, JournalNote, GroupJournal, Discipline
 
 
 class PersonalGradesDetailView(DetailView):
