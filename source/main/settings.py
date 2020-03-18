@@ -22,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '9^mr=0j@i8i19p-py1+o#k_ro3zn61(gef^@2pnm7$2n29!u4q'
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
-ALLOWED_HOSTS = ['*']
+# DEBUG = int(os.environ.get("DEBUG", default=0))
+
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', ]
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -98,7 +101,17 @@ DATABASES = {
         'PORT': DB_PORT,
     }
 }
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql'),
+#         "NAME": os.environ.get("SQL_DATABASE", DB_NAME),
+#         "USER": os.environ.get("SQL_USER", DB_USER),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD", DB_PASSWORD),
+#         "HOST": os.environ.get("SQL_HOST", DB_HOST),
+#         "PORT": os.environ.get("SQL_PORT", DB_PORT),
+#         # "PORT": os.environ.get("SQL_PORT", "5432"),
+#     }
+# }
 
 
 
@@ -121,10 +134,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-DATE_INPUT_FORMATS= [
+DATE_INPUT_FORMATS = [
     '%d/%m/%Y'
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -147,6 +159,8 @@ DATE_FORMAT = 'd E Y'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_URL = "/staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 LOGIN_URL = 'accounts:login'
 
@@ -158,3 +172,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 MEDIA_URL = '/uploads/'
 
+
+# AJAX_SEARCH_HELPER = 'app.views.search_helper'
+
+# SEARCH_RESULT_TEMPLATE = 'user_search.html'

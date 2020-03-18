@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load auth_extras %}
 
 <!doctype html>
 <html lang="en">
@@ -27,7 +28,8 @@
         </button>
         <div class="container collapse navbar-collapse" id="navbarNav">
             <ul class="menu navbar-nav text-uppercase">
-                {% if request.user.is_staff %}
+                {% if request.user|has_group:'principal_staff' or request.user.is_staff %}
+{#                {% if request.user.is_staff %}#}
                     <li class="staff-menu nav-item nav-left"><span onclick="openNav()">&#9776; Меню</span></li>
                 {% endif %}
                 <li class="nav-item"><a href="{% url 'webapp:index' %}" class="nav-link">Главная</a></li>
@@ -76,12 +78,19 @@
                                             class="nav-link">Регистрация</a></li>
                     <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
                 {% endif %}
+
             </ul>
         </div>
     </nav>
+    {#<div class="sidenav">#}
+    {#{% include 'partial/staff_menu.html' %}#}
+    {#</div>#}
     <div class="carousel">
         {% block carousel %} {% endblock %}
     </div>
+    {#<div class="side_nav">#}
+    {#{% include 'partial/staff_menu.html' %}#}
+    {#</div>#}
     <div class="container">
         {% block content %}{% endblock %}
     </div>
@@ -120,4 +129,5 @@
 {% block scripts %}{% endblock %}
 </body>
 </html>
+
 

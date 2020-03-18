@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./source
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./source/:/usr/src/source/
+    ports:
+      - 8888:8000
+    env_file:
+      - ./.env.dev
+#    environment:
+#      - SQL_ENGINE=django.db.backends.postgresql
+#      - SQL_DATABASE=
+#      - SQL_USER=
+#      - SQL_PASSWORD=
+#      - SQL_HOST=db
+#      - SQL_PORT=5333
+#      - DATABASE=postgres
+    depends_on:
+      - db
+  db:
+    image: postgres:10.11-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+#    ports:
+#    - "5444:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=PostgresPass
+      - POSTGRES_DB=muk_crm
+#    command: -p 5432
+
+volumes:
+  postgres_data:
