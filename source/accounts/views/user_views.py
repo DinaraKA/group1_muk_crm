@@ -210,14 +210,14 @@ class UserDeleteView(UserPassesTestMixin, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class UserSearchView(UserPassesTestMixin, FormView):
+class UserSearchView(FormView):
     template_name = 'search.html'
     form_class = FullSearchForm
 
-    def test_func(self):
-        user_requesting = self.request.user
-        user_detail = User.objects.get(pk=self.kwargs['pk'])
-        return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff')
+    # def test_func(self):
+    #     user_requesting = self.request.user
+    #     user_detail = User.objects.get(pk=self.kwargs['pk'])
+    #     return user_requesting.is_staff or user_requesting.groups.filter(name='principal_staff') or user_detail == user_requesting
 
     def form_valid(self, form):
         query = urlencode(form.cleaned_data)

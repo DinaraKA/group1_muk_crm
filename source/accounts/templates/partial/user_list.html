@@ -17,7 +17,6 @@
   </thead>
   <tbody>
       {% for list in object_list %}
-          {{ list }}
     <tr data-href="{% url 'accounts:user_detail' list.user.pk %}">
       <th scope="row">{{ list.id }}</th>
         <td data-href="{% url 'accounts:user_detail' list.user.pk %}">{{ list.user.first_name }}</td>
