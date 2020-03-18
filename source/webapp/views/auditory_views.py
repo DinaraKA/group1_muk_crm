@@ -4,13 +4,18 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class AuditoryListView(ListView):
+class AuditoryListView(UserPassesTestMixin, ListView):
     template_name = 'auditory/auditories.html'
     model = Auditory
     ordering = ["-name"]
     context_object_name = 'auditories'
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_staff or user.groups.filter(name='principal_staff')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()

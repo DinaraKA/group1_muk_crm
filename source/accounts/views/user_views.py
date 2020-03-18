@@ -1,17 +1,14 @@
 import json
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
-from django.urls import reverse
 from django.views.generic import UpdateView, DetailView, ListView, DeleteView, FormView, CreateView, TemplateView
-from django.views.generic.base import View
-from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm
+from accounts.forms import UserCreationForm, UserChangeForm, FullSearchForm, UserFamilyForm, PasswordChangeForm
 from accounts.models import Passport, Profile, Role, Status, Family, StudyGroup
-from accounts.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.http import urlencode
 from django.db.models import Q
